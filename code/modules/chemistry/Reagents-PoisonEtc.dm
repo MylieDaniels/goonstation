@@ -1558,13 +1558,13 @@ datum
 
 			on_mob_life(var/mob/M, var/mult = 1)
 				if (!M) M = holder.my_atom
-				counter = max(-30, counter + ( holder.get_reagent_amount(src.id) ** 0.67 - 3) * mult)
+				counter = max(-45, counter + ( holder.get_reagent_amount(src.id) ** 0.67 - 3) * mult)
 				if (ishuman(M))
 					var/mob/living/carbon/human/H = M
 					switch (stage)
 						if(0)
-							if(counter <= -15 && H.organHolder) // maintaining a dosage of less than 5u.  dont do this IRL, ancient herbalism is wack - mylie
-								H.organHolder.heal_organs(2*mult, 2*mult, 2*mult, target_organs, 90)
+							if(counter <= -40 && H.organHolder) // maintaining a dosage of less than 5u.  dont do this IRL, ancient herbalism is wack - mylie
+								H.organHolder.heal_organs(3*mult, 3*mult, 3*mult, target_organs, 90)
 							if(counter >= 20) // whoopsie, too much!
 								APPLY_ATOM_PROPERTY(H, PROP_MOB_STAMINA_REGEN_BONUS, src.id, -1)
 								stage++
@@ -1622,7 +1622,7 @@ datum
 						var/mob/living/L = M
 						L.contract_disease(/datum/ailment/malady/heartfailure, null, null, 1)
 				if (counter >= 800)
-					if (probmult(min(counter / 300, 25)))
+					if (probmult(min(counter / 300, 12)))
 						var/mob/living/L = M
 						L.contract_disease(/datum/ailment/malady/flatline, null, null, 1)
 						boutput(M, "<span class='alert'>Your heart seizes up!</span>")
