@@ -195,7 +195,7 @@ datum
 			fluid_b = 255
 			transparency = 50
 			var/damage_counter = 0
-			var/damage_power = 1
+			var/damage_power = 1.05
 
 			on_mob_life(var/mob/M, var/mult = 1)
 				if (!M) M = holder.my_atom
@@ -216,7 +216,10 @@ datum
 								M.take_toxin_damage(1 * mult)
 				..()
 
-			on_mob_life_complete(var/mob/living/M)
+			on_remove()
+				..()
+				var/mob/M = holder.my_atom
+				if (!istype(M)) return
 				damage_counter = damage_counter ** damage_power
 				if (damage_counter > 5)
 					if (ishuman(M))
@@ -252,15 +255,15 @@ datum
 				depletion_rate = 0.05
 				flushing_multiplier = 0.02
 				random_chem_blacklisted = 1
-				damage_power = 1.25
+				damage_power = 1.3
 
 			fatuus
 				name = "fatui onus extract"
 				id = "fatuus_amanitin"
 				description = "This alien mycotoxin destroys the liver in moments, but will sustain normal functioning until purged."
-				fluid_r = 120
-				fluid_g = 120
-				fluid_b = 120
+				fluid_r = 45
+				fluid_g = 55
+				fluid_b = 50
 				depletion_rate = 0
 				random_chem_blacklisted = 1
 				damage_counter = 500
