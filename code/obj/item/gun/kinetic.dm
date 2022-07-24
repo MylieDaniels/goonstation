@@ -885,12 +885,13 @@ ABSTRACT_TYPE(/obj/item/gun/kinetic)
 	force = MELEE_DMG_PISTOL
 	contraband = 2
 	ammo_cats = list(AMMO_DART_ALL)
-	max_ammo_capacity = 1.
+	max_ammo_capacity = 1
 	can_dual_wield = 0
+	silenced = 1
 	hide_attack = 1
 	gildable = 1
 	w_class = W_CLASS_SMALL
-	muzzle_flash = "muzzle_flash_launch"
+	muzzle_flash = null
 	default_magazine = /obj/item/ammo/bullets/blow_darts/single
 
 	New()
