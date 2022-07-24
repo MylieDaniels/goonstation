@@ -185,29 +185,7 @@ datum
 					return
 				B.take_damage(blob_damage * min(volume, 10), 1, "mixed")
 
-		harmful/amanitin
-			name = "amanitin"
-			id = "amanitin"
-			description = "A toxin produced by certain mushrooms. Very deadly."
-			reagent_state = LIQUID
-			fluid_r = 255
-			fluid_g = 255
-			fluid_b = 255
-			transparency = 50
-			var/damage_counter = 0
-
-			on_mob_life(var/mob/M, var/mult = 1)
-
-				if (!M) M = holder.my_atom
-				damage_counter += rand(2,4) * mult // RNG rolls moved to accumulation proc for consistency
-
-				..()
-
-			on_mob_life_complete(var/mob/living/M)
-				if(M)
-					M.take_toxin_damage(damage_counter + (rand(2,3)))
-
-		harmful/botulinum_toxin
+    harmful/botulinum_toxin
 			name = "botulinum toxin"
 			id = "botulinum_toxin"
 			description = "An incredibly potent bacterial toxin, produced in minute but lethal amounts in low oxygen environments."
@@ -223,6 +201,89 @@ datum
 				M.setStatusMin("weakened", 5 SECONDS * mult)
 				M.setStatus("resting", INFINITE_STATUS)
 				..()
+
+		harmful/amanitin
+			name = "amanitin"
+			id = "amanitin"
+			description = "A toxin produced by certain mushrooms. Very deadly, causing sudden liver failure."
+			reagent_state = LIQUID
+			fluid_r = 255
+			fluid_g = 255
+			fluid_b = 255
+			transparency = 50
+			var/damage_counter = 0
+			var/damage_power = 1.05
+
+			on_mob_life(var/mob/M, var/mult = 1)
+				if (!M) M = holder.my_atom
+				damage_counter += rand(1,2) * mult // RNG rolls moved to accumulation proc for consistency
+
+				if (ishuman(M))
+					var/mob/living/carbon/human/H = M
+					if (H.organHolder)
+						H.organHolder.damage_organ(0, 0, 0.25 * mult, "liver")
+						if (!H.organHolder.liver || H.organHolder.liver.broken)
+							H.organHolder.damage_organs(0, 0, 8 * mult, list("left_kidney","right_kidney"), 90)
+							holder.remove_reagent(src.id, 4 * mult)
+							if (prob(30))
+								boutput(M, pick("<span class='alert'>You taste blood.</span>",\
+											"<span class='alert'>Your stomach hurts so bad.</span>"))
+								M.emote(pick("collapse", "faint"))
+								M.setStatusMin("stunned", 1 SECONDS * mult)
+								M.take_toxin_damage(1 * mult)
+				..()
+
+			on_remove()
+				..()
+				var/mob/M = holder.my_atom
+				if (!istype(M)) return
+				damage_counter = damage_counter ** damage_power
+				if (damage_counter > 5)
+					if (ishuman(M))
+						var/mob/living/carbon/human/H = M
+						if (H.organHolder)
+							H.organHolder.damage_organ(0, 0, damage_counter, "liver")
+							if (!H.organHolder.liver || H.organHolder.liver.broken)
+								boutput(M, "<span class='alert'><b>Unbelievable agony lances from the right side of your abdomen and spreads like a fire through your veins!</b></span>")
+								M.take_toxin_damage(damage_counter / 2)
+								M.visible_message("<span class='alert'>[M] vomits a lot of blood!</span>")
+								playsound(M, "sound/impact_sounds/Slimy_Splat_1.ogg", 30, 1)
+								make_cleanable(/obj/decal/cleanable/blood/splatter,M.loc)
+								if (damage_counter > 400) // ill admit, this is for my own amusement - Mylie
+									bleed(H, round(damage_counter / 10), 6)
+									H.organHolder.drop_and_throw_organ("liver", H.loc, H.dir, min(damage_counter / 80, 30), min(damage_counter/400, 2))
+								M.emote("collapse")
+								M.setStatusMin("paralysis", round(damage_counter))
+							else
+								M.visible_message("<span class='alert'>[M] pukes all over [himself_or_herself(M)].</span>", "<span class='alert'>Pain explodes in your guts and you puke all over yourself!</span>")
+								M.vomit()
+					else
+						M.take_toxin_damage(damage_counter)
+						M.visible_message("<span class='alert'>[M] pukes all over [himself_or_herself(M)].</span>", "<span class='alert'>Pain explodes in your guts and you puke all over yourself!</span>")
+						M.vomit()
+						
+			syndicate
+				name = "death cap extract"
+				id = "syndicate_amanitin"
+				description = "Requiring atypical means to purge, even a miniscule dose can kill via liver failure."
+				fluid_r = 120
+				fluid_g = 120
+				fluid_b = 120
+				depletion_rate = 0.05
+				flushing_multiplier = 0.02
+				random_chem_blacklisted = 1
+				damage_power = 1.3
+
+			fatuus
+				name = "fatui onus extract"
+				id = "fatuus_amanitin"
+				description = "This alien mycotoxin destroys the liver in moments, but will sustain normal functioning until purged."
+				fluid_r = 45
+				fluid_g = 55
+				fluid_b = 50
+				depletion_rate = 0
+				random_chem_blacklisted = 1
+				damage_counter = 500
 
 		harmful/chemilin
 			name = "chemilin"
@@ -278,34 +339,52 @@ datum
 			penetrates_skin = 1
 			blob_damage = 5
 			value = 7 // 3 2 1 heat
+			target_organs = list("left_lung","right_lung","heart")
+			flushing_multiplier = 0.5
 			var/counter = 1
+
+			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
+				. = ..()
+				if (method!=TOUCH)             //is not as effective when entering the skin, takes more time to metabolize
+					counter = max(counter, 12)
+				return
 
 			on_mob_life(var/mob/M, var/mult = 1) // -cogwerks. previous version
 				if (!M) M = holder.my_atom
 				if (!counter) counter = 1
-				M.take_toxin_damage(1.5 * mult)
-				if (probmult(8))
-					M.emote("drool")
-				if (prob(15))
-					boutput(M, "<span class='alert'>You cannot breathe!</span>")
-					M.losebreath += (1 * mult)
-					M.emote("gasp")
-				switch(counter += (1 * mult))
-					if (20 to 30)
-						if (prob(15))
-							boutput(M, "<span class='alert'>You feel weak.</span>")
-							M.setStatusMin("stunned", 0.5 SECONDS * mult)
-							M.take_toxin_damage(0.5 * mult)
-					if (30 to 45)
-						if (prob(20))
-							boutput(M, "<span class='alert'>You feel very weak.</span>")
-							M.setStatusMin("stunned", 1 SECONDS * mult)
-							M.take_toxin_damage(1 * mult)
-					if (45 to INFINITY)
-						if (prob(25))
-							boutput(M, "<span class='alert'>You feel horribly weak.</span>")
-							M.setStatusMin("stunned", 2 SECONDS * mult)
-							M.take_toxin_damage(1.5 * mult)
+				M.take_toxin_damage(0.5 * mult)  // a bit of tox to show you that something is indeed, not alright
+				M.change_misstep_chance(2 * mult) //stumbling a tad bit
+
+				if(!M.reagents.has_reagent("space_drugs")) //amyl nitrate inhibits cyanide's effects IRL, space drugs is pretty close
+					counter = max(0.5, counter + ( holder.get_reagent_amount(src.id) ** 0.36 / 2) * mult) //speed of poisoning scales nonlinearly
+				else                                                                                        //with dosage
+					counter += 0.25 * mult
+
+				switch(counter)
+					if (1 to 25)
+						if (probmult(12))                              //some not so pleasant  emotes
+							M.emote(pick("drool", "pale", "tremble", "cough"))
+						else if(probmult(5))
+							M.visible_message("<span class='alert'>[M] pukes all over [himself_or_herself(M)].</span>", "<span class='alert'>You puke all over yourself!</span>")
+							M.vomit()
+					if (25 to INFINITY)
+						M.change_eye_blurry(3, 3)
+						if (probmult(12))
+							M.emote(pick("drool", "pale", "tremble"))
+						if(prob(min((counter * 0.4), 50)))  //oxy damage chance rises with time
+							M.losebreath += (3 * mult)
+							M.take_oxygen_deprivation(1 * mult)
+							if (prob(40))   // just so it doesn't show up every time you take damage
+								boutput(M, pick("<span class='alert'>You cannot breathe!</span>", "<span class='alert'>Your chest hurts!</span>"))
+								M.emote(pick("gasp", "cough"))
+						if(prob(min((counter * 0.2), 25)))
+							boutput(M, "<span class='alert'>You feel [pick("weak", "very weak", "so tired")].</span>")
+							M.setStatusMin("stunned", 2 SECONDS * mult) //increasing chance of a small stun
+						if (ishuman(M))
+							var/mob/living/carbon/human/H = M
+							if (H.organHolder)                    //chance of damage starts at 15 and rises
+								H.organHolder.damage_organs(0, 0, 3*mult, target_organs, min((counter * 0.6), 60))
+
 
 				..()
 				return
@@ -1502,30 +1581,97 @@ datum
 			transparency = 220
 
 		harmful/wolfsbane
-			name = "Aconitum"
+			name = "aconitine"
 			id = "wolfsbane"
-			description = "Also known as monkshood or wolfsbane, aconitum is a very potent neurotoxin."
+			description = "Also known as monkshood or wolfsbane, aconitine kills by paralyzing the cardiovascular system."
 			reagent_state = LIQUID
 			fluid_r = 129
 			fluid_b = 116
 			fluid_g = 198
 			transparency = 20
+			depletion_rate = 0.2
+			target_organs = list("heart","stomach")
+			var/counter = 0
+			var/stage = 0
 
 			on_mob_life(var/mob/M, var/mult = 1)
 				if (!M) M = holder.my_atom
-				M.take_toxin_damage(2 * mult)
-				if (probmult(4))
-					M.emote("drool")
-				if (prob(8))
-					boutput(M, "<span class='alert'>You cannot breathe!</span>")
-					M.losebreath += (1 * mult)
-					M.emote("gasp")
-				if (prob(10))
-					boutput(M, "<span class='alert'>You feel horribly weak.</span>")
-					M.setStatusMin("stunned", 3 SECONDS * mult)
-					M.take_toxin_damage(2 * mult)
+				counter = max(-45, counter + ( holder.get_reagent_amount(src.id) ** 0.67 - 3) * mult)
+				if (ishuman(M))
+					var/mob/living/carbon/human/H = M
+					switch (stage)
+						if(0)
+							if(counter <= -40 && H.organHolder) // maintaining a dosage of less than 5u.  dont do this IRL, ancient herbalism is wack - mylie
+								H.organHolder.heal_organs(3*mult, 3*mult, 3*mult, target_organs, 90)
+							if(counter >= 20) // whoopsie, too much!
+								APPLY_ATOM_PROPERTY(H, PROP_MOB_STAMINA_REGEN_BONUS, src.id, -1)
+								stage++
+						if(1)
+							if(counter >= 70)
+								H.add_stam_mod_max(src.id, -15)
+								stage++
+						if(2)
+							if(counter >= 150)
+								H.remove_stam_mod_max(src.id)
+								H.add_stam_mod_max(src.id, -35)
+								boutput(M, "<span class='alert'>You feel tired.</span>")
+								stage++
+						if(3)
+							if(counter >= 250)
+								H.remove_stam_mod_max(src.id)
+								H.add_stam_mod_max(src.id, -60)
+								REMOVE_ATOM_PROPERTY(H, PROP_MOB_STAMINA_REGEN_BONUS, src.id)
+								APPLY_ATOM_PROPERTY(H, PROP_MOB_STAMINA_REGEN_BONUS, src.id, -2)
+								boutput(M, "<span class='alert'>You feel woozy.</span>")
+								stage++
+						if(4)
+							if(counter >= 400)
+								H.remove_stam_mod_max(src.id)
+								H.add_stam_mod_max(src.id, -90)
+								REMOVE_ATOM_PROPERTY(H, PROP_MOB_STAMINA_REGEN_BONUS, src.id)
+								APPLY_ATOM_PROPERTY(H, PROP_MOB_STAMINA_REGEN_BONUS, src.id, -3)
+								boutput(M, "<span class='alert'>You feel exhausted.</span>")
+								stage++
+						if(5)
+							if(counter >= 800)
+								boutput(M, "<span class='alert'>You feel horribly weak.</span>")
+								H.remove_stam_mod_max(src.id)
+								H.add_stam_mod_max(src.id, -125)
+								REMOVE_ATOM_PROPERTY(H, PROP_MOB_STAMINA_REGEN_BONUS, src.id)
+								APPLY_ATOM_PROPERTY(H, PROP_MOB_STAMINA_REGEN_BONUS, src.id, -4)
+								stage++
+				else
+					M.take_toxin_damage((counter / 100 + 1 ) * mult)
+
+				if (counter >= 20)
+					M.make_dizzy(1 * mult)
+					M.change_misstep_chance(1 * mult)
+					if (probmult(20))
+						M.emote(pick("twitch", "blink_r", "yawn"))
+						// hypotension
+				if (counter >= 70)
+					if (probmult(clamp(counter / 10, 1, 80)))
+						M.losebreath += (1.5 * mult)
+						if (prob(40))
+							boutput(M, pick("<span class='alert'>Your chest hurts!</span>",\
+											"<span class='alert'>You can't breathe!</span>"))
+							M.emote("gasp")
+					if (probmult(min(counter / 100, 25)))
+						var/mob/living/L = M
+						L.contract_disease(/datum/ailment/malady/heartfailure, null, null, 1)
+				if (counter >= 800)
+					if (probmult(min(counter / 300, 12)))
+						var/mob/living/L = M
+						L.contract_disease(/datum/ailment/malady/flatline, null, null, 1)
+						boutput(M, "<span class='alert'>Your heart seizes up!</span>")
 				..()
-				return
+				
+			on_remove()
+				..()
+				var/mob/living/carbon/human/H = holder.my_atom
+				if (!istype(H)) return
+				H.remove_stam_mod_max(src.id)
+				REMOVE_ATOM_PROPERTY(H, PROP_MOB_STAMINA_REGEN_BONUS, src.id)
 
 		harmful/toxic_slurry
 			name = "toxic slurry"

@@ -492,6 +492,7 @@ datum/projectile
 
 	var/casing = null
 	var/reagent_payload = null
+	var/reagent_amount = 15
 	var/forensic_ID = null
 	var/precalculated = 1
 
@@ -915,8 +916,8 @@ datum/projectile/snowball
 		P.max_range = min(DATA.dissipation_delay + round(P.power / DATA.dissipation_rate), DATA.max_range)
 
 	if (DATA.reagent_payload)
-		P.create_reagents(15)
-		P.reagents.add_reagent(DATA.reagent_payload, 15)
+		P.create_reagents(DATA.reagent_amount)
+		P.reagents.add_reagent(DATA.reagent_payload, DATA.reagent_amount)
 
 	return P
 
