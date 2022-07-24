@@ -585,18 +585,30 @@
 //0.40
 /obj/item/ammo/bullets/blow_darts
 	sname = "blowdart"
-	name = "poison blowdarts"
+	name = "paralytic blowdarts"
 	ammo_type = new/datum/projectile/bullet/blow_dart
-	desc = "These darts are loaded with a dangerous paralytic toxin."
+	desc = "These darts are loaded with paralytic botulinum toxin."
 	icon_state = "tranq_clip"
 	amount_left = 4
 	max_amount = 4
 	ammo_cat = AMMO_BLOWDART
-	color = "green"
+	color = "teal"
 
 	single
 		amount_left = 1
 		max_amount = 1
+
+	amanitin
+		name = "countdown blowdarts"
+		desc = "These darts are loaded with a nearly undetectable mycotoxin."
+		ammo_type = new/datum/projectile/bullet/blow_dart/amanitin
+		color = "grey"
+
+	viper_venom
+		name = "snakebite blowdarts"
+		desc = "These darts are loaded with venom harvested from a rattlesnake."
+		ammo_type = new/datum/projectile/bullet/blow_dart/viper_venom
+		color = "green"
 
 	madness
 		name = "madness blowdarts"

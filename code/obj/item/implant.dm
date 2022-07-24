@@ -968,9 +968,15 @@ ABSTRACT_TYPE(/obj/item/implant/revenge)
 
 	blowdart
 		name = "blowdart"
-		desc = "a sharp little dart with a little poison reservoir."
+		desc = "A tiny barbed dart with a little poison reservoir."
 		icon_state = "blowdart"
 		leaves_wound = FALSE
+		bleed_time = 0
+
+		on_life(mult)
+			. = ..()
+			if (src.reagents?.total_volume)
+				src.reagents.trans_to(owner, 2 * mult)
 
 		New()
 			..()
