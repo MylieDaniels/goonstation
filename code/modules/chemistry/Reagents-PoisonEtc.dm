@@ -185,6 +185,23 @@ datum
 					return
 				B.take_damage(blob_damage * min(volume, 10), 1, "mixed")
 
+    harmful/botulinum_toxin
+			name = "botulinum toxin"
+			id = "botulinum_toxin"
+			description = "An incredibly potent bacterial toxin, produced in minute but lethal amounts in low oxygen environments."
+			reagent_state = LIQUID
+			fluid_r = 25
+			fluid_g = 10
+			fluid_b = 15
+			transparency = 16
+			depletion_rate = 0.01
+
+			on_mob_life(var/mob/M, var/mult = 1)
+				if (!M) M = holder.my_atom
+				M.setStatusMin("weakened", 5 SECONDS * mult)
+				M.setStatus("resting", INFINITE_STATUS)
+				..()
+
 		harmful/amanitin
 			name = "amanitin"
 			id = "amanitin"

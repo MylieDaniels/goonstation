@@ -981,6 +981,99 @@
 
 	return modded
 
+/proc/say_botulism(var/string)
+	var/modded = ""
+	var/datum/text_roamer/T = new/datum/text_roamer(lowertext(string))
+
+	for(var/i = 0, i < length(string), i++)
+		switch(T.curr_char)
+			if("b")
+				if(isVowel(T.next_char))
+					modded += "h"
+				else
+					modded += "hu"
+
+			if("d")
+				if(isVowel(T.next_char))
+					modded += "th"
+				else
+					modded += "tha"
+
+			if("f")
+				if(isVowel(T.next_char))
+					modded += "fl"
+				else
+					modded += "af"
+
+			if("g")
+				if(isVowel(T.next_char))
+					modded += "ghh"
+				else
+					modded += "gh"
+
+			if("k")
+				if(isVowel(T.next_char) || T.prev_char == "c" || T.prev_char == "n")
+					modded += "ghh"
+				else
+					modded += "huu"
+
+			if("m")
+				modded += "w"
+
+			if("n")
+				if(isVowel(T.prev_char))
+					modded += "uh"
+				else
+					modded += "w"
+
+			if("p")
+				if(isVowel(T.prev_char))
+					modded += "ah"
+				else
+					modded += "h"
+
+			if("p")
+				if(isVowel(T.prev_char))
+					modded += "ah"
+				else
+					modded += "h"
+
+			if("q")
+				modded += "glh"
+
+			if("s")
+				if(isVowel(T.prev_char))
+					modded += "ss"
+				else
+					modded += "hss"
+
+			if("t")
+				modded += "h"
+
+			if("v")
+				if(isVowel(T.prev_char))
+					modded += "uf"
+				else
+					modded += "fi"
+
+			if("x")
+				modded += "sh"
+
+			if("y")
+				modded += "e"
+
+			if("z")
+				if(isVowel(T.prev_char))
+					modded += "ss"
+				else
+					modded += "hss"
+			else
+				modded += T.curr_char
+		T.curr_char_pos++
+		T.update()
+
+	return modded
+
 // berserker proc thing
 
 /proc/say_furious(var/string)
