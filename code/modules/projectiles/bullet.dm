@@ -466,20 +466,22 @@ toxic - poisons
 //0.40
 /datum/projectile/bullet/blow_dart
 	name = "poison dart"
-	power = 1
+	power = 3
 	icon_state = "blowdart"
 	damage_type = D_TOXIC
-	hit_type = DAMAGE_STAB
-	dissipation_delay = 10
+	hit_type = null
+	dissipation_delay = 12
 	implanted = /obj/item/implant/projectile/blowdart
 	shot_sound = 'sound/effects/syringeproj.ogg'
+	impact_image_state = null
 	silentshot = 1
 	casing = null
-	reagent_payload = "botulinum_toxin"
-	reagent_amount = 2.5
+	reagent_payload = "conotoxin"
+	reagent_amount = 1
 
 	amanitin
 		reagent_payload = "syndicate_amanitin"
+		reagent_amount = 2.5
 
 	viper_venom
 		reagent_payload = "viper_venom"

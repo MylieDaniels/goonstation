@@ -587,12 +587,12 @@
 	sname = "blowdart"
 	name = "paralytic blowdarts"
 	ammo_type = new/datum/projectile/bullet/blow_dart
-	desc = "These darts are loaded with paralytic botulinum toxin."
+	desc = "These darts are loaded with a small dose of paralytic conotoxin."
 	icon_state = "tranq_clip"
 	amount_left = 4
 	max_amount = 4
 	ammo_cat = AMMO_BLOWDART
-	color = "teal"
+	color = "purple"
 
 	single
 		amount_left = 1
@@ -602,7 +602,7 @@
 		name = "countdown blowdarts"
 		desc = "These darts are loaded with a nearly undetectable mycotoxin."
 		ammo_type = new/datum/projectile/bullet/blow_dart/amanitin
-		color = "grey"
+		color = "white"
 
 	viper_venom
 		name = "snakebite blowdarts"

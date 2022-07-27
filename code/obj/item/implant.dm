@@ -973,10 +973,9 @@ ABSTRACT_TYPE(/obj/item/implant/revenge)
 		leaves_wound = FALSE
 		bleed_time = 0
 
-		on_life(mult)
-			. = ..()
+		implanted(var/mob/M)
 			if (src.reagents?.total_volume)
-				src.reagents.trans_to(owner, 2 * mult)
+				src.reagents.trans_to(M, src.reagents.total_volume)
 
 		New()
 			..()
