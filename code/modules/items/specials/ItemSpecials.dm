@@ -674,6 +674,14 @@
 			if(master)
 				overrideStaminaDamage = master.stamina_damage * 0.8
 			return
+			
+	heavyctube
+		name = "Heavy Bonk"
+		cooldown = 25
+		staminaCost = 50
+		damageMult = 5
+		overrideStaminaDamage = -1
+		swipe_color = "#FF0000"
 
 /datum/item_special/launch_projectile
 	cooldown = 3 SECONDS

@@ -537,6 +537,7 @@ var/datum/preMapLoad/preMapLoad = new
 #include "code\mob\living\critter\small_animal.dm"
 #include "code\mob\living\critter\snake.dm"
 #include "code\mob\living\critter\spider.dm"
+#include "code\mob\living\critter\vermin_operatives.dm"
 #include "code\mob\living\critter\ai\aquatic.dm"
 #include "code\mob\living\critter\ai\capybara.dm"
 #include "code\mob\living\critter\ai\generic_critter.dm"
