@@ -64,6 +64,9 @@
 #elif defined(MAP_OVERRIDE_NADIR)
 #include "nadir.dm"
 
+#elif defined(MAP_OVERRIDE_MUSPELHEIM)
+#include "muspelheim.dm"
+
 #elif defined(MAP_OVERRIDE_FLEET)
 #include "fleet.dm"
 
