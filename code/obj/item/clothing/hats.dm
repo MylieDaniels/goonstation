@@ -1944,3 +1944,30 @@ TYPEINFO(/obj/item/clothing/head/lesbian_hat)
 	item_state = "space_replica"
 	desc = "A replica of an old space helmet. Looks spaceworthy regardless."
 
+/obj/item/clothing/head/fish_fear_syndicate
+	name = "\improper NanoTrasen fears me hat"
+	desc = "A towering angler's hat covered in a manuscript of tiny text."
+	item_state = "fish_fear_syndicate"
+	wear_image_icon = 'icons/mob/clothing/bighat.dmi'
+	icon_state = "fish_fear_syndicate"
+	w_class = W_CLASS_BULKY
+	blocked_from_petasusaphilic = TRUE
+	tooltip_flags = REBUILD_ALWAYS
+
+	get_desc(dist, mob/user)
+		var/quip
+		if(prob(10))
+			quip = pick("Gone fission!",\
+				"Stir Stir is my fishing buddy.",\
+				"I walk alone on this barren earth.",\
+				"Syndicate Fishing Tourney Champion 2041",\
+				"Heaven is a jug of moonshine and a day on the lake.",\
+				"Rocko knows the best fishing spots.",\
+				"This hat is worth more than your station.",\
+				"[user.real_name] fears me.")
+		else if(prob(40))
+			quip = "[pick("The Syndicate","God","CentComm","NanoTrasen","The King in Yellow","Everyone","The Head of Security")] fears me."
+		else
+			quip = "[pick("Fish","Men","Women","You","Martians","The wise","Nukies","NTSO's","Wraiths","Sharks","Monkeys","Revolutionaries","Ranchers","Frogs","Bees","Even I")] fear me."
+
+		. += " One of the lines of text reads \"[quip]\""

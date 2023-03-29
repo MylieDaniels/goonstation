@@ -240,3 +240,6 @@
 
 /datum/movement_modifier/shiver
 	additive_slowdown = 2
+
+/datum/movement_modifier/syndie_fishing
+	multiplicative_slowdown = 1.5

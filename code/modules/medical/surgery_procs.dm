@@ -636,6 +636,16 @@ var/global/list/chestitem_whitelist = list(/obj/item/gnomechompski, /obj/item/gn
 						if(surgeon == patient) continue
 						remove_mindhack_status(patient, "otherhack", "surgery")
 
+				if (istype(I, /obj/item/implant/syndie_lure))
+					surgeon.tri_message(patient, "<span class='alert'><b>[surgeon]</b> cuts out \an [I] on a hook from [patient == surgeon ? "[him_or_her(patient)]self" : "[patient]"] with [src]!</span>",\
+						"<span class='alert'>You cut out \an [I] on a hook from [surgeon == patient ? "yourself" : "[patient]"] with [src]!</span>",\
+						"<span class='alert'>[patient == surgeon ? "You cut" : "<b>[surgeon]</b> cuts"] out \an [I] on a hook from you with [src]!</span>")
+					I.pixel_x = rand(-2, 5)
+					I.pixel_y = rand(-6, 1)
+					I.set_loc(get_turf(patient))
+					I.on_remove(patient)
+					patient.implant.Remove(I)
+
 				if (!istype(I, /obj/item/implant/artifact))
 					surgeon.tri_message(patient, "<span class='alert'><b>[surgeon]</b> cuts out an implant from [patient == surgeon ? "[him_or_her(patient)]self" : "[patient]"] with [src]!</span>",\
 						"<span class='alert'>You cut out an implant from [surgeon == patient ? "yourself" : "[patient]"] with [src]!</span>",\
