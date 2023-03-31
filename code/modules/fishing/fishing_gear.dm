@@ -103,7 +103,7 @@
 	icon = 'icons/obj/items/fishing_gear.dmi'
 	icon_state = "syndicate_fishing_rod-inactive"
 	inhand_image_icon = 'icons/mob/inhand/hand_fishing.dmi'
-	item_state = "syndicate_fishing_rod-inactive"
+	item_state = "fishing_rod-inactive"
 	hit_type = DAMAGE_STAB
 	flags = FPRINT | TABLEPASS | USEDELAY
 	w_class = W_CLASS_NORMAL
@@ -119,7 +119,7 @@
 	// time per step to reel/filet a mob
 	var/syndie_fishing_speed = 1 SECOND
 	// cooldown after throwing a hooked target around
-	var/yank_cooldown = 9 SECONDS
+	var/yank_cooldown = 6 SECONDS
 	// how far the line can stretch
 	var/line_length = 8
 	// true if the rod is currently ""fishing"", false if it isnt
@@ -172,17 +172,18 @@
 			src.lure = new (src)
 			src.lure.rod = src
 		if (src.lure.loc == src)
-			boutput(user, "You clean and reset \the [src.name]'s holographic bait projector.")
+			boutput(user, "You clean \the [src.name]'s holographic bait projector.")
 			src.lure.clean_forensic()
-			src.lure.name = initial(src.lure.name)
-			src.lure.real_name = initial(src.lure.real_name)
-			src.lure.desc = initial(src.lure.desc)
-			src.lure.real_desc = initial(src.lure.real_desc)
-			src.lure.icon = initial(src.lure.icon)
-			src.lure.set_dir(0)
-			src.lure.tooltip_rebuild = 1
 		else
-			boutput(user, "You can't reset the lure while the line is out!")
+			if(!src.lure.owner)
+				if(BOUNDS_DIST(src.lure,src) == 0)
+					src.lure.set_loc(src)
+				else
+					step_towards(src.lure, src)
+			else
+				user.visible_message("<span class='alert'><b>[user] yanks the lure out of [src.lure.owner]!</b></span>")
+				src.lure.set_loc(get_turf(src.lure.loc))
+				src.lure.on_remove(src.lure.owner)
 
 	// here so that afterattack is called at range, which is the least bad way to throw the lure
 	pixelaction(atom/target, params, mob/user, reach)
@@ -241,6 +242,10 @@
 		else
 			src.icon_state = "syndicate_fishing_rod-inactive"
 			src.item_state = "fishing_rod-inactive"
+
+	disposing()
+		. = ..()
+		qdel(src.lure)
 
 	proc/reel_in(mob/target, mob/user, damage_per_reel = 5)
 		target.setStatusMin("staggered", 4 SECONDS)
@@ -307,7 +312,7 @@
 			return ..()
 
 	throw_impact(mob/hit_atom, datum/thrown_thing/thr)
-		if (hit_atom == src.rod.loc)
+		if (isliving(hit_atom) && hit_atom.equipped() == src.rod)
 			return
 		else if ((isliving(hit_atom) && !hit_atom.nodamage && GET_DIST(src, src.rod) < src.rod.line_length))
 			implanted(hit_atom, null)
@@ -354,7 +359,7 @@
 
 //action (with bar) for reeling in a mob with the Scylla
 /datum/action/bar/syndie_fishing
-	interrupt_flags = INTERRUPT_MOVE | INTERRUPT_STUNNED | INTERRUPT_ACTION
+	interrupt_flags = INTERRUPT_ATTACKED | INTERRUPT_STUNNED | INTERRUPT_ACTION
 	var/mob/user = null
 	/// the target of the action
 	var/mob/target = null
@@ -362,8 +367,8 @@
 	var/obj/item/syndie_fishing_rod/rod = null
 	/// what lure is snagged in the mob
 	var/obj/item/implant/syndie_lure/lure = null
-	/// how much damage is dealt on a filet, starting at 1 and increasing by 1 after each loop
-	var/damage_per_reel = 1
+	/// stores current damage per point blank reel and increases by 0.5 each cycle
+	var/damage_per_reel = 0
 	/// how long a step of reeling takes, set onStart
 	duration = 0
 	/// id for fishing action
@@ -378,7 +383,7 @@
 
 	onStart()
 		..()
-		if (!src.user || !src.target || !src.rod || !src.lure || !(src.rod.loc == src.user) || GET_DIST(src.user, src.target) > src.rod.line_length)
+		if (!src.user || !src.target || !src.rod || !src.lure || (src.target == src.user) || !(src.lure.owner == src.target) || !(src.user.equipped() == src.rod) || GET_DIST(src.user, src.target) > src.rod.line_length)
 			interrupt(INTERRUPT_ALWAYS)
 			return
 
@@ -393,24 +398,27 @@
 
 	onUpdate()
 		..()
-		if (!src.user || !src.target || !src.rod || !src.lure || !(src.rod.loc == src.user) || GET_DIST(src.user, src.target) > src.rod.line_length)
+		if (!src.user || !src.target || !src.rod || !src.lure || (src.target == src.user) || !(src.lure.owner == src.target) || !(src.user.equipped() == src.rod) || GET_DIST(src.user, src.target) > src.rod.line_length)
 			interrupt(INTERRUPT_ALWAYS)
 			return
 
 	onEnd()
-		if (!src.user || !src.target || !src.rod || !src.lure || !(src.rod.loc == src.user) || GET_DIST(src.user, src.target) > src.rod.line_length)
+		if (!src.user || !src.target || !src.rod || !src.lure || (src.target == src.user) || !(src.lure.owner == src.target) || !(src.user.equipped() == src.rod) || GET_DIST(src.user, src.target) > src.rod.line_length)
 			..()
 			interrupt(INTERRUPT_ALWAYS)
 			return
 
+		src.damage_per_reel += 0.5
 		src.rod.reel_in(src.target, src.user, src.damage_per_reel)
-		src.damage_per_reel += 1
 		src.onRestart()
 
 	onDelete()
 		..()
-		src.lure.set_loc(get_turf(src.lure.loc))
+		src.rod.is_fishing = FALSE
+		src.rod.UpdateIcon()
+		src.user.update_inhands()
 		if (src.lure.owner)
+			src.lure.set_loc(get_turf(src.lure.loc))
 			src.lure.on_remove(src.lure.owner)
 		REMOVE_ATOM_PROPERTY(src.target, PROP_MOB_CANTSPRINT, src)
 		REMOVE_MOVEMENT_MODIFIER(src.target, /datum/movement_modifier/syndie_fishing, src)

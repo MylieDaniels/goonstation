@@ -1964,7 +1964,8 @@ TYPEINFO(/obj/item/clothing/head/lesbian_hat)
 				"Heaven is a jug of moonshine and a day on the lake.",\
 				"Rocko knows the best fishing spots.",\
 				"This hat is worth more than your station.",\
-				"[user.real_name] fears me.")
+				"[user.real_name] fears me.",\
+				"You've been gibus'd.")
 		else if(prob(40))
 			quip = "[pick("The Syndicate","God","CentComm","NanoTrasen","The King in Yellow","Everyone","The Head of Security")] fears me."
 		else
