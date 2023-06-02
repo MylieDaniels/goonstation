@@ -2,10 +2,7 @@
 	// do not put this anywhere anyone can get it. it is for crime.
 	name = "(de/re)-construction device"
 	desc = "A magical saw-like device for unmaking things. Is that a soldering iron on the back?"
-
-	New()
-		..()
-		setMaterial(getMaterial("miracle"))
+	default_material = "miracle"
 
 	afterattack(atom/target as mob|obj|turf|area, mob/user as mob)
 		if (!isobj(target))
@@ -192,7 +189,7 @@
 					stuffnearby += X
 			if(length(stuffnearby))
 				var/mob/living/target = pick(stuffnearby)
-				var/datum/callback/C = new(src, .proc/alter_projectile)
+				var/datum/callback/C = new(src, PROC_REF(alter_projectile))
 				if(prob(10))
 					shoot_projectile_ST(POT, projectile, get_step(target, pick(ordinal)), alter_proj=C)
 				else
@@ -305,7 +302,7 @@
 		if(!AE)
 			..()
 		else if(AE.interaction == 0)
-			SETUP_GENERIC_ACTIONBAR(user, src, AE.duration, .proc/complete_stage, list(user, null), null, null, null, null)
+			SETUP_GENERIC_ACTIONBAR(user, src, AE.duration, PROC_REF(complete_stage), list(user, null), null, null, null, null)
 		else
 			..()
 
@@ -336,7 +333,7 @@
 				attempt = TRUE
 
 		if(attempt)
-			SETUP_GENERIC_ACTIONBAR(user, src, AE.duration, .proc/complete_stage, list(user, W), W.icon, W.icon_state, null, null)
+			SETUP_GENERIC_ACTIONBAR(user, src, AE.duration, PROC_REF(complete_stage), list(user, W), W.icon, W.icon_state, null, null)
 
 	proc/complete_stage(mob/user as mob, obj/item/W as obj)
 		var/datum/gimmick_event/AE = get_active_event()
@@ -1011,6 +1008,8 @@ ADMIN_INTERACT_PROCS(/turf/unsimulated/floor, proc/sunset, proc/sunrise)
 				T.set_loc(turf_source)
 				T.set_dir(torpedo_dir)
 				T.lockdir = torpedo_dir
+
+/obj/machinery/power/power_wheel
 
 #ifdef MACHINE_PROCESSING_DEBUG
 /datum/power_usage_viewer
