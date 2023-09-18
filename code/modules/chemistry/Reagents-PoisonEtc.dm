@@ -2237,3 +2237,31 @@ datum
 						H.take_eye_damage(1)
 					else
 						M.take_toxin_damage(1 * mult)
+
+		harmful/alphacarbon_hemotoxin
+			name = "alchaemotoxin"
+			id = "alphacarbon_hemotoxin"
+			description = "Seek immediate purgatives and blood transfusion if ingested."
+			reagent_state = LIQUID
+			fluid_r = 120
+			fluid_g = 15
+			fluid_b = 10
+			depletion_rate = 0.4
+			flushing_multiplier = 0.4
+
+			on_mob_life(var/mob/M, var/mult = 1)
+				if (!M) M = holder.my_atom
+				var/poison_amount = holder?.get_reagent_amount(src.id)
+
+				if (isliving(M))
+					var/mob/living/H = M
+					H.blood_volume -= max(sqrt(H.blood_volume) - clamp(20 - poison_amount / 6, 13, 19), 0) * clamp(poison_amount / 40, 1, 3) * mult
+					if (probmult(clamp(poison_amount * 2, 15, 50)))
+						M.setStatus("slowed", max(M.getStatusDuration("slowed"), 2 SECONDS))
+						if (prob(15))
+							if (!isdead(M))
+								M.emote(pick("shake", "tremble", "shudder"))
+								boutput(M, pick("<span class='alert'><b>You feel so cold.</b></span>","<span class='alert'><b>You can tell you're going to die.</b></span>"))
+						M.remove_stamina(clamp(poison_amount, 10, 25))
+				..()
+				return
