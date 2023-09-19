@@ -4126,6 +4126,43 @@ datum
 			fluid_b = 40
 			fluid_g = 9
 
+		alphacarbon_hemotracker
+			name = "alchaemotracker"
+			id = "alphacarbon_hemotracker"
+			description = "Highly responsive to spectroscopic and thermal analysis."
+			reagent_state = SOLID
+			fluid_r = 240
+			fluid_g = 180
+			fluid_b = 200
+			depletion_rate = 0.075
+			flushing_multiplier = 0.5
+			penetrates_skin = 1
+			var/trail_color = "#FF3344"
+
+			proc/track_alchaemotracker(mob/living/M, oldLoc, direct)
+				var/turf/T = get_turf(M)
+				var/obj/decal/thermal_trail/D = locate(/obj/decal/thermal_trail) in T
+				if(!D)
+					D = new /obj/decal/thermal_trail(T)
+					D.dir = direct
+					D.color = src.trail_color
+					var/obj/decal/thermal_trail/oldD = locate(/obj/decal/thermal_trail) in get_turf(oldLoc)
+					if(oldD && !oldD.altered)
+						oldD.altered = TRUE
+						if(direct != opposite_dir_to(oldD.dir) && direct != oldD.dir)
+							oldD.dir |= opposite_dir_to(direct)
+
+			on_add()
+				var/mob/living/carbon/M = holder.my_atom
+				if (!istype(M)) return
+				src.trail_color = random_saturated_hex_color()
+				src.RegisterSignal(M, COMSIG_MOVABLE_MOVED, PROC_REF(track_alchaemotracker))
+
+			on_remove()
+				var/mob/living/carbon/M = holder.my_atom
+				if (!istype(M)) return
+				src.UnregisterSignal(M, COMSIG_MOVABLE_MOVED)
+
 		//=-=-=-=-=-=-=-=-=
 		//|| C E M E N T ||
 		//=-=-=-=-=-=-=-=-=

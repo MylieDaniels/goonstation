@@ -514,6 +514,37 @@ obj/decal/fakeobjects/teleport_pad
 	blood_type = null
 	anchored = ANCHORED
 
+/obj/decal/thermal_trail
+	name = "thermal residue"
+	desc = "Leads the way."
+	icon = 'icons/obj/decals/thermal_trails.dmi'
+	icon_state = "thermal_trail"
+	color = "#FF3344"
+	plane = PLANE_SELFILLUM
+	alpha = 100
+	invisibility = INVIS_CLOAK
+	anchored = ANCHORED
+	var/fade_time
+	var/altered
+
+	New(var/loc)
+		..()
+		if(loc)
+			setup(loc)
+
+	setup(var/L)
+		..()
+		fade_time = world.time + rand(50 SECONDS, 90 SECONDS)
+		processing_items.Add(src)
+
+	disposing()
+		processing_items.Remove(src)
+		..()
+
+	proc/process()
+		if (world.time > fade_time)
+			qdel(src)
+
 /obj/decal/boxingrope
 	name = "Boxing Ropes"
 	desc = "Do not exit the ring."
