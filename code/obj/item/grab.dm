@@ -982,7 +982,8 @@
 									if (!item_num_to_throw)
 										break
 
-					sleep(0.1 SECONDS)
+					if (v < slidekick_range)
+						sleep(0.1 SECONDS)
 
 				if(!did_any_dive_hit)
 					for (var/mob/O in AIviewers(user))
