@@ -911,8 +911,11 @@
 			target_dir = user.dir
 		var/slidekick_range = max(1 + min(GET_ATOM_PROPERTY(user, PROP_MOB_SLIDEKICK_BONUS) , GET_DIST(user,target) - 1), 1)
 		if (!(T.turf_flags & CAN_BE_SPACE_SAMPLE) && !(user.lying) && can_act(user) && !HAS_ATOM_PROPERTY(user, PROP_MOB_CANTMOVE) && target_dir)
-			user.changeStatus("weakened", max(user.movement_delay()*2, (0.4 + 0.1 * slidekick_range) SECONDS))
-			user.force_laydown_standup()
+			/*user.changeStatus("weakened", max(user.movement_delay()*2, (0.4 + 0.1 * slidekick_range) SECONDS))
+			user.force_laydown_standup()*/
+			user.animate_lying(TRUE)
+			spawn((0.4 + 0.1 * slidekick_range) SECONDS)
+				user.animate_lying(FALSE)
 			spawn(0)
 				for (var/v in 1 to slidekick_range)
 					var/turf/target_turf = get_step(user, target_dir)
@@ -988,7 +991,6 @@
 				if(!did_any_dive_hit)
 					for (var/mob/O in AIviewers(user))
 						O.show_message("<span class='alert'><B>[user] slides to the ground!</B></span>", 1, group = "resist")
-
 
 	user.u_equip(src)
 

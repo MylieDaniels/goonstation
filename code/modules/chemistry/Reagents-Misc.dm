@@ -4140,8 +4140,8 @@ datum
 			penetrates_skin = 1
 			var/trail_color = "#FF3344"
 
-			proc/track_alchaemotracker(mob/living/M, oldLoc, direct)
-				var/turf/T = get_turf(M)
+			proc/track_alchaemotracker(atom/movable/AM, oldLoc, direct)
+				var/turf/T = get_turf(AM)
 				var/obj/decal/thermal_trail/D = locate(/obj/decal/thermal_trail) in T
 				if(!D)
 					D = new /obj/decal/thermal_trail(T)
