@@ -2237,3 +2237,40 @@ datum
 						H.take_eye_damage(1)
 					else
 						M.take_toxin_damage(1 * mult)
+
+		harmful/hemotoxin
+			name = "hemotoxin"
+			id = "hemotoxin"
+			description = "A toxin that harms red blood cells, causing suffocation and cardiac failure"
+			reagent_state = LIQUID
+			fluid_r = 120
+			fluid_g = 15
+			fluid_b = 10
+			depletion_rate = 0.4
+			flushing_multiplier = 0.4
+			var/adjusted_severity = 1
+
+			on_mob_life(var/mob/M, var/mult = 1)
+				if (!M) M = holder.my_atom
+
+				if (isliving(M))
+					var/mob/living/L = M
+					if (adjusted_severity < 5)
+						adjusted_severity = clamp(adjusted_severity + clamp(sqrt(holder?.get_reagent_amount(src.id) - 3), -0.1, 3) / 15 * mult, 1, 5)
+
+					if (holder?.has_reagent("proconvertin", adjusted_severity))
+						adjusted_severity = max(adjusted_severity - 0.3 * mult, 1)
+
+					// debugging
+					L.say("Hemotoxin: [adjusted_severity] severity!", TRUE)
+
+					L.blood_volume -= (sqrt(clamp(L.blood_volume, 200, 600) * adjusted_severity / 40) - 1) * mult
+					if (probmult(adjusted_severity * 10))
+						L.setStatus("slowed", max(L.getStatusDuration("slowed"), 3 SECONDS))
+						if (prob(15))
+							if (!isdead(L))
+								L.emote(pick("shake", "tremble", "shudder"))
+								boutput(M, pick("<span class='alert'><b>You feel so cold.</b></span>","<span class='alert'><b>You can tell you're going to die.</b></span>"))
+						L.remove_stamina(adjusted_severity * 5)
+				..()
+				return
