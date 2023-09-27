@@ -738,6 +738,26 @@ TYPEINFO(/obj/item/clothing/shoes/moon)
 	desc = "The curved front of these boots is reminiscent of a crescent moon, how magical."
 	step_sound = "footstep"
 
+/obj/item/clothing/shoes/turbopunk
+	name = "Turbopunk Combat Heelies"
+	desc = "These shoes have so many mosh pit battle scars that nothing remains of straight laces."
+	icon_state = "swatheavy"
+	step_sound = "step_military"
+	step_priority = STEP_PRIORITY_LOW
+	compatible_species = list("cow", "human")
+
+	setupProperties()
+		..()
+		setProperty("slidekick_bonus", 5)
+
+	equipped(mob/user, slot)
+		. = ..()
+		APPLY_ATOM_PROPERTY(user, PROB_MOB_SLIDEKICK_TURBO, src)
+
+	unequipped(mob/user)
+		. = ..()
+		REMOVE_ATOM_PROPERTY(user, PROB_MOB_SLIDEKICK_TURBO, src)
+
 //Western Boots
 
 /obj/item/clothing/shoes/westboot
