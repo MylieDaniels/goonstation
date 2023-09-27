@@ -2241,36 +2241,44 @@ datum
 		harmful/hemotoxin
 			name = "hemotoxin"
 			id = "hemotoxin"
-			description = "A toxin that harms red blood cells, causing suffocation and cardiac failure"
+			description = "A toxin that destroys red blood cells, causing suffocation and cardiac failure"
+			taste = "metallic"
 			reagent_state = LIQUID
 			fluid_r = 120
 			fluid_g = 15
 			fluid_b = 10
 			depletion_rate = 0.4
-			flushing_multiplier = 0.4
-			var/adjusted_severity = 1
+			flushing_multiplier = 0.75
+			dynamic_severity = 1
+			dynamic_severity_scaling = 0.075
+			dynamic_severity_impacts = list("proconvertin" = -0.3)
+			target_organs = list("spleen")
 
 			on_mob_life(var/mob/M, var/mult = 1)
 				if (!M) M = holder.my_atom
 
+				M.say("hemotoxin severity: [dynamic_severity]")
+
+				if (probmult(dynamic_severity * 10))
+					M.setStatus("slowed", max(M.getStatusDuration("slowed"), 3 SECONDS))
+					if (prob(dynamic_severity * 5))
+						M.losebreath += 2
+						M.emote(pick("gasp", "pale"))
+					else if (prob(35))
+						M.emote(pick("shake", "tremble", "shudder"))
+					if (prob(20))
+						boutput(M, pick("<span class='alert'><b>You feel so cold.</b></span>",\
+							"<span class='alert'><b>You're going to die.</b></span>",\
+							"<span class='alert'><b>Everything starts hurting.</b></span>"))
+					M.remove_stamina(dynamic_severity * 5)
+
 				if (isliving(M))
 					var/mob/living/L = M
-					if (adjusted_severity < 5)
-						adjusted_severity = clamp(adjusted_severity + clamp(sqrt(holder?.get_reagent_amount(src.id) - 3), -0.1, 3) / 15 * mult, 1, 5)
+					L.blood_volume -= (sqrt(clamp(L.blood_volume, 200, 600) * dynamic_severity / 40) - 1) * mult
+					if (dynamic_severity >= 3 && ishuman(M))
+						var/mob/living/carbon/human/H = M
+						if (H.organHolder)
+							H.organHolder.damage_organs(0.5*mult, 0, 0.5*mult, target_organs, dynamic_severity * 15)
 
-					if (holder?.has_reagent("proconvertin", adjusted_severity))
-						adjusted_severity = max(adjusted_severity - 0.3 * mult, 1)
-
-					// debugging
-					L.say("Hemotoxin: [adjusted_severity] severity!", TRUE)
-
-					L.blood_volume -= (sqrt(clamp(L.blood_volume, 200, 600) * adjusted_severity / 40) - 1) * mult
-					if (probmult(adjusted_severity * 10))
-						L.setStatus("slowed", max(L.getStatusDuration("slowed"), 3 SECONDS))
-						if (prob(15))
-							if (!isdead(L))
-								L.emote(pick("shake", "tremble", "shudder"))
-								boutput(M, pick("<span class='alert'><b>You feel so cold.</b></span>","<span class='alert'><b>You can tell you're going to die.</b></span>"))
-						L.remove_stamina(adjusted_severity * 5)
 				..()
 				return

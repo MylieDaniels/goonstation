@@ -38,6 +38,11 @@ datum
 		var/flushing_multiplier = 1 // this decides how succeptible it is to other chemical's flushing
 		var/penetrates_skin = 0 //if this reagent can enter the bloodstream through simple touch.
 		var/touch_modifier = 1 //If this does penetrate skin, how much should be transferred by default (assuming naked dude)? 1 = transfer full amount, 0.5 = transfer half, etc.
+
+		var/dynamic_severity = 0 //the current severity of a dynamically severe reagent
+		var/dynamic_severity_scaling = 0 //the scaling factor of how fast severity increases
+		var/list/dynamic_severity_impacts
+
 		var/taste = null
 		var/value = 1 // how many credits this is worth per unit
 		var/thirst_value = 0
@@ -219,6 +224,9 @@ datum
 			if (!holder)
 				holder = M.reagents
 			var/deplRate = depletion_rate
+
+			if(holder && dynamic_severity_scaling > 0) modify_dynamic_severity(holder, mult)
+
 			if (ishuman(M))
 				var/mob/living/carbon/human/H = M
 				if (H.traitHolder.hasTrait("slowmetabolism"))
@@ -261,6 +269,18 @@ datum
 		proc/on_plant_life(var/obj/machinery/plantpot/P)
 			if (!P) return
 
+		// for dynamically severe chemicals, this is the default logic
+		proc/modify_dynamic_severity(var/datum/reagents/holder, var/mult = 1)
+			if (dynamic_severity < 5)
+				dynamic_severity += log(3,holder.get_reagent_amount(src.id) + 1) * dynamic_severity_scaling * mult
+
+			for (var/reagent_id in dynamic_severity_impacts)
+				if (holder.has_reagent(reagent_id))
+					dynamic_severity += dynamic_severity_impacts[reagent_id] * mult
+
+			dynamic_severity = clamp(dynamic_severity, 1, 5)
+			return
+
 		proc/check_overdose(var/mob/M, var/mult = 1)
 			if (!M || !M.reagents)
 				return
@@ -287,8 +307,6 @@ datum
 			if (effect <= 8)
 				M.take_toxin_damage(severity * mult)
 			return effect
-
-
 
 		proc/handle_addiction(var/mob/M, var/rate)
 			//DEBUG_MESSAGE("[src.id].handle_addiction([M],[rate])")
