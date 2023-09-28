@@ -2257,8 +2257,6 @@ datum
 			on_mob_life(var/mob/M, var/mult = 1)
 				if (!M) M = holder.my_atom
 
-				M.say("hemotoxin severity: [dynamic_severity]")
-
 				if (probmult(dynamic_severity * 10))
 					M.setStatus("slowed", max(M.getStatusDuration("slowed"), 3 SECONDS))
 					if (prob(dynamic_severity * 5))
@@ -2278,7 +2276,7 @@ datum
 					if (dynamic_severity >= 3 && ishuman(M))
 						var/mob/living/carbon/human/H = M
 						if (H.organHolder)
-							H.organHolder.damage_organs(0.5*mult, 0, 0.5*mult, target_organs, dynamic_severity * 15)
+							H.organHolder.damage_organs(1*mult, 0, 1*mult, target_organs, dynamic_severity * 20)
 
 				..()
 				return
