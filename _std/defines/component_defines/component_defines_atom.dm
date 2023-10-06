@@ -185,6 +185,10 @@
 	#define COMSIG_MOB_DEATH "mob_death"
 	/// When a mob fakes death
 	#define COMSIG_MOB_FAKE_DEATH "mob_fake_death"
+	/// When a mob equips an item (item, slot)
+	#define COMSIG_MOB_EQUIP "mob_equip"
+	/// When an item is unequipped (item)
+	#define COMSIG_MOB_UNEQUIP "mob_unequip"
 	/// When a mob picks up an item
 	#define COMSIG_MOB_PICKUP "mob_pickup"
 	/// When a mob drops an item

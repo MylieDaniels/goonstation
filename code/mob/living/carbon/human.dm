@@ -19,7 +19,6 @@
 
 	var/image/health_mon = null
 	var/list/prodoc_icons = null
-	var/image/arrestIcon = null
 
 	var/pin = null
 	var/obj/item/clothing/suit/wear_suit = null
@@ -211,8 +210,7 @@
 	for (var/implant in prodoc_icons)
 		get_image_group(CLIENT_IMAGE_GROUP_HEALTH_MON_ICONS).add_image(prodoc_icons[implant])
 
-	arrestIcon = image('icons/effects/sechud.dmi',src,null,EFFECTS_LAYER_UNDER_4)
-	get_image_group(CLIENT_IMAGE_GROUP_ARREST_ICONS).add_image(arrestIcon)
+	AddComponent(/datum/component/contraband_track)
 
 	src.organHolder = new(src)
 
@@ -518,10 +516,6 @@
 			get_image_group(CLIENT_IMAGE_GROUP_HEALTH_MON_ICONS).remove_image(I)
 			I.dispose()
 		prodoc_icons = null
-	if(arrestIcon)
-		get_image_group(CLIENT_IMAGE_GROUP_ARREST_ICONS).remove_image(arrestIcon)
-		arrestIcon.dispose()
-		arrestIcon = null
 
 	src.chest_item = null
 
@@ -1682,6 +1676,7 @@
 		W.unequipped(src)
 		src.update_clothing()
 	else if (W == src.w_uniform)
+		src.w_uniform = null
 		W.unequipped(src)
 		W = src.r_store
 		if (W)
@@ -1711,38 +1706,36 @@
 				W.set_loc(src.loc)
 				W.dropped(src)
 				W.layer = initial(W.layer)
-		src.w_uniform = null
 		src.update_clothing()
 	else if (W == src.gloves)
-		W.unequipped(src)
 		src.gloves = null
+		W.unequipped(src)
 		src.update_clothing()
 	else if (W == src.glasses)
-		W.unequipped(src)
 		src.glasses = null
+		W.unequipped(src)
 		src.update_clothing()
 	else if (W == src.head)
-		W.unequipped(src)
 		src.head = null
+		W.unequipped(src)
 		src.update_hair_layer()
 		src.update_clothing()
 	else if (W == src.ears)
-		W.unequipped(src)
 		src.ears = null
+		W.unequipped(src)
 		src.update_clothing()
 	else if (W == src.shoes)
-		W.unequipped(src)
 		src.shoes = null
+		W.unequipped(src)
 		src.update_clothing()
 		var/turf/T = get_turf(src)
 		if(T?.active_liquid)
 			T.active_liquid.Crossed(src)
 	else if (W == src.belt)
-		W.unequipped(src)
 		src.belt = null
+		W.unequipped(src)
 		src.update_clothing()
 	else if (W == src.wear_mask)
-		W.unequipped(src)
 		if (internal)
 			if (src.internals)
 				src.internals.icon_state = "internal0"
@@ -1750,18 +1743,19 @@
 				T.icon_state = "airoff"
 			internal = null
 		src.wear_mask = null
+		W.unequipped(src)
 		src.update_clothing()
 	else if (W == src.wear_id)
-		W.unequipped(src)
 		src.wear_id = null
+		W.unequipped(src)
 		src.update_clothing()
 	else if (W == src.r_store)
 		src.r_store = null
 	else if (W == src.l_store)
 		src.l_store = null
 	else if (W == src.back)
-		W.unequipped(src)
 		src.back = null
+		W.unequipped(src)
 		src.update_clothing()
 	else if (W == src.handcuffs)
 		src.handcuffs = null
@@ -1769,12 +1763,12 @@
 		src.update_clothing()
 
 	if (W && W == src.r_hand)
-		W.dropped(src)
 		src.r_hand = null
+		W.dropped(src)
 		src.update_inhands()
 	if (W && W == src.l_hand)
-		W.dropped(src)
 		src.l_hand = null
+		W.dropped(src)
 		src.update_inhands()
 
 

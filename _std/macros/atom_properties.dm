@@ -180,13 +180,13 @@ To remove:
 #define PROP_UPDATE_HIDE_ICONS(target, prop, old_val) do { \
 	var/new_val = GET_ATOM_PROPERTY_RAW(target, prop); \
 	if (old_val != new_val) { \
+		SEND_SIGNAL(target, COMSIG_ATOM_PROP_MOB_HIDE_ICONS, old_val); \
 		var/icon_alpha = new_val ? 0 : 255; \
 		if(isliving(target)) { \
 			var/mob/living/L = target; \
 			L.name_tag?.set_visibility(!new_val); \
 		} if(ishuman(target)) { \
 			var/mob/living/carbon/human/H = target; \
-			H.arrestIcon?.alpha = icon_alpha; \
 			if (H.prodoc_icons) { \
 				var/image/I; \
 				for (var/implant in H.prodoc_icons) { \

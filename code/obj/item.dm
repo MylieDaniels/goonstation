@@ -993,6 +993,9 @@ ABSTRACT_TYPE(/obj/item)
 	#ifdef COMSIG_ITEM_EQUIPPED
 	SEND_SIGNAL(src, COMSIG_ITEM_EQUIPPED, user, slot)
 	#endif
+	#ifdef COMSIG_MOB_EQUIP
+	SEND_SIGNAL(user, COMSIG_MOB_EQUIP, src, slot)
+	#endif
 	src.equipped_in_slot = slot
 	for(var/datum/objectProperty/equipment/prop in src.properties)
 		prop.onEquipped(src, user, src.properties[prop])
@@ -1006,6 +1009,9 @@ ABSTRACT_TYPE(/obj/item)
 		return
 	#ifdef COMSIG_ITEM_UNEQUIPPED
 	SEND_SIGNAL(src, COMSIG_ITEM_UNEQUIPPED, user)
+	#endif
+	#ifdef COMSIG_MOB_UNEQUIP
+	SEND_SIGNAL(user, COMSIG_MOB_UNEQUIP, src)
 	#endif
 	src.hide_buttons()
 	for(var/datum/objectProperty/equipment/prop in src.properties)

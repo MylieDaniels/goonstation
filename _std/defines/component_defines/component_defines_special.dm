@@ -75,7 +75,8 @@
 
 	/// When invisibility of a mob gets updated (old_value)
 	#define COMSIG_ATOM_PROP_MOB_INVISIBILITY "atom_prop_invis"
-
+	/// When hide_icons of a mob gets updated (old_value)
+	#define COMSIG_ATOM_PROP_MOB_HIDE_ICONS "atom_prop_hide_icons"
 
 // ---- ability signals ----
 
