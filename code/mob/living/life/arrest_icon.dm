@@ -46,14 +46,23 @@ TYPEINFO(/datum/component/contraband_track)
 	. = ..()
 	if (!ismob(src.parent))
 		return COMPONENT_INCOMPATIBLE
-	RegisterSignal(parent, COMSIG_MOB_DROPPED, PROC_REF(update_contraband))
-	RegisterSignal(parent, COMSIG_MOB_PICKUP, PROC_REF(update_contraband))
-	RegisterSignal(parent, COMSIG_MOB_EQUIP, PROC_REF(update_contraband))
-	RegisterSignal(parent, COMSIG_MOB_UNEQUIP, PROC_REF(update_contraband))
+	RegisterSignal(parent, COMSIG_MOB_DROPPED, PROC_REF(triggered))
+	RegisterSignal(parent, COMSIG_MOB_PICKUP, PROC_REF(triggered))
+	RegisterSignal(parent, COMSIG_MOB_EQUIP, PROC_REF(triggered_equip))
+	RegisterSignal(parent, COMSIG_MOB_UNEQUIP, PROC_REF(triggered_equip))
 	RegisterSignal(parent, COMSIG_ATOM_PROP_MOB_HIDE_ICONS, PROC_REF(on_hide_icons))
 
 /datum/component/contraband_track/proc/on_hide_icons(mob/M, old_val)
 	contrabandIcon.alpha = HAS_ATOM_PROPERTY(M, PROP_MOB_HIDE_ICONS) ? 0 : 255
+
+/datum/component/contraband_track/proc/triggered(mob/M)
+	src.update_contraband(M)
+	src.contrabandIcon.icon_state = src.contrabandLevel == 0 ? "" : "Contraband"
+
+/datum/component/contraband_track/proc/triggered_equip(mob/M, /obj/item/I, var/slot = SLOT_BACK)
+	if (slot in list(SLOT_BACK, SLOT_BELT, SLOT_WEAR_ID, SLOT_WEAR_SUIT))
+		src.update_contraband(M)
+		src.contrabandIcon.icon_state = src.contrabandLevel == 0 ? "" : "Contraband"
 
 /datum/component/contraband_track/proc/update_contraband(mob/M)
 	src.contrabandLevel = 0
@@ -63,7 +72,7 @@ TYPEINFO(/datum/component/contraband_track)
 	if (!istype(myID) && istype(H))
 		myID = H.wear_id
 
-	if (myID)
+	if (istype(myID))
 		var/has_carry_permit = (access_carrypermit in myID.access)
 		var/has_contraband_permit = (access_contrabandpermit in myID.access)
 		if (has_carry_permit && has_contraband_permit)
@@ -123,7 +132,6 @@ TYPEINFO(/datum/component/contraband_track)
 				else
 					if (!has_contraband_permit)
 						src.contrabandLevel += H.back.get_contraband() * 0.5
-			H.say("[src.contrabandLevel]")
 		return
 
 	if (ismobcritter(M))
@@ -144,7 +152,6 @@ TYPEINFO(/datum/component/contraband_track)
 			src.contrabandLevel += H.wear_suit.get_contraband()
 		if (H.back)
 			src.contrabandLevel += H.back.get_contraband() * 0.5
-		H.say("[src.contrabandLevel]")
 
 /datum/component/contraband_track/RegisterWithParent()
 	. = ..()
@@ -154,10 +161,7 @@ TYPEINFO(/datum/component/contraband_track)
 /datum/component/contraband_track/UnregisterFromParent()
 	. = ..()
 	UnregisterSignal(parent, list(COMSIG_MOB_DROPPED, COMSIG_MOB_PICKUP))
-
-/datum/component/contraband_track/disposing()
 	if(contrabandIcon)
 		get_image_group(CLIENT_IMAGE_GROUP_ARREST_ICONS).remove_image(contrabandIcon)
 		contrabandIcon.dispose()
 		contrabandIcon = null
-	..()

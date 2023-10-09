@@ -1011,7 +1011,7 @@ ABSTRACT_TYPE(/obj/item)
 	SEND_SIGNAL(src, COMSIG_ITEM_UNEQUIPPED, user)
 	#endif
 	#ifdef COMSIG_MOB_UNEQUIP
-	SEND_SIGNAL(user, COMSIG_MOB_UNEQUIP, src)
+	SEND_SIGNAL(user, COMSIG_MOB_UNEQUIP, src, src.equipped_in_slot)
 	#endif
 	src.hide_buttons()
 	for(var/datum/objectProperty/equipment/prop in src.properties)
