@@ -1014,6 +1014,7 @@
 					return // just in case
 				if (src.budgun)	// oh no, we have a gun! And no tool!
 					if(!DropTheThing("gun", null, 0, 1, Tdurg)) //lets see if we can drop it
+						;
 					else //guess not
 						return // message is handled in the DropTheThing proc :)
 				else // oh no we have a tool!
@@ -1788,7 +1789,7 @@
 			gun_overlay = image(src.budgun.icon, "[src.budgun.icon_state]", layer = 10, pixel_x = src.gun_x_offset, pixel_y = src.gun_y_offset)
 
 			if (istype(src.budgun, /obj/item/gun/energy/lawbringer))
-				var/image/lawbringer_lights = image('icons/obj/items/gun.dmi', "lawbringer-d100", 11, pixel_x = src.gun_x_offset, pixel_y = src.gun_y_offset)
+				var/image/lawbringer_lights = image('icons/obj/items/guns/energy.dmi', "lawbringer-d100", 11, pixel_x = src.gun_x_offset, pixel_y = src.gun_y_offset)
 				switch(lawbringer_state)
 					if ("clown")
 						lawbringer_lights.color = "#FFC0CB"
@@ -3299,7 +3300,7 @@ TYPEINFO(/obj/item/device/guardbot_module)
 					master.frustration++
 					if (master.mover)
 						qdel(master.mover)
-					master.navigate_to(protected,3,1,1, max_dist=15)
+					master.navigate_to(protected,2,1,1, max_dist=15)
 					return
 				else
 
@@ -3315,7 +3316,7 @@ TYPEINFO(/obj/item/device/guardbot_module)
 						master.moving = 0
 						if (master.mover)
 							qdel(master.mover)
-						master.navigate_to(protected,3,1,1, max_dist=15)
+						master.navigate_to(protected,2,1,1, max_dist=15)
 
 			return
 

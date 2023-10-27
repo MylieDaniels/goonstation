@@ -811,7 +811,9 @@ var/global/current_state = GAME_STATE_INVALID
 	SPAWN(0)
 		for(var/mob/E in mobs)
 			if(E.client)
-				E.verbs += /mob/proc/show_credits
+				if (!E.abilityHolder)
+					E.add_ability_holder(/datum/abilityHolder/generic)
+				E.addAbility(/datum/targetable/crew_credits)
 				if (E.client.preferences.view_tickets)
 					E.showtickets()
 				if (E.client.preferences.view_score)
@@ -837,3 +839,9 @@ var/global/current_state = GAME_STATE_INVALID
 		global.lag_detection_process.automatic_profiling(force_stop=TRUE)
 
 	return 1
+
+/datum/controller/gameticker/proc/get_credits()
+	RETURN_TYPE(/datum/crewCredits)
+	if (!src.creds)
+		src.creds = new /datum/crewCredits
+	return src.creds
