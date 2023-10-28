@@ -95,6 +95,9 @@
 #elif defined(MAP_OVERRIDE_GEHENNA)
 #include "gehenna.dm"
 
+#elif defined(MAP_OVERRIDE_BODMIR)
+#include "bodmir.dm"
+
 #elif defined(MAP_OVERRIDE_DEVTEST)
 #include "devtest.dm"
 

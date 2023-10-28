@@ -147,7 +147,7 @@ o+`        `-` ``..-:yooos-..----------..`
 //#define MAP_OVERRIDE_FLEET				// Multiple stations stuck together
 //#define MAP_OVERRIDE_ICARUS
 //#define MAP_OVERRIDE_GEHENNA			// Warcrimes WIP do not use
-
+#define MAP_OVERRIDE_BODMIR       // Adventure map (MylieDaniels)
 
 //------------ Unit Test Framework ------------//
 

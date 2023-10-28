@@ -3659,6 +3659,20 @@ ABSTRACT_TYPE(/area/station/catwalk)
 
 // end syndie //
 
+/// Bodmir unique areas
+/area/bodmir/outer_deck
+	name = "AMS Bodmir"
+	icon_state = "white"
+	requires_power = 0
+	sound_environment = 2
+	teleport_blocked = 1
+	area_parallax_render_source_group = /datum/parallax_render_source_group/area/cairngorm
+
+/area/bodmir/outer_deck
+	name = "AMS Bodmir Outer Deck"
+	icon_state = "yellow"
+	ambient_light = rgb(94, 114, 126)
+
 /// Wizard den area for the wizard shuttle spawn
 /area/wizard_station
 	name = "Wizard's Den"
