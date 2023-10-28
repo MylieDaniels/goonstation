@@ -4,6 +4,10 @@
 /obj/item/sponge,
 /turf/unsimulated/floor/black,
 /area/space)
+"am" = (
+/obj/machinery/camera/auto/alt/west,
+/turf/unsimulated/floor/plating,
+/area/space)
 "as" = (
 /obj/decal/fakeobjects/pipe/heat{
 	dir = 10;
@@ -12,6 +16,12 @@
 	},
 /turf/unsimulated/floor/engine/caution/east,
 /area/bodmir/outer_deck)
+"aA" = (
+/obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe{
+	dir = 1
+	},
+/turf/unsimulated/wall/auto/lead/gray,
+/area/space)
 "aC" = (
 /obj/cable/auto/blue,
 /turf/unsimulated/wall/auto/lead/gray,
@@ -24,6 +34,11 @@
 /obj/item/reagent_containers/food/drinks/fueltank/napalm{
 	pixel_x = -3
 	},
+/turf/unsimulated/floor/plating,
+/area/space)
+"aQ" = (
+/obj/decal/cleanable/oil/streak,
+/obj/decal/cleanable/dirt/dirt5,
 /turf/unsimulated/floor/plating,
 /area/space)
 "bc" = (
@@ -50,8 +65,14 @@
 	dir = 10
 	},
 /area/bodmir/outer_deck)
+"ce" = (
+/obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe/overfloor{
+	dir = 6
+	},
+/turf/unsimulated/floor/plating,
+/area/space)
 "co" = (
-/obj/railing{
+/obj/railing/steel{
 	dir = 4
 	},
 /turf/unsimulated/floor/plating,
@@ -77,8 +98,21 @@
 	},
 /turf/unsimulated/floor/black,
 /area/space)
+"cC" = (
+/obj/railing/steel{
+	dir = 1
+	},
+/obj/cable/auto,
+/turf/unsimulated/floor/plating,
+/area/space)
+"cL" = (
+/obj/grille/catwalk,
+/obj/decal/cleanable/blood/gibs,
+/turf/unsimulated/floor/plating,
+/area/space)
 "dh" = (
 /obj/decal/cleanable/blood/drip/med,
+/obj/cable/auto,
 /turf/unsimulated/wall/auto/lead/gray,
 /area/space)
 "dG" = (
@@ -117,6 +151,15 @@
 	},
 /turf/unsimulated/floor/engine/caution/west,
 /area/bodmir/outer_deck)
+"ev" = (
+/obj/railing/steel{
+	dir = 1
+	},
+/obj/decal/cleanable/blood/splatter{
+	icon_state = "gibbl2"
+	},
+/turf/unsimulated/floor/plating,
+/area/space)
 "eA" = (
 /obj/machinery/conveyor/EN{
 	name = "ammunition belt";
@@ -125,7 +168,7 @@
 /turf/unsimulated/floor/black/grime,
 /area/space)
 "eG" = (
-/obj/railing{
+/obj/railing/steel{
 	dir = 8
 	},
 /obj/machinery/conveyor/WN{
@@ -147,6 +190,10 @@
 	dir = 4;
 	pixel_y = -3
 	},
+/obj/decal/cleanable/oil/streak,
+/obj/decal/cleanable/blood,
+/obj/decal/cleanable/blood/gibs/core,
+/obj/item/material_piece/bone,
 /turf/unsimulated/floor/industrial,
 /area/space)
 "eP" = (
@@ -160,6 +207,7 @@
 	id = "bodmir-cannon-belt";
 	name = "ammunition belt"
 	},
+/obj/cable/auto,
 /turf/unsimulated/floor/black/grime,
 /area/space)
 "fm" = (
@@ -174,7 +222,7 @@
 /turf/unsimulated/floor/black,
 /area/space)
 "ft" = (
-/obj/railing{
+/obj/railing/steel{
 	dir = 4
 	},
 /obj/machinery/conveyor_switch{
@@ -195,6 +243,12 @@
 /obj/grille/steel/broken,
 /turf/unsimulated/floor/plating,
 /area/space)
+"gw" = (
+/obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe{
+	dir = 8
+	},
+/turf/unsimulated/wall/auto/lead/gray,
+/area/space)
 "he" = (
 /obj/window/auto/bulletproof,
 /turf/unsimulated/floor/black,
@@ -202,7 +256,7 @@
 "ho" = (
 /obj/decal/cleanable/blood/gibs,
 /obj/item/gun/kinetic/smg/empty{
-	pixel_x = -6;
+	pixel_x = -12;
 	pixel_y = -3
 	},
 /obj/item/casing/small{
@@ -215,7 +269,14 @@
 	pixel_y = -2;
 	pixel_x = 3
 	},
+/obj/decal/cleanable/blood,
 /turf/unsimulated/floor/industrial,
+/area/space)
+"ig" = (
+/obj/machinery/alarm{
+	pixel_y = 20
+	},
+/turf/unsimulated/floor/plating,
 /area/space)
 "ii" = (
 /obj/cable/auto/blue,
@@ -260,7 +321,7 @@
 	id = "bodmir-cannon-belt";
 	name = "ammunition belt"
 	},
-/obj/railing{
+/obj/railing/steel{
 	dir = 8
 	},
 /turf/unsimulated/floor/black/grime,
@@ -269,6 +330,16 @@
 /obj/cable/auto/blue,
 /turf/unsimulated/floor/engine,
 /area/bodmir/outer_deck)
+"kg" = (
+/obj/railing/steel{
+	dir = 8
+	},
+/turf/unsimulated/floor/plating,
+/area/space)
+"ki" = (
+/obj/decal/cleanable/blood/drip/med,
+/turf/unsimulated/floor/plating,
+/area/space)
 "kp" = (
 /obj/machinery/drainage,
 /turf/unsimulated/floor/black,
@@ -289,6 +360,11 @@
 	pixel_x = -3;
 	pixel_y = -3
 	},
+/obj/item/tank/oxygen,
+/obj/item/storage/toolbox/mechanical/orange_tools{
+	pixel_x = -2
+	},
+/obj/item/device/t_scanner,
 /turf/unsimulated/floor/plating,
 /area/space)
 "kF" = (
@@ -337,15 +413,17 @@
 /turf/unsimulated/floor/black,
 /area/space)
 "mg" = (
-/obj/railing{
+/obj/railing/steel{
 	dir = 1
 	},
+/obj/machinery/camera/auto/alt/west,
 /turf/unsimulated/floor/plating,
 /area/space)
 "mh" = (
-/obj/railing{
+/obj/railing/steel{
 	dir = 8
 	},
+/obj/decal/cleanable/blood/gibs,
 /turf/unsimulated/floor/plating,
 /area/space)
 "mi" = (
@@ -364,13 +442,19 @@
 	id = "bodmir-cannon-belt";
 	name = "ammunition belt"
 	},
-/obj/railing{
+/obj/railing/steel{
 	dir = 8
 	},
 /obj/strip_door{
 	desc = "A strip door to keep the line rolling clearly."
 	},
 /turf/unsimulated/floor/black/grime,
+/area/space)
+"no" = (
+/obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe/overfloor{
+	dir = 8
+	},
+/turf/unsimulated/floor/plating,
 /area/space)
 "nV" = (
 /obj/stool/chair/office/syndie{
@@ -381,6 +465,16 @@
 "og" = (
 /obj/decoration/syndiepc/syndiepc16,
 /turf/unsimulated/floor/black,
+/area/space)
+"oj" = (
+/obj/item/wrench{
+	pixel_y = 10
+	},
+/turf/unsimulated/floor/plating,
+/area/space)
+"ow" = (
+/obj/decal/cleanable/dirt/dirt5,
+/turf/unsimulated/floor/plating,
 /area/space)
 "oC" = (
 /obj/machinery/light/incandescent/warm,
@@ -435,6 +529,7 @@
 	pixel_y = -7;
 	pixel_x = 3
 	},
+/obj/item/roadflare,
 /turf/unsimulated/floor/industrial,
 /area/space)
 "pz" = (
@@ -457,6 +552,19 @@
 	working = 0
 	},
 /turf/unsimulated/wall/auto/lead/gray,
+/area/space)
+"pV" = (
+/obj/grille/catwalk,
+/obj/cable/auto,
+/turf/unsimulated/floor/plating,
+/area/space)
+"qc" = (
+/obj/machinery/conveyor/WE{
+	id = "bodmir-cannon-belt";
+	name = "ammunition belt"
+	},
+/obj/cable/auto,
+/turf/unsimulated/floor/black/grime,
 /area/space)
 "qj" = (
 /obj/grille/catwalk,
@@ -491,7 +599,7 @@
 /turf/unsimulated/floor/engine,
 /area/bodmir/outer_deck)
 "rw" = (
-/obj/railing{
+/obj/railing/steel{
 	dir = 8
 	},
 /obj/machinery/conveyor/ES{
@@ -513,6 +621,18 @@
 /obj/machinery/light/emergencyflashing,
 /turf/unsimulated/floor/engine,
 /area/bodmir/outer_deck)
+"sy" = (
+/obj/barricade,
+/obj/decal/cleanable/machine_debris,
+/turf/unsimulated/floor/plating,
+/area/space)
+"sB" = (
+/obj/item/weldingtool{
+	pixel_x = -3;
+	pixel_y = -2
+	},
+/turf/unsimulated/floor/plating,
+/area/space)
 "sI" = (
 /obj/grille/catwalk,
 /turf/simulated/floor/black,
@@ -533,6 +653,10 @@
 /obj/map/light/dimred,
 /turf/unsimulated/floor/black,
 /area/space)
+"tp" = (
+/obj/machinery/atmospherics/pipe/manifold/overfloor,
+/turf/unsimulated/floor/plating,
+/area/space)
 "tS" = (
 /obj/stove,
 /obj/item/soup_pot{
@@ -552,6 +676,10 @@
 "vy" = (
 /obj/machinery/camera/auto/west,
 /turf/unsimulated/floor/black,
+/area/space)
+"vG" = (
+/obj/decal/cleanable/dirt,
+/turf/unsimulated/floor/plating,
 /area/space)
 "vQ" = (
 /obj/machinery/conveyor/ES{
@@ -589,8 +717,23 @@
 	},
 /turf/unsimulated/floor/engine,
 /area/bodmir/outer_deck)
+"xi" = (
+/obj/decal/cleanable/oil,
+/obj/item/rods/steel,
+/turf/unsimulated/floor/plating,
+/area/space)
+"xx" = (
+/obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe/overfloor{
+	dir = 9
+	},
+/turf/unsimulated/floor/plating,
+/area/space)
 "xE" = (
 /turf/unsimulated/floor/blackwhite,
+/area/space)
+"xQ" = (
+/obj/decal/cleanable/dirt/dirt3,
+/turf/unsimulated/floor/plating,
 /area/space)
 "xX" = (
 /obj/cable/auto,
@@ -604,12 +747,13 @@
 /turf/unsimulated/floor/black,
 /area/space)
 "yy" = (
-/obj/railing{
+/obj/railing/steel{
 	dir = 1
 	},
-/obj/railing{
+/obj/railing/steel{
 	dir = 1
 	},
+/obj/item/device/t_scanner,
 /turf/unsimulated/floor/plating,
 /area/space)
 "yz" = (
@@ -622,6 +766,7 @@
 	id = "bodmir-cannon-belt";
 	name = "ammunition belt"
 	},
+/obj/cable/auto,
 /turf/unsimulated/floor/black/grime,
 /area/space)
 "yI" = (
@@ -630,13 +775,39 @@
 	dir = 9
 	},
 /area/bodmir/outer_deck)
+"yX" = (
+/obj/machinery/light/incandescent/warm{
+	dir = 1
+	},
+/turf/unsimulated/floor/plating,
+/area/space)
+"zj" = (
+/obj/item/material_piece/bone{
+	pixel_x = -9;
+	pixel_y = 6
+	},
+/turf/unsimulated/floor/industrial,
+/area/space)
+"zr" = (
+/obj/item/scrap,
+/obj/decal/cleanable/dirt,
+/turf/unsimulated/floor/plating,
+/area/space)
 "zx" = (
 /obj/cable/auto,
 /turf/unsimulated/floor/engine/caution/east,
 /area/bodmir/outer_deck)
+"zV" = (
+/obj/machinery/atmospherics/unary/vent_pump,
+/turf/unsimulated/floor/plating,
+/area/space)
 "An" = (
 /mob/living/critter/robotic/gunbot/syndicate,
 /turf/unsimulated/floor/black,
+/area/space)
+"Av" = (
+/obj/cable/auto,
+/turf/unsimulated/floor/plating,
 /area/space)
 "Aw" = (
 /obj/machinery/conveyor/SW{
@@ -672,7 +843,7 @@
 	id = "bodmir-cannon-belt";
 	name = "ammunition belt"
 	},
-/obj/railing{
+/obj/railing/steel{
 	dir = 8
 	},
 /turf/unsimulated/floor/black/grime,
@@ -692,6 +863,13 @@
 /obj/grille/catwalk,
 /turf/unsimulated/floor/engine/caution/west,
 /area/bodmir/outer_deck)
+"BT" = (
+/obj/machinery/light/incandescent/warm{
+	dir = 1
+	},
+/obj/decal/cleanable/oil/streak,
+/turf/unsimulated/floor/plating,
+/area/space)
 "Ci" = (
 /obj/machinery/conveyor/EN{
 	name = "ammunition belt";
@@ -699,14 +877,32 @@
 	},
 /turf/unsimulated/floor/black,
 /area/space)
-"Cp" = (
-/obj/railing/steel/reinforced,
-/turf/unsimulated/floor/industrial,
+"Cm" = (
+/obj/railing/steel{
+	dir = 1
+	},
+/obj/decal/cleanable/dirt/dirt2,
+/turf/unsimulated/floor/plating,
 /area/space)
 "Cu" = (
 /obj/cable/auto/blue,
 /turf/unsimulated/floor/engine/caution/corner,
 /area/bodmir/outer_deck)
+"CD" = (
+/obj/machinery/conveyor/NS{
+	id = "bodmir-cannon-belt";
+	name = "ammunition belt"
+	},
+/obj/railing/steel{
+	dir = 8
+	},
+/obj/cable/auto,
+/turf/unsimulated/floor/black/grime,
+/area/space)
+"CL" = (
+/obj/cable/auto,
+/turf/unsimulated/wall/auto/lead/gray,
+/area/space)
 "CN" = (
 /obj/ladder{
 	icon_state = "ladder_wall";
@@ -729,6 +925,7 @@
 	dir = 4;
 	pixel_y = -3
 	},
+/obj/machinery/camera/auto/east,
 /turf/unsimulated/floor/plating,
 /area/space)
 "ED" = (
@@ -740,6 +937,12 @@
 	dir = 9
 	},
 /area/bodmir/outer_deck)
+"Fs" = (
+/obj/railing/steel{
+	dir = 1
+	},
+/turf/unsimulated/floor/plating,
+/area/space)
 "FS" = (
 /obj/table/reinforced/auto,
 /obj/item/reagent_containers/food/snacks/cereal_box/honey{
@@ -753,6 +956,7 @@
 /obj/machinery/light/incandescent/warm{
 	dir = 4
 	},
+/obj/cable/auto,
 /turf/unsimulated/floor/plating,
 /area/space)
 "FZ" = (
@@ -777,7 +981,7 @@
 	id = "bodmir-cannon-belt";
 	name = "ammunition belt"
 	},
-/obj/railing{
+/obj/railing/steel{
 	dir = 4
 	},
 /turf/unsimulated/floor/black/grime,
@@ -818,17 +1022,33 @@
 	pixel_y = -7;
 	pixel_x = 3
 	},
+/obj/decal/cleanable/dirt/dirt2,
 /turf/unsimulated/floor/industrial,
+/area/space)
+"Ir" = (
+/obj/machinery/door/poddoor/blast/pyro,
+/turf/unsimulated/floor/black,
+/area/space)
+"IB" = (
+/obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe/overfloor,
+/turf/unsimulated/floor/plating,
 /area/space)
 "IF" = (
 /obj/decoration/syndiepc/syndiepc5,
 /obj/map/light/dimred,
 /turf/unsimulated/floor/black,
 /area/space)
+"IG" = (
+/obj/decal/cleanable/machine_debris,
+/obj/item/scrap,
+/turf/unsimulated/floor/plating,
+/area/space)
 "Je" = (
 /obj/decal/cleanable/blood/splatter{
 	icon_state = "gibbl2"
 	},
+/obj/machinery/camera/auto/alt/north,
+/obj/decal/cleanable/dirt/dirt3,
 /turf/unsimulated/floor/plating,
 /area/space)
 "Ka" = (
@@ -836,10 +1056,16 @@
 	id = "bodmir-cannon-belt";
 	name = "ammunition belt"
 	},
-/obj/railing{
+/obj/railing/steel{
 	dir = 4
 	},
 /turf/unsimulated/floor/black/grime,
+/area/space)
+"Kl" = (
+/obj/decal/cleanable/machine_debris,
+/obj/item/raw_material/scrap_metal,
+/obj/decal/cleanable/dirt/dirt4,
+/turf/unsimulated/floor/plating,
 /area/space)
 "Km" = (
 /obj/grille/catwalk,
@@ -849,6 +1075,10 @@
 /area/bodmir/outer_deck)
 "Ks" = (
 /obj/decal/cleanable/blood/gibs,
+/obj/item/material_piece/bone{
+	pixel_y = -4;
+	pixel_x = 4
+	},
 /turf/unsimulated/floor/industrial,
 /area/space)
 "KD" = (
@@ -858,13 +1088,27 @@
 	},
 /turf/unsimulated/floor/black,
 /area/space)
+"KK" = (
+/obj/decal/cleanable/oil/streak,
+/turf/unsimulated/floor/plating,
+/area/space)
+"KL" = (
+/obj/barricade,
+/obj/decal/cleanable/dirt/dirt4,
+/turf/unsimulated/floor/plating,
+/area/space)
 "Lh" = (
 /obj/grille/catwalk,
 /turf/unsimulated/floor/engine,
 /area/bodmir/outer_deck)
 "Li" = (
 /obj/decal/cleanable/oil,
+/obj/cable/auto,
 /turf/unsimulated/wall/auto/lead/gray,
+/area/space)
+"Lt" = (
+/obj/decal/cleanable/blood,
+/turf/unsimulated/floor/industrial,
 /area/space)
 "Lu" = (
 /turf/unsimulated/wall/auto/reinforced/supernorn,
@@ -873,14 +1117,16 @@
 /obj/machinery/light/emergencyflashing{
 	dir = 1
 	},
+/obj/item/device/igniter,
 /obj/item/reagent_containers/food/drinks/coolerbottle{
 	pixel_x = -5;
-	pixel_y = -4
+	pixel_y = -4;
+	initial_reagents = list("water" = 28)
 	},
 /turf/unsimulated/floor/plating,
 /area/space)
 "LE" = (
-/obj/railing{
+/obj/railing/steel{
 	dir = 4
 	},
 /obj/machinery/conveyor/WS{
@@ -898,6 +1144,7 @@
 	id = "bodmir-cannon-belt";
 	name = "ammunition belt"
 	},
+/obj/machinery/camera/auto/alt/north,
 /turf/unsimulated/floor/black/grime,
 /area/space)
 "Mn" = (
@@ -910,12 +1157,31 @@
 /obj/machinery/light/small/floor/frostedred,
 /turf/unsimulated/floor/engine,
 /area/bodmir/outer_deck)
+"Ni" = (
+/obj/machinery/atmospherics/pipe/vent{
+	dir = 4
+	},
+/turf/unsimulated/floor/plating,
+/area/space)
+"Nk" = (
+/obj/machinery/conveyor/NS{
+	id = "bodmir-cannon-belt";
+	name = "ammunition belt"
+	},
+/obj/railing/steel{
+	dir = 4
+	},
+/obj/cable/auto,
+/turf/unsimulated/floor/black/grime,
+/area/space)
 "Nu" = (
-/obj/decal/cleanable/blood/drip/high,
 /obj/item/casing/small{
 	dir = 1;
 	pixel_y = -7;
 	pixel_x = 3
+	},
+/obj/decal/cleanable/blood/tracks{
+	icon_state = "drip5"
 	},
 /turf/unsimulated/floor/industrial,
 /area/space)
@@ -942,14 +1208,12 @@
 	},
 /turf/unsimulated/floor/plating,
 /area/space)
-"OL" = (
-/obj/railing/steel/reinforced{
-	dir = 8
+"Oy" = (
+/mob/living/critter/robotic/sawfly/ai_controlled,
+/obj/decal/cleanable/blood/tracks{
+	icon_state = "drip5"
 	},
-/obj/railing/steel/reinforced{
-	dir = 4
-	},
-/turf/unsimulated/floor/industrial,
+/turf/unsimulated/floor/plating,
 /area/space)
 "Pk" = (
 /obj/machinery/door/poddoor/blast/pyro,
@@ -968,6 +1232,21 @@
 "PP" = (
 /turf/unsimulated/wall/auto/lead/white,
 /area/bodmir/outer_deck)
+"PT" = (
+/obj/cable/auto,
+/obj/decal/cleanable/dirt/dirt2,
+/turf/unsimulated/floor/plating,
+/area/space)
+"Qy" = (
+/obj/railing/steel{
+	dir = 1
+	},
+/obj/railing/steel{
+	dir = 1
+	},
+/obj/cable/auto,
+/turf/unsimulated/floor/plating,
+/area/space)
 "QW" = (
 /obj/railing/steel/reinforced,
 /turf/unsimulated/floor/industrial,
@@ -979,7 +1258,7 @@
 /turf/unsimulated/floor/black,
 /area/space)
 "Ra" = (
-/obj/railing{
+/obj/railing/steel{
 	dir = 8
 	},
 /obj/machinery/conveyor/SN{
@@ -1003,6 +1282,10 @@
 /obj/cable/auto,
 /turf/unsimulated/floor/engine/caution/corner,
 /area/bodmir/outer_deck)
+"Sg" = (
+/obj/decal/cleanable/dirt/dirt2,
+/turf/unsimulated/floor/plating,
+/area/space)
 "Sk" = (
 /obj/table/syndicate/auto,
 /turf/unsimulated/floor/black,
@@ -1065,7 +1348,7 @@
 /turf/unsimulated/floor/plating,
 /area/space)
 "UL" = (
-/obj/railing{
+/obj/railing/steel{
 	dir = 4
 	},
 /obj/machinery/conveyor/WE{
@@ -1077,6 +1360,13 @@
 "UW" = (
 /obj/window/auto,
 /turf/unsimulated/floor/blackwhite,
+/area/space)
+"Vc" = (
+/obj/decal/cleanable/blood/tracks{
+	icon_state = "drip5"
+	},
+/obj/decal/cleanable/dirt/dirt2,
+/turf/unsimulated/floor/plating,
 /area/space)
 "Vs" = (
 /obj/machinery/conveyor/SW{
@@ -1111,6 +1401,14 @@
 	},
 /turf/simulated/floor/sanitary/white,
 /area/space)
+"VJ" = (
+/obj/decal/cleanable/machine_debris,
+/obj/item/rods/steel{
+	pixel_x = -4;
+	pixel_y = -2
+	},
+/turf/unsimulated/floor/plating,
+/area/space)
 "Wb" = (
 /obj/item/clothing/suit/bedsheet/black{
 	pixel_x = 1;
@@ -1123,6 +1421,7 @@
 /obj/decal/cleanable/blood/splatter{
 	icon_state = "gibbl2"
 	},
+/obj/decal/cleanable/blood/gibs,
 /turf/unsimulated/floor/plating,
 /area/space)
 "Wg" = (
@@ -1130,12 +1429,24 @@
 	id = "bodmir-cannon-belt";
 	name = "ammunition belt"
 	},
+/obj/machinery/camera/auto/alt/north,
 /turf/unsimulated/floor/black/grime,
 /area/space)
 "Wi" = (
 /obj/storage/secure/closet/fridge,
 /obj/item/reagent_containers/iv_drip/blood,
 /turf/simulated/floor/sanitary/white,
+/area/space)
+"Wp" = (
+/obj/machinery/light/incandescent/warm{
+	dir = 4
+	},
+/obj/decal/cleanable/dirt/dirt3,
+/turf/unsimulated/floor/plating,
+/area/space)
+"Wr" = (
+/obj/machinery/camera/auto/alt/north,
+/turf/unsimulated/floor/plating,
 /area/space)
 "WF" = (
 /obj/item/device/light/floodlight/with_cell,
@@ -1156,10 +1467,6 @@
 	},
 /turf/unsimulated/floor/engine/caution/east,
 /area/bodmir/outer_deck)
-"Xr" = (
-/obj/grille/catwalk,
-/turf/simulated/floor/black,
-/area/space)
 "Xw" = (
 /turf/unsimulated/floor/engine/caution/corner2{
 	dir = 5
@@ -1179,6 +1486,14 @@
 /obj/map/light/dimred,
 /turf/unsimulated/floor/black,
 /area/space)
+"YF" = (
+/obj/grille/catwalk,
+/obj/machinery/light/incandescent/warm{
+	dir = 1
+	},
+/obj/cable/auto,
+/turf/unsimulated/floor/plating,
+/area/space)
 "YL" = (
 /obj/machinery/conveyor/NS{
 	id = "bodmir-cannon-belt";
@@ -1187,7 +1502,7 @@
 /obj/strip_door{
 	desc = "A strip door to keep the line rolling clearly."
 	},
-/obj/railing{
+/obj/railing/steel{
 	dir = 4
 	},
 /turf/unsimulated/floor/black/grime,
@@ -52042,13 +52357,13 @@ bc
 bc
 bc
 Lu
-OL
-OL
-OL
-OL
-OL
-OL
-OL
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
 Lu
 Lu
 Lu
@@ -52336,13 +52651,13 @@ bc
 bc
 bc
 Lu
-OL
-OL
-OL
-OL
-OL
-OL
-OL
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
 Lu
 bc
 bc
@@ -52632,11 +52947,11 @@ bc
 bc
 bc
 Lu
-OL
-OL
-OL
-OL
-OL
+Lu
+Lu
+Lu
+Lu
+Lu
 Lu
 bc
 bc
@@ -52928,11 +53243,11 @@ bc
 bc
 bc
 Lu
-OL
-OL
-OL
-OL
-OL
+Lu
+Lu
+Lu
+Lu
+Lu
 Lu
 bc
 bc
@@ -53225,10 +53540,10 @@ bc
 bc
 bc
 Lu
-OL
-OL
-OL
-OL
+Lu
+Lu
+Lu
+Lu
 Lu
 bc
 bc
@@ -53523,9 +53838,9 @@ bc
 bc
 bc
 Lu
-OL
-OL
-OL
+Lu
+Lu
+Lu
 Lu
 bc
 bc
@@ -53821,9 +54136,9 @@ bc
 bc
 bc
 Lu
-OL
-OL
-OL
+Lu
+Lu
+Lu
 Lu
 bc
 bc
@@ -54119,14 +54434,14 @@ bc
 bc
 bc
 Lu
-OL
-OL
-OL
 Lu
-Rc
-Rc
-Rc
-Rc
+Lu
+Lu
+Lu
+bc
+bc
+bc
+bc
 bc
 bc
 bc
@@ -54417,9 +54732,9 @@ bc
 bc
 bc
 Lu
-OL
-OL
-OL
+Lu
+Lu
+Lu
 Lu
 bc
 bc
@@ -54716,13 +55031,9 @@ bc
 bc
 bc
 Lu
-OL
-OL
 Lu
-Rc
-Rc
-Rc
-Rc
+Lu
+Lu
 bc
 bc
 bc
@@ -54730,6 +55041,10 @@ bc
 bc
 bc
 bc
+bc
+bc
+bc
+HC
 bc
 bc
 bc
@@ -55015,16 +55330,9 @@ bc
 bc
 bc
 Lu
-OL
-OL
 Lu
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
+Lu
+Lu
 bc
 bc
 bc
@@ -55032,6 +55340,13 @@ bc
 bc
 bc
 bc
+bc
+bc
+HC
+HC
+HC
+HC
+HC
 bc
 bc
 bc
@@ -55314,22 +55629,22 @@ bc
 bc
 bc
 Lu
-OL
-OL
 Lu
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
+Lu
+Lu
 bc
 bc
 bc
+bc
+bc
+bc
+bc
+bc
+HC
+HC
+HC
+HC
+HC
 bc
 bc
 bc
@@ -55613,22 +55928,22 @@ bc
 bc
 bc
 Lu
-OL
-OL
 Lu
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
+Lu
+Lu
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+HC
+HC
+HC
+HC
+bc
 bc
 bc
 bc
@@ -55913,24 +56228,20 @@ bc
 bc
 bc
 Lu
-OL
 Lu
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
+Lu
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+HC
 bc
 bc
 bc
@@ -55969,11 +56280,15 @@ bc
 bc
 bc
 bc
+HC
+HC
+HC
 bc
 bc
 bc
 bc
-bc
+HC
+HC
 HC
 HC
 HC
@@ -56215,24 +56530,20 @@ bc
 Lu
 Lu
 Lu
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Xr
-Xr
-Xr
-Xr
-Xr
-Xr
-Xr
-Xr
-Xr
-Xr
-Xr
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+HC
 bc
 bc
 bc
@@ -56271,18 +56582,22 @@ bc
 bc
 bc
 bc
+HC
+Lu
+HC
 bc
 bc
 bc
 bc
-bc
+HC
+HC
 HC
 kK
 qo
 qo
 HC
 HC
-HC
+Ta
 HC
 bc
 bc
@@ -56515,26 +56830,27 @@ bc
 Lu
 Lu
 Lu
-Rc
-Cp
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Xr
-Xr
-Xr
-Xr
-Xr
-Xr
-Xr
-Xr
-Xr
-Xr
-Xr
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+HC
+bc
+bc
+bc
+bc
+bc
 bc
 bc
 bc
@@ -56566,18 +56882,17 @@ bc
 bc
 bc
 HC
+Ow
+Ow
 HC
-HC
-HC
-HC
-HC
+Lu
 HC
 bc
 bc
 bc
 bc
-bc
-bc
+HC
+HC
 HC
 Mf
 eA
@@ -56815,28 +57130,29 @@ bc
 bc
 Lu
 Lu
-Rc
-Rc
-Rc
-Cp
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Xr
-Xr
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+HC
+bc
+bc
+bc
+bc
+bc
 bc
 bc
 bc
@@ -56868,7 +57184,6 @@ bc
 bc
 bc
 HC
-wq
 wq
 wq
 HC
@@ -56886,7 +57201,7 @@ te
 qo
 Ih
 ho
-Rc
+Lt
 HC
 bc
 bc
@@ -57116,29 +57431,30 @@ bc
 bc
 Lu
 Lu
-Rc
-Rc
-Rc
-Rc
-Cp
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Xr
-Xr
-Lu
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+HC
+bc
+bc
+bc
+bc
+bc
 bc
 bc
 bc
@@ -57170,13 +57486,12 @@ bc
 bc
 bc
 HC
-wq
-wq
+yX
 wq
 kz
 Ps
 HC
-HC
+CL
 HC
 HC
 HC
@@ -57188,7 +57503,7 @@ eR
 qo
 Ks
 py
-Rc
+zj
 Ta
 bc
 bc
@@ -57417,30 +57732,31 @@ bc
 bc
 Lu
 Lu
-Rc
-Rc
-Rc
-Rc
-Rc
-Cp
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Xr
-Xr
-Lu
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+HC
+bc
+bc
+bc
+bc
+bc
 bc
 bc
 bc
@@ -57474,11 +57790,10 @@ bc
 HC
 wq
 wq
-wq
 kz
 Ps
-wq
-wq
+am
+Av
 HC
 HC
 HC
@@ -57487,10 +57802,10 @@ te
 HC
 HC
 dh
-eI
+YF
 qo
 Ec
-qo
+cL
 HC
 bc
 bc
@@ -57718,31 +58033,32 @@ bc
 bc
 bc
 Lu
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Cp
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Xr
-Xr
-Lu
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+HC
+bc
+bc
+bc
+bc
+bc
 bc
 bc
 bc
@@ -57775,12 +58091,11 @@ bc
 bc
 HC
 wq
-wq
-wq
+ow
 HC
 LE
 Ka
-Ka
+Nk
 Ka
 Ka
 YL
@@ -57788,9 +58103,9 @@ YL
 GU
 HC
 WF
-wq
-wq
-wq
+oj
+Av
+PT
 Li
 qo
 HC
@@ -58021,30 +58336,31 @@ bc
 bc
 Lu
 Lu
-Rc
-Rc
-Rc
-Rc
-Rc
-Cp
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Xr
-Xr
-Lu
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+HC
+bc
+bc
+bc
+bc
+bc
 bc
 bc
 bc
@@ -58076,13 +58392,12 @@ bc
 bc
 bc
 HC
-wq
 wq
 wq
 HC
 rw
 Bq
-Bq
+CD
 Bq
 Bq
 nd
@@ -58091,7 +58406,7 @@ jV
 HC
 ft
 co
-HC
+CL
 HC
 HC
 qo
@@ -58324,29 +58639,30 @@ bc
 bc
 Lu
 Lu
-Rc
-Rc
-Rc
-Rc
-Cp
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Xr
-Xr
-Lu
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+HC
+bc
+bc
+bc
+bc
+bc
 bc
 bc
 bc
@@ -58378,13 +58694,12 @@ bc
 bc
 bc
 HC
-wq
-wq
-wq
+zr
+aQ
 kz
 te
 wq
-wq
+Av
 HC
 HC
 HC
@@ -58627,28 +58942,29 @@ bc
 bc
 Lu
 Lu
-Rc
-Rc
-Rc
-Cp
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Xr
-Xr
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+HC
+bc
+bc
+bc
+bc
+bc
 bc
 bc
 bc
@@ -58680,23 +58996,22 @@ bc
 bc
 bc
 HC
-wq
-wq
-wq
+BT
+vG
 kz
 te
 HC
+CL
+CL
 HC
 HC
 HC
-HC
-HC
-FU
-wq
-wq
-wq
-Ps
-mg
+Wp
+ki
+Av
+Av
+qc
+cC
 pM
 qo
 HC
@@ -58931,26 +59246,27 @@ bc
 Lu
 Lu
 Lu
-Rc
-Cp
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Xr
-Xr
-Xr
-Xr
-Xr
-Xr
-Xr
-Xr
-Xr
-Xr
-Xr
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+HC
+bc
+bc
+bc
+bc
+bc
 bc
 bc
 bc
@@ -58982,23 +59298,22 @@ bc
 bc
 bc
 HC
-wq
-wq
-wq
+xi
+IG
 HC
 Ow
 HC
-bc
-bc
-bc
-bc
+wq
+Av
+wq
+wq
 HC
 HC
 HC
 HC
 Uw
 Ps
-yy
+Qy
 HC
 qo
 mg
@@ -59235,24 +59550,20 @@ bc
 Lu
 Lu
 Lu
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Xr
-Xr
-Xr
-Xr
-Xr
-Xr
-Xr
-Xr
-Xr
-Xr
-Xr
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+HC
 bc
 bc
 bc
@@ -59283,28 +59594,32 @@ bc
 bc
 bc
 bc
+bc
+bc
+bc
+bc
+bc
+HC
+Kl
+KK
+HC
+Lu
 HC
 wq
+Av
 wq
 wq
-HC
-HC
-HC
-bc
-bc
-bc
-bc
 HC
 kB
 Wb
 XK
 Je
 Ps
-mg
+cC
 HC
 eI
-mg
-wq
+Cm
+ki
 HC
 bc
 bc
@@ -59537,24 +59852,25 @@ bc
 bc
 bc
 Lu
-OL
 Lu
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
+Lu
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+HC
+bc
+bc
+bc
+bc
+bc
 bc
 bc
 bc
@@ -59586,28 +59902,27 @@ bc
 bc
 bc
 HC
-bc
-bc
-bc
+sy
+KL
 HC
+Lu
 HC
-HC
-bc
-bc
-bc
-bc
-HC
+ig
+ce
+IB
+IB
+aA
 LB
 rR
 HC
 SG
 Ps
-mg
-HC
-qo
-mg
-wq
-HC
+cC
+CL
+pV
+cC
+Av
+CL
 bc
 bc
 bc
@@ -59841,22 +60156,23 @@ bc
 bc
 bc
 Lu
-OL
-OL
 Lu
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
+Lu
+Lu
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+HC
+HC
+HC
+HC
+bc
+bc
 bc
 bc
 bc
@@ -59888,26 +60204,25 @@ bc
 bc
 bc
 HC
-bc
-bc
-bc
+wq
+VJ
 HC
+Lu
 HC
-HC
-bc
-bc
-bc
-bc
+wq
+no
+wq
+wq
 HC
 aM
 pL
 gp
 mi
 Ps
-mg
+Fs
 HC
 qo
-mg
+Fs
 wq
 HC
 bc
@@ -60146,21 +60461,22 @@ bc
 bc
 bc
 Lu
-OL
-OL
 Lu
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
+Lu
+Lu
 bc
 bc
+bc
+bc
+bc
+bc
+bc
+bc
+HC
+HC
+HC
+HC
+HC
 bc
 bc
 bc
@@ -60190,16 +60506,15 @@ bc
 bc
 bc
 HC
-bc
-bc
-bc
+xQ
+wq
 HC
 HC
 HC
 HC
-HC
-bc
-bc
+gw
+wq
+wq
 HC
 HC
 HC
@@ -60209,7 +60524,7 @@ UL
 HC
 HC
 qo
-mg
+ev
 oC
 HC
 bc
@@ -60451,22 +60766,23 @@ bc
 bc
 bc
 Lu
-OL
-OL
 Lu
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
-Rc
+Lu
+Lu
 bc
 bc
 bc
 bc
 bc
 bc
+bc
+bc
+bc
+HC
+HC
+HC
+HC
+HC
 bc
 bc
 bc
@@ -60492,18 +60808,17 @@ bc
 bc
 bc
 HC
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+wq
+wq
+wq
+wq
+zV
+IB
+tp
+wq
+wq
+HC
+HC
 HC
 CN
 qo
@@ -60756,13 +61071,9 @@ bc
 bc
 bc
 Lu
-OL
-OL
 Lu
-Rc
-Rc
-Rc
-Rc
+Lu
+Lu
 bc
 bc
 bc
@@ -60773,6 +61084,11 @@ bc
 bc
 bc
 bc
+HC
+HC
+HC
+HC
+HC
 bc
 bc
 bc
@@ -60794,27 +61110,26 @@ bc
 bc
 bc
 HC
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+wq
+wq
+wq
+wq
+wq
+ce
+xx
+wq
+wq
+HC
+HC
 HC
 Ra
 Ra
 eG
-mh
+kg
 mh
 HC
 HC
-wq
+Sg
 HC
 bc
 bc
@@ -61061,9 +61376,9 @@ bc
 bc
 bc
 Lu
-OL
-OL
-OL
+Lu
+Lu
+Lu
 Lu
 bc
 bc
@@ -61075,10 +61390,11 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
+HC
+HC
+HC
+HC
+HC
 bc
 bc
 bc
@@ -61096,26 +61412,25 @@ bc
 bc
 bc
 HC
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+HC
+HC
+HC
+HC
+HC
+gw
+HC
+Ow
+Ow
+HC
+HC
 HC
 HC
 wq
-wq
-wq
-wq
+Sg
+Av
+ki
 Rz
-wq
+sB
 wq
 HC
 bc
@@ -61367,26 +61682,10 @@ bc
 bc
 bc
 Lu
-OL
-OL
-OL
 Lu
-Rc
-Rc
-Rc
-Rc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+Lu
+Lu
+Lu
 bc
 bc
 bc
@@ -61403,20 +61702,36 @@ HC
 HC
 HC
 HC
-HC
-HC
-HC
-HC
-HC
-HC
-HC
-HC
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
+bc
 HC
 wq
-Rz
+wq
+wq
+wq
+HC
+HC
+HC
+Wr
+Oy
 FU
-wq
-wq
+Ni
+Vc
 wq
 wq
 HC
@@ -61673,9 +61988,9 @@ bc
 bc
 bc
 Lu
-OL
-OL
-OL
+Lu
+Lu
+Lu
 Lu
 bc
 bc
@@ -61688,20 +62003,13 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+HC
+HC
+HC
+HC
+HC
+HC
+HC
 bc
 bc
 bc
@@ -61714,9 +62022,16 @@ bc
 bc
 bc
 HC
+wq
+wq
+wq
+wq
+HC
+bc
 HC
 HC
 HC
+CL
 HC
 HC
 HC
@@ -61979,9 +62294,9 @@ bc
 bc
 bc
 Lu
-OL
-OL
-OL
+Lu
+Lu
+Lu
 Lu
 bc
 bc
@@ -61996,24 +62311,24 @@ bc
 bc
 bc
 bc
+HC
+HC
+HC
+HC
+HC
+HC
+HC
 bc
 bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+HC
+wq
+wq
+wq
+wq
+HC
 bc
 bc
 bc
@@ -62285,10 +62600,10 @@ bc
 bc
 bc
 Lu
-OL
-OL
-OL
-OL
+Lu
+Lu
+Lu
+Lu
 Lu
 bc
 bc
@@ -62304,18 +62619,18 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+HC
+HC
+HC
+HC
+HC
+HC
+HC
+wq
+wq
+wq
+wq
+HC
 bc
 bc
 bc
@@ -62592,11 +62907,11 @@ bc
 bc
 bc
 Lu
-OL
-OL
-OL
-OL
-OL
+Lu
+Lu
+Lu
+Lu
+Lu
 Lu
 bc
 bc
@@ -62613,16 +62928,16 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+wq
+wq
+wq
+wq
+HC
+HC
+HC
+HC
+HC
+HC
 bc
 bc
 bc
@@ -62900,11 +63215,11 @@ bc
 bc
 bc
 Lu
-OL
-OL
-OL
-OL
-OL
+Lu
+Lu
+Lu
+Lu
+Lu
 Lu
 bc
 bc
@@ -62915,10 +63230,10 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
+wq
+wq
+wq
+wq
 bc
 bc
 bc
@@ -63208,19 +63523,19 @@ bc
 bc
 bc
 Lu
-OL
-OL
-OL
-OL
-OL
-OL
-OL
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
 Lu
 bc
-bc
-bc
-bc
-bc
+wq
+wq
+wq
+wq
 bc
 bc
 bc
@@ -63518,13 +63833,13 @@ bc
 bc
 bc
 Lu
-OL
-OL
-OL
-OL
-OL
-OL
-OL
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
 Lu
 Lu
 Lu
@@ -76814,7 +77129,7 @@ IF
 ec
 Yu
 HM
-HM
+Ir
 HM
 HC
 Po
@@ -81042,7 +81357,7 @@ IF
 ec
 Yu
 HM
-HM
+Ir
 GW
 HC
 Po
