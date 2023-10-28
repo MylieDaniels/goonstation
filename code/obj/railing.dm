@@ -173,6 +173,13 @@
 		is_reinforced = 1
 		icon_state = "railing-reinforced"
 
+	steel
+		default_material = "steel"
+		color = "#8C8C8C"
+		reinforced
+			is_reinforced = 1
+			icon_state = "railing-reinforced"
+
 	orange
 		color = "#ff7b00"
 		reinforced

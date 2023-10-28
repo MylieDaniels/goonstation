@@ -99,6 +99,10 @@
 	},
 /turf/simulated/floor/sanitary/white,
 /area/space)
+"dI" = (
+/obj/machinery/light/small/floor/frostedred,
+/turf/unsimulated/floor/black,
+/area/space)
 "ec" = (
 /obj/decoration/syndiepc/syndiepc2{
 	pixel_x = 1
@@ -273,6 +277,11 @@
 /obj/cable/auto,
 /turf/unsimulated/wall/auto/reinforced/supernorn,
 /area/bodmir/outer_deck)
+"kz" = (
+/obj/grille/steel,
+/obj/window/auto/crystal/reinforced,
+/turf/unsimulated/floor/plating,
+/area/space)
 "kB" = (
 /obj/storage/secure/closet/engineering,
 /obj/item/ammo/bullets/bullet_9mm/smg,
@@ -350,6 +359,19 @@
 /obj/cable/auto/blue,
 /turf/unsimulated/floor/engine/caution/west,
 /area/bodmir/outer_deck)
+"nd" = (
+/obj/machinery/conveyor/NS{
+	id = "bodmir-cannon-belt";
+	name = "ammunition belt"
+	},
+/obj/railing{
+	dir = 8
+	},
+/obj/strip_door{
+	desc = "A strip door to keep the line rolling clearly."
+	},
+/turf/unsimulated/floor/black/grime,
+/area/space)
 "nV" = (
 /obj/stool/chair/office/syndie{
 	dir = 1
@@ -468,6 +490,16 @@
 /obj/cable/auto,
 /turf/unsimulated/floor/engine,
 /area/bodmir/outer_deck)
+"rw" = (
+/obj/railing{
+	dir = 8
+	},
+/obj/machinery/conveyor/ES{
+	id = "bodmir-cannon-belt";
+	name = "ammunition belt"
+	},
+/turf/unsimulated/floor/black/grime,
+/area/space)
 "rQ" = (
 /turf/unsimulated/floor/engine,
 /area/bodmir/outer_deck)
@@ -668,7 +700,7 @@
 /turf/unsimulated/floor/black,
 /area/space)
 "Cp" = (
-/obj/railing/reinforced,
+/obj/railing/steel/reinforced,
 /turf/unsimulated/floor/industrial,
 /area/space)
 "Cu" = (
@@ -740,6 +772,16 @@
 	},
 /turf/unsimulated/floor/engine,
 /area/bodmir/outer_deck)
+"GU" = (
+/obj/machinery/conveyor/NW{
+	id = "bodmir-cannon-belt";
+	name = "ammunition belt"
+	},
+/obj/railing{
+	dir = 4
+	},
+/turf/unsimulated/floor/black/grime,
+/area/space)
 "GW" = (
 /obj/cable/auto/blue,
 /turf/unsimulated/floor/black,
@@ -789,6 +831,16 @@
 	},
 /turf/unsimulated/floor/plating,
 /area/space)
+"Ka" = (
+/obj/machinery/conveyor/NS{
+	id = "bodmir-cannon-belt";
+	name = "ammunition belt"
+	},
+/obj/railing{
+	dir = 4
+	},
+/turf/unsimulated/floor/black/grime,
+/area/space)
 "Km" = (
 /obj/grille/catwalk,
 /turf/unsimulated/floor/engine/caution/corner2{
@@ -826,6 +878,16 @@
 	pixel_y = -4
 	},
 /turf/unsimulated/floor/plating,
+/area/space)
+"LE" = (
+/obj/railing{
+	dir = 4
+	},
+/obj/machinery/conveyor/WS{
+	id = "bodmir-cannon-belt";
+	name = "ammunition belt"
+	},
+/turf/unsimulated/floor/black/grime,
 /area/space)
 "LJ" = (
 /obj/cable/auto/blue,
@@ -874,11 +936,17 @@
 	dir = 4
 	},
 /area/bodmir/outer_deck)
+"Ow" = (
+/obj/machinery/door/poddoor/blast/pyro{
+	dir = 4
+	},
+/turf/unsimulated/floor/plating,
+/area/space)
 "OL" = (
-/obj/railing/reinforced{
+/obj/railing/steel/reinforced{
 	dir = 8
 	},
-/obj/railing/reinforced{
+/obj/railing/steel/reinforced{
 	dir = 4
 	},
 /turf/unsimulated/floor/industrial,
@@ -901,7 +969,7 @@
 /turf/unsimulated/wall/auto/lead/white,
 /area/bodmir/outer_deck)
 "QW" = (
-/obj/railing/reinforced,
+/obj/railing/steel/reinforced,
 /turf/unsimulated/floor/industrial,
 /area/bodmir/outer_deck)
 "QY" = (
@@ -978,10 +1046,10 @@
 /turf/unsimulated/wall/auto/reinforced/supernorn,
 /area/bodmir/outer_deck)
 "TM" = (
-/obj/railing/reinforced{
+/obj/railing/steel/reinforced{
 	dir = 8
 	},
-/obj/railing/reinforced{
+/obj/railing/steel/reinforced{
 	dir = 4
 	},
 /turf/unsimulated/floor/industrial,
@@ -1110,6 +1178,19 @@
 /obj/decoration/syndiepc/syndiepc10,
 /obj/map/light/dimred,
 /turf/unsimulated/floor/black,
+/area/space)
+"YL" = (
+/obj/machinery/conveyor/NS{
+	id = "bodmir-cannon-belt";
+	name = "ammunition belt"
+	},
+/obj/strip_door{
+	desc = "A strip door to keep the line rolling clearly."
+	},
+/obj/railing{
+	dir = 4
+	},
+/turf/unsimulated/floor/black/grime,
 /area/space)
 "YO" = (
 /obj/machinery/door/poddoor/blast/pyro,
@@ -56484,13 +56565,13 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+HC
+HC
+HC
+HC
+HC
+HC
+HC
 bc
 bc
 bc
@@ -56786,13 +56867,13 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+HC
+wq
+wq
+wq
+HC
+Ow
+HC
 bc
 bc
 bc
@@ -57088,17 +57169,17 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+HC
+wq
+wq
+wq
+kz
+Ps
+HC
+HC
+HC
+HC
+HC
 HC
 vQ
 oR
@@ -57390,14 +57471,14 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+HC
+wq
+wq
+wq
+kz
+Ps
+wq
+wq
 HC
 HC
 HC
@@ -57692,19 +57773,19 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
 HC
-oR
-oR
-oR
-eR
+wq
+wq
+wq
+HC
+LE
+Ka
+Ka
+Ka
+Ka
+YL
+YL
+GU
 HC
 WF
 wq
@@ -57994,23 +58075,23 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
 HC
+wq
+wq
+wq
+HC
+rw
 Bq
 Bq
 Bq
+Bq
+nd
+nd
 jV
 HC
 ft
 co
-co
+HC
 HC
 HC
 qo
@@ -58296,14 +58377,14 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+HC
+wq
+wq
+wq
+kz
+te
+wq
+wq
 HC
 HC
 HC
@@ -58598,17 +58679,17 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+HC
+wq
+wq
+wq
+kz
+te
+HC
+HC
+HC
+HC
+HC
 HC
 FU
 wq
@@ -58900,13 +58981,13 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+HC
+wq
+wq
+wq
+HC
+Ow
+HC
 bc
 bc
 bc
@@ -59202,13 +59283,13 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+HC
+wq
+wq
+wq
+HC
+HC
+HC
 bc
 bc
 bc
@@ -59504,13 +59585,13 @@ bc
 bc
 bc
 bc
+HC
 bc
 bc
 bc
-bc
-bc
-bc
-bc
+HC
+HC
+HC
 bc
 bc
 bc
@@ -59806,13 +59887,13 @@ bc
 bc
 bc
 bc
+HC
 bc
 bc
 bc
-bc
-bc
-bc
-bc
+HC
+HC
+HC
 bc
 bc
 bc
@@ -60108,15 +60189,15 @@ bc
 bc
 bc
 bc
+HC
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
+HC
+HC
+HC
+HC
+HC
 bc
 bc
 HC
@@ -60410,7 +60491,7 @@ bc
 bc
 bc
 bc
-bc
+HC
 bc
 bc
 bc
@@ -60712,7 +60793,7 @@ bc
 bc
 bc
 bc
-bc
+HC
 bc
 bc
 bc
@@ -61014,7 +61095,7 @@ bc
 bc
 bc
 bc
-bc
+HC
 bc
 bc
 bc
@@ -61316,20 +61397,20 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+HC
+HC
+HC
+HC
+HC
+HC
+HC
+HC
+HC
+HC
+HC
+HC
+HC
+HC
 HC
 wq
 Rz
@@ -77332,11 +77413,11 @@ TH
 Lu
 HJ
 Ci
-HM
+dI
 og
 HM
 HM
-HM
+dI
 HC
 HM
 HC
@@ -81560,11 +81641,11 @@ TH
 Lu
 HJ
 Ci
-HM
+dI
 og
 HM
 HM
-HM
+dI
 aC
 HM
 HC
