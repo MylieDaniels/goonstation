@@ -390,6 +390,19 @@
 	},
 /turf/unsimulated/floor/plating,
 /area/space)
+"nR" = (
+/obj/machinery/conveyor/NS{
+	id = "bodmir-cannon-belt";
+	name = "ammunition belt"
+	},
+/obj/railing/steel{
+	dir = 4
+	},
+/obj/strip_door{
+	desc = "A strip door to keep the line rolling clearly."
+	},
+/turf/unsimulated/floor/black/grime,
+/area/space)
 "nV" = (
 /obj/stool/chair/office/syndie{
 	dir = 1
@@ -521,6 +534,7 @@
 /obj/decal/cleanable/blood/tracks{
 	icon_state = "drip5"
 	},
+/mob/living/critter/changeling/eyespider/ai_controlled,
 /turf/unsimulated/floor/plating,
 /area/space)
 "se" = (
@@ -778,6 +792,13 @@
 	},
 /turf/unsimulated/floor/plating,
 /area/space)
+"FQ" = (
+/obj/mapping_helper/airlock/bolter,
+/obj/machinery/door/airlock/pyro/maintenance{
+	dir = 4
+	},
+/turf/unsimulated/floor/plating,
+/area/space)
 "FS" = (
 /obj/table/reinforced/auto,
 /obj/item/reagent_containers/food/snacks/cereal_box/honey{
@@ -819,6 +840,13 @@
 	dir = 4
 	},
 /turf/unsimulated/floor/black/grime,
+/area/space)
+"Hs" = (
+/obj/railing/steel{
+	dir = 1
+	},
+/obj/decal/cleanable/dirt/dirt3,
+/turf/unsimulated/floor/plating,
 /area/space)
 "Hu" = (
 /obj/decal/fakeobjects/pipe/heat{
@@ -933,6 +961,7 @@
 /area/space)
 "Lt" = (
 /obj/decal/cleanable/blood,
+/obj/machinery/light/emergencyflashing,
 /turf/unsimulated/floor/industrial,
 /area/space)
 "Lu" = (
@@ -1032,6 +1061,7 @@
 /obj/railing/steel{
 	dir = 1
 	},
+/obj/decal/cleanable/dirt/dirt3,
 /turf/unsimulated/floor/plating,
 /area/space)
 "QW" = (
@@ -1230,11 +1260,6 @@
 "WF" = (
 /obj/item/device/light/floodlight/with_cell,
 /turf/unsimulated/floor/plating,
-/area/space)
-"WJ" = (
-/obj/map/light/dimreddish,
-/mob/living/critter/changeling/headspider/ai_controlled,
-/turf/unsimulated/floor/industrial,
 /area/space)
 "Xn" = (
 /obj/decal/fakeobjects/pipe/heat{
@@ -56043,9 +56068,9 @@ bc
 bc
 bc
 bc
-HC
-HC
-HC
+bc
+bc
+bc
 bc
 bc
 bc
@@ -56346,7 +56371,7 @@ bc
 bc
 bc
 HC
-Lu
+HC
 HC
 bc
 bc
@@ -56662,7 +56687,7 @@ eA
 qo
 Nu
 eN
-WJ
+Rc
 HC
 bc
 bc
@@ -57860,8 +57885,8 @@ LE
 Ka
 Ka
 Ka
+nR
 Ka
-YL
 YL
 GU
 HC
@@ -58162,8 +58187,8 @@ rw
 Bq
 Bq
 Bq
-Bq
 nd
+Bq
 nd
 jV
 HC
@@ -58774,7 +58799,7 @@ ki
 wq
 wq
 Ps
-Fs
+Hs
 pM
 qo
 HC
@@ -61182,8 +61207,8 @@ HC
 HC
 gw
 HC
-Ow
-Ow
+FQ
+FQ
 HC
 HC
 HC
@@ -61486,7 +61511,7 @@ HC
 wq
 wq
 wq
-wq
+HC
 HC
 HC
 HC
@@ -61790,7 +61815,7 @@ wq
 wq
 wq
 HC
-bc
+HC
 HC
 HC
 HC
@@ -62091,12 +62116,12 @@ wq
 wq
 wq
 wq
-HC
-bc
-bc
-bc
-bc
-bc
+wq
+wq
+wq
+wq
+wq
+wq
 bc
 bc
 bc
@@ -62389,16 +62414,16 @@ HC
 HC
 HC
 HC
-wq
-wq
-wq
-wq
 HC
-bc
-bc
-bc
-bc
-bc
+HC
+wq
+wq
+wq
+wq
+wq
+wq
+wq
+wq
 bc
 bc
 bc
@@ -62692,9 +62717,9 @@ bc
 bc
 bc
 wq
-wq
-wq
-wq
+HC
+HC
+HC
 HC
 HC
 HC
