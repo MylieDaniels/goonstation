@@ -217,6 +217,8 @@ This file is the critter itself, and all the custom procs it needs in order to f
 				continue
 			if(istype(C, /mob/living/critter/robotic/sawfly))
 				continue
+			if(faction_check(src, C, src.ai_attacks_neutral))
+				continue
 			if (isintangible(C))
 				continue
 			if(C.mind?.special_role && issawflybuddy(C))

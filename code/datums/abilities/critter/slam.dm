@@ -117,6 +117,9 @@
 			return TRUE
 		var/mob/M = holder.owner
 		var/turf/S = get_turf(M)
+		if (T == S)
+			boutput(holder.owner, "<span class='notice'>The target is too close!</span>")
+			return TRUE
 		var/obj/projectile/O = initialize_projectile_pixel_spread(S, proj, T)
 		if (!O)
 			return TRUE
