@@ -39,6 +39,7 @@ This file is the critter itself, and all the custom procs it needs in order to f
 	hand_count = 1 //stabby hands
 
 	faction = FACTION_SYNDICATE
+	ai_attacks_neutral = TRUE
 
 	New()
 		..()
@@ -217,7 +218,7 @@ This file is the critter itself, and all the custom procs it needs in order to f
 				continue
 			if(istype(C, /mob/living/critter/robotic/sawfly))
 				continue
-			if(faction_check(src, C, src.ai_attacks_neutral))
+			if(!faction_check(src, C, src.ai_attacks_neutral))
 				continue
 			if (isintangible(C))
 				continue

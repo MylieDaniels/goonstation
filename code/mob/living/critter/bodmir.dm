@@ -96,9 +96,6 @@
 			src.gib()
 		else
 
-/datum/targetable/critter/slam/cableworm
-	cooldown = 3 SECONDS
-
 /mob/living/critter/bodmir_cableworm/ai_controlled
 	ai_type = /datum/aiHolder/aggressive_closing_ability/cableworm
 	is_npc = TRUE
@@ -122,6 +119,7 @@
 	max_dist = 7
 	var/ability_type = /datum/targetable/critter/slam
 	var/datum/aiTask/transition_task = null
+	move_through_space = TRUE
 
 /datum/aiTask/critter/closing_ability/New(parentHolder, transTask)
 		transition_task = transTask
