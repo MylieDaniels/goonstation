@@ -161,7 +161,7 @@
 //--------------------------------------------------------------------------------------------------------------------------------------------------//
 
 /datum/aiTask/critter/closing_ability/cableworm
-	var/ability_type = /datum/targetable/critter/slam/cableworm
+	ability_type = /datum/targetable/critter/slam/cableworm
 
 /datum/targetable/critter/slam/cableworm
 	cooldown = 5 SECONDS
