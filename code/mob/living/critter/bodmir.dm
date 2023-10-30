@@ -37,7 +37,7 @@
 
 	New()
 		..()
-		abilityHolder.addAbility(/datum/targetable/critter/slam)
+		abilityHolder.addAbility(/datum/targetable/critter/slam/cableworm)
 		abilityHolder.updateButtons()
 		src.flags ^= TABLEPASS | DOORPASS
 
