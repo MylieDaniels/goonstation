@@ -978,10 +978,9 @@
 	dir = 1
 	},
 /obj/item/device/igniter,
-/obj/item/reagent_containers/food/drinks/coolerbottle{
+/obj/item/reagent_containers/food/drinks/coolerbottle/bodmir_grendel{
 	pixel_x = -5;
-	pixel_y = -4;
-	initial_reagents = list("water" = 28)
+	pixel_y = -4
 	},
 /obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe/overfloor,
 /turf/unsimulated/floor/plating,

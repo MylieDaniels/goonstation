@@ -789,3 +789,19 @@ TYPEINFO(/obj/reagent_dispensers/watertank/fountain)
 			src.underlays += src.fluid_image
 		else
 			src.icon_state = initial(src.icon_state)
+
+	bodmir_grendel
+		New()
+			..()
+			reagents.add_reagent("oil",rand(90,120))
+			reagents.add_reagent("water",rand(90,120))
+			reagents.add_reagent("iron",rand(40,60))
+			reagents.add_reagent("bloodc",rand(10,15))
+			reagents.add_reagent("chromium",rand(10,20))
+			reagents.add_reagent("graphene",rand(10,20))
+			reagents.add_reagent("carbon",rand(10,20))
+			reagents.add_reagent("copper",rand(10,20))
+			reagents.add_reagent("blood",rand(20,40))
+			reagents.add_reagent("bodmir_draksadd",rand(20,30))
+			src.UpdateIcon()
+		name = "tainted jug"

@@ -1652,6 +1652,7 @@ datum
 			var/last_brute
 			var/last_burn
 			var/active_remaining = 0
+			var/damage_mult = 1
 
 			initial_metabolize(var/mob/M)
 				if (!M)
@@ -1667,35 +1668,53 @@ datum
 					return
 
 				src.active_remaining = max(0, src.active_remaining - mult)
+
+				if(M.reagents.has_reagent(src.id,5))
+					var/recent_damage = (M.get_brute_damage() - src.last_brute) / (HAS_ATOM_PROPERTY(M, PROP_MOB_BRUTEMULT) ? GET_ATOM_PROPERTY(M, PROP_MOB_BRUTEMULT) : 1) + (M.get_burn_damage() - src.last_burn) / (HAS_ATOM_PROPERTY(M, PROP_MOB_BURNMULT) ? GET_ATOM_PROPERTY(M, PROP_MOB_BURNMULT) : 1)
+					switch(recent_damage)
+						if(-INFINITY to -1)
+							if(M.health / M.max_health < 0.15)
+								if(!M.reagents.has_reagent(src.id,15))
+									M.reagents.add_reagent(src.id,0.15 * mult)
+								playsound(M, 'sound/effects/welding_arc.ogg', 30, TRUE)
+								if (!ON_COOLDOWN(M, "grendel_voice_draksadd_healing", 15 SECONDS))
+									boutput(M, "<span class='alert'>Good. [pick("Pry your tendons together again","Staple your arteries back in place","Weld your wounds shut once more","Hammer your bones back in","Pour your blood back into your veins")], [pick("grow and progress in my name.","little soldier.","become stronger for me.","eat your flesh off the floor.")]</span>")
+								src.active_remaining += mult
+						if(10 to 25)
+							src.active_remaining += 2 * mult
+							playsound(M, 'sound/effects/welderarc_ignite.ogg', 40, TRUE)
+							if(src.damage_mult > 0.8)
+								src.damage_mult = max(src.damage_mult - 0.1 * mult, 0.7)
+							else
+								src.damage_mult = max(src.damage_mult - 0.025 * mult, 0.5)
+						if(25 to 50)
+							src.active_remaining += 4 * mult
+							playsound(M, 'sound/effects/welderarc_ignite.ogg', 50, TRUE)
+							if(src.damage_mult > 0.675)
+								src.damage_mult = max(src.damage_mult - 0.125 * mult, 0.55)
+							else
+								src.damage_mult = max(src.damage_mult - 0.05 * mult, 0.5)
+						if(50 to INFINITY)
+							playsound(M, 'sound/effects/welderarc_ignite.ogg', 70, TRUE)
+							if (!ON_COOLDOWN(M, "grendel_voice_draksadd_invincible", 20 SECONDS))
+								boutput(M, "<span class='alert'>What beautiful gore. You make an exquisite walking corpse, but don't dare drop.</span>")
+								src.damage_mult = max(src.damage_mult - 0.35, 0.5)
+							else
+								src.damage_mult = max(src.damage_mult - 0.1 * mult, 0.5)
+							src.active_remaining += 7 * mult
+
 				if(!src.active_remaining)
 					REMOVE_ATOM_PROPERTY(M, PROP_MOB_BRUTEMULT, "r_draksadd")
 					REMOVE_ATOM_PROPERTY(M, PROP_MOB_BURNMULT, "r_draksadd")
-
-				var/recent_damage = (M.get_brute_damage() - src.last_brute) / (HAS_ATOM_PROPERTY(M, PROP_MOB_BRUTEMULT) ? GET_ATOM_PROPERTY(M, PROP_MOB_BRUTEMULT) : 1) + (M.get_burn_damage() - src.last_burn) / (HAS_ATOM_PROPERTY(M, PROP_MOB_BURNMULT) ? GET_ATOM_PROPERTY(M, PROP_MOB_BURNMULT) : 1)
-				switch(recent_damage)
-					if(-INFINITY to -1)
-						if(M.health / M.max_health < 0.15)
-							M.reagents.add_reagent("bodmir_draksadd",0.1 * mult)
-							playsound(M, 'sound/effects/welding_arc.ogg', 30, TRUE)
-							if (!ON_COOLDOWN(M, "grendel_voice_draksadd_healing", 15 SECONDS))
-								boutput(M, "<span class='alert'>Good. [pick("Pry your tendons together again","Staple your arteries back in place","Weld your wounds shut once more","Hammer your bones back in","Pour your blood back into your veins")], [pick("grow and progress in my name.","little soldier.","become stronger for me.","eat your flesh off the floor.")]</span>")
-					if(10 to 25)
-						src.active_remaining += 1 * mult
-					if(25 to 50)
-						src.active_remaining += 3 * mult
-					if(50 to INFINITY)
-						if (!ON_COOLDOWN(M, "grendel_voice_draksadd_invincible", 15 SECONDS))
-							boutput(M, "<span class='alert'>What beautiful gore. You make an exquisite walking corpse, but don't dare drop.</span>")
-							boutput(M, "You feel invincible.")
-						APPLY_ATOM_PROPERTY(M, PROP_MOB_BRUTEMULT, "r_draksadd", 0.4)
-						APPLY_ATOM_PROPERTY(M, PROP_MOB_BURNMULT, "r_draksadd", 0.6)
-						src.active_remaining += 10 * mult
+					damage_mult = 1
+				else
+					if(src.damage_mult < 0.65)
+						boutput(M, "You [pick("are","feel")] [pick("unstoppable","invincible","unkillable")].")
+					APPLY_ATOM_PROPERTY(M, PROP_MOB_BRUTEMULT, "r_draksadd", src.damage_mult)
+					APPLY_ATOM_PROPERTY(M, PROP_MOB_BURNMULT, "r_draksadd", min(src.damage_mult + 0.2, 1))
 
 				src.last_brute = M.get_brute_damage()
 				src.last_burn = M.get_burn_damage()
-
-				if (probmult(12))
-					M.emote(pick("shiver","twitch_v","blink_r","wheeze"))
 
 				..()
 
@@ -1705,24 +1724,26 @@ datum
 					var/iterations = rand(17, 21)
 					violent_standup_twitch_parametrized(M,2,2,5,iterations * 30,2)
 					M.visible_message("<span class='alert'><B>[M]</B> starts twitching!</span>")
-					for (var/i = 0, (i < iterations / 3), i++)
+					for (var/i = 0, (i < iterations / 3) && M, i++)
 						playsound(M, pick('sound/misc/meat_hork.ogg','sound/misc/hastur/growl.ogg','sound/effects/welding_arc.ogg'), 40 + i * 2, TRUE)
 						sleep(rand(20,30))
 					violent_standup_twitch_parametrized(M,3,3,15,iterations * 11,1)
 					M.visible_message("<span class='alert'><B>[M]</B> starts convulsing violently!</span>")
-					for (var/i = 0, (i < iterations), i++)
+					for (var/i = 0, (i < iterations) && M, i++)
+						if(prob(20))
+							M.emote(pick("shiver","twitch_v","twitch"))
+							playsound(M, pick('sound/misc/meat_hork.ogg','sound/misc/hastur/growl.ogg','sound/effects/welderarc_ignite.ogg'), 40 + i * 2, TRUE)
 						playsound(M, 'sound/effects/welding_arc.ogg', 20 + i * 3, TRUE)
 						sleep(rand(8,10))
 					if(!isliving(M))
 						return
 					if (isdead(M) || istype(get_area(M),/area/afterlife/bar))
 						M.make_jittery(250)
-						APPLY_ATOM_PROPERTY(M, PROP_MOB_BRUTEMULT, "r_draksadd", 0.3)
-						APPLY_ATOM_PROPERTY(M, PROP_MOB_BURNMULT, "r_draksadd", 0.5)
-						src.active_remaining += 30
-						src.depletion_rate *= 4
+						src.damage_mult = 0.75
+						src.active_remaining += 10
+						src.depletion_rate *= 5
 						M.take_oxygen_deprivation(-INFINITY)
-						M.HealDamage("All", M.get_brute_damage() / 2, M.get_burn_damage() / 3, 50)
+						M.HealDamage("All", M.get_brute_damage() * max(M.reagents.get_reagent_amount("bodmir_draksadd") / 20, 0.75), M.get_burn_damage() * max(M.reagents.get_reagent_amount("bodmir_draksadd") / 30, 0.5), 10)
 						setalive(M)
 						M.emote("scream")
 						var/mob/G
