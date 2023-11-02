@@ -798,7 +798,7 @@ proc/muzzle_flash_any(var/atom/movable/A, var/firing_angle, var/muzzle_anim, var
 		for (var/i = 0, (i < iterations && A), i++)
 			offx = rand(-off_x, off_x) * effect_scale
 			offy = rand(-off_y, off_y) * effect_scale
-			angle = rand(-angle, angle) * effect_scale
+			angle = rand(-input_angle, input_angle) * effect_scale
 			animate(A, time = 0.5, transform = matrix().Turn(angle), easing = JUMP_EASING, pixel_x = offx, pixel_y = offy, flags = ANIMATION_PARALLEL|ANIMATION_RELATIVE)
 			animate(time = 0.5, transform = matrix().Turn(-angle), easing = JUMP_EASING, pixel_x = -offx, pixel_y = -offy, flags = ANIMATION_RELATIVE)
 			sleep(sleep_length)

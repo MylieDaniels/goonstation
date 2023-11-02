@@ -1015,7 +1015,7 @@
 /turf/unsimulated/floor/engine,
 /area/bodmir/outer_deck)
 "Ni" = (
-/obj/machinery/atmospherics/pipe/vent{
+/obj/machinery/atmospherics/unary/vent{
 	dir = 4
 	},
 /turf/unsimulated/floor/plating,

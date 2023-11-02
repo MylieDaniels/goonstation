@@ -1633,3 +1633,121 @@ datum
 			fluid_g = 220
 			fluid_b = 200
 			transparency = 230
+
+		medical/bodmir_draksadd // from the swedish idiom draksådd, from the greek tale of sowing dragon's teeth
+			name = "draksådd"
+			id = "bodmir_draksadd"
+			description = "Alters muscle structure and thought patterns in unpredictable ways. Advanced analysis reveals a shell of misfolded mammalian neurons concealing a core nanite."
+			reagent_state = LIQUID
+			fluid_r = 102
+			fluid_g = 5
+			fluid_b = 5
+			transparency = 255
+			depletion_rate = 0.05
+			flushing_multiplier = 0.1
+			viscosity = 0.8
+			penetrates_skin = 1
+			taste = "molten steel"
+			stun_resist = 15
+			var/last_brute
+			var/last_burn
+			var/active_remaining = 0
+
+			initial_metabolize(var/mob/M)
+				if (!M)
+					M = holder.my_atom
+				last_brute = M.get_brute_damage()
+				last_burn = M.get_burn_damage()
+				RegisterSignal(M, COMSIG_MOB_DEATH, PROC_REF(reanimate))
+
+			on_mob_life(var/mob/M, var/mult = 1)
+				if (!M)
+					M = holder.my_atom
+				if (!isliving(M))
+					return
+
+				src.active_remaining = max(0, src.active_remaining - mult)
+				if(!src.active_remaining)
+					REMOVE_ATOM_PROPERTY(M, PROP_MOB_BRUTEMULT, "r_draksadd")
+					REMOVE_ATOM_PROPERTY(M, PROP_MOB_BURNMULT, "r_draksadd")
+
+				var/recent_damage = (M.get_brute_damage() - src.last_brute) / (HAS_ATOM_PROPERTY(M, PROP_MOB_BRUTEMULT) ? GET_ATOM_PROPERTY(M, PROP_MOB_BRUTEMULT) : 1) + (M.get_burn_damage() - src.last_burn) / (HAS_ATOM_PROPERTY(M, PROP_MOB_BURNMULT) ? GET_ATOM_PROPERTY(M, PROP_MOB_BURNMULT) : 1)
+				switch(recent_damage)
+					if(-INFINITY to -1)
+						if(M.health / M.max_health < 0.15)
+							M.reagents.add_reagent("bodmir_draksadd",0.1 * mult)
+							playsound(M, 'sound/effects/welding_arc.ogg', 30, TRUE)
+							if (!ON_COOLDOWN(M, "grendel_voice_draksadd_healing", 15 SECONDS))
+								boutput(M, "<span class='alert'>Good. [pick("Pry your tendons together again","Staple your arteries back in place","Weld your wounds shut once more","Hammer your bones back in","Pour your blood back into your veins")], [pick("grow and progress in my name.","little soldier.","become stronger for me.","eat your flesh off the floor.")]</span>")
+					if(10 to 25)
+						src.active_remaining += 1 * mult
+					if(25 to 50)
+						src.active_remaining += 3 * mult
+					if(50 to INFINITY)
+						if (!ON_COOLDOWN(M, "grendel_voice_draksadd_invincible", 15 SECONDS))
+							boutput(M, "<span class='alert'>What beautiful gore. You make an exquisite walking corpse, but don't dare drop.</span>")
+							boutput(M, "You feel invincible.")
+						APPLY_ATOM_PROPERTY(M, PROP_MOB_BRUTEMULT, "r_draksadd", 0.4)
+						APPLY_ATOM_PROPERTY(M, PROP_MOB_BURNMULT, "r_draksadd", 0.6)
+						src.active_remaining += 10 * mult
+
+				src.last_brute = M.get_brute_damage()
+				src.last_burn = M.get_burn_damage()
+
+				if (probmult(12))
+					M.emote(pick("shiver","twitch_v","blink_r","wheeze"))
+
+				..()
+
+			proc/reanimate(source)
+				var/mob/living/M = source
+				SPAWN(rand(10,80))
+					var/iterations = rand(17, 21)
+					violent_standup_twitch_parametrized(M,2,2,5,iterations * 30,2)
+					M.visible_message("<span class='alert'><B>[M]</B> starts twitching!</span>")
+					for (var/i = 0, (i < iterations / 3), i++)
+						playsound(M, pick('sound/misc/meat_hork.ogg','sound/misc/hastur/growl.ogg','sound/effects/welding_arc.ogg'), 40 + i * 2, TRUE)
+						sleep(rand(20,30))
+					violent_standup_twitch_parametrized(M,3,3,15,iterations * 11,1)
+					M.visible_message("<span class='alert'><B>[M]</B> starts convulsing violently!</span>")
+					for (var/i = 0, (i < iterations), i++)
+						playsound(M, 'sound/effects/welding_arc.ogg', 20 + i * 3, TRUE)
+						sleep(rand(8,10))
+					if(!isliving(M))
+						return
+					if (isdead(M) || istype(get_area(M),/area/afterlife/bar))
+						M.make_jittery(250)
+						APPLY_ATOM_PROPERTY(M, PROP_MOB_BRUTEMULT, "r_draksadd", 0.3)
+						APPLY_ATOM_PROPERTY(M, PROP_MOB_BURNMULT, "r_draksadd", 0.5)
+						src.active_remaining += 30
+						src.depletion_rate *= 4
+						M.take_oxygen_deprivation(-INFINITY)
+						M.HealDamage("All", M.get_brute_damage() / 2, M.get_burn_damage() / 3, 50)
+						setalive(M)
+						M.emote("scream")
+						var/mob/G
+						if (ishuman(M)) // if they're human, let's get whoever owns the brain
+							var/mob/living/carbon/human/H = M
+							var/obj/item/organ/brain/B = H.organHolder?.get_organ("brain")
+							G = find_ghost_by_key(B?.owner?.key)
+						else // else just get whoever's the mind
+							G = find_ghost_by_key(M.mind?.key)
+						logTheThing(LOG_COMBAT, M, "is resuscitated by bodmir_draksadd at [log_loc(M)].")
+						if (G)
+							if (!isdead(G)) // so if they're in VR, the afterlife bar, or a ghostcritter
+								G.show_text("<span class='notice'>You have not been permitted a peaceful afterlife!</span>")
+								G.ghostize()?.mind?.transfer_to(M)
+							else
+								G.show_text("<span class='alert'>Your death came too soon for me!</span>")
+								G.mind?.transfer_to(M)
+							qdel(G)
+							M.visible_message("<span class='alert'><b>[M]</b> seems to rise from the dead!</span>","<span class='alert'>Continue your war.</span>")
+						else
+							M.visible_message("<span class='alert'><b>[M]</b> shudders and stares vacantly, brain utterly destroyed.</span>")
+					return
+
+			on_remove()
+				var/mob/M = holder.my_atom
+				REMOVE_ATOM_PROPERTY(M, PROP_MOB_BRUTEMULT, "r_draksadd")
+				REMOVE_ATOM_PROPERTY(M, PROP_MOB_BURNMULT, "r_draksadd")
+				UnregisterSignal(M, COMSIG_MOB_DEATH)

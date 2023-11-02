@@ -283,12 +283,12 @@
 	if (probmult(5 + D.stage ** 2))
 		if (!ON_COOLDOWN(affected_mob, "grendel_voice_drugs", 20 SECONDS))
 			boutput(affected_mob, "<span class='alert'>Let us enhance you.</span>")
-		affected_mob.reagents?.add_reagent(pick("synaptizine","epinephrine","aranesp","oculine","silicate","smelling_salt","anti_rad"), 4)
-		affected_mob.reagents?.add_reagent(pick("saline","strychnine","teporone","lexorin","salicylic_acid","salbutamol","strange_reagent"), 2)
+		affected_mob.reagents?.add_reagent(pick("synaptizine","epinephrine","oculine","silicate","smelling_salt","anti_rad"), 4)
+		affected_mob.reagents?.add_reagent(pick("saline","strychnine","teporone","lexorin","salicylic_acid","salbutamol","strange_reagent","aranesp"), 2)
 
-	affected_mob.AddComponent(/datum/component/hallucination/random_sound_distant, timeout=10, sound_list=src.common_halluc_sounds, sound_prob=(5 + 3 * D.stage))
-	affected_mob.AddComponent(/datum/component/hallucination/random_sound_distant, timeout=10, sound_list=src.rare_halluc_sounds, sound_prob=D.stage)
-	affected_mob.AddComponent(/datum/component/hallucination/random_image_override_outside_vision,\
+	affected_mob.AddComponent(/datum/component/hallucination/random_sound, timeout=10, sound_list=src.common_halluc_sounds, sound_prob=(5 + 3 * D.stage), min_distance=5)
+	affected_mob.AddComponent(/datum/component/hallucination/random_sound, timeout=10, sound_list=src.rare_halluc_sounds, sound_prob=D.stage, min_distance=5)
+	affected_mob.AddComponent(/datum/component/hallucination/random_image_override,\
 					timeout=10,\
 					image_list=list(\
 						image(icon = 'icons/misc/meatland.dmi', icon_state = "bloodfloor_1"),\
@@ -299,9 +299,10 @@
 					range=8,\
 					image_prob=40 + 12 * D.stage,\
 					image_time=60,\
-					override=TRUE\
+					override=TRUE,\
+					visible_creation = FALSE\
 				)
-	affected_mob.AddComponent(/datum/component/hallucination/random_image_outside_vision,\
+	affected_mob.AddComponent(/datum/component/hallucination/random_image_override,\
 					timeout=10,\
 					image_list=list(\
 						image(icon = 'icons/obj/scrap.dmi', icon_state = "Crusher_1"),\
@@ -309,11 +310,13 @@
 						image(icon = 'icons/obj/delivery.dmi', icon_state = "floorflush_o"),\
 						image(icon = 'icons/obj/items/weapons.dmi', icon_state = "bear_trap-open")\
 					),\
-					range=10,\
+					range=8,\
 					image_prob=D.stage,\
-					image_time=120\
+					image_time=120,\
+					override=FALSE,\
+					visible_creation = FALSE\
 				)
-	affected_mob.AddComponent(/datum/component/hallucination/random_image_override_outside_vision,\
+	affected_mob.AddComponent(/datum/component/hallucination/random_image_override,\
 					timeout=10,\
 					image_list=list(\
 						image(icon = 'icons/mob/mob.dmi', icon_state = "metalcube-squish"),\
@@ -322,9 +325,10 @@
 					),\
 					target_list=list(/mob/living/carbon/human),\
 					range=8,\
-					image_prob=4 * D.stage,\
+					image_prob=3 * D.stage,\
 					image_time=20,\
-					override=TRUE\
+					override=TRUE,\
+					visible_creation = FALSE\
 				)
 
 	if(D.stage > 1)
@@ -341,154 +345,3 @@
 			if (affected_mob.bleeding > 2)
 				repair_bleeding_damage(affected_mob, 100, 2)
 			affected_mob.HealDamage("All", D.stage * 1.5, D.stage, D.stage / 2)
-
-//#########################################################
-//                 RANDOM IMAGE OVERRIDE - OUTSIDE VISION
-//#########################################################
-
-/// Random image override - hallucinate an image on a filtered atom outside view with prob per life tick, with an option to add as overlay or replace the icon
-/datum/component/hallucination/random_image_override_outside_vision
-	var/list/image_list
-	var/image_prob = 10
-	var/image_time = 20
-	var/list/target_list
-	var/range = 5
-	var/override = TRUE
-
-	Initialize(timeout=30, image_list=null, target_list=null, range=5, image_prob=10, image_time=20 SECONDS, override=TRUE)
-		. = ..()
-		if(. == COMPONENT_INCOMPATIBLE || length(image_list) == 0 || length(target_list) == 0)
-			return .
-		src.image_list = image_list
-		src.image_prob = image_prob
-		src.image_time = image_time
-		src.range = range
-		src.target_list = target_list
-		src.override = override
-
-
-	do_mob_tick(mob,mult)
-		if(probmult(image_prob))
-			//pick a non dense turf in view
-			var/list/atom/potentials = list()
-			var/list/nonvisibles = orange(parent_mob, range) - oview(parent_mob, range)
-			for(var/atom/A in nonvisibles)
-				for(var/type in src.target_list)
-					if(istype(A, type))
-						potentials += A
-			if(!length(potentials)) return
-			var/atom/halluc_loc = pick(potentials)
-			var/image/halluc = new /image()
-			var/image/copyfrom = pick(src.image_list)
-			halluc.appearance = copyfrom.appearance
-			halluc.loc = halluc_loc
-			halluc.override = src.override
-			parent_mob.client?.images += halluc
-			SPAWN(src.image_time SECONDS)
-				qdel(halluc)
-		. = ..()
-
-	CheckDupeComponent(timeout, image_list, target_list, range, image_prob, image_time, override)
-		if(image_list ~= src.image_list && src.target_list ~= target_list) //this is the same hallucination, just update timeout and prob, time
-			if(timeout == -1)
-				src.ttl = timeout
-			else if(src.ttl != -1)
-				src.ttl = world.time + timeout SECONDS //reset timeout
-			src.range = range
-			src.image_prob = image_prob
-			src.image_time = image_time
-			src.override = override
-			return TRUE //no duplicate
-		else
-			return FALSE //create a new hallucination
-
-//#########################################################
-//                    RANDOM IMAGE - OUTSIDE VISION
-//#########################################################
-
-/// Random image - hallucinate an image on currently nonvisible tile with prob per life tick
-/datum/component/hallucination/random_image_outside_vision
-	var/list/image_list
-	var/image_prob = 10
-	var/image_time = 20
-	var/range = 5
-
-	Initialize(timeout=30, image_list=null, image_prob=10, image_time=20 SECONDS, range = 5)
-		. = ..()
-		if(. == COMPONENT_INCOMPATIBLE || length(image_list) == 0)
-			return .
-		src.image_list = image_list
-		src.image_prob = image_prob
-		src.image_time = image_time
-
-	do_mob_tick(mob, mult)
-		if(probmult(image_prob))
-			//pick a non dense turf in view
-			var/list/turf/potentials = list()
-			var/list/nonvisibles = orange(parent_mob, range) - oview(parent_mob, range)
-			for(var/turf/T in nonvisibles)
-				if(!T.density)
-					potentials += T
-			var/turf/halluc_loc = pick(potentials)
-			var/image/halluc = new /image()
-			var/image/copyfrom = pick(src.image_list)
-			halluc.appearance = copyfrom.appearance
-			halluc.loc = halluc_loc
-			parent_mob.client?.images += halluc
-			SPAWN(src.image_time SECONDS)
-				qdel(halluc)
-		. = ..()
-
-	CheckDupeComponent(timeout, image_list, image_prob, image_time)
-		if(image_list ~= src.image_list) //this is the same hallucination, just update timeout and prob, time
-			if(timeout == -1)
-				src.ttl = timeout
-			else if(src.ttl != -1)
-				src.ttl = world.time + timeout SECONDS //reset timeout
-			src.image_prob = image_prob
-			src.image_time = image_time
-			return TRUE //no duplicate
-		else
-			return FALSE //create a new hallucination
-
-//#########################################################
-//                    RANDOM SOUNDS - DISTANT
-//#########################################################
-
-/// Random sound - play a distant sound from a list with a prob per life tick
-/datum/component/hallucination/random_sound_distant
-	var/list/sound_list
-	var/sound_prob = 10
-
-	Initialize(timeout=30, sound_list=null, sound_prob=10)
-		.=..()
-		if(. == COMPONENT_INCOMPATIBLE || length(sound_list) == 0)
-			return .
-		src.sound_list = sound_list
-		src.sound_prob = sound_prob
-
-
-	do_mob_tick(mob, mult)
-		if(probmult(src.sound_prob))
-			var/atom/origin = parent_mob.loc
-			var/turf/mob_turf = get_turf(parent_mob)
-			if (mob_turf)
-				origin = locate(mob_turf.x + (prob(50) ? rand(-10,-5) : rand(5,10)), mob_turf.y + (prob(50) ? rand(-10,-5) : rand(5,10)), mob_turf.z)
-			//wacky loosely typed code ahead
-			var/datum/hallucinated_sound/chosen = pick(src.sound_list)
-			if (istype(chosen)) //it's a datum
-				chosen.play(parent_mob, origin)
-			else //it's just a path directly
-				parent_mob.playsound_local(origin, chosen, 100, 1)
-		. = ..()
-
-	CheckDupeComponent(timeout, sound_list, sound_prob)
-		if(sound_list ~= src.sound_list) //this is the same hallucination, just update timeout and prob
-			if(timeout == -1)
-				src.ttl = timeout
-			else if(src.ttl != -1)
-				src.ttl = world.time + timeout SECONDS //reset timeout
-			src.sound_prob = sound_prob
-			return TRUE //no duplicate
-		else
-			return FALSE //create a new hallucination

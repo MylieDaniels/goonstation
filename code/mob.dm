@@ -1096,8 +1096,8 @@
 // for mobs without organs
 /mob/proc/TakeDamage(zone, brute, burn, tox, damage_type, disallow_limb_loss)
 	hit_twitch(src)
-	src.health -= max(0, brute)
-	src.health -= max(0, (src.bioHolder?.HasEffect("fire_resist") > 1) ? burn/2 : burn)
+	src.health -= max(0, GET_ATOM_PROPERTY(src, PROP_MOB_BRUTEMULT) * brute)
+	src.health -= max(0, GET_ATOM_PROPERTY(src, PROP_MOB_BURNMULT) * ((src.bioHolder?.HasEffect("fire_resist") > 1) ? burn/2 : burn))
 
 /mob/proc/TakeDamageAccountArmor(zone, brute, burn, tox, damage_type)
 	TakeDamage(zone, brute - get_melee_protection(zone,damage_type), burn - get_melee_protection(zone,damage_type))

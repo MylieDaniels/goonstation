@@ -343,6 +343,15 @@
 		burn *= src.mutantrace.firevuln
 		tox *= src.mutantrace.toxvuln
 
+	var/damage_mult = GET_ATOM_PROPERTY(src, PROP_MOB_BRUTEMULT)
+	if(!isnull(damage_mult))
+		brute *= damage_mult
+	damage_mult = GET_ATOM_PROPERTY(src, PROP_MOB_BURNMULT)
+	if(!isnull(damage_mult))
+		burn *= damage_mult
+	damage_mult = GET_ATOM_PROPERTY(src, PROP_MOB_TOXMULT)
+	if(!isnull(damage_mult))
+		tox *= damage_mult
 
 	//if (src.bioHolder && src.bioHolder.HasEffect("resist_toxic"))
 		//tox = 0
