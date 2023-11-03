@@ -523,3 +523,15 @@
 
 		return ..()
 
+/datum/overlayComposition/draksadd
+	New()
+		var/datum/overlayDefinition/draksadd = new()
+		draksadd.d_icon = 'icons/effects/overlays/draksadd.dmi'
+		draksadd.d_icon_state = "draksadd"
+		draksadd.d_blend_mode = 2
+		draksadd.do_wide_fill = 0
+		draksadd.d_layer = HUD_LAYER_3
+		draksadd.d_screen_loc = "CENTER-10,CENTER-7"
+		definitions.Add(draksadd)
+
+		return ..()
