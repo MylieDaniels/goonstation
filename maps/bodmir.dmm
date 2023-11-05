@@ -6,6 +6,10 @@
 /area/space)
 "am" = (
 /obj/machinery/camera/auto/alt/west,
+/obj/railing/steel{
+	dir = 1
+	},
+/obj/decal/cleanable/blood/gibs,
 /turf/unsimulated/floor/plating,
 /area/space)
 "as" = (
@@ -17,9 +21,7 @@
 /turf/unsimulated/floor/engine/caution/east,
 /area/bodmir/outer_deck)
 "aA" = (
-/obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe{
-	dir = 1
-	},
+/obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe/overfloor,
 /turf/unsimulated/wall/auto/lead/gray,
 /area/space)
 "aM" = (
@@ -35,7 +37,7 @@
 "aQ" = (
 /obj/decal/cleanable/oil/streak,
 /obj/decal/cleanable/dirt/dirt5,
-/turf/unsimulated/floor/plating,
+/turf/unsimulated/floor/industrial,
 /area/space)
 "bc" = (
 /turf/space,
@@ -65,7 +67,7 @@
 /obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe/overfloor{
 	dir = 6
 	},
-/turf/unsimulated/floor/plating,
+/turf/unsimulated/floor/industrial,
 /area/space)
 "cs" = (
 /obj/machinery/lawrack/syndicate,
@@ -124,6 +126,12 @@
 	pixel_x = 1
 	},
 /turf/unsimulated/floor/black,
+/area/space)
+"eh" = (
+/obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe/overfloor{
+	dir = 9
+	},
+/turf/unsimulated/wall/auto/lead/gray,
 /area/space)
 "em" = (
 /obj/decal/fakeobjects/pipe/heat{
@@ -219,7 +227,7 @@
 /turf/unsimulated/floor/plating,
 /area/space)
 "gw" = (
-/obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe{
+/obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe/overfloor{
 	dir = 8
 	},
 /turf/unsimulated/wall/auto/lead/gray,
@@ -252,7 +260,8 @@
 /obj/machinery/alarm{
 	pixel_y = 20
 	},
-/turf/unsimulated/floor/plating,
+/obj/table/reinforced/industrial/auto,
+/turf/unsimulated/floor/twotone/black,
 /area/space)
 "iD" = (
 /obj/decal/fakeobjects/pipe/heat{
@@ -271,6 +280,24 @@
 "jw" = (
 /obj/decoration/syndiepc/syndiepc3,
 /turf/unsimulated/floor/black,
+/area/space)
+"jF" = (
+/obj/item/gun/kinetic/rpg7,
+/obj/table/reinforced/industrial/auto,
+/turf/unsimulated/floor/twotone/black,
+/area/space)
+"jT" = (
+/obj/item/deployer/barricade{
+	pixel_y = -6
+	},
+/obj/item/deployer/barricade{
+	pixel_y = 4;
+	pixel_x = -2
+	},
+/obj/item/deployer/barricade{
+	pixel_x = 4
+	},
+/turf/unsimulated/floor/twotone/black,
 /area/space)
 "jV" = (
 /obj/machinery/conveyor/NE{
@@ -296,17 +323,14 @@
 /turf/unsimulated/floor/plating,
 /area/space)
 "kB" = (
-/obj/storage/secure/closet/engineering,
 /obj/item/ammo/bullets/bullet_9mm/smg,
-/obj/item/ammo/bullets/bullet_9mm/smg{
-	pixel_x = -3;
-	pixel_y = -3
-	},
 /obj/item/tank/oxygen,
 /obj/item/storage/toolbox/mechanical/orange_tools{
 	pixel_x = -2
 	},
 /obj/item/device/t_scanner,
+/obj/storage/cart/mechcart,
+/obj/item/breaching_charge/thermite,
 /turf/unsimulated/floor/plating,
 /area/space)
 "kF" = (
@@ -354,6 +378,15 @@
 	},
 /turf/unsimulated/floor/black,
 /area/space)
+"lF" = (
+/mob/living/carbon/cube/metal,
+/turf/unsimulated/floor/plating,
+/area/space)
+"lH" = (
+/obj/table/reinforced/industrial/auto,
+/obj/item/storage/beartrap_pouch,
+/turf/unsimulated/floor/twotone/black,
+/area/space)
 "mg" = (
 /obj/railing/steel{
 	dir = 1
@@ -389,7 +422,10 @@
 /obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe/overfloor{
 	dir = 8
 	},
-/turf/unsimulated/floor/plating,
+/obj/table/reinforced/industrial/auto,
+/obj/item/garrote,
+/obj/item/gun/kinetic/pistol/empty,
+/turf/unsimulated/floor/twotone/black,
 /area/space)
 "nR" = (
 /obj/machinery/conveyor/NS{
@@ -422,7 +458,7 @@
 /area/space)
 "ow" = (
 /obj/decal/cleanable/dirt/dirt5,
-/turf/unsimulated/floor/plating,
+/turf/unsimulated/floor/industrial,
 /area/space)
 "oC" = (
 /obj/machinery/light/incandescent/warm,
@@ -518,6 +554,10 @@
 	},
 /turf/unsimulated/floor/engine/caution/west,
 /area/bodmir/outer_deck)
+"rv" = (
+/obj/item/beartrap/armed,
+/turf/unsimulated/floor/industrial,
+/area/space)
 "rw" = (
 /obj/railing/steel{
 	dir = 8
@@ -535,8 +575,8 @@
 /obj/decal/cleanable/blood/tracks{
 	icon_state = "drip5"
 	},
-/mob/living/critter/changeling/eyespider/ai_controlled,
 /obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe/overfloor,
+/mob/living/critter/changeling/handspider/ai_controlled,
 /turf/unsimulated/floor/plating,
 /area/space)
 "se" = (
@@ -546,7 +586,7 @@
 "sy" = (
 /obj/barricade,
 /obj/decal/cleanable/machine_debris,
-/turf/unsimulated/floor/plating,
+/turf/unsimulated/floor/industrial,
 /area/space)
 "sB" = (
 /obj/item/weldingtool{
@@ -559,6 +599,10 @@
 /obj/grille/catwalk,
 /turf/simulated/floor/black,
 /area/bodmir/outer_deck)
+"sR" = (
+/obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe/overfloor,
+/turf/unsimulated/floor/twotone/black,
+/area/space)
 "te" = (
 /obj/machinery/conveyor/EW{
 	name = "ammunition belt";
@@ -573,7 +617,7 @@
 /area/space)
 "tp" = (
 /obj/machinery/atmospherics/pipe/manifold/overfloor,
-/turf/unsimulated/floor/plating,
+/turf/unsimulated/floor/industrial,
 /area/space)
 "tS" = (
 /obj/stove,
@@ -597,7 +641,7 @@
 /area/space)
 "vG" = (
 /obj/decal/cleanable/dirt,
-/turf/unsimulated/floor/plating,
+/turf/unsimulated/floor/industrial,
 /area/space)
 "vQ" = (
 /obj/machinery/conveyor/ES{
@@ -605,6 +649,12 @@
 	name = "ammunition belt"
 	},
 /turf/unsimulated/floor/black/grime,
+/area/space)
+"wp" = (
+/obj/machinery/door/poddoor/blast/pyro{
+	dir = 4
+	},
+/turf/unsimulated/floor/industrial,
 /area/space)
 "wq" = (
 /turf/unsimulated/floor/plating,
@@ -633,20 +683,30 @@
 "xi" = (
 /obj/decal/cleanable/oil,
 /obj/item/rods/steel,
-/turf/unsimulated/floor/plating,
+/turf/unsimulated/floor/industrial,
+/area/space)
+"xj" = (
+/obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe/overfloor{
+	dir = 6
+	},
+/turf/unsimulated/floor/twotone/black,
 /area/space)
 "xx" = (
 /obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe/overfloor{
 	dir = 9
 	},
-/turf/unsimulated/floor/plating,
+/turf/unsimulated/floor/industrial,
 /area/space)
 "xE" = (
 /turf/unsimulated/floor/blackwhite,
 /area/space)
 "xQ" = (
 /obj/decal/cleanable/dirt/dirt3,
-/turf/unsimulated/floor/plating,
+/turf/unsimulated/floor/industrial,
+/area/space)
+"yd" = (
+/obj/machinery/light/small/floor,
+/turf/unsimulated/floor/twotone/black,
 /area/space)
 "yr" = (
 /obj/decoration/syndiepc/syndiepc8,
@@ -676,11 +736,18 @@
 	dir = 9
 	},
 /area/bodmir/outer_deck)
+"yW" = (
+/obj/item/device/prox_sensor{
+	pixel_y = 5;
+	pixel_x = -6
+	},
+/turf/unsimulated/floor/plating,
+/area/space)
 "yX" = (
 /obj/machinery/light/incandescent/warm{
 	dir = 1
 	},
-/turf/unsimulated/floor/plating,
+/turf/unsimulated/floor/industrial,
 /area/space)
 "zj" = (
 /obj/item/material_piece/bone{
@@ -692,11 +759,12 @@
 "zr" = (
 /obj/item/scrap,
 /obj/decal/cleanable/dirt,
-/turf/unsimulated/floor/plating,
+/mob/living/critter/bodmir_cableworm/ai_controlled,
+/turf/unsimulated/floor/industrial,
 /area/space)
 "zV" = (
 /obj/machinery/atmospherics/unary/vent_pump,
-/turf/unsimulated/floor/plating,
+/turf/unsimulated/floor/industrial,
 /area/space)
 "An" = (
 /mob/living/critter/robotic/gunbot/syndicate,
@@ -749,7 +817,7 @@
 	dir = 1
 	},
 /obj/decal/cleanable/oil/streak,
-/turf/unsimulated/floor/plating,
+/turf/unsimulated/floor/industrial,
 /area/space)
 "Ci" = (
 /obj/machinery/conveyor/EN{
@@ -794,6 +862,12 @@
 	},
 /turf/unsimulated/floor/plating,
 /area/space)
+"Fu" = (
+/obj/machinery/door/airlock/pyro/maintenance{
+	dir = 4
+	},
+/turf/unsimulated/floor/industrial,
+/area/space)
 "FQ" = (
 /obj/mapping_helper/airlock/bolter,
 /obj/machinery/door/airlock/pyro/maintenance{
@@ -815,6 +889,22 @@
 	dir = 4
 	},
 /turf/unsimulated/floor/plating,
+/area/space)
+"FY" = (
+/obj/table/reinforced/industrial/auto,
+/obj/item/storage/pouch{
+	pixel_y = 3;
+	pixel_x = 7
+	},
+/obj/item/storage/pouch{
+	pixel_y = 3;
+	pixel_x = -7
+	},
+/obj/item/storage/pouch{
+	pixel_y = -3;
+	pixel_x = 7
+	},
+/turf/unsimulated/floor/twotone/black,
 /area/space)
 "FZ" = (
 /obj/machinery/light/emergencyflashing{
@@ -887,7 +977,7 @@
 /area/space)
 "IB" = (
 /obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe/overfloor,
-/turf/unsimulated/floor/plating,
+/turf/unsimulated/floor/industrial,
 /area/space)
 "IF" = (
 /obj/decoration/syndiepc/syndiepc5,
@@ -897,6 +987,13 @@
 "IG" = (
 /obj/decal/cleanable/machine_debris,
 /obj/item/scrap,
+/turf/unsimulated/floor/industrial,
+/area/space)
+"Jb" = (
+/obj/railing/steel{
+	dir = 1
+	},
+/obj/decal/cleanable/blood/gibs,
 /turf/unsimulated/floor/plating,
 /area/space)
 "Je" = (
@@ -924,7 +1021,8 @@
 /obj/decal/cleanable/machine_debris,
 /obj/item/raw_material/scrap_metal,
 /obj/decal/cleanable/dirt/dirt4,
-/turf/unsimulated/floor/plating,
+/obj/decal/cleanable/oil/streak,
+/turf/unsimulated/floor/industrial,
 /area/space)
 "Km" = (
 /obj/grille/catwalk,
@@ -948,14 +1046,16 @@
 /turf/unsimulated/floor/black,
 /area/space)
 "KK" = (
-/obj/decal/cleanable/oil/streak,
-/mob/living/critter/bodmir_cableworm/ai_controlled,
+/obj/item/rods/steel{
+	pixel_x = -4;
+	pixel_y = -2
+	},
 /turf/unsimulated/floor/plating,
 /area/space)
 "KL" = (
 /obj/barricade,
 /obj/decal/cleanable/dirt/dirt4,
-/turf/unsimulated/floor/plating,
+/turf/unsimulated/floor/industrial,
 /area/space)
 "Lh" = (
 /obj/grille/catwalk,
@@ -995,6 +1095,41 @@
 	},
 /turf/unsimulated/floor/black/grime,
 /area/space)
+"LK" = (
+/obj/storage/crate/wooden{
+	icon_state = "woodencrate9";
+	desc = "A wooden crate of ammunition.";
+	name = "ammunition crate"
+	},
+/obj/item/ammo/bullets/assault_rifle,
+/obj/item/ammo/bullets/assault_rifle/armor_piercing{
+	pixel_y = -2;
+	pixel_x = -9
+	},
+/obj/item/ammo/bullets/a12/weak,
+/obj/item/ammo/bullets/bullet_9mm/smg{
+	pixel_x = -3;
+	pixel_y = -3
+	},
+/obj/item/ammo/bullets/bullet_22HP,
+/obj/item/ammo/bullets/bullet_9mm{
+	pixel_y = -4;
+	pixel_x = 10
+	},
+/obj/item/ammo/bullets/flare,
+/obj/item/ammo/bullets/lmg,
+/obj/item/ammo/bullets/nine_mm_NATO{
+	pixel_y = -1
+	},
+/obj/item/ammo/bullets/nine_mm_NATO{
+	pixel_x = -4
+	},
+/obj/item/ammo/bullets/veritate{
+	pixel_y = -1;
+	pixel_x = 2
+	},
+/turf/unsimulated/floor/twotone/black,
+/area/space)
 "Mf" = (
 /obj/machinery/conveyor/SN{
 	id = "bodmir-cannon-belt";
@@ -1013,6 +1148,11 @@
 /obj/machinery/light/small/floor/frostedred,
 /turf/unsimulated/floor/engine,
 /area/bodmir/outer_deck)
+"Nh" = (
+/obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe/overfloor,
+/obj/machinery/light/small/floor,
+/turf/unsimulated/floor/twotone/black,
+/area/space)
 "Ni" = (
 /obj/machinery/atmospherics/unary/vent{
 	dir = 4
@@ -1069,6 +1209,9 @@
 	},
 /obj/decal/cleanable/dirt/dirt3,
 /turf/unsimulated/floor/plating,
+/area/space)
+"QB" = (
+/turf/unsimulated/floor/twotone/black,
 /area/space)
 "QW" = (
 /obj/railing/steel/reinforced,
@@ -1225,7 +1368,7 @@
 	pixel_x = -4;
 	pixel_y = -2
 	},
-/turf/unsimulated/floor/plating,
+/turf/unsimulated/floor/industrial,
 /area/space)
 "Wb" = (
 /obj/item/clothing/suit/bedsheet/black{
@@ -1240,6 +1383,7 @@
 	icon_state = "gibbl2"
 	},
 /obj/decal/cleanable/blood/gibs,
+/obj/item/bandage,
 /turf/unsimulated/floor/plating,
 /area/space)
 "Wg" = (
@@ -56084,8 +56228,8 @@ bc
 bc
 bc
 bc
-HC
-HC
+bc
+bc
 HC
 HC
 HC
@@ -56386,8 +56530,8 @@ bc
 bc
 bc
 bc
-HC
-HC
+bc
+bc
 HC
 kK
 qo
@@ -56679,8 +56823,8 @@ bc
 bc
 bc
 HC
-Ow
-Ow
+wp
+wp
 HC
 Lu
 HC
@@ -56688,8 +56832,8 @@ bc
 bc
 bc
 bc
-HC
-HC
+bc
+bc
 HC
 Mf
 eA
@@ -56981,8 +57125,8 @@ bc
 bc
 bc
 HC
-wq
-wq
+Rc
+Rc
 HC
 Ow
 HC
@@ -57284,7 +57428,7 @@ bc
 bc
 HC
 yX
-wq
+Rc
 kz
 Ps
 HC
@@ -57585,8 +57729,8 @@ bc
 bc
 bc
 HC
-wq
-wq
+Rc
+Rc
 kz
 Ps
 am
@@ -57887,7 +58031,7 @@ bc
 bc
 bc
 HC
-wq
+Rc
 ow
 HC
 LE
@@ -58189,8 +58333,8 @@ bc
 bc
 bc
 HC
-wq
-wq
+Rc
+Rc
 HC
 rw
 Bq
@@ -58495,8 +58639,8 @@ zr
 aQ
 kz
 te
-wq
-wq
+Jb
+lF
 HC
 HC
 HC
@@ -58805,7 +58949,7 @@ HC
 HC
 Wp
 ki
-wq
+yW
 wq
 Ps
 Hs
@@ -59100,10 +59244,10 @@ IG
 HC
 Ow
 HC
-wq
-wq
-wq
-wq
+jT
+QB
+FY
+LK
 HC
 HC
 HC
@@ -59398,14 +59542,14 @@ bc
 bc
 HC
 Kl
-KK
+wp
 HC
 Lu
 HC
-wq
-wq
-wq
-wq
+jF
+yd
+QB
+QB
 HC
 kB
 Wb
@@ -59705,9 +59849,9 @@ HC
 Lu
 HC
 ig
-ce
-IB
-IB
+xj
+Nh
+sR
 aA
 LB
 rR
@@ -60001,15 +60145,15 @@ bc
 bc
 bc
 HC
-wq
+Rc
 VJ
 HC
 Lu
 HC
-wq
+lH
 no
-wq
-wq
+QB
+QB
 HC
 aM
 pL
@@ -60304,14 +60448,14 @@ bc
 bc
 HC
 xQ
-wq
+Rc
 HC
 HC
 HC
 HC
 gw
-wq
-wq
+Fu
+Fu
 HC
 HC
 HC
@@ -60605,15 +60749,15 @@ bc
 bc
 bc
 HC
-wq
-wq
-wq
-wq
+Rc
+Rc
+Rc
+rv
 zV
 IB
 tp
-wq
-wq
+Rc
+Rc
 HC
 HC
 HC
@@ -60907,15 +61051,15 @@ bc
 bc
 bc
 HC
-wq
-wq
-wq
-wq
-wq
+Rc
+Rc
+Rc
+Rc
+rv
 ce
 xx
-wq
-wq
+Rc
+Rc
 HC
 HC
 HC
@@ -61228,7 +61372,7 @@ wq
 ki
 Rz
 sB
-wq
+KK
 HC
 bc
 bc
@@ -61516,13 +61660,13 @@ bc
 bc
 bc
 bc
-HC
+eh
 wq
 wq
 wq
-HC
-HC
-HC
+wq
+wq
+wq
 HC
 Wr
 Oy
@@ -61823,8 +61967,8 @@ wq
 wq
 wq
 wq
-HC
-HC
+wq
+wq
 HC
 HC
 HC

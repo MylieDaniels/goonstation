@@ -1022,6 +1022,11 @@
 	if (src.stat)
 		return
 
+	var/obj/item/grab/block/B = src.check_block()
+	if (B)
+		B.handle_throw(src, target)
+		return
+
 	var/obj/item/I = src.equipped()
 
 	if (!I || !isitem(I) || I.cant_drop) return

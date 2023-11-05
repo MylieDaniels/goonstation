@@ -1203,14 +1203,14 @@ proc/muzzle_flash_any(var/atom/movable/A, var/firing_angle, var/muzzle_anim, var
 			A.underlays -= underlay
 			qdel(underlay)
 
-/proc/animate_rest(var/atom/A, var/stand)
+/proc/animate_rest(var/atom/A, var/stand, var/side = 0)
 	if(!istype(A))
 		return
 	if(stand)
 		animate(A, pixel_x = 0, pixel_y = 0, transform = A.transform.Turn(A.rest_mult * -90), time = 3, easing = LINEAR_EASING, flags=ANIMATION_PARALLEL)
 		A.rest_mult = 0
 	else if(!A.rest_mult)
-		var/fall_left_or_right = pick(1, -1) //A multiplier of one makes the atom rotate to the right, negative makes them fall to the left.
+		var/fall_left_or_right = side == 0 ? pick(1, -1) : side //A multiplier of one makes the atom rotate to the right, negative makes them fall to the left.
 		animate(A, pixel_x = 0, pixel_y = -4, transform = A.transform.Turn(fall_left_or_right * 90), time = 2, easing = LINEAR_EASING, flags=ANIMATION_PARALLEL)
 		A.rest_mult = fall_left_or_right
 

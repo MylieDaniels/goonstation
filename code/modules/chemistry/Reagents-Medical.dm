@@ -1709,9 +1709,8 @@ datum
 							playsound(M, 'sound/effects/welderarc_ignite.ogg', 70, TRUE)
 							if (!ON_COOLDOWN(M, "grendel_voice_draksadd_invincible", 20 SECONDS))
 								boutput(M, "<span class='alert'>What beautiful gore. You make an exquisite walking corpse, but don't dare drop.</span>")
-								src.damage_mult = max(src.damage_mult - 0.35, 0.5)
-								if(M.getStatusDuration("paralysis"))
-									M.delStatus("paralysis")
+								src.damage_mult = max(src.damage_mult - 0.225 * mult, 0.5)
+								M.delStatus("paralysis")
 								M.delStatus("stunned")
 								M.delStatus("weakened")
 							else
@@ -1734,6 +1733,7 @@ datum
 
 			proc/reanimate(source)
 				var/mob/living/M = source
+				if(M && M.reagents && M.reagents.has_reagent(src.id,5))
 				SPAWN(rand(10,80))
 					var/iterations = rand(17, 21)
 					violent_standup_twitch_parametrized(M,2,2,5,iterations * 30,2)
@@ -1759,7 +1759,7 @@ datum
 						src.active_remaining += 10
 						src.depletion_rate *= 5
 						M.take_oxygen_deprivation(-INFINITY)
-						M.HealDamage("All", M.get_brute_damage() * max(M.reagents.get_reagent_amount("bodmir_draksadd") / 20, 0.75), M.get_burn_damage() * max(M.reagents.get_reagent_amount("bodmir_draksadd") / 30, 0.5), 10)
+						M.HealDamage("All", M.get_brute_damage() * max(M.reagents.get_reagent_amount("bodmir_draksadd") / 50, 0.75), M.get_burn_damage() * max(M.reagents.get_reagent_amount("bodmir_draksadd") / 60, 0.5), 10)
 						setalive(M)
 						M.emote("scream")
 						var/mob/G

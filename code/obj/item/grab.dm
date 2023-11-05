@@ -906,83 +906,96 @@
 	if (isturf(user.loc) && target)
 		var/turf/T = user.loc
 		var/target_dir = get_dir(user,target)
+		var/did_any_dive_hit = FALSE
 		if(!target_dir)
 			target_dir = user.dir
+		var/slidekick_range = max(1 + min(GET_ATOM_PROPERTY(user, PROP_MOB_SLIDEKICK_BONUS) , GET_DIST(user,target) - 1), 1)
 		if (!(T.turf_flags & CAN_BE_SPACE_SAMPLE) && !(user.lying) && can_act(user) && !HAS_ATOM_PROPERTY(user, PROP_MOB_CANTMOVE) && target_dir)
+			if (!HAS_ATOM_PROPERTY(user, PROB_MOB_SLIDEKICK_TURBO))
+				user.changeStatus("weakened", max(user.movement_delay()*2, (0.4 + 0.1 * slidekick_range) SECONDS))
+				user.force_laydown_standup()
+			else
+				animate_rest(user, FALSE, target_dir & EAST ? -1 : target_dir & WEST ? 1 : 0)
+				spawn((0.1 + 0.1 * slidekick_range) SECONDS)
+					animate_rest(user, TRUE)
+			spawn(0)
+				for (var/v in 1 to slidekick_range)
+					var/turf/target_turf = get_step(user, target_dir)
+					if (!target_turf)
+						target_turf = T
+					step_to(user, target_turf)
+					var/mob/living/dive_attack_hit = null
+					if(get_turf(user) == target_turf)
 
-			user.changeStatus("weakened", max(user.movement_delay()*2, 0.5 SECONDS))
-			user.force_laydown_standup()
-			var/turf/target_turf = get_step(user, target_dir)
-			if (!target_turf)
-				target_turf = T
-			step_to(user, target_turf)
-			var/mob/living/dive_attack_hit = null
-			if(get_turf(user) == target_turf)
+						for (var/mob/living/L in target_turf)
+							if (user == L || isintangible(L)) continue
+							dive_attack_hit = L
+							did_any_dive_hit = TRUE
+							break
 
-				for (var/mob/living/L in target_turf)
-					if (user == L || isintangible(L)) continue
-					dive_attack_hit = L
-					break
-
-				if (dive_attack_hit)
-					var/damage = rand(1,6)
-					if (ishuman(user))
-						var/mob/living/carbon/human/H = user
-						if (H.shoes)
-							damage += H.shoes.kick_bonus
-						else if (H.limbs.r_leg)
-							damage += H.limbs.r_leg.limb_hit_bonus
-						else if (H.limbs.l_leg)
-							damage += H.limbs.l_leg.limb_hit_bonus
-					if(issilicon(dive_attack_hit))
-						playsound(src.loc, 'sound/impact_sounds/Metal_Clang_3.ogg', 60, 1)
-						for (var/mob/O in AIviewers(user))
-							O.show_message("<span class='alert'><B>[user] slides into [dive_attack_hit]! What [pick_string("descriptors.txt", "borg_punch")]!")
-					else
-						dive_attack_hit.TakeDamageAccountArmor("chest", damage, 0, 0, DAMAGE_BLUNT)
-						playsound(user, 'sound/impact_sounds/Generic_Hit_2.ogg', 50, TRUE, -1)
-						for (var/mob/O in AIviewers(user))
-							O.show_message("<span class='alert'><B>[user] slides into [dive_attack_hit]!</B></span>", 1)
-					logTheThing(LOG_COMBAT, user, "slides into [dive_attack_hit] at [log_loc(dive_attack_hit)].")
+						if (dive_attack_hit)
+							var/damage = rand(1,6)
+							if (ishuman(user))
+								var/mob/living/carbon/human/H = user
+								if (H.shoes)
+									damage += H.shoes.kick_bonus
+								else if (H.limbs.r_leg)
+									damage += H.limbs.r_leg.limb_hit_bonus
+								else if (H.limbs.l_leg)
+									damage += H.limbs.l_leg.limb_hit_bonus
+							if(issilicon(dive_attack_hit))
+								playsound(src.loc, 'sound/impact_sounds/Metal_Clang_3.ogg', 60, 1)
+								for (var/mob/O in AIviewers(user))
+									O.show_message("<span class='alert'><B>[user] slides into [dive_attack_hit]! What [pick_string("descriptors.txt", "borg_punch")]!")
+							else
+								dive_attack_hit.TakeDamageAccountArmor("chest", damage, 0, 0, DAMAGE_BLUNT)
+								playsound(user, 'sound/impact_sounds/Generic_Hit_2.ogg', 50, TRUE, -1)
+								for (var/mob/O in AIviewers(user))
+									O.show_message("<span class='alert'><B>[user] slides into [dive_attack_hit]!</B></span>", 1)
+							logTheThing(LOG_COMBAT, user, "slides into [dive_attack_hit] at [log_loc(dive_attack_hit)].")
 
 
-				else
-					// Slidekick to throw items on the turf
-					var/item_num_to_throw = 0
-					if (ishuman(user))
-						var/mob/living/carbon/human/H = user
-						item_num_to_throw += !!H.limbs.r_leg
-						item_num_to_throw += !!H.limbs.l_leg
-					else if (ismobcritter(user))
-						//TODO: When mobcritters keep track of how many legs they have, replace the below.
-						item_num_to_throw += 2
+						else
+							// Slidekick to throw items on the turf
+							var/item_num_to_throw = 0
+							if (ishuman(user))
+								var/mob/living/carbon/human/H = user
+								item_num_to_throw += !!H.limbs.r_leg
+								item_num_to_throw += !!H.limbs.l_leg
+							else if (ismobcritter(user))
+								//TODO: When mobcritters keep track of how many legs they have, replace the below.
+								item_num_to_throw += 2
 
-					if (item_num_to_throw)
-						for (var/obj/item/itm in target_turf) // We want to kick items only
-							if (itm.w_class >= W_CLASS_HUGE)
-								continue
+							if (item_num_to_throw)
+								for (var/obj/item/itm in target_turf) // We want to kick items only
+									if (itm.w_class >= W_CLASS_HUGE)
+										continue
 
-							var/cardinal_throw_dir = target_dir
-							if (!is_cardinal(cardinal_throw_dir))
-								if(prob(50))
-									cardinal_throw_dir &= NORTH | SOUTH
-								else
-									cardinal_throw_dir &= EAST | WEST
+									var/cardinal_throw_dir = target_dir
+									if (!is_cardinal(cardinal_throw_dir))
+										if(prob(50))
+											cardinal_throw_dir &= NORTH | SOUTH
+										else
+											cardinal_throw_dir &= EAST | WEST
 
-							var/atom/throw_target = get_edge_target_turf(itm, cardinal_throw_dir)
-							if (throw_target)
-								item_num_to_throw--
-								playsound(itm, "swing_hit", 50, 1)
-								itm.throw_at(throw_target, W_CLASS_HUGE - itm.w_class, (1 / itm.w_class) + 0.8) // Range: 1-4, Speed: 1-2
+									var/atom/throw_target = get_edge_target_turf(itm, cardinal_throw_dir)
+									if (throw_target)
+										item_num_to_throw--
+										playsound(itm, "swing_hit", 50, 1)
+										itm.throw_at(throw_target, W_CLASS_HUGE - itm.w_class, (1 / itm.w_class) + 0.8) // Range: 1-4, Speed: 1-2
 
-							if (!item_num_to_throw)
-								break
-			if(!dive_attack_hit)
-				for (var/mob/O in AIviewers(user))
-					O.show_message("<span class='alert'><B>[user] slides to the ground!</B></span>", 1, group = "resist")
+									if (!item_num_to_throw)
+										break
 
+					if (v < slidekick_range)
+						sleep(0.1 SECONDS)
+
+				if(!did_any_dive_hit)
+					for (var/mob/O in AIviewers(user))
+						O.show_message("<span class='alert'><B>[user] slides to the ground!</B></span>", 1, group = "resist")
 
 	user.u_equip(src)
+	qdel(src)
 
 ////////////////////////////
 //SPECIAL GRAB ITEMS STUFF//
