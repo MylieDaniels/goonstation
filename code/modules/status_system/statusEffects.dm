@@ -1251,6 +1251,26 @@
 				var/mob/living/carbon/human/H = L
 				H.hud.update_resting()
 
+	turboslide
+		id = "turboslide"
+		name = "Turboslide"
+		desc = "You are turbosliding.<br>You can fire guns and attack during this slide."
+		icon_state = "resting"
+		unique = 1
+		maxDuration = null
+
+		onAdd(optional=null)
+			. = ..()
+			if (isliving(owner))
+				var/mob/living/L = owner
+				L.force_laydown_standup()
+				if(QDELETED(src))
+					return
+
+				ON_COOLDOWN(owner, "lying_bullet_dodge_cheese", 0.2 SECONDS)
+			else
+				owner.delStatus("turboslide")
+
 	ganger
 		id = "ganger"
 		name = "Gang Member"

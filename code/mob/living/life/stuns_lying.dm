@@ -59,7 +59,7 @@
 					setalive(owner)
 
 			else	//Not stunned.
-				owner.lying = must_lie ? TRUE : FALSE
+				owner.lying = statusList["turboslide"] ? TRUE : FALSE
 				setalive(owner)
 
 		else //Dead.

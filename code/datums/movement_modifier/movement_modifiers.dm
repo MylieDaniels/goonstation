@@ -219,7 +219,7 @@
 		if (!H.limbs.r_arm)
 			missing_arms++
 
-	if (user.lying)
+	if (user.lying && !user.hasStatus("turboslide"))
 		missing_legs = 2
 	else if (istype(H) && H.shoes && H.shoes.chained)
 		missing_legs = 2
