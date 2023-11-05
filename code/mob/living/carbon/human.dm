@@ -1023,7 +1023,7 @@
 		return
 
 	var/obj/item/grab/block/B = src.check_block()
-	if (B)
+	if (B && HAS_ATOM_PROPERTY(src, PROB_MOB_SLIDEKICK_TURBO))
 		B.handle_throw(src, target)
 		return
 

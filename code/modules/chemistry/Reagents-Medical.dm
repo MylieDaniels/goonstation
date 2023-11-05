@@ -1734,54 +1734,53 @@ datum
 			proc/reanimate(source)
 				var/mob/living/M = source
 				if(M && M.reagents && M.reagents.has_reagent(src.id,5))
-				SPAWN(rand(10,80))
-					var/iterations = rand(17, 21)
-					violent_standup_twitch_parametrized(M,2,2,5,iterations * 30,2)
-					M.visible_message("<span class='alert'><B>[M]</B> starts twitching!</span>")
-					for (var/i = 0, (i < iterations / 3) && M, i++)
-						playsound(M, pick('sound/misc/meat_hork.ogg','sound/misc/hastur/growl.ogg','sound/effects/welding_arc.ogg'), 40 + i * 2, TRUE)
-						sleep(rand(20,30))
-					if(M)
-						M.addOverlayComposition(/datum/overlayComposition/draksadd)
-						violent_standup_twitch_parametrized(M,3,3,15,iterations * 11,1)
-						M.visible_message("<span class='alert'><B>[M]</B> starts convulsing violently!</span>")
-					for (var/i = 0, (i < iterations) && M, i++)
-						if(prob(20))
-							M.emote(pick("shiver","twitch_v","twitch"))
-							playsound(M, pick('sound/misc/meat_hork.ogg','sound/misc/hastur/growl.ogg','sound/effects/welderarc_ignite.ogg'), 40 + i * 2, TRUE)
-						playsound(M, 'sound/effects/welding_arc.ogg', 20 + i * 3, TRUE)
-						sleep(rand(8,10))
-					if(!isliving(M))
-						return
-					if (isdead(M))
-						M.make_jittery(250)
-						src.damage_mult = 0.75
-						src.active_remaining += 10
-						src.depletion_rate *= 5
-						M.take_oxygen_deprivation(-INFINITY)
-						M.HealDamage("All", M.get_brute_damage() * max(M.reagents.get_reagent_amount("bodmir_draksadd") / 50, 0.75), M.get_burn_damage() * max(M.reagents.get_reagent_amount("bodmir_draksadd") / 60, 0.5), 10)
-						setalive(M)
-						M.emote("scream")
-						var/mob/G
-						if (ishuman(M)) // if they're human, let's get whoever owns the brain
-							var/mob/living/carbon/human/H = M
-							var/obj/item/organ/brain/B = H.organHolder?.get_organ("brain")
-							G = find_ghost_by_key(B?.owner?.key)
-						else // else just get whoever's the mind
-							G = find_ghost_by_key(M.mind?.key)
-						logTheThing(LOG_COMBAT, M, "is resuscitated by bodmir_draksadd at [log_loc(M)].")
-						if (G)
-							if (!isdead(G)) // so if they're in VR, the afterlife bar, or a ghostcritter
-								G.show_text("<span class='notice'>You have not been permitted a peaceful afterlife!</span>")
-								G.ghostize()?.mind?.transfer_to(M)
+					SPAWN(rand(10,80))
+						var/iterations = rand(17, 21)
+						violent_standup_twitch_parametrized(M,2,2,5,iterations * 30,2)
+						M.visible_message("<span class='alert'><B>[M]</B> starts twitching!</span>")
+						for (var/i = 0, (i < iterations / 3) && M, i++)
+							playsound(M, pick('sound/misc/meat_hork.ogg','sound/misc/hastur/growl.ogg','sound/effects/welding_arc.ogg'), 40 + i * 2, TRUE)
+							sleep(rand(20,30))
+						if(M)
+							M.addOverlayComposition(/datum/overlayComposition/draksadd)
+							violent_standup_twitch_parametrized(M,3,3,15,iterations * 11,1)
+							M.visible_message("<span class='alert'><B>[M]</B> starts convulsing violently!</span>")
+						for (var/i = 0, (i < iterations) && M, i++)
+							if(prob(20))
+								M.emote(pick("shiver","twitch_v","twitch"))
+								playsound(M, pick('sound/misc/meat_hork.ogg','sound/misc/hastur/growl.ogg','sound/effects/welderarc_ignite.ogg'), 40 + i * 2, TRUE)
+							playsound(M, 'sound/effects/welding_arc.ogg', 20 + i * 3, TRUE)
+							sleep(rand(8,10))
+						if(!isliving(M))
+							return
+						if (isdead(M))
+							M.make_jittery(250)
+							src.damage_mult = 0.75
+							src.active_remaining += 10
+							src.depletion_rate *= 5
+							M.take_oxygen_deprivation(-INFINITY)
+							M.HealDamage("All", M.get_brute_damage() * max(M.reagents.get_reagent_amount("bodmir_draksadd") / 50, 0.75), M.get_burn_damage() * max(M.reagents.get_reagent_amount("bodmir_draksadd") / 60, 0.5), 10)
+							setalive(M)
+							M.emote("scream")
+							var/mob/G
+							if (ishuman(M)) // if they're human, let's get whoever owns the brain
+								var/mob/living/carbon/human/H = M
+								var/obj/item/organ/brain/B = H.organHolder?.get_organ("brain")
+								G = find_ghost_by_key(B?.owner?.key)
+							else // else just get whoever's the mind
+								G = find_ghost_by_key(M.mind?.key)
+							logTheThing(LOG_COMBAT, M, "is resuscitated by bodmir_draksadd at [log_loc(M)].")
+							if (G)
+								if (!isdead(G)) // so if they're in VR, the afterlife bar, or a ghostcritter
+									G.show_text("<span class='notice'>You have not been permitted a peaceful afterlife!</span>")
+									G.ghostize()?.mind?.transfer_to(M)
+								else
+									G.show_text("<span class='alert'>Your death came too soon for me!</span>")
+									G.mind?.transfer_to(M)
+								qdel(G)
+								M.visible_message("<span class='alert'><b>[M]</b> violently rises from the dead!</span>","<span class='alert'>Continue my war.</span>")
 							else
-								G.show_text("<span class='alert'>Your death came too soon for me!</span>")
-								G.mind?.transfer_to(M)
-							qdel(G)
-							M.visible_message("<span class='alert'><b>[M]</b> violently rises from the dead!</span>","<span class='alert'>Continue my war.</span>")
-						else
-							M.visible_message("<span class='alert'><b>[M]</b> shudders and stares vacantly, brain utterly destroyed.</span>")
-					return
+								M.visible_message("<span class='alert'><b>[M]</b> shudders and stares vacantly, brain utterly destroyed.</span>")
 
 			on_remove()
 				var/mob/M = holder.my_atom
