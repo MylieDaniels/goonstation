@@ -1271,6 +1271,12 @@
 			else
 				owner.delStatus("turboslide")
 
+		onRemove()
+			. = ..()
+			if (isliving(owner))
+				var/mob/living/L = owner
+				L.force_laydown_standup()
+
 	ganger
 		id = "ganger"
 		name = "Gang Member"
