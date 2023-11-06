@@ -220,9 +220,9 @@ ABSTRACT_TYPE(/obj/deployable_turret)
 	proc/sweep()
 		if(!src.sweep_angle)
 			return
-		src.sweep_current = clamp(src.sweep_current + src.sweep_speed,-src.sweep_angle,src.sweep_angle)
 		if(abs(src.sweep_current) == src.sweep_angle)
 			src.sweep_speed *= -1
+		src.sweep_current = clamp(src.sweep_current + src.sweep_speed,-src.sweep_angle,src.sweep_angle)
 		src.set_angle(src.external_angle + src.sweep_speed)
 
 	attackby(obj/item/W, mob/user)
@@ -567,14 +567,14 @@ ABSTRACT_TYPE(/obj/deployable_turret)
 	max_health = 200
 	range = 7
 	projectile_type = /datum/projectile/bullet/nine_mm_NATO
-	burst_size = 12
+	burst_size = 10
 	fire_rate = 18
-	angle_arc_size = 30
+	angle_arc_size = 45
 	icon_tag = "st"
 	quick_deploy_fuel = -1
 	associated_deployer = /obj/item/turret_deployer/bodmir_brrt
-	sweep_angle = 75
-	sweep_speed = 15
+	sweep_angle = 60
+	sweep_speed = 30
 
 	is_friend(var/mob/living/C)
 		return (C.faction && C.faction == FACTION_SYNDICATE) //a bit lazy

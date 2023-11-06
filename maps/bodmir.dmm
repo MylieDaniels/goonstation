@@ -632,6 +632,10 @@
 	},
 /turf/simulated/floor/sanitary/white,
 /area/space)
+"ua" = (
+/obj/deployable_turret/bodmir_brrt/active/north,
+/turf/unsimulated/floor/engine,
+/area/bodmir/outer_deck)
 "vo" = (
 /obj/minimap/map_computer,
 /turf/unsimulated/floor/black,
@@ -1175,6 +1179,10 @@
 	},
 /turf/unsimulated/floor/industrial,
 /area/space)
+"Nw" = (
+/obj/deployable_turret/bodmir_brrt/active/southeast,
+/turf/unsimulated/floor/industrial,
+/area/bodmir/outer_deck)
 "Ow" = (
 /obj/machinery/door/poddoor/blast/pyro{
 	dir = 4
@@ -1188,10 +1196,18 @@
 	},
 /turf/unsimulated/floor/plating,
 /area/space)
+"Pf" = (
+/obj/deployable_turret/bodmir_brrt/active/north,
+/turf/unsimulated/floor/industrial,
+/area/bodmir/outer_deck)
 "Pk" = (
 /obj/machinery/door/poddoor/blast/pyro,
 /turf/unsimulated/floor/engine,
 /area/space)
+"Pm" = (
+/obj/deployable_turret/bodmir_brrt/active/southwest,
+/turf/unsimulated/floor/industrial,
+/area/bodmir/outer_deck)
 "Po" = (
 /turf/unsimulated/floor/engine/caution/south,
 /area/bodmir/outer_deck)
@@ -75275,7 +75291,7 @@ RR
 RR
 RR
 RR
-RR
+Pf
 TH
 TH
 Lu
@@ -78224,7 +78240,7 @@ bc
 TH
 TH
 TH
-RR
+Nw
 RR
 RR
 RR
@@ -79179,7 +79195,7 @@ rQ
 rQ
 rQ
 rQ
-rQ
+ua
 Zt
 YX
 YX
@@ -80387,7 +80403,7 @@ rQ
 rQ
 rQ
 rQ
-rQ
+ua
 bP
 fM
 fM
@@ -81244,7 +81260,7 @@ bc
 TH
 TH
 TH
-RR
+Pm
 RR
 RR
 RR
@@ -84335,7 +84351,7 @@ RR
 RR
 RR
 RR
-RR
+Pf
 TH
 TH
 Lu
