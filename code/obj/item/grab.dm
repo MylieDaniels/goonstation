@@ -914,6 +914,7 @@
 		if (!(T.turf_flags & CAN_BE_SPACE_SAMPLE) && !(user.lying) && can_act(user) && !HAS_ATOM_PROPERTY(user, PROP_MOB_CANTMOVE) && target_dir)
 			if (HAS_ATOM_PROPERTY(user, PROB_MOB_SLIDEKICK_TURBO))
 				user.changeStatus("turboslide", (0.2 + 0.1 * slidekick_range) SECONDS)
+				user.emote("flip", 0)
 				user.force_laydown_standup()
 			else
 				user.changeStatus("weakened", max(user.movement_delay()*2, (0.4 + 0.1 * slidekick_range) SECONDS))

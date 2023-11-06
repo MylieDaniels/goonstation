@@ -48,7 +48,7 @@ ABSTRACT_TYPE(/obj/item/turret_deployer)
 		if(istype(get_area(src), /area/sim/gunsim))
 			boutput(usr, "You can't deploy the turret here!")
 			return
-		if(src.quick_deploy_fuel > 0)
+		if(src.quick_deploy_fuel)
 			var/turf/thrown_to = get_turf(src)
 			var/spawn_direction = get_dir(thrown_to,thrown_from)
 			var/obj/deployable_turret/turret = src.spawn_turret(spawn_direction)
@@ -94,6 +94,16 @@ TYPEINFO(/obj/item/turret_deployer/riot)
 	icon_tag = "op"
 	associated_turret = /obj/deployable_turret/outpost
 
+/obj/item/turret_deployer/bodmir_brrt
+	name = "B.R.R.T. Deployer"
+	desc = "A high power Bodmir Rapid Rotational Turret used for eradication of intruders. Use it in your hand or throw to deploy."
+	turret_health = 200
+	icon_state = "st_deployer"
+	w_class = W_CLASS_BULKY
+	icon_tag = "st"
+	quick_deploy_fuel = -1
+	associated_turret = /obj/deployable_turret/bodmir_brrt
+
 /////////////////////////////
 //       Turret Code       //
 /////////////////////////////
@@ -128,6 +138,9 @@ ABSTRACT_TYPE(/obj/deployable_turret)
 	var/associated_deployer = null //what kind of turret deployer should this deconstruct to?
 	var/deconstructable = TRUE
 	var/can_toggle_activation = TRUE // whether you can enable or disable the turret with a screwdriver, used for map setpiece turrets
+	var/sweep_angle = 0 // if nonzero, the turret will sweep side to side between +sweep_angle and -sweep_angle
+	var/sweep_speed = 0 // how many degrees the turret rotates per processing tick
+	var/sweep_current = 0 // tracks current angle of sweep
 
 	New(var/loc, var/direction)
 		..()
@@ -188,10 +201,12 @@ ABSTRACT_TYPE(/obj/deployable_turret)
 	proc/process()
 		if(src.active)
 			if(!src.target && !src.seek_target()) //attempt to set the target if no target
+				src.sweep()
 				return
 			if(!src.target_valid(src.target)) //check valid target
 				src.icon_state = "[src.icon_tag]_idle"
 				src.target = null
+				src.sweep()
 				return
 			else //GUN THEM DOWN
 				if(src.target)
@@ -202,6 +217,13 @@ ABSTRACT_TYPE(/obj/deployable_turret)
 							sleep(src.current_projectile.shot_delay)
 					shoot_projectile_ST_pixel_spread(src, current_projectile, target, 0, 0 , spread)
 
+	proc/sweep()
+		if(!src.sweep_angle)
+			return
+		src.sweep_current = clamp(src.sweep_current + src.sweep_speed,-src.sweep_angle,src.sweep_angle)
+		if(abs(src.sweep_current) == src.sweep_angle)
+			src.sweep_speed *= -1
+		src.set_angle(src.external_angle + src.sweep_speed)
 
 	attackby(obj/item/W, mob/user)
 		user.lastattacked = src
@@ -299,7 +321,7 @@ ABSTRACT_TYPE(/obj/deployable_turret)
 			src.icon_state = "[src.icon_tag]_idle"
 
 	proc/quick_deploy()
-		if(!(src.quick_deploy_fuel > 0))
+		if(!src.quick_deploy_fuel)
 			return
 		src.quick_deploy_fuel--
 		src.visible_message("<span class='alert'>[src]'s quick deploy system engages, automatically securing it!</span>")
@@ -396,7 +418,7 @@ ABSTRACT_TYPE(/obj/deployable_turret)
 				return FALSE
 		if (istype(C,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = C
-			if (H.hasStatus(list("resting", "weakened", "stunned", "paralysis"))) // stops it from uselessly firing at people who are already suppressed. It's meant to be a suppression weapon!
+			if (H.hasStatus(list("weakened", "stunned", "paralysis"))) // stops it from uselessly firing at people who are already suppressed. It's meant to be a suppression weapon!
 				return FALSE
 		if (is_friend(C))
 			return FALSE
@@ -538,6 +560,51 @@ ABSTRACT_TYPE(/obj/deployable_turret)
 	west
 		dir=WEST
 
+/obj/deployable_turret/bodmir_brrt
+	name = "B.R.R.T."
+	desc = "A deadly Bodmir Rapid Rotational Turret."
+	health = 200
+	max_health = 200
+	range = 7
+	projectile_type = /datum/projectile/bullet/nine_mm_NATO
+	burst_size = 12
+	fire_rate = 18
+	angle_arc_size = 30
+	icon_tag = "st"
+	quick_deploy_fuel = -1
+	associated_deployer = /obj/item/turret_deployer/bodmir_brrt
+	sweep_angle = 75
+	sweep_speed = 15
+
+	is_friend(var/mob/living/C)
+		return (C.faction && C.faction == FACTION_SYNDICATE) //a bit lazy
+
+/obj/deployable_turret/bodmir_brrt/active
+	can_toggle_activation = FALSE
+	anchored = ANCHORED
+	deconstructable = FALSE
+
+	New(loc)
+		..(src.loc, src.dir)
+		src.toggle_activated()
+
+	north
+		dir=NORTH
+	south
+		dir=SOUTH
+	east
+		dir=EAST
+	west
+		dir=WEST
+	northeast
+		dir=NORTHEAST
+	southeast
+		dir=SOUTHEAST
+	northwest
+		dir=NORTHWEST
+	southwest
+		dir=SOUTHWEST
+
 /////////////////////////////
 //   Turret Ability Stuff  //
 /////////////////////////////
@@ -584,6 +651,7 @@ ABSTRACT_TYPE(/obj/deployable_turret)
 
 			SPAWN(0)
 				src.my_turret.set_angle(get_angle(my_turret,target))
+				src.my_turret.sweep_current = 0
 
 			return FALSE
 

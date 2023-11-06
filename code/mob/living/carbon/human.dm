@@ -2842,7 +2842,7 @@
 		 	slot_item.equipment_click(src, target, params, location, control, origParams, slot))
 			return
 
-	if (src.lying)
+	if (src.lying && !src.hasStatus("turboslide"))
 		if (src.limbs.r_leg || src.limbs.l_leg) //legless people should still be able to interact
 			return 0
 	.=..()
@@ -3298,7 +3298,7 @@
 		if (!src.limbs.r_leg) missing_legs++
 		if (!src.limbs.l_arm) missing_arms++
 		if (!src.limbs.r_arm) missing_arms++
-	if (src.lying || GET_COOLDOWN(src, "unlying_speed_cheesy"))
+	if ((src.lying && !src.hasStatus("turboslide")) || GET_COOLDOWN(src, "unlying_speed_cheesy"))
 		missing_legs = 2
 	else if (src.shoes && src.shoes.chained)
 		missing_legs = 2
