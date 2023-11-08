@@ -108,8 +108,17 @@ TYPEINFO(/datum/component/holdertargeting/windup)
 	var/turf/T
 	var/atom/movable/screen/fullautoAimHUD/F = object
 	if(istype(F) && aimer)
-		T = locate(M.x + (F.xOffset + -1 - ((istext(aimer.view) ? WIDE_TILE_WIDTH : SQUARE_TILE_WIDTH) - 1) / 2),\
-							M.y + (F.yOffset + -1 - 7),\
+		var/center_x
+		var/center_y
+		if(M.client)
+			T = get_turf(M.client.virtual_eye)
+			center_x = T.x
+			center_y = T.y
+		else
+			center_x = M.x
+			center_y = M.y
+		T = locate(center_x + (F.xOffset + -1 - ((istext(aimer.view) ? WIDE_TILE_WIDTH : SQUARE_TILE_WIDTH) - 1) / 2),\
+							center_y + (F.yOffset + -1 - 7),\
 							M.z)
 
 		if(T && T != get_turf(parent))
@@ -214,7 +223,7 @@ TYPEINFO(/datum/component/holdertargeting/windup)
 	resumable = FALSE
 
 
-	New(_gun,  _time, _comp, _do_point_blank = FALSE)
+	New(_gun,  _time, _do_point_blank = FALSE)
 		ownerGun = _gun
 		icon = ownerGun.icon
 		icon_state = ownerGun.icon_state

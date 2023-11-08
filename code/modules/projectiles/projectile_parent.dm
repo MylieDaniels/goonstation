@@ -566,7 +566,7 @@ ABSTRACT_TYPE(/datum/projectile)
 	var/damage_type = D_KINETIC  // What is our damage type
 	var/hit_type = null          // For blood system damage - DAMAGE_BLUNT, DAMAGE_CUT and DAMAGE_STAB
 	var/hit_ground_chance = 0    // With what % do we hit mobs laying down
-	var/window_pass = 0          // Can we pass windows
+	var/window_pass = 0          // 0 to hit windows, 1 to pass them, 2 to also pass grilles
 	var/obj/projectile/master = null // The projectile obj that we're associated with
 	var/silentshot = 0           // Standard visible message upon bullet_act.
 	var/implanted                // Path of "bullet" left behind in the mob on successful hit
