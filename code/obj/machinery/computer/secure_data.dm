@@ -840,3 +840,47 @@
 #undef SECREC_LIST_RECORDS
 #undef SECREC_MANAGE_RECORDS
 #undef SECREC_VIEW_RECORD
+
+/obj/submachine/detective_filing
+	name = "Case Records"
+	desc = "An old filing cabinet stuffed with information and case files."
+	density = TRUE
+	anchored = ANCHORED
+	icon = 'icons/obj/computer.dmi'
+	icon_state = "messyfiles"
+	flags = TGUI_INTERACTIVE | FPRINT
+	var/list/list/scans
+
+	New()
+		..()
+		src.scans = list()
+		START_TRACKING
+
+	disposing()
+		STOP_TRACKING
+		..()
+
+	ui_interact(mob/user, datum/tgui/ui)
+		ui = tgui_process.try_update_ui(user, src, ui)
+		if(!ui)
+			ui = new(user, src, "DetectiveFiling")
+			ui.open()
+
+	ui_data(mob/user)
+		return list(
+			"scans_data" = src.scans
+		)
+
+	ui_act(action, params)
+		. = ..()
+		if (.)
+			return
+		if(action == "write_note")
+			var/new_note = sanitize(strip_html(params["new_note"]))
+			src.scans[params["note_index"]]["scan_notes"] = new_note
+			phrase_log.log_phrase("new_note", new_note, TRUE)
+
+	proc/add_scan(var/scan)
+		src.scans += ""
+		src.scans[length(src.scans)] = list("scanned_name" = name, "scan_results" = scan,\
+			"scan_notes" = "Uploaded at shift time [formattedShiftTime(TRUE)].", "scan_index" = length(src.scans))

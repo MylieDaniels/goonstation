@@ -203,6 +203,7 @@ TYPEINFO(/obj/item/device/detective_scanner)
 	hide_attack = ATTACK_PARTIALLY_HIDDEN
 	var/active = 0
 	var/distancescan = 0
+	var/detnet_upload = 0
 	var/target = null
 
 	var/list/scans
@@ -220,7 +221,7 @@ TYPEINFO(/obj/item/device/detective_scanner)
 			if (scan_number < number_of_scans - maximum_scans)
 				boutput(usr, "<span class='alert'>ERROR: Scanner unable to load report data.</span>")
 				return
-			if(!ON_COOLDOWN(src, "print", 2 SECOND))
+			if(!ON_COOLDOWN(src, "uploadprint", 2 SECOND))
 				playsound(src, 'sound/machines/printer_thermal.ogg', 50, TRUE)
 				SPAWN(1 SECONDS)
 					var/obj/item/paper/P = new /obj/item/paper
@@ -229,7 +230,19 @@ TYPEINFO(/obj/item/device/detective_scanner)
 					var/index = (scan_number % maximum_scans) + 1 // Once a number of scans equal to the maximum number of scans is made, begin to overwrite existing scans, starting from the earliest made.
 					P.info = scans[index]
 					P.name = "forensic readout"
-
+		if (href_list["upload"] && src.detnet_upload)
+			if (!(src in usr.contents))
+				boutput(usr, "<span class='notice'>You must be holding [src] that made the record in order to upload it.</span>")
+				return
+			var/scan_number = text2num(href_list["upload"])
+			if (scan_number < number_of_scans - maximum_scans)
+				boutput(usr, "<span class='alert'>ERROR: Scanner unable to load report data.</span>")
+				return
+			if(!ON_COOLDOWN(src, "uploadprint", 2 SECOND))
+				playsound(src, 'sound/machines/ping.ogg', 50, TRUE)
+				var/index = (scan_number % maximum_scans) + 1
+				for_by_tcl(filing_cabinet, /obj/submachine/detective_filing)
+					filing_cabinet.add_scan(scans[index])
 
 	attack_self(mob/user as mob)
 
@@ -279,6 +292,8 @@ TYPEINFO(/obj/item/device/detective_scanner)
 		var/index = (number_of_scans % maximum_scans) + 1 // Once a number of scans equal to the maximum number of scans is made, begin to overwrite existing scans, starting from the earliest made.
 		scans[index] = last_scan
 		var/scan_output = last_scan + "<br>---- <a href='?src=\ref[src];print=[number_of_scans];'>PRINT REPORT</a> ----"
+		if(src.detnet_upload)
+			scan_output += "<br>--- <a href='?src=\ref[src];upload=[number_of_scans];'>DET NET UPLOAD</a> ---"
 		number_of_scans += 1
 
 		boutput(user, scan_output)
@@ -325,8 +340,9 @@ TYPEINFO(/obj/item/device/detective_scanner)
 
 /obj/item/device/detective_scanner/detective
 	name = "cool forensic scanner"
-	desc = "Used to scan objects for DNA and fingerprints. This model seems to have an upgrade that lets it scan for prints at a distance. You feel cool holding it."
+	desc = "Used to scan objects for DNA and fingerprints. This model seems to have an upgrade that lets it scan for prints at a distance and upload files. You feel cool holding it."
 	distancescan = 1
+	detnet_upload = 1
 
 ///////////////////////////////////// Health analyzer ////////////////////////////////////////
 
