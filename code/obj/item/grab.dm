@@ -985,23 +985,15 @@
 										playsound(itm, "swing_hit", 50, 1)
 										itm.throw_at(throw_target, W_CLASS_HUGE - itm.w_class, (1 / itm.w_class) + 0.8) // Range: 1-4, Speed: 1-2
 
-<<<<<<< HEAD
 									if (!item_num_to_throw)
 										break
-=======
-							if (!item_num_to_throw)
-								break
-			if(!dive_attack_hit)
-				for (var/mob/O in AIviewers(user))
-					O.show_message(SPAN_ALERT("<B>[user] slides to the ground!</B>"), 1, group = "resist")
->>>>>>> 052ceccd905321583a2422fc0121c517aa3bcff8
 
 					if (v < slidekick_range)
 						sleep(0.1 SECONDS)
 
 				if(!did_any_dive_hit)
 					for (var/mob/O in AIviewers(user))
-						O.show_message("<span class='alert'><B>[user] slides to the ground!</B></span>", 1, group = "resist")
+						O.show_message(SPAN_ALERT("<B>[user] slides to the ground!</B>"), 1, group = "resist")
 
 	user.u_equip(src)
 	qdel(src)
