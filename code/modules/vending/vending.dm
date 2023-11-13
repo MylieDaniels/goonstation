@@ -64,7 +64,7 @@ ADMIN_INTERACT_PROCS(/obj/machinery/vending, proc/throw_item, proc/admin_command
 	layer = OBJ_LAYER - 0.1 // so items get spawned at 3, don't @ me
 	deconstruct_flags = DECON_SCREWDRIVER | DECON_WRENCH | DECON_MULTITOOL
 	object_flags = CAN_REPROGRAM_ACCESS | NO_GHOSTCRITTER
-	flags = TGUI_INTERACTIVE
+	flags = FPRINT | TGUI_INTERACTIVE
 	var/freestuff = 0
 	var/obj/item/card/id/scan = null
 
@@ -626,6 +626,7 @@ ADMIN_INTERACT_PROCS(/obj/machinery/vending, proc/throw_item, proc/admin_command
 				if(product_amount <= 0 || isnull(product))
 					return
 				src.vend_ready = 0
+				src.add_fingerprint(usr)
 				src.prevend_effect()
 				src.currently_vending = product
 				SPAWN(src.vend_delay)
@@ -689,16 +690,13 @@ ADMIN_INTERACT_PROCS(/obj/machinery/vending, proc/throw_item, proc/admin_command
 	return vended
 
 /obj/machinery/vending/attack_hand(mob/user as mob)
-	if (status & (BROKEN|NOPOWER))
-		return
+	. = ..()
 
 	if (src.seconds_electrified != 0)
 		if (src.shock(user, 100))
 			return
 
 	ui_interact(user)
-
-	interact_particle(user,src)
 	return
 
 /obj/machinery/vending/Topic(href, href_list)
