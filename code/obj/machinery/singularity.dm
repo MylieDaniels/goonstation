@@ -61,6 +61,9 @@ TYPEINFO(/obj/machinery/the_singularitygen)
 	density = 1
 	var/bhole = 0 // it is time. we can trust people to use the singularity For Good - cirr
 
+	HELP_MESSAGE_OVERRIDE({"Automatically creates a singularity when all surrounding containment fields are active.\
+							Can be anchored/unanchored with a <b>wrench</b>"})
+
 /obj/machinery/the_singularitygen/process()
 	var/max_radius = singularity_containment_check(get_turf(src))
 	if(isnull(max_radius))
@@ -279,7 +282,9 @@ for some reason I brought it back and tried to clean it up a bit and I regret ev
 
 /obj/machinery/the_singularity/ex_act(severity, last_touched, power)
 	if (severity == 1 && prob(power * 5)) //need a big bomb (TTV+ sized), but a big enough bomb will always clear it
+		var/turf/T = get_turf(src)
 		qdel(src)
+		new /obj/bhole(T,rand(100,300))
 
 /obj/machinery/the_singularity/Bumped(atom/A)
 	if(istype(A, /obj/dummy))
@@ -592,6 +597,10 @@ TYPEINFO(/obj/machinery/field_generator)
 	var/obj/machinery/power/data_terminal/link = null
 	var/active_dirs = 0
 	var/shortestlink = 0
+
+	HELP_MESSAGE_OVERRIDE({"In order to be activated, the Field Generator has to be <b>wrenched</b> and <b>welded</b> down first. Once \
+							secured, a valid ID has to be swiped to unlock the controls. On activation, the generator will connect to \
+							other ones within a cardinal range of 13 tiles."})
 
 	proc/set_active(var/act)
 		if (src.active != act)
@@ -1101,6 +1110,10 @@ TYPEINFO(/obj/machinery/emitter)
 	var/obj/machinery/power/data_terminal/link = null
 	var/datum/projectile/current_projectile = new/datum/projectile/laser/heavy
 
+	HELP_MESSAGE_OVERRIDE({"The Emitter shoots laser bolts at Containment Field Generators to power them. Has to be \
+							<b>wrenched</b> and <b>welded</b> down before being useable. The control systems must be unlocked \
+							with a valid ID in order to activate the Emitter."})
+
 /obj/machinery/emitter/New()
 	..()
 	SPAWN(0.6 SECONDS)
@@ -1254,7 +1267,7 @@ TYPEINFO(/obj/machinery/emitter)
 			return
 
 	var/obj/item/card/id/id_card = get_id_card(W)
-	if (istype(id_card))
+	if (istype(id_card) && length(src.req_access))
 		if (src.allowed(user))
 			src.locked = !src.locked
 			boutput(user, "Controls are now [src.locked ? "locked." : "unlocked."]")
@@ -1360,6 +1373,22 @@ TYPEINFO(/obj/machinery/emitter)
 
 	return
 
+/obj/machinery/emitter/assault
+	name = "prototype assault emitter"
+	desc = "Shoots a VERY high power laser when active. The ID lock appears to have been messily smashed off."
+	current_projectile = new/datum/projectile/laser/asslaser
+	locked = FALSE
+	fire_delay = 30
+	req_access = list()
+	HELP_MESSAGE_OVERRIDE({"The Emitter shoots assault lasers at <s>Containment Field Generators</s> just about anything! Has to be \
+							<b>wrenched</b> and <b>welded</b> down before being useable."})
+
+	attack_ai(mob/user)
+		return
+
+	receive_signal(datum/signal/signal)
+		return
+
 /////////////////////////////////// Collector array /////////////////////////////////
 
 /obj/item/electronics/frame/collector_array
@@ -1385,6 +1414,8 @@ TYPEINFO(/obj/machinery/power/collector_array)
 	var/obj/item/tank/plasma/P = null
 	var/obj/machinery/power/collector_control/CU = null
 	deconstruct_flags = DECON_WELDER | DECON_MULTITOOL | DECON_CROWBAR | DECON_WRENCH
+	HELP_MESSAGE_OVERRIDE({"Must be cardinally adjacent to a Radiation Collector Controller to function. \
+							It can be bolted or unbolted to the floor with a <b>wrench</b>."})
 
 /obj/machinery/power/collector_array/New()
 	..()
@@ -1445,7 +1476,7 @@ TYPEINFO(/obj/machinery/power/collector_array)
 /obj/machinery/power/collector_array/attackby(obj/item/W, mob/user)
 	if (iswrenchingtool(W))
 		if(src.active)
-			boutput(SPAN_ALERT("The [src.name] must be turned off first!"))
+			boutput(user, SPAN_ALERT("The [src.name] must be turned off first!"))
 		else
 			if (!src.anchored)
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)
@@ -1518,6 +1549,10 @@ TYPEINFO(/obj/machinery/power/collector_control)
 	var/obj/machinery/power/collector_array/CAW = null
 	var/list/obj/machinery/the_singularity/S = null
 	deconstruct_flags = DECON_WELDER | DECON_MULTITOOL | DECON_CROWBAR | DECON_WRENCH
+
+	HELP_MESSAGE_OVERRIDE({"Transfers the energy from cardinally adjacent Radiation Collector Arrays \
+							to the wire below it as usable electric power. \
+							It can be bolted or unbolted to the floor with a <b>wrench</b>."})
 
 /obj/machinery/power/collector_control/New()
 	..()
@@ -1678,7 +1713,7 @@ TYPEINFO(/obj/machinery/power/collector_control)
 /obj/machinery/power/collector_control/attackby(obj/item/W, mob/user)
 	if (iswrenchingtool(W))
 		if(src.active)
-			boutput(SPAN_ALERT("The [src.name] must be turned off first!"))
+			boutput(user, SPAN_ALERT("The [src.name] must be turned off first!"))
 		else
 			if (!src.anchored)
 				playsound(src.loc, 'sound/items/Ratchet.ogg', 75, 1)

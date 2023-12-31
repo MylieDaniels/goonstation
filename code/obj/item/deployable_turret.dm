@@ -142,7 +142,7 @@ ABSTRACT_TYPE(/obj/deployable_turret)
 	var/sweep_speed = 0 // how many degrees the turret rotates per processing tick
 	var/sweep_current = 0 // tracks current angle of sweep
 
-	New(var/loc, var/direction)
+	New(loc, direction)
 		..()
 		src.set_dir(direction || src.dir) // don't set the dir if we weren't passed one
 		src.set_initial_angle()
@@ -484,7 +484,7 @@ ABSTRACT_TYPE(/obj/deployable_turret)
 	icon_tag = "st"
 	associated_deployer = /obj/item/turret_deployer/syndicate
 
-	New()
+	New(loc, direction)
 		START_TRACKING_CAT(TR_CAT_NUKE_OP_STYLE)
 		..()
 

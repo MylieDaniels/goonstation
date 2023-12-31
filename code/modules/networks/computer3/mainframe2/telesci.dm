@@ -569,8 +569,8 @@ TYPEINFO(/obj/machinery/networked/telepad)
 			ZSUBTRACT = rand(0,world.maxz)
 			SPAWN(1 SECOND)
 				processbadeffect(pick("flash","buzz","scatter","ignite","chill"))
-		if(prob(5) && !locate(/obj/dfissure_to) in get_step(src, EAST))
-			new/obj/dfissure_to(get_step(src, EAST))
+		if(prob(5) && !locate(/obj/dfissure_to) in get_step(src, NORTHEAST))
+			new/obj/dfissure_to(get_step(src, NORTHEAST))
 		else
 			start_portal = makeportal(src.loc, target)
 			if (start_portal)
@@ -883,7 +883,7 @@ TYPEINFO(/obj/machinery/networked/teleconsole)
 				if (!istype(user_data))
 					user_data = new
 
-					user_data.fields["userid"] = "telepad"
+					user_data.fields["userid"] = src.net_id
 					user_data.fields["access"] = "11"
 
 				src.timeout = initial(src.timeout)

@@ -163,7 +163,7 @@
 					continue
 				if(holder.organ_list[thing] == src)
 					holder.organ_list[thing] = null
-				if(thing in holder.vars && holder.vars[thing] == src) // organ holders suck, refactor when they no longer suck
+				if((thing in holder.vars) && holder.vars[thing] == src) // organ holders suck, refactor when they no longer suck
 					holder.vars[thing] = null
 
 		donor_original = null
@@ -286,7 +286,7 @@
 			return
 		if (user)
 			user.show_text("You disable the safety limiters on [src].", "red")
-		src.visible_message(SPAN_ALERT("<B>[src] sparks and shudders oddly!</B>"), 1)
+		src.visible_message(SPAN_ALERT("<B>[src] sparks and shudders oddly!</B>"))
 		src.emagged = 1
 		return 1
 

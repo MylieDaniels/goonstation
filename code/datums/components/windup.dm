@@ -3,7 +3,7 @@
 //TODO: sfx?
 TYPEINFO(/datum/component/holdertargeting/windup)
 	initialization_args = list(
-		ARG_INFO("duration", DATA_INPUT_NUM, "windup time (seconds)", 1),
+		ARG_INFO("duration", DATA_INPUT_NUM, "windup time (deciseconds)", 10),
 	)
 
 /datum/component/holdertargeting/windup
@@ -18,6 +18,7 @@ TYPEINFO(/datum/component/holdertargeting/windup)
 	var/scoped = FALSE
 
 	var/list/atom/movable/screen/fullautoAimHUD/hudSquares = list()
+	var/atom/movable/screen/fullautoAimHUD/hudCenter
 	var/client/aimer
 
 	InheritComponent(datum/component/holdertargeting/windup/C, i_am_original, _duration)
@@ -34,14 +35,26 @@ TYPEINFO(/datum/component/holdertargeting/windup)
 			var/obj/item/gun/G = parent
 			src.duration = duration
 
-			for(var/x in 1 to WIDE_TILE_WIDTH)
-				for(var/y in 1 to 15)
-					var/atom/movable/screen/fullautoAimHUD/hudSquare = new /atom/movable/screen/fullautoAimHUD
-					hudSquare.screen_loc = "[x],[y]"
-					hudSquare.xOffset = x
-					hudSquare.yOffset = y
-					hudSquares["[x],[y]"] = hudSquare
 
+			var/atom/movable/screen/fullautoAimHUD/hudSquare
+
+			hudSquare = new /atom/movable/screen/fullautoAimHUD
+			hudSquare.screen_loc = "SOUTHWEST to CENTER-2,NORTH"
+			hudSquares += hudSquare
+			hudSquare = new /atom/movable/screen/fullautoAimHUD
+			hudSquare.screen_loc = "CENTER+2,SOUTH to NORTHEAST"
+			hudSquares += hudSquare
+			hudSquare = new /atom/movable/screen/fullautoAimHUD
+			hudSquare.screen_loc = "CENTER-1,CENTER+2 to CENTER+1,NORTH"
+			hudSquares += hudSquare
+			hudSquare = new /atom/movable/screen/fullautoAimHUD
+			hudSquare.screen_loc = "CENTER-1,SOUTH to CENTER+1,CENTER-2"
+			hudSquares += hudSquare
+
+			hudSquare = new /atom/movable/screen/fullautoAimHUD
+			hudSquare.screen_loc = "CENTER-1,CENTER-1 to CENTER+1,CENTER+1"
+			hudSquares += hudSquare
+			hudCenter = hudSquare
 
 			RegisterSignal(G, COMSIG_ITEM_SWAP_TO, PROC_REF(init_aim_mode))
 			RegisterSignal(G, COMSIG_ITEM_SWAP_AWAY, PROC_REF(end_aim_mode))
@@ -58,7 +71,7 @@ TYPEINFO(/datum/component/holdertargeting/windup)
 			COMSIG_GUN_TRY_POINTBLANK,\
 			COMSIG_SCOPE_TOGGLED))
 		for(var/hudSquare in hudSquares)
-			aimer?.screen -= hudSquares[hudSquare]
+			aimer?.screen -= hudSquare
 		aimer = null
 
 		if(current_user)
@@ -68,7 +81,7 @@ TYPEINFO(/datum/component/holdertargeting/windup)
 
 	disposing()
 		for(var/hudSquare in hudSquares)
-			qdel(hudSquares[hudSquare])
+			qdel(hudSquare)
 		hudSquares = null
 		. = ..()
 
@@ -89,36 +102,28 @@ TYPEINFO(/datum/component/holdertargeting/windup)
 	if(!aimer)
 		return
 	if(!old_scoped && src.scoped) //add aiming squares to center of screen
-		for(var/x in ((istext(aimer.view) ? WIDE_TILE_WIDTH : SQUARE_TILE_WIDTH)+1)/2 - 1 to ((istext(aimer.view) ? WIDE_TILE_WIDTH : SQUARE_TILE_WIDTH)+1)/2 + 1)
-			for(var/y in 7 to 9)
-				aimer.screen += hudSquares["[x],[y]"]
+		aimer.screen += hudCenter
 		return
 	if(old_scoped && !src.scoped) //add aiming squares to center of screen
-		for(var/x in ((istext(aimer.view) ? WIDE_TILE_WIDTH : SQUARE_TILE_WIDTH)+1)/2 - 1 to ((istext(aimer.view) ? WIDE_TILE_WIDTH : SQUARE_TILE_WIDTH)+1)/2 + 1)
-			for(var/y in 7 to 9)
-				aimer.screen -= hudSquares["[x],[y]"]
+		aimer.screen -= hudCenter
 		return
 
 /datum/component/holdertargeting/windup/proc/init_aim_mode(datum/source, mob/user)
 	RegisterSignal(user, COMSIG_FULLAUTO_MOUSEDOWN, PROC_REF(on_mousedown))
 	if(user.client)
 		aimer = user.client
-		for(var/x in 1 to (istext(aimer.view) ? WIDE_TILE_WIDTH : SQUARE_TILE_WIDTH))
-			for(var/y in 1 to 15)
-				var/atom/movable/screen/fullautoAimHUD/FH = hudSquares["[x],[y]"]
-				FH.mouse_over_pointer = icon(cursors_selection[aimer.preferences.target_cursor], "all")
-				if((y >= 7 && y <= 9) && (x >= ((istext(aimer.view) ? WIDE_TILE_WIDTH : SQUARE_TILE_WIDTH)+1)/2 - 1 && x <= ((istext(aimer.view) ? WIDE_TILE_WIDTH : SQUARE_TILE_WIDTH)+1)/2 + 1))
-					continue
-				aimer.screen += hudSquares["[x],[y]"]
+		for(var/atom/hudSquare in hudSquares)
+			hudSquare.mouse_over_pointer = icon(cursors_selection[aimer.preferences.target_cursor], "all")
+			aimer.screen += hudSquare
+		aimer.screen -= hudCenter
 
 /datum/component/holdertargeting/windup/proc/end_aim_mode(datum/source, mob/user)
 	UnregisterSignal(user, COMSIG_FULLAUTO_MOUSEDOWN)
 	interrupt = TRUE
 	end_shootloop(user)
 	if(aimer)
-		for(var/x in 1 to (istext(aimer.view) ? WIDE_TILE_WIDTH : SQUARE_TILE_WIDTH))
-			for(var/y in 1 to 15)
-				aimer.screen -= hudSquares["[x],[y]"]
+		for(var/atom/hudSquare in hudSquares)
+			aimer.screen -= hudSquare
 	aimer = null
 
 /datum/component/holdertargeting/windup/proc/moveRetarget(mob/M, newLoc, direct)
@@ -129,10 +134,18 @@ TYPEINFO(/datum/component/holdertargeting/windup)
 
 	var/turf/T
 	var/atom/movable/screen/fullautoAimHUD/F = object
+
+
+	var/regex/locparser = new(@"^(\d+):(\d*),(\d+):(\d*)$")
+	if(!locparser.Find(params2list(params)["screen-loc"]))
+		return //FUCK
+	var/x = text2num(locparser.group[1])
+	var/y = text2num(locparser.group[3])
+
 	if(istype(F) && aimer)
 		T = get_turf(aimer.virtual_eye)
-		T = locate(T.x + (aimer.pixel_x / 32) + (F.xOffset + -1 - ((istext(aimer.view) ? WIDE_TILE_WIDTH : SQUARE_TILE_WIDTH) - 1) / 2),\
-							T.y + (aimer.pixel_y / 32) + (F.yOffset + -1 - 7),\
+		T = locate(T.x + (aimer.pixel_x / 32) + (x + -1 - ((istext(aimer.view) ? WIDE_TILE_WIDTH : SQUARE_TILE_WIDTH) - 1) / 2),\
+							T.y + (aimer.pixel_y / 32) + (y + -1 - 7),\
 							M.z)
 
 		if(T && T != get_turf(parent))
@@ -159,16 +172,14 @@ TYPEINFO(/datum/component/holdertargeting/windup)
 
 	//add aiming squares to center of screen
 	if(!src.scoped)
-		for(var/x in ((istext(aimer.view) ? WIDE_TILE_WIDTH : SQUARE_TILE_WIDTH)+1)/2 - 1 to ((istext(aimer.view) ? WIDE_TILE_WIDTH : SQUARE_TILE_WIDTH)+1)/2 + 1)
-			for(var/y in 7 to 9)
-				aimer.screen += hudSquares["[x],[y]"]
+		aimer.screen += hudCenter
 
 	src.do_windup(user)
 
 /datum/component/holdertargeting/windup/proc/do_windup(mob/living/L)
 	set waitfor = 0
 	var/obj/item/gun/G = parent
-	winder = new/datum/action/bar/icon/windup/infinite(G, duration, src)
+	winder = new/datum/action/bar/icon/windup/infinite(G, duration)
 	actions.start(winder, L)
 
 /datum/component/holdertargeting/windup/proc/end_shootloop(mob/living/user, object, location, control, params)
@@ -181,11 +192,11 @@ TYPEINFO(/datum/component/holdertargeting/windup)
 				winder.poy = text2num(paramlist["icon-y"]) - 16
 				if(user.client && src.scoped)
 					if(user.client.pixel_x)
-						winder.pox += user.client.pixel_x % (32 * sign(user.client.pixel_x))
+						winder.pox += user.client.pixel_x % 32
 						if(user.client.pixel_x < 0)
 							winder.pox += 32
 					if(user.client.pixel_y)
-						winder.poy += user.client.pixel_y % (32 * sign(user.client.pixel_y))
+						winder.poy += user.client.pixel_y % 32
 						if(user.client.pixel_y < 0)
 							winder.poy += 32
 			winder.target = src.target
@@ -203,9 +214,7 @@ TYPEINFO(/datum/component/holdertargeting/windup)
 
 	//clear aiming squares around center of screen
 	if(aimer && !src.scoped)
-		for(var/x in ((istext(aimer.view) ? WIDE_TILE_WIDTH : SQUARE_TILE_WIDTH)+1)/2 - 1 to ((istext(aimer.view) ? WIDE_TILE_WIDTH : SQUARE_TILE_WIDTH)+1)/2 + 1)
-			for(var/y in 7 to 9)
-				aimer.screen -= hudSquares["[x],[y]"]
+		aimer.screen -= hudCenter
 
 
 
@@ -248,7 +257,7 @@ TYPEINFO(/datum/component/holdertargeting/windup)
 	resumable = FALSE
 
 
-	New(_gun,  _time, _comp, _do_point_blank = FALSE)
+	New(_gun,  _time, _do_point_blank = FALSE)
 		ownerGun = _gun
 		icon = ownerGun.icon
 		icon_state = ownerGun.icon_state
