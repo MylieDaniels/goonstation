@@ -3723,9 +3723,9 @@ ABSTRACT_TYPE(/area/station/catwalk)
 // end syndie //
 
 /// Bodmir unique areas
-/area/bodmir/outer_deck
+/area/bodmir
 	name = "AMS Bodmir"
-	icon_state = "white"
+	icon_state = "purple"
 	requires_power = 0
 	sound_environment = 2
 	teleport_blocked = 1

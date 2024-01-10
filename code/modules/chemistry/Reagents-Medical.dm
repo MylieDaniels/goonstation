@@ -1660,7 +1660,7 @@ datum
 			flushing_multiplier = 0.1
 			viscosity = 0.8
 			penetrates_skin = 1
-			taste = "molten steel"
+			taste = "like molten steel"
 			stun_resist = 15
 			random_chem_blacklisted = TRUE
 
@@ -1696,7 +1696,7 @@ datum
 								if(!M.reagents.has_reagent(src.id,15))
 									M.reagents.add_reagent(src.id,0.15 * mult)
 								playsound(M, 'sound/effects/welding_arc.ogg', 30, TRUE)
-								if (!ON_COOLDOWN(M, "grendel_voice_draksadd_healing", 15 SECONDS))
+								if (!ON_COOLDOWN(M, "dragon_voice_draksadd_healing", 15 SECONDS))
 									boutput(M, "<span class='alert'>Good. [pick("Pry your tendons together again","Staple your arteries back in place","Weld your wounds shut once more","Hammer your bones back in","Pour your blood back into your veins")], [pick("grow and progress in my name.","little soldier.","become stronger for me.","eat your flesh off the floor.")]</span>")
 								src.active_remaining += mult
 						if(10 to 25)
@@ -1720,7 +1720,7 @@ datum
 							src.active_remaining += 7 * mult
 							M.make_jittery(30)
 							playsound(M, 'sound/effects/welderarc_ignite.ogg', 70, TRUE)
-							if (!ON_COOLDOWN(M, "grendel_voice_draksadd_invincible", 20 SECONDS))
+							if (!ON_COOLDOWN(M, "dragon_voice_draksadd_invincible", 20 SECONDS))
 								boutput(M, "<span class='alert'>What beautiful gore. You make an exquisite walking corpse, but don't dare drop.</span>")
 								src.damage_mult = max(src.damage_mult - 0.225 * mult, 0.5)
 								M.delStatus("paralysis")
@@ -1796,9 +1796,10 @@ datum
 								M.visible_message("<span class='alert'><b>[M]</b> shudders and stares vacantly, brain utterly destroyed.</span>")
 
 			on_remove()
-				var/mob/M = holder.my_atom
-				REMOVE_ATOM_PROPERTY(M, PROP_MOB_BRUTEMULT, "r_draksadd")
-				REMOVE_ATOM_PROPERTY(M, PROP_MOB_BURNMULT, "r_draksadd")
-				UnregisterSignal(M, COMSIG_MOB_DEATH)
-				REMOVE_MOVEMENT_MODIFIER(M, /datum/movement_modifier/reagent/juggernaut, src.type)
-				M.removeOverlayComposition(/datum/overlayComposition/draksadd)
+				var/mob/M = src.holder.my_atom
+				if (isliving(M))
+					REMOVE_ATOM_PROPERTY(M, PROP_MOB_BRUTEMULT, "r_draksadd")
+					REMOVE_ATOM_PROPERTY(M, PROP_MOB_BURNMULT, "r_draksadd")
+					UnregisterSignal(M, COMSIG_MOB_DEATH)
+					REMOVE_MOVEMENT_MODIFIER(M, /datum/movement_modifier/reagent/juggernaut, src.type)
+					M.removeOverlayComposition(/datum/overlayComposition/draksadd)

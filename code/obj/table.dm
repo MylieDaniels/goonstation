@@ -871,7 +871,7 @@ TYPEINFO_NEW(/obj/table/reinforced/bodmirkitchen)
 	drawer_contents = list(/obj/item/plate = 6,
 				/obj/item/reagent_containers/food/drinks/bowl = 6)
 
-/obj/table/reinforced/bodmirkitchen/auto/dishes
+/obj/table/reinforced/bodmirkitchen/auto/glasses
 	name = "glassware kitchen counter"
 	drawer_contents = list(/obj/item/reagent_containers/food/drinks/drinkingglass = 13)
 

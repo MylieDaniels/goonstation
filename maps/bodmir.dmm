@@ -3,12 +3,12 @@
 /turf/unsimulated/floor/redwhite/corner{
 	dir = 8
 	},
-/area/space)
+/area/bodmir)
 "ai" = (
 /obj/rack,
 /obj/item/sponge,
 /turf/unsimulated/floor/black,
-/area/space)
+/area/bodmir)
 "as" = (
 /obj/decal/fakeobjects/pipe/heat{
 	dir = 10;
@@ -21,7 +21,7 @@
 /turf/unsimulated/floor/redwhite{
 	dir = 8
 	},
-/area/space)
+/area/bodmir)
 "aA" = (
 /obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe/overfloor,
 /turf/unsimulated/wall/auto/lead/gray,
@@ -53,7 +53,7 @@
 "bl" = (
 /obj/machinery/door/airlock/pyro/weapons/noemag,
 /turf/unsimulated/floor/black,
-/area/space)
+/area/bodmir)
 "bP" = (
 /turf/unsimulated/floor/engine/caution/corner2{
 	dir = 10
@@ -73,7 +73,7 @@
 /turf/unsimulated/floor/redwhite{
 	dir = 8
 	},
-/area/space)
+/area/bodmir)
 "ce" = (
 /obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe/overfloor{
 	dir = 6
@@ -83,7 +83,7 @@
 "cs" = (
 /obj/machinery/lawrack/syndicate,
 /turf/unsimulated/floor/black,
-/area/space)
+/area/bodmir)
 "cw" = (
 /obj/table/wood/auto/desk,
 /obj/item/paper{
@@ -97,7 +97,7 @@
 /turf/unsimulated/floor/redwhite{
 	dir = 8
 	},
-/area/space)
+/area/bodmir)
 "cx" = (
 /obj/storage/closet/dresser,
 /obj/item/clothing/head/helmet/space/syndicate/commissar_cap{
@@ -114,7 +114,7 @@
 	pixel_y = -9
 	},
 /turf/unsimulated/floor/black,
-/area/space)
+/area/bodmir)
 "cL" = (
 /obj/grille/catwalk,
 /obj/decal/cleanable/blood/gibs,
@@ -125,14 +125,21 @@
 /turf/unsimulated/wall/auto/lead/gray,
 /area/space)
 "dw" = (
-/obj/table/reinforced/auto,
 /obj/item/reagent_containers/food/snacks/cereal_box/honey{
 	pixel_x = 4;
 	pixel_y = 5
 	},
 /obj/item/reagent_containers/food/snacks/cereal_box,
+/obj/table/reinforced/bodmirkitchen/auto,
 /turf/unsimulated/floor/sanitary/white,
-/area/space)
+/area/bodmir)
+"dG" = (
+/obj/item/clothing/head/flower/gardenia{
+	pixel_x = 13;
+	pixel_y = -10
+	},
+/turf/simulated/wall/auto/reinforced/supernorn/blackred,
+/area/bodmir)
 "dI" = (
 /obj/machinery/light/small/floor/frostedred,
 /turf/unsimulated/floor/black,
@@ -142,11 +149,11 @@
 /turf/unsimulated/floor/redwhite{
 	dir = 1
 	},
-/area/space)
+/area/bodmir)
 "dW" = (
 /obj/submachine/chef_oven,
 /turf/unsimulated/floor/sanitary/white,
-/area/space)
+/area/bodmir)
 "ec" = (
 /obj/decoration/syndiepc/syndiepc2{
 	pixel_x = 1
@@ -180,6 +187,10 @@
 	},
 /turf/unsimulated/floor/black/grime,
 /area/space)
+"eE" = (
+/obj/decoration/syndiepc/syndiepc16,
+/turf/unsimulated/floor/black,
+/area/bodmir)
 "eG" = (
 /obj/railing/steel{
 	dir = 8
@@ -214,7 +225,7 @@
 	dir = 8
 	},
 /turf/unsimulated/floor/black,
-/area/space)
+/area/bodmir)
 "eR" = (
 /obj/machinery/conveyor/NW{
 	id = "bodmir-cannon-belt";
@@ -226,7 +237,7 @@
 /turf/simulated/floor/blackwhite/side{
 	dir = 8
 	},
-/area/space)
+/area/bodmir)
 "fm" = (
 /obj/machinery/conveyor/SN{
 	id = "bodmir-cannon-belt";
@@ -237,7 +248,7 @@
 "fp" = (
 /obj/machinery/shower,
 /turf/unsimulated/floor/black,
-/area/space)
+/area/bodmir)
 "fs" = (
 /obj/machinery/door/poddoor/pyro/shutters{
 	dir = 4;
@@ -249,7 +260,7 @@
 	dir = 4
 	},
 /turf/unsimulated/floor/white,
-/area/space)
+/area/bodmir)
 "ft" = (
 /obj/machinery/conveyor_switch{
 	name = "ammunition belt switch";
@@ -266,7 +277,7 @@
 /turf/unsimulated/floor/redwhite{
 	dir = 4
 	},
-/area/space)
+/area/bodmir)
 "fM" = (
 /turf/unsimulated/floor/engine/caution/west,
 /area/bodmir/outer_deck)
@@ -276,11 +287,7 @@
 /turf/unsimulated/floor/redwhite{
 	dir = 1
 	},
-/area/space)
-"gh" = (
-/obj/machinery/light/small/floor/warm,
-/turf/unsimulated/floor/white,
-/area/space)
+/area/bodmir)
 "gp" = (
 /obj/decal/cleanable/blood/tracks,
 /obj/item/rods/steel{
@@ -302,7 +309,7 @@
 /area/bodmir/outer_deck)
 "hg" = (
 /turf/unsimulated/floor/redwhite/corner,
-/area/space)
+/area/bodmir)
 "ho" = (
 /obj/decal/cleanable/blood/gibs,
 /obj/item/gun/kinetic/smg/empty{
@@ -328,7 +335,7 @@
 /turf/unsimulated/floor/redwhite{
 	dir = 1
 	},
-/area/space)
+/area/bodmir)
 "ig" = (
 /obj/machinery/alarm{
 	pixel_y = 20
@@ -349,13 +356,14 @@
 	dir = 4
 	},
 /turf/unsimulated/floor/black,
-/area/space)
+/area/bodmir)
 "iP" = (
 /obj/machinery/coffeemaker{
 	desc = "It's top of the line espresso technology! Featuring 100% Organic Locally-Grown espresso beans!"
 	},
+/obj/table/reinforced/bodmirkitchen/auto,
 /turf/unsimulated/floor/sanitary/white,
-/area/space)
+/area/bodmir)
 "iS" = (
 /obj/table/syndicate/auto,
 /obj/item/clothing/mask/surgical_shield,
@@ -368,13 +376,16 @@
 /turf/unsimulated/floor/redwhite{
 	dir = 4
 	},
-/area/space)
+/area/bodmir)
+"iW" = (
+/turf/unsimulated/floor/black,
+/area/bodmir)
 "je" = (
 /obj/submachine/chef_sink{
 	dir = 8
 	},
 /turf/unsimulated/floor/sanitary/white,
-/area/space)
+/area/bodmir)
 "jl" = (
 /obj/decal/cleanable/blood{
 	icon_state = "left_bloodygloves_c";
@@ -392,11 +403,11 @@
 /turf/unsimulated/floor/redwhite{
 	dir = 1
 	},
-/area/space)
+/area/bodmir)
 "jw" = (
 /obj/decoration/syndiepc/syndiepc3,
 /turf/unsimulated/floor/black,
-/area/space)
+/area/bodmir)
 "jF" = (
 /obj/item/gun/kinetic/rpg7,
 /obj/table/reinforced/industrial/auto,
@@ -407,7 +418,10 @@
 	name = "Operating Theatre"
 	},
 /turf/unsimulated/floor/white,
-/area/space)
+/area/bodmir)
+"jL" = (
+/turf/unsimulated/floor/industrial,
+/area/bodmir)
 "jT" = (
 /obj/item/deployer/barricade{
 	pixel_y = -6
@@ -431,11 +445,17 @@
 	},
 /turf/unsimulated/floor/black/grime,
 /area/space)
+"kd" = (
+/obj/stool/chair/office/syndie{
+	dir = 8
+	},
+/turf/unsimulated/floor/wood/six,
+/area/bodmir)
 "kh" = (
 /turf/unsimulated/floor/redwhite/corner{
 	dir = 4
 	},
-/area/space)
+/area/bodmir)
 "ki" = (
 /obj/decal/cleanable/blood/drip/med,
 /turf/unsimulated/floor/plating,
@@ -443,7 +463,7 @@
 "kp" = (
 /obj/machinery/drainage,
 /turf/unsimulated/floor/black,
-/area/space)
+/area/bodmir)
 "kz" = (
 /obj/grille/steel,
 /obj/window/auto/crystal/reinforced,
@@ -463,6 +483,45 @@
 "kF" = (
 /turf/unsimulated/floor/engine/caution/corner,
 /area/bodmir/outer_deck)
+"kI" = (
+/turf/unsimulated/floor/carpet/wizard/standard/edge/north,
+/area/bodmir)
+"kJ" = (
+/obj/item/clothing/suit/bedsheet/pink{
+	pixel_y = 8;
+	pixel_x = -12
+	},
+/obj/item/clothing/suit/bedsheet/orange{
+	pixel_y = 1;
+	pixel_x = 10
+	},
+/obj/stool/bed,
+/obj/item/clothing/suit/bedsheet/blue{
+	pixel_x = -7;
+	pixel_y = -5
+	},
+/obj/item/cloth/towel/pink{
+	pixel_x = 8;
+	pixel_y = 12
+	},
+/obj/decal/poster/wallsign/pw_map{
+	pixel_x = 29;
+	pixel_y = 6
+	},
+/obj/item/clothing/under/towel{
+	pixel_x = -5
+	},
+/obj/decal/wreath{
+	pixel_x = 4;
+	pixel_y = -27
+	},
+/mob/living/critter/small_animal/meatslinky{
+	name = "Unferth"
+	},
+/turf/unsimulated/floor/carpet/regalcarpet/border{
+	dir = 6
+	},
+/area/bodmir)
 "kK" = (
 /obj/ladder{
 	icon_state = "ladder_wall";
@@ -472,6 +531,10 @@
 /obj/grille/catwalk,
 /turf/unsimulated/floor/plating,
 /area/space)
+"kM" = (
+/obj/decoration/regallamp/walp,
+/turf/unsimulated/floor/carpet/wizard/standard/edge/ne,
+/area/bodmir)
 "kO" = (
 /obj/table/endtable_classic,
 /obj/item/decoration/ashtray{
@@ -486,7 +549,7 @@
 	pixel_y = 5
 	},
 /turf/unsimulated/floor/black,
-/area/space)
+/area/bodmir)
 "kR" = (
 /turf/unsimulated/floor/engine/caution/corner{
 	dir = 1
@@ -504,7 +567,7 @@
 	initial_item = /obj/item/gun/kinetic/hunting_rifle
 	},
 /turf/unsimulated/floor/black,
-/area/space)
+/area/bodmir)
 "lF" = (
 /mob/living/carbon/cube/metal,
 /turf/unsimulated/floor/plating,
@@ -525,6 +588,15 @@
 /obj/decal/cleanable/blood/drip/med,
 /turf/unsimulated/floor/plating,
 /area/space)
+"mu" = (
+/turf/unsimulated/floor/carpet/wizard,
+/area/bodmir)
+"mC" = (
+/obj/machinery/light/incandescent{
+	dir = 1
+	},
+/turf/unsimulated/floor/wood/six,
+/area/bodmir)
 "mJ" = (
 /obj/table/syndicate/auto,
 /obj/item_dispenser/latex_gloves,
@@ -546,7 +618,12 @@
 /turf/unsimulated/floor/redwhite{
 	dir = 1
 	},
-/area/space)
+/area/bodmir)
+"mO" = (
+/obj/decoration/syndiepc/syndiepc10,
+/obj/map/light/dimred,
+/turf/unsimulated/floor/black,
+/area/bodmir)
 "nd" = (
 /obj/machinery/conveyor/NS{
 	id = "bodmir-cannon-belt";
@@ -560,6 +637,10 @@
 	},
 /turf/unsimulated/floor/black/grime,
 /area/space)
+"nn" = (
+/obj/machinery/light/incandescent,
+/turf/unsimulated/floor/wood/six,
+/area/bodmir)
 "no" = (
 /obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe/overfloor{
 	dir = 8
@@ -573,7 +654,7 @@
 /obj/storage/secure/closet/fridge,
 /obj/item/reagent_containers/iv_drip/blood,
 /turf/unsimulated/floor/sanitary/white,
-/area/space)
+/area/bodmir)
 "nR" = (
 /obj/machinery/conveyor/NS{
 	id = "bodmir-cannon-belt";
@@ -592,7 +673,7 @@
 	dir = 1
 	},
 /turf/unsimulated/floor/black,
-/area/space)
+/area/bodmir)
 "og" = (
 /obj/decoration/syndiepc/syndiepc16,
 /turf/unsimulated/floor/black,
@@ -603,12 +684,15 @@
 	},
 /turf/unsimulated/floor/plating,
 /area/space)
+"ok" = (
+/turf/unsimulated/wall/auto/reinforced/supernorn,
+/area/bodmir)
 "ov" = (
 /obj/machinery/drainage/big,
 /turf/unsimulated/floor/redwhite{
 	dir = 8
 	},
-/area/space)
+/area/bodmir)
 "ow" = (
 /obj/decal/cleanable/dirt/dirt5,
 /turf/unsimulated/floor/industrial,
@@ -636,7 +720,7 @@
 /turf/unsimulated/floor/redwhite{
 	dir = 8
 	},
-/area/space)
+/area/bodmir)
 "pg" = (
 /obj/item/clothing/under/towel,
 /obj/item/clothing/under/towel{
@@ -653,16 +737,16 @@
 	},
 /obj/table/reinforced/auto,
 /turf/unsimulated/floor/sanitary/white,
-/area/space)
+/area/bodmir)
 "ph" = (
 /turf/unsimulated/floor/red,
-/area/space)
+/area/bodmir)
 "pr" = (
 /obj/machinery/bathtub{
 	dir = 8
 	},
 /turf/unsimulated/floor/black,
-/area/space)
+/area/bodmir)
 "py" = (
 /obj/item/casing/small{
 	pixel_y = -12
@@ -685,6 +769,11 @@
 /obj/item/roadflare,
 /turf/unsimulated/floor/industrial,
 /area/space)
+"pF" = (
+/obj/decoration/syndiepc/syndiepc5,
+/obj/map/light/dimred,
+/turf/unsimulated/floor/black,
+/area/bodmir)
 "pL" = (
 /obj/decal/cleanable/blood/tracks{
 	dir = 5
@@ -701,6 +790,10 @@
 	},
 /turf/unsimulated/wall/auto/lead/gray,
 /area/space)
+"qb" = (
+/obj/machinery/light/small/floor,
+/turf/unsimulated/floor/sanitary/white,
+/area/bodmir)
 "qo" = (
 /obj/grille/catwalk,
 /turf/unsimulated/floor/plating,
@@ -716,6 +809,19 @@
 	dir = 4
 	},
 /area/bodmir/outer_deck)
+"qx" = (
+/obj/machinery/door/airlock/pyro/command{
+	id = "bodmir_1";
+	name = "High Security Wing"
+	},
+/turf/unsimulated/floor/sanitary/white,
+/area/bodmir)
+"qF" = (
+/obj/map/light/cyan,
+/turf/unsimulated/floor/carpet/regalcarpet/border{
+	dir = 8
+	},
+/area/bodmir)
 "qQ" = (
 /obj/table/syndicate/auto,
 /obj/item_dispenser/medical_mask,
@@ -731,7 +837,7 @@
 /turf/unsimulated/floor/redwhite{
 	dir = 1
 	},
-/area/space)
+/area/bodmir)
 "rb" = (
 /obj/decal/fakeobjects/pipe/heat{
 	name = "heat pipe";
@@ -764,6 +870,9 @@
 /mob/living/critter/changeling/handspider/ai_controlled,
 /turf/unsimulated/floor/plating,
 /area/space)
+"rU" = (
+/turf/unsimulated/floor/carpet/wizard/standard/edge/south,
+/area/bodmir)
 "se" = (
 /obj/machinery/light/emergencyflashing,
 /turf/unsimulated/floor/engine,
@@ -771,7 +880,7 @@
 "so" = (
 /obj/machinery/light/small/floor/frostedred,
 /turf/unsimulated/floor/red,
-/area/space)
+/area/bodmir)
 "sy" = (
 /obj/barricade,
 /obj/decal/cleanable/machine_debris,
@@ -803,7 +912,7 @@
 /obj/decoration/syndiepc/syndiepc11,
 /obj/map/light/dimred,
 /turf/unsimulated/floor/black,
-/area/space)
+/area/bodmir)
 "tp" = (
 /obj/machinery/atmospherics/pipe/manifold/overfloor,
 /turf/unsimulated/floor/industrial,
@@ -813,7 +922,19 @@
 /obj/table/wood/auto/desk,
 /obj/item/gun/kinetic/veritate,
 /turf/unsimulated/floor/white,
-/area/space)
+/area/bodmir)
+"tv" = (
+/obj/machinery/light/incandescent{
+	dir = 4
+	},
+/turf/unsimulated/floor/wood/six,
+/area/bodmir)
+"tS" = (
+/obj/decoration/syndiepc/syndiepc2{
+	pixel_x = 1
+	},
+/turf/unsimulated/floor/black,
+/area/bodmir)
 "ua" = (
 /obj/deployable_turret/bodmir_brrt/active/north,
 /turf/unsimulated/floor/engine,
@@ -827,11 +948,16 @@
 /turf/unsimulated/floor/redwhite{
 	dir = 6
 	},
-/area/space)
+/area/bodmir)
 "vo" = (
 /obj/minimap/map_computer,
 /turf/unsimulated/floor/black,
-/area/space)
+/area/bodmir)
+"vE" = (
+/obj/decoration/syndiepc/syndiepc9,
+/obj/map/light/dimred,
+/turf/unsimulated/floor/black,
+/area/bodmir)
 "vG" = (
 /obj/decal/cleanable/dirt,
 /turf/unsimulated/floor/industrial,
@@ -851,7 +977,7 @@
 	icon_state = "handblood_c"
 	},
 /turf/unsimulated/floor/red,
-/area/space)
+/area/bodmir)
 "wp" = (
 /obj/machinery/door/poddoor/blast/pyro{
 	dir = 4
@@ -861,6 +987,26 @@
 "wq" = (
 /turf/unsimulated/floor/plating,
 /area/space)
+"wM" = (
+/obj/decal/poster/wallsign/chsl{
+	pixel_y = 2;
+	pixel_x = -31
+	},
+/obj/table/wood/auto/desk,
+/obj/item/clothing/head/flower/bird_of_paradise,
+/obj/item/device/light/lava_lamp/activated{
+	pixel_x = -8;
+	pixel_y = 17
+	},
+/obj/item/clothing/head/flower/hydrangea{
+	pixel_x = -11
+	},
+/obj/item/clothing/head/flower/lavender{
+	pixel_x = -4;
+	pixel_y = -9
+	},
+/turf/unsimulated/floor/wood/six,
+/area/bodmir)
 "wS" = (
 /turf/unsimulated/floor/circuit/red,
 /area/space)
@@ -890,7 +1036,7 @@
 /area/space)
 "xE" = (
 /turf/unsimulated/floor/blackwhite,
-/area/space)
+/area/bodmir)
 "xQ" = (
 /obj/decal/cleanable/dirt/dirt3,
 /turf/unsimulated/floor/industrial,
@@ -899,12 +1045,43 @@
 /obj/machinery/light/small/floor,
 /turf/unsimulated/floor/twotone/black,
 /area/space)
+"ye" = (
+/obj/decal/poster/wallsign/pod_build/sy{
+	pixel_y = 31
+	},
+/obj/decal/poster/wallsign/no_smoking{
+	pixel_y = 25;
+	pixel_x = 13
+	},
+/obj/storage/closet/dresser/random{
+	pixel_y = -2
+	},
+/obj/bomb_decoy{
+	name = "soft plush nuclear bomb";
+	_health = 10000000;
+	_max_health = 10000000;
+	extremely_convincing = 1
+	},
+/obj/item/clothing/suit/armor/hoscape,
+/obj/item/clothing/suit/witchcape_mint,
+/obj/item/clothing/suit/torncloak{
+	pixel_y = -5;
+	pixel_x = -9
+	},
+/obj/item/clothing/suit/scarfcape/black,
+/mob/living/critter/small_animal/meatslinky{
+	name = "Hrothulf"
+	},
+/turf/unsimulated/floor/carpet/regalcarpet/border{
+	dir = 9
+	},
+/area/bodmir)
 "yi" = (
 /obj/table/wood/auto/desk,
 /turf/unsimulated/floor/redwhite{
 	dir = 8
 	},
-/area/space)
+/area/bodmir)
 "yr" = (
 /obj/decoration/syndiepc/syndiepc8,
 /obj/map/light/dimred,
@@ -914,7 +1091,7 @@
 /turf/simulated/floor/blackwhite/side{
 	dir = 10
 	},
-/area/space)
+/area/bodmir)
 "yy" = (
 /obj/railing/steel{
 	dir = 1
@@ -964,6 +1141,9 @@
 /mob/living/critter/bodmir_cableworm/ai_controlled,
 /turf/unsimulated/floor/industrial,
 /area/space)
+"zM" = (
+/turf/unsimulated/floor/wood/six,
+/area/bodmir)
 "zV" = (
 /obj/machinery/atmospherics/unary/vent_pump,
 /turf/unsimulated/floor/industrial,
@@ -971,7 +1151,15 @@
 "An" = (
 /mob/living/critter/robotic/gunbot/syndicate,
 /turf/unsimulated/floor/black,
-/area/space)
+/area/bodmir)
+"AF" = (
+/obj/machinery/computer/security/wooden_tv{
+	desc = "These channels seem to mostly be about robuddies. What is this, some kind of reality show?";
+	name = "Television";
+	network = "Zeta"
+	},
+/turf/unsimulated/floor/wood/six,
+/area/bodmir)
 "AL" = (
 /obj/machinery/optable{
 	desc = "This one bears an uncomfortably high amount of restraints.";
@@ -979,7 +1167,7 @@
 	name = "Examination Table"
 	},
 /turf/unsimulated/floor/red,
-/area/space)
+/area/bodmir)
 "AN" = (
 /obj/grille/catwalk,
 /turf/unsimulated/floor/engine/caution/east,
@@ -998,6 +1186,12 @@
 	},
 /turf/unsimulated/floor/black/grime,
 /area/space)
+"BC" = (
+/obj/stool/chair/office/syndie{
+	dir = 8
+	},
+/turf/unsimulated/floor/carpet/wizard/standard/edge/east,
+/area/bodmir)
 "BE" = (
 /obj/grille/catwalk,
 /turf/unsimulated/floor/engine/caution/corner{
@@ -1013,6 +1207,64 @@
 /obj/grille/catwalk,
 /turf/unsimulated/floor/engine/caution/west,
 /area/bodmir/outer_deck)
+"BS" = (
+/obj/item/toy/plush/small/arthur,
+/obj/item/toy/plush/small/brullbar{
+	pixel_y = 6;
+	pixel_x = 15
+	},
+/obj/item/toy/plush/small/orca{
+	pixel_x = 8;
+	pixel_y = -6
+	},
+/obj/item/toy/plush/small/penguin/cool{
+	pixel_x = -10;
+	pixel_y = -7
+	},
+/obj/item/toy/plush/small/singuloose{
+	pixel_y = 10
+	},
+/obj/decal/poster/flag/trans{
+	pixel_x = 4;
+	pixel_y = 34
+	},
+/obj/stool/pet_bed,
+/obj/item/clothing/suit/bedsheet/green,
+/obj/item/clothing/suit/bedsheet/random{
+	pixel_x = 16;
+	pixel_y = -5
+	},
+/obj/item/clothing/suit/bedsheet/random{
+	pixel_y = 7;
+	pixel_x = 20
+	},
+/obj/item/clothing/suit/bedsheet/random{
+	pixel_x = 4;
+	pixel_y = -7
+	},
+/obj/item/cloth/towel/green{
+	pixel_x = 4;
+	pixel_y = -8
+	},
+/obj/decal/poster/wallsign/poster_ptoe{
+	pixel_x = 23;
+	pixel_y = 20
+	},
+/obj/decal/poster/wallsign/testsubject{
+	pixel_y = -20;
+	pixel_x = 30
+	},
+/obj/decal/poster/flag/lesb{
+	pixel_y = 6;
+	pixel_x = 29
+	},
+/obj/item/clothing/suit/scarfcape/truerandom{
+	pixel_x = -12
+	},
+/turf/unsimulated/floor/carpet/regalcarpet/border{
+	dir = 5
+	},
+/area/bodmir)
 "BT" = (
 /obj/machinery/light/incandescent/warm{
 	dir = 1
@@ -1050,7 +1302,7 @@
 /turf/unsimulated/floor/redwhite{
 	dir = 8
 	},
-/area/space)
+/area/bodmir)
 "Dw" = (
 /obj/item/handcuffs{
 	desc = "Adjustable metal rings joined by cable, made to be applied to a person in such a way that they are unable to use their hands. Stamped into the steel of each cuff is the name LUCARNE.";
@@ -1066,7 +1318,7 @@
 /turf/unsimulated/floor/redwhite{
 	dir = 4
 	},
-/area/space)
+/area/bodmir)
 "Dz" = (
 /obj/table/syndicate/auto,
 /obj/item/robodefibrillator,
@@ -1074,7 +1326,13 @@
 /turf/unsimulated/floor/redwhite{
 	dir = 9
 	},
-/area/space)
+/area/bodmir)
+"DV" = (
+/obj/stool/chair/couch/red{
+	dir = 8
+	},
+/turf/unsimulated/floor/wood/six,
+/area/bodmir)
 "Ea" = (
 /turf/unsimulated/floor/engine/caution/north,
 /area/bodmir/outer_deck)
@@ -1087,6 +1345,11 @@
 	},
 /turf/unsimulated/floor/plating,
 /area/space)
+"Ei" = (
+/turf/unsimulated/floor/carpet/regalcarpet/border{
+	dir = 10
+	},
+/area/bodmir)
 "EG" = (
 /turf/unsimulated/floor/engine/caution/corner2{
 	dir = 9
@@ -1102,7 +1365,11 @@
 	desc = "A fear-inspiring, black-leather great coat, typically worn by a Syndicate Nuclear Operative Commander. So scary even the vacuum of space doesn't dare claim the wearer. This one is rumpled, old, and has been cleaned many, many times."
 	},
 /turf/unsimulated/floor/white,
-/area/space)
+/area/bodmir)
+"EN" = (
+/obj/bookshelf,
+/turf/unsimulated/floor/carpet/wizard/standard/edge/nw,
+/area/bodmir)
 "ET" = (
 /obj/storage/secure/closet/fridge/blood,
 /obj/item/organ/heart,
@@ -1111,7 +1378,24 @@
 /turf/unsimulated/floor/redwhite{
 	dir = 10
 	},
-/area/space)
+/area/bodmir)
+"Fr" = (
+/obj/decal/poster/wallsign/danger_highvolt{
+	pixel_y = -4;
+	pixel_x = -26
+	},
+/obj/decal/poster/wallsign/neonsparkle{
+	pixel_x = -30;
+	pixel_y = 9
+	},
+/obj/computer3frame/desktop,
+/obj/table/wood/auto/desk,
+/obj/stocking/very_not_safe{
+	pixel_x = -17;
+	pixel_y = 13
+	},
+/turf/unsimulated/floor/wood/six,
+/area/bodmir)
 "Fs" = (
 /obj/railing/steel{
 	dir = 1
@@ -1124,6 +1408,12 @@
 	},
 /turf/unsimulated/floor/industrial,
 /area/space)
+"FO" = (
+/obj/decoration/bookcase{
+	pixel_y = 16
+	},
+/turf/unsimulated/floor/wood/six,
+/area/bodmir)
 "FQ" = (
 /obj/mapping_helper/airlock/bolter,
 /obj/machinery/door/airlock/pyro/maintenance{
@@ -1159,6 +1449,53 @@
 	},
 /turf/unsimulated/floor/engine,
 /area/bodmir/outer_deck)
+"GG" = (
+/obj/item/toy/plush/small/bee/cute{
+	pixel_x = 6
+	},
+/obj/item/toy/plush/small/bunny/mask{
+	pixel_y = -11
+	},
+/obj/item/toy/plush/small/buddy{
+	pixel_x = -7;
+	pixel_y = 12
+	},
+/obj/item/toy/plush/small/kitten/wizard{
+	pixel_y = 11;
+	pixel_x = 13
+	},
+/obj/item/toy/plush/small/monkey,
+/obj/item/clothing/suit/bedsheet/captain{
+	pixel_y = -5;
+	pixel_x = -4
+	},
+/obj/item/clothing/suit/bedsheet/hop{
+	pixel_y = 8;
+	pixel_x = 12
+	},
+/obj/item/clothing/suit/bedsheet/random,
+/obj/item/cloth/towel/blue,
+/obj/item/cloth/towel/black{
+	pixel_x = -9;
+	pixel_y = -10
+	},
+/obj/item/clothing/under/towel{
+	pixel_x = 6;
+	pixel_y = -8
+	},
+/obj/decal/poster/wallsign/keep_it_or_melt{
+	pixel_x = 29;
+	pixel_y = -7
+	},
+/obj/item/clothing/suit/bedsheet/cape/pink{
+	pixel_x = -9;
+	pixel_y = 5
+	},
+/obj/item/clothing/suit/scarfcape/truerandom,
+/turf/unsimulated/floor/carpet/regalcarpet/border{
+	dir = 4
+	},
+/area/bodmir)
 "GN" = (
 /obj/decal/fakeobjects/pipe/heat{
 	dir = 4;
@@ -1183,8 +1520,9 @@
 	pixel_x = 4;
 	pixel_y = 6
 	},
+/obj/table/reinforced/bodmirkitchen/auto,
 /turf/unsimulated/floor/sanitary/white,
-/area/space)
+/area/bodmir)
 "Hs" = (
 /obj/railing/steel{
 	dir = 1
@@ -1210,6 +1548,13 @@
 "HM" = (
 /turf/unsimulated/floor/black,
 /area/space)
+"HT" = (
+/obj/machinery/ai_status_display{
+	pixel_x = 3;
+	pixel_y = -4
+	},
+/turf/simulated/wall/auto/reinforced/supernorn/blackred,
+/area/bodmir)
 "Ih" = (
 /obj/item/casing/rifle_loud{
 	pixel_y = -3;
@@ -1223,6 +1568,9 @@
 /obj/decal/cleanable/dirt/dirt2,
 /turf/unsimulated/floor/industrial,
 /area/space)
+"Ik" = (
+/turf/simulated/wall/auto/reinforced/supernorn/blackred,
+/area/bodmir)
 "Ir" = (
 /obj/machinery/door/poddoor/blast/pyro,
 /turf/unsimulated/floor/black,
@@ -1261,10 +1609,7 @@
 "Jh" = (
 /obj/iv_stand,
 /turf/unsimulated/floor/red,
-/area/space)
-"Jj" = (
-/turf/unsimulated/floor/sanitary/white,
-/area/space)
+/area/bodmir)
 "JJ" = (
 /obj/table/wood/auto/desk,
 /obj/item/cigpacket{
@@ -1274,7 +1619,12 @@
 /turf/unsimulated/floor/redwhite{
 	dir = 8
 	},
-/area/space)
+/area/bodmir)
+"JL" = (
+/obj/stool/bed,
+/obj/item/clothing/suit/bedsheet/black,
+/turf/unsimulated/floor/carpet/wizard/standard/edge/sw,
+/area/bodmir)
 "Ka" = (
 /obj/machinery/conveyor/NS{
 	id = "bodmir-cannon-belt";
@@ -1288,7 +1638,7 @@
 "Kh" = (
 /obj/machinery/light/small/floor/frostedred,
 /turf/unsimulated/floor/white,
-/area/space)
+/area/bodmir)
 "Kl" = (
 /obj/decal/cleanable/machine_debris,
 /obj/item/raw_material/scrap_metal,
@@ -1316,7 +1666,10 @@
 /turf/unsimulated/floor/redwhite{
 	dir = 5
 	},
-/area/space)
+/area/bodmir)
+"Ku" = (
+/turf/unsimulated/floor/white,
+/area/bodmir)
 "KD" = (
 /obj/machinery/conveyor/EW{
 	name = "ammunition belt";
@@ -1336,6 +1689,12 @@
 /obj/decal/cleanable/dirt/dirt4,
 /turf/unsimulated/floor/industrial,
 /area/space)
+"KP" = (
+/obj/stool/chair/office/syndie{
+	dir = 4
+	},
+/turf/unsimulated/floor/wood/six,
+/area/bodmir)
 "Lh" = (
 /obj/grille/catwalk,
 /turf/unsimulated/floor/engine,
@@ -1364,6 +1723,10 @@
 /obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe/overfloor,
 /turf/unsimulated/floor/plating,
 /area/space)
+"LD" = (
+/obj/machinery/light/small/floor,
+/turf/unsimulated/floor/black,
+/area/bodmir)
 "LE" = (
 /obj/railing/steel{
 	dir = 4
@@ -1432,13 +1795,17 @@
 /turf/unsimulated/floor/redwhite{
 	dir = 8
 	},
-/area/space)
+/area/bodmir)
 "Mn" = (
 /obj/grille/catwalk,
 /turf/unsimulated/floor/engine/caution/corner2{
 	dir = 5
 	},
 /area/bodmir/outer_deck)
+"Ms" = (
+/obj/adventurepuzzle/triggerer/bookcase,
+/turf/unsimulated/floor/wood/six,
+/area/bodmir)
 "ME" = (
 /obj/machinery/light/small/floor/frostedred,
 /turf/unsimulated/floor/engine,
@@ -1467,8 +1834,8 @@
 	name = "Lucarne's footlocker";
 	interesting = "Countless pairs of disposable nitrile gloves have opened this box."
 	},
-/turf/unsimulated/floor/white,
-/area/space)
+/turf/unsimulated/floor/carpet/wizard/standard/edge/west,
+/area/bodmir)
 "Nh" = (
 /obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe/overfloor,
 /obj/machinery/light/small/floor,
@@ -1492,7 +1859,7 @@
 /turf/unsimulated/floor/redwhite{
 	dir = 4
 	},
-/area/space)
+/area/bodmir)
 "Nu" = (
 /obj/item/casing/small{
 	dir = 1;
@@ -1508,6 +1875,11 @@
 /obj/deployable_turret/bodmir_brrt/active/southeast,
 /turf/unsimulated/floor/industrial,
 /area/bodmir/outer_deck)
+"NT" = (
+/obj/decoration/syndiepc/syndiepc8,
+/obj/map/light/dimred,
+/turf/unsimulated/floor/black,
+/area/bodmir)
 "Ow" = (
 /obj/machinery/door/poddoor/blast/pyro{
 	dir = 4
@@ -1522,8 +1894,8 @@
 /turf/unsimulated/floor/plating,
 /area/space)
 "OF" = (
-/turf/unsimulated/floor/white,
-/area/space)
+/turf/unsimulated/floor/sanitary/white,
+/area/bodmir)
 "Pf" = (
 /obj/deployable_turret/bodmir_brrt/active/north,
 /turf/unsimulated/floor/industrial,
@@ -1550,7 +1922,7 @@
 /turf/unsimulated/floor/redwhite/corner{
 	dir = 1
 	},
-/area/space)
+/area/bodmir)
 "PP" = (
 /turf/unsimulated/wall/auto/lead/white,
 /area/bodmir/outer_deck)
@@ -1576,7 +1948,7 @@
 	dir = 1
 	},
 /turf/unsimulated/floor/black,
-/area/space)
+/area/bodmir)
 "Ra" = (
 /obj/railing/steel{
 	dir = 8
@@ -1608,15 +1980,12 @@
 "Sk" = (
 /obj/table/syndicate/auto,
 /turf/unsimulated/floor/black,
-/area/space)
-"Sl" = (
-/turf/simulated/wall/auto/reinforced/supernorn/blackred,
-/area/space)
+/area/bodmir)
 "Sp" = (
 /turf/unsimulated/floor/redwhite{
 	dir = 1
 	},
-/area/space)
+/area/bodmir)
 "Sx" = (
 /obj/table/wood/auto/desk,
 /obj/item/ammo/bullets/veritate{
@@ -1628,7 +1997,7 @@
 	pixel_y = 4
 	},
 /turf/unsimulated/floor/white,
-/area/space)
+/area/bodmir)
 "Sz" = (
 /obj/grille/catwalk,
 /turf/unsimulated/floor/engine/caution/corner{
@@ -1670,8 +2039,10 @@
 	pixel_y = 7;
 	pixel_x = 1
 	},
+/obj/table/reinforced/bodmirkitchen/auto/silverware,
+/obj/machinery/light/incandescent,
 /turf/unsimulated/floor/sanitary/white,
-/area/space)
+/area/bodmir)
 "TH" = (
 /turf/unsimulated/wall/auto/reinforced/supernorn,
 /area/bodmir/outer_deck)
@@ -1707,7 +2078,7 @@
 "UW" = (
 /obj/window/auto,
 /turf/unsimulated/floor/blackwhite,
-/area/space)
+/area/bodmir)
 "Vc" = (
 /obj/decal/cleanable/blood/tracks{
 	icon_state = "drip5"
@@ -1733,33 +2104,14 @@
 	pixel_y = 11
 	},
 /turf/unsimulated/floor/sanitary/white,
-/area/space)
+/area/bodmir)
 "Vu" = (
-/obj/table/reinforced/auto,
-/obj/item/kitchen/utensil/fork{
+/obj/table/reinforced/bodmirkitchen/auto,
+/obj/machinery/light/incandescent{
 	dir = 8
 	},
-/obj/item/kitchen/utensil/knife{
-	dir = 8;
-	pixel_y = 7
-	},
-/obj/item/kitchen/utensil/spoon{
-	dir = 8;
-	pixel_x = -1;
-	pixel_y = 4
-	},
-/obj/item/kitchen/utensil/fork{
-	dir = 8;
-	pixel_x = 2;
-	pixel_y = -5
-	},
-/obj/item/kitchen/utensil/spoon{
-	dir = 8;
-	pixel_x = 1;
-	pixel_y = 1
-	},
 /turf/unsimulated/floor/sanitary/white,
-/area/space)
+/area/bodmir)
 "VJ" = (
 /obj/decal/cleanable/machine_debris,
 /obj/item/rods/steel{
@@ -1776,8 +2128,9 @@
 	interesting = "Long white hairs are snagged in the hinges.";
 	can_flip_bust = 0
 	},
-/turf/unsimulated/floor/white,
-/area/space)
+/mob/living/critter/small_animal/armadillo,
+/turf/unsimulated/floor/carpet/wizard/standard/edge/se,
+/area/bodmir)
 "Wb" = (
 /obj/item/clothing/suit/bedsheet/black{
 	pixel_x = 1;
@@ -1828,6 +2181,12 @@
 /obj/decal/poster/wallsign/warning1,
 /turf/unsimulated/wall/auto/lead/gray,
 /area/space)
+"XO" = (
+/obj/stool/chair/couch/red{
+	dir = 4
+	},
+/turf/unsimulated/floor/wood/six,
+/area/bodmir)
 "Yl" = (
 /obj/decoration/syndiepc/syndiepc9,
 /obj/map/light/dimred,
@@ -1854,7 +2213,7 @@
 "YO" = (
 /obj/machinery/door/poddoor/blast/pyro,
 /turf/unsimulated/floor/industrial,
-/area/space)
+/area/bodmir)
 "YW" = (
 /obj/grille/catwalk,
 /turf/unsimulated/floor/engine/caution/corner{
@@ -1875,8 +2234,9 @@
 /obj/item/reagent_containers/food/drinks/mug{
 	pixel_x = -7
 	},
+/obj/table/reinforced/bodmirkitchen/auto/dishes,
 /turf/unsimulated/floor/sanitary/white,
-/area/space)
+/area/bodmir)
 "Zt" = (
 /turf/unsimulated/floor/engine/caution/corner2{
 	dir = 6
@@ -1886,13 +2246,33 @@
 /obj/window/auto/bulletproof,
 /obj/grille/steel,
 /turf/unsimulated/floor/red,
-/area/space)
+/area/bodmir)
 "ZN" = (
 /obj/machinery/light/emergencyflashing{
 	dir = 4
 	},
 /turf/unsimulated/floor/engine,
 /area/bodmir/outer_deck)
+"ZS" = (
+/obj/decal/poster/wallsign/poster_eyetest{
+	pixel_x = -27;
+	pixel_y = 4
+	},
+/obj/decal/poster/flag/progressive{
+	pixel_y = 6;
+	pixel_x = -28
+	},
+/obj/item/clothing/suit/scarfcape/truerandom{
+	pixel_x = -12
+	},
+/mob/living/critter/small_animal/meatslinky{
+	name = "Heremod"
+	},
+/obj/stool/chair/office/syndie{
+	dir = 1
+	},
+/turf/unsimulated/floor/wood/six,
+/area/bodmir)
 
 (1,1,1) = {"
 bc
@@ -74159,24 +74539,24 @@ TH
 TH
 TH
 TH
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
 bc
 bc
 bc
@@ -74461,24 +74841,24 @@ RR
 RR
 TH
 RR
-Lu
-Rc
-Rc
-Lu
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
+ok
+jL
+jL
+ok
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
 bc
 bc
 bc
@@ -74764,23 +75144,23 @@ sI
 sI
 sI
 YO
-Rc
-Rc
+jL
+jL
 YO
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
 bc
 bc
 bc
@@ -75066,23 +75446,23 @@ sI
 sI
 sI
 YO
-Rc
-Rc
+jL
+jL
 YO
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
 Lu
 Lu
 Lu
@@ -75367,24 +75747,24 @@ sI
 RR
 TH
 RR
-Lu
-Rc
-Rc
-Lu
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
+ok
+jL
+jL
+ok
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
 bc
 bc
 bc
@@ -75669,24 +76049,24 @@ RR
 Pf
 TH
 TH
-Lu
-Lu
-Lu
-Lu
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
+ok
+ok
+ok
+ok
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
 bc
 bc
 bc
@@ -75971,24 +76351,24 @@ RR
 RR
 RR
 RR
-Lu
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
+ok
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
 bc
 bc
 bc
@@ -76273,24 +76653,24 @@ RR
 RR
 RR
 RR
-Lu
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
+ok
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
 bc
 bc
 bc
@@ -76575,24 +76955,24 @@ RR
 RR
 RR
 RR
-Lu
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
+ok
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
 bc
 bc
 bc
@@ -76877,24 +77257,24 @@ RR
 RR
 RR
 RR
-Lu
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
+ok
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
 bc
 bc
 bc
@@ -77179,24 +77559,24 @@ RR
 RR
 RR
 RR
-Lu
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
+ok
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
 bc
 bc
 bc
@@ -77481,24 +77861,24 @@ RR
 RR
 TH
 TH
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
+ok
+ok
+ok
+ok
+ok
+ok
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
 bc
 bc
 bc
@@ -77782,25 +78162,25 @@ RR
 RR
 RR
 he
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-bc
+iW
+iW
+iW
+iW
+iW
+iW
+ok
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
 bc
 bc
 bc
@@ -78084,25 +78464,25 @@ RR
 RR
 RR
 he
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-HM
-HM
-Lu
-Lu
-Lu
-bc
+iW
+iW
+iW
+iW
+iW
+iW
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+iW
+iW
+ok
+ok
+ok
+ok
 bc
 bc
 bc
@@ -78386,25 +78766,25 @@ RR
 RR
 RR
 he
-HM
-HM
+iW
+iW
 An
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-bc
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
 bc
 bc
 bc
@@ -78688,32 +79068,32 @@ RR
 RR
 RR
 he
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
 bc
 bc
 bc
 bc
 bc
 bc
-Lu
-Lu
+bc
 bc
 bc
 bc
@@ -78990,32 +79370,32 @@ RR
 RR
 RR
 he
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-bc
-bc
-bc
-bc
-bc
-bc
-Lu
-Lu
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
 bc
 bc
 bc
@@ -79292,32 +79672,32 @@ RR
 RR
 RR
 he
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
 Sk
 Sk
 Sk
-HM
+iW
 Sk
 Sk
 Sk
-HM
-HM
-HM
-Lu
-Jj
-Sl
-Sl
-Sl
-Sl
-Sl
-Lu
+iW
+iW
+iW
+ok
+OF
+Ik
+Ik
+Ik
+Ik
+Ik
+ok
 bc
 bc
 bc
@@ -79594,32 +79974,32 @@ RR
 RR
 RR
 he
-HM
-HM
-IF
-ec
-Yu
-HM
-HM
-HM
+iW
+iW
+pF
+tS
+mO
+iW
+iW
+iW
 Sk
-HM
-HM
-HM
-HM
+iW
+iW
+iW
+iW
 vo
 Sk
-HM
-HM
-Lu
-Lu
-Jj
-Sl
+iW
+iW
+ok
+ok
+OF
+Ik
 cs
-HM
-HM
-Sl
-Lu
+iW
+iW
+Ik
+ok
 bc
 bc
 bc
@@ -79896,32 +80276,32 @@ RR
 RR
 RR
 he
-HM
-HM
-Yl
+iW
+iW
+vE
 nV
-HM
-HM
-HM
-HM
+iW
+iW
+iW
+iW
 Sk
-HM
-HM
-HM
-HM
-HM
+iW
+iW
+iW
+iW
+iW
 Sk
-HM
-HM
-Lu
-Jj
-Jj
-Sl
+iW
+iW
+ok
+OF
+OF
+Ik
 cx
-HM
-HM
-Sl
-Lu
+LD
+iW
+Ik
+ok
 bc
 bc
 bc
@@ -80198,32 +80578,32 @@ RR
 RR
 RR
 he
-HM
-HM
-og
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
+iW
+iW
+eE
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
 bl
-Jj
-Jj
-Sl
+OF
+qb
+Ik
 ly
-HM
-HM
-Sl
-Lu
+iW
+iW
+Ik
+ok
 bc
 bc
 bc
@@ -80500,32 +80880,32 @@ RR
 RR
 RR
 he
-HM
-HM
-Yl
+iW
+iW
+vE
 nV
 iG
-HM
-HM
-HM
+iW
+iW
+iW
 Sk
-HM
-HM
-HM
-HM
-HM
+iW
+iW
+iW
+iW
+iW
 Sk
-HM
-HM
-Lu
-Jj
-Jj
-Sl
-HM
-HM
-HM
-Sl
-Lu
+iW
+iW
+ok
+OF
+OF
+Ik
+iW
+iW
+iW
+Ik
+ok
 bc
 bc
 bc
@@ -80802,32 +81182,32 @@ RR
 RR
 RR
 he
-HM
-HM
-yr
+iW
+iW
+NT
 jw
 tl
-HM
-HM
-HM
+iW
+iW
+iW
 Sk
-HM
-HM
-HM
-HM
-HM
+iW
+iW
+iW
+iW
+iW
 Sk
-HM
-HM
-Lu
-Lu
-Jj
+iW
+iW
+ok
+ok
+OF
 xE
-HM
-HM
+iW
+LD
 QY
-Sl
-Lu
+Ik
+ok
 bc
 bc
 bc
@@ -81104,32 +81484,32 @@ RR
 RR
 RR
 he
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
 Sk
 Sk
 Sk
-HM
+iW
 Sk
 Sk
 Sk
-HM
-HM
-HM
-Lu
-Jj
-Sl
-HM
+iW
+iW
+iW
+ok
+OF
+Ik
+iW
 eP
 kO
-Sl
-Lu
+Ik
+ok
 bc
 bc
 bc
@@ -81148,10 +81528,10 @@ bc
 bc
 bc
 bc
-Lu
-Lu
-Lu
-Lu
+ok
+ok
+ok
+ok
 Lu
 bc
 bc
@@ -81406,32 +81786,32 @@ RR
 RR
 RR
 he
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
-Jj
-Sl
-Sl
-Sl
-Sl
-Sl
-Lu
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
+OF
+Ik
+Ik
+Ik
+Ik
+Ik
+ok
 bc
 bc
 bc
@@ -81444,16 +81824,16 @@ bc
 bc
 bc
 bc
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-bc
-bc
-Lu
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+Ku
+Ku
+ok
 Lu
 bc
 bc
@@ -81708,32 +82088,32 @@ RR
 RR
 RR
 he
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
-Jj
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
+OF
 UW
-HM
+LD
 ai
-Lu
-Lu
-Lu
+ok
+ok
+ok
 bc
 bc
 bc
@@ -81746,16 +82126,16 @@ bc
 bc
 bc
 bc
-Lu
+ok
 Dz
 pb
 bX
 Ml
 ET
-Lu
-Lu
-OF
-Lu
+ok
+ok
+Ku
+ok
 Lu
 bc
 bc
@@ -82010,30 +82390,30 @@ RR
 RR
 RR
 he
-HM
-HM
+iW
+iW
 An
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
-Jj
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
+OF
 xE
 kp
 fp
-Lu
+ok
 bc
 bc
 bc
@@ -82048,7 +82428,7 @@ bc
 bc
 bc
 bc
-Lu
+ok
 hu
 ph
 so
@@ -82057,7 +82437,7 @@ kh
 ov
 Pv
 Kh
-Lu
+ok
 Lu
 bc
 bc
@@ -82312,30 +82692,30 @@ RR
 RR
 RR
 he
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-HM
-HM
-Lu
-Lu
-Lu
-Lu
+iW
+iW
+iW
+iW
+iW
+iW
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+iW
+iW
+ok
+ok
+ok
+ok
 pg
 UW
 pr
-HM
-Lu
+iW
+ok
 bc
 bc
 bc
@@ -82350,16 +82730,16 @@ bc
 bc
 bc
 bc
-Lu
+ok
 mJ
 ph
 wc
 ph
 ph
 dT
-OF
-OF
-Lu
+Ku
+Ku
+ok
 Lu
 bc
 bc
@@ -82614,30 +82994,30 @@ RR
 RR
 RR
 he
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
+iW
+iW
+iW
+iW
+iW
+iW
+ok
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
+ok
+ok
+ok
+iW
+ok
 bc
 bc
 bc
@@ -82652,16 +83032,16 @@ bc
 bc
 bc
 bc
-Lu
+ok
 qQ
 ph
 AL
 Jh
 ph
 dT
-OF
-OF
-Lu
+Ku
+Ku
+ok
 Lu
 bc
 bc
@@ -82917,44 +83297,44 @@ RR
 RR
 TH
 TH
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
+ok
+ok
+ok
+ok
+ok
+ok
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
+bc
+bc
+ok
+iW
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
 bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-Lu
+ok
 gd
 ph
 so
@@ -82963,7 +83343,7 @@ hg
 fD
 ag
 Kh
-Lu
+ok
 Lu
 bc
 bc
@@ -83219,53 +83599,53 @@ RR
 RR
 RR
 RR
-Lu
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
+ok
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
+bc
+bc
+ok
+iW
+LD
+iW
+iW
+iW
+iW
+LD
+iW
+iW
+iW
+iW
+ok
 bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-Lu
+ok
 Kt
 Nn
 Dw
 iS
 uR
-Lu
+ok
 jl
 fs
-Lu
+ok
 Lu
 bc
 bc
@@ -83521,53 +83901,53 @@ RR
 RR
 RR
 RR
-Lu
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
+ok
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
+bc
+bc
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+iW
+ok
 bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-Lu
-Lu
+ok
+ok
 ZF
 ZF
 ZF
-Lu
-Lu
+ok
+ok
 Sp
-OF
-Lu
+Ku
+ok
 Lu
 bc
 bc
@@ -83823,24 +84203,24 @@ RR
 RR
 RR
 RR
-Lu
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
+ok
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
 bc
 bc
 bc
@@ -83850,26 +84230,26 @@ bc
 bc
 bc
 bc
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
+bc
+bc
+bc
+ok
+LD
+ok
+bc
+bc
+bc
+bc
+ok
 at
 cw
 JJ
 yi
 Dc
-Lu
+ok
 Pv
-OF
-Lu
+Ku
+ok
 Lu
 bc
 bc
@@ -84125,53 +84505,53 @@ RR
 RR
 RR
 RR
-Lu
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
+ok
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
 bc
 bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-Lu
-OF
-OF
-OF
-OF
-OF
-OF
-OF
-OF
-OF
-OF
-OF
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+iW
+ok
+ok
+ok
+ok
+ok
+ok
+Ku
 Sx
 EM
 tr
-OF
+Ku
 jG
-OF
-OF
-Lu
+Ku
+Ku
+ok
 Lu
 bc
 bc
@@ -84427,53 +84807,53 @@ RR
 RR
 RR
 RR
-Lu
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
+ok
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
 bc
 bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-Lu
+ok
+dG
+Ik
+Ik
+Ik
+Ik
+qb
+qx
+OF
+OF
+qb
 OF
 OF
 OF
-OF
-OF
-OF
-OF
-OF
-OF
-OF
-OF
-OF
-gh
-OF
-OF
+Ku
+Ku
+Ku
+Ku
+Ku
+Ku
 jG
-OF
+Ku
 Kh
-Lu
+ok
 Lu
 bc
 bc
@@ -84729,53 +85109,53 @@ RR
 Pf
 TH
 TH
-Lu
-Lu
-Lu
-Lu
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
+ok
+ok
+ok
+ok
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
 bc
 bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-Lu
-bc
-bc
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-fg
-fg
-fg
-fg
-fg
-Lu
-yt
+ok
+HT
+Fr
+ZS
+wM
+Ik
 OF
-Lu
+Ik
+Ik
+Ik
+Ik
+Ik
+ok
+ok
+ok
+fg
+fg
+fg
+fg
+fg
+ok
+yt
+Ku
+ok
 Lu
 bc
 bc
@@ -85031,53 +85411,53 @@ sI
 RR
 TH
 RR
-Lu
-Rc
-Rc
-Lu
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
+ok
+jL
+jL
+ok
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
 bc
 bc
 bc
 bc
 bc
-Lu
-Lu
-Lu
-Lu
-Lu
-bc
-bc
-Lu
+ok
+Ik
+ye
+qF
+Ei
 OF
 OF
-OF
-Lu
+Ik
+zM
+zM
+zM
+Ik
+ok
 bc
-bc
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-bc
-OF
-Lu
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
 Lu
 bc
 bc
@@ -85334,41 +85714,41 @@ sI
 sI
 sI
 YO
-Rc
-Rc
+jL
+jL
 YO
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
 Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-bc
-bc
-bc
-Lu
-bc
-bc
-bc
+Ik
+Ik
+Ik
+Ik
+Ik
+Ik
+BS
+GG
+kJ
+Ik
 OF
 OF
-OF
-Lu
-bc
+zM
+zM
+zM
+Ik
+ok
 bc
 bc
 bc
@@ -85636,41 +86016,41 @@ sI
 sI
 sI
 YO
-Rc
-Rc
+jL
+jL
 YO
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
 bc
-bc
-bc
-bc
-bc
-Lu
-bc
-bc
-bc
-bc
-bc
-bc
-Lu
-OF
-OF
-OF
-Lu
-bc
+Ik
+zM
+zM
+zM
+zM
+Ik
+Ik
+Ik
+Ik
+Ik
+qb
+Ik
+zM
+kd
+zM
+Ik
+ok
 bc
 bc
 bc
@@ -85937,42 +86317,42 @@ RR
 RR
 TH
 RR
-Lu
-Rc
-Rc
-Lu
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-HM
-Lu
+ok
+jL
+jL
+ok
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+iW
+ok
 bc
-bc
-bc
-bc
-bc
-Lu
-bc
-bc
-bc
-Lu
-bc
-bc
-Lu
-Lu
-Lu
-Lu
-Lu
-bc
+Ik
+zM
+zM
+zM
+zM
+Ik
+zM
+KP
+zM
+Ik
+OF
+Ik
+Ik
+Ik
+Ik
+Ik
+ok
 bc
 bc
 bc
@@ -86239,42 +86619,42 @@ TH
 TH
 TH
 TH
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
 bc
-bc
-bc
-bc
-bc
-Lu
-Lu
-Lu
-Lu
-Lu
-bc
-bc
-Lu
+Ik
+zM
+zM
+zM
+zM
+Ik
+zM
+zM
+zM
 OF
+OF
+Ik
+EN
 ML
-OF
-Lu
-bc
+JL
+Ik
+ok
 bc
 bc
 bc
@@ -86560,23 +86940,23 @@ bc
 bc
 Lu
 bc
-bc
-bc
-bc
-bc
-Lu
-bc
-bc
-bc
-Lu
-bc
-bc
-bc
+Ik
+mC
+zM
+zM
+nn
+Ik
+zM
+zM
+zM
+Ik
 OF
 OF
-OF
-Lu
-bc
+kI
+mu
+rU
+Ik
+ok
 bc
 bc
 bc
@@ -86862,25 +87242,25 @@ bc
 bc
 Lu
 bc
-bc
-bc
-bc
-bc
-Lu
-bc
-bc
-bc
-bc
-bc
-bc
-Lu
-OF
-OF
+Ik
+Ms
+zM
+zM
+zM
+Ik
+Ik
+Ik
+Ik
+Ik
+qb
+Ik
+kM
+BC
 VO
-Lu
-bc
-bc
-bc
+Ik
+ok
+ok
+ok
 bc
 bc
 bc
@@ -87164,25 +87544,25 @@ bc
 bc
 Lu
 bc
-bc
-bc
-bc
-bc
-Lu
-bc
-bc
-bc
-Lu
-bc
-bc
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
+Ik
+FO
+zM
+zM
+zM
+DV
+zM
+AF
+Ik
+zM
+zM
+Ik
+Ik
+Ik
+Ik
+Ik
+Ik
+Ik
+ok
 Lu
 Lu
 Lu
@@ -87466,26 +87846,26 @@ bc
 bc
 Lu
 bc
-bc
-bc
-bc
-bc
-Lu
-Lu
-Lu
-Lu
-Lu
-bc
-bc
-bc
-Lu
+Ik
+FO
+zM
+zM
+zM
+XO
+zM
+AF
+Ik
+zM
+zM
+zM
+Ik
 dw
 Vu
 nI
 iP
-Lu
+Ik
+ok
 bc
-Lu
 bc
 bc
 bc
@@ -87768,26 +88148,26 @@ Lu
 Lu
 Lu
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-Lu
-bc
-bc
-bc
-Lu
+Ik
+FO
+tv
+zM
+zM
+zM
+zM
+zM
+zM
+zM
+zM
+zM
+Ik
 dW
-Jj
-Jj
+OF
+OF
 Zq
-Lu
+Ik
+ok
 bc
-Lu
 bc
 bc
 bc
@@ -88070,26 +88450,26 @@ bc
 Lu
 Lu
 Lu
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-Lu
+Ik
+Ik
+Ik
+Ik
+zM
+tv
+zM
+zM
+zM
+zM
+zM
+zM
+Ik
 Vt
-Jj
-Jj
+OF
+OF
 Tq
-Lu
+Ik
+ok
 bc
-Lu
 bc
 bc
 bc
@@ -88375,23 +88755,23 @@ Lu
 Lu
 Lu
 Lu
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-Lu
-Jj
-Jj
+Ik
+Ik
+Ik
+Ik
+Ik
+zM
+zM
+tv
+zM
+OF
+OF
+OF
 je
 Hl
-Lu
+Ik
+ok
 bc
-Lu
 bc
 bc
 bc
@@ -88681,19 +89061,19 @@ Lu
 Lu
 Lu
 Lu
+Ik
+Ik
+Ik
+Ik
+Ik
+Ik
+Ik
+Ik
+Ik
+Ik
+Ik
+ok
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
 bc
 bc
 bc
@@ -88986,15 +89366,15 @@ Lu
 Lu
 Lu
 Lu
-Lu
-bc
-bc
-bc
-Lu
-bc
-bc
-bc
-bc
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
+ok
 bc
 bc
 bc

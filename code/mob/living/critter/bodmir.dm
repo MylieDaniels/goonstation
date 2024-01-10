@@ -281,7 +281,7 @@
 
 	if (probmult(5 + D.stage ** 2))
 		if (!ON_COOLDOWN(affected_mob, "grendel_voice_drugs", 20 SECONDS))
-			boutput(affected_mob, "<span class='alert'>Let us enhance you.</span>")
+			boutput(affected_mob, "<span class='alert'>Let me save you.</span>")
 		affected_mob.reagents?.add_reagent(pick("synaptizine","epinephrine","oculine","silicate","smelling_salt","anti_rad"), 4)
 		affected_mob.reagents?.add_reagent(pick("saline","strychnine","teporone","lexorin","salicylic_acid","salbutamol","strange_reagent","aranesp"), 2)
 
@@ -309,6 +309,7 @@
 						image(icon = 'icons/obj/delivery.dmi', icon_state = "floorflush_o"),\
 						image(icon = 'icons/obj/items/weapons.dmi', icon_state = "bear_trap-open")\
 					),\
+					target_list=list(/turf/simulated/floor,/turf/unsimulated/floor),\
 					range=8,\
 					image_prob=D.stage,\
 					image_time=120,\

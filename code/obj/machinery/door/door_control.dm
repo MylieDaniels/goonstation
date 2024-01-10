@@ -531,6 +531,36 @@ ADMIN_INTERACT_PROCS(/obj/machinery/door_control, proc/toggle)
 	else
 		boutput(user, SPAN_ALERT("Invalid biometric profile. Access denied."))
 
+/obj/machinery/door_control/bodmirscanner
+	var/flying_chat = 0
+	var/commander_text = "Welcome, Commander!"
+	name = "Hand Scanner"
+	id = "bodmir_blank"
+	icon = 'icons/obj/decoration.dmi'
+	icon_state = "antagscanner"
+	unpressed_icon = "antagscanner"
+	pressed_icon = "antagscanner-u"
+	unpowered_icon = "antagscanner" // should never happen, this is a failsafe if anything.
+	requires_power = 0
+	welcome_text = "Access granted."
+
+/obj/machinery/door_control/bodmirscanner/attack_hand(mob/user)
+	if (ON_COOLDOWN(src, "scan", 2 SECONDS))
+		return
+	playsound(src.loc, 'sound/effects/handscan.ogg', 50, 1)
+	if (user.mind?.get_antagonist(ROLE_ARCFIEND))
+		user.visible_message(SPAN_NOTICE("The [src] accepts the electromagnetic passkey of the user and beeps, granting you access."))
+		src.toggle()
+		if (src.flying_chat)
+			src.speak(src.commander_text)
+	if (user.mind?.get_antagonist(ROLE_TRAITOR))
+		user.visible_message(SPAN_NOTICE("The [src] accepts the biometrics of the user and beeps, granting you access."))
+		src.toggle()
+		if (src.flying_chat)
+			src.speak(src.welcome_text)
+	else
+		boutput(user, SPAN_ALERT("Insufficient permissions. Access denied."))
+
 ////////////////////////////////////////////////////////
 //////////// Machine activation buttons	///////////////
 ///////////////////////////////////////////////////////
