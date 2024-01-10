@@ -166,10 +166,9 @@
 
 // ----------- //
 /datum/ailment/parasite/bodmir_cable
-	name = "Unidentified Foreign Body"
+	name = "Writhing Cables"
 	max_stages = 5
 	affected_species = list("Human")
-	cure = "Surgery"
 	stage_prob = 0
 	var/static/list/common_halluc_sounds = list(
 				'sound/weapons/gunload_heavy.ogg',
@@ -340,7 +339,7 @@
 
 		if (probmult(D.stage ** 2))
 			if (!ON_COOLDOWN(affected_mob, "grendel_voice_heal", 20 SECONDS))
-				boutput(affected_mob, "<span class='alert'>Let us heal you.</span>")
+				boutput(affected_mob, "<span class='alert'>Let me heal you.</span>")
 			boutput(affected_mob, pick("Your [pick("wounds","sores","injuries")] [pick("cauterize","knit closed","singe shut")]."))
 			if (affected_mob.bleeding > 2)
 				repair_bleeding_damage(affected_mob, 100, 2)
