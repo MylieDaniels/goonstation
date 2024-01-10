@@ -285,6 +285,14 @@ TYPEINFO(/obj/item/furniture_parts/table/glass)
 	furniture_type = /obj/table/reinforced/chemistry/auto
 	furniture_name = "chemistry countertop"
 
+/obj/item/furniture_parts/table/reinforced/bodmirkitchen
+	name = "kitchen countertop parts"
+	desc = "A collection of parts that can be used to make a kitchen table."
+	icon = 'icons/obj/furniture/table_bodmirkitchen.dmi'
+	furniture_type = /obj/table/reinforced/bodmirkitchen/auto
+	furniture_name = "kitchen countertop"
+
+
 /* ---------- Rack Parts ---------- */
 /obj/item/furniture_parts/rack
 	name = "rack parts"

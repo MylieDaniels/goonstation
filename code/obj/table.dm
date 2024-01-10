@@ -847,6 +847,33 @@ TYPEINFO_NEW(/obj/table/reinforced/chemistry)
 				/obj/item/clothing/glasses/spectro,
 				/obj/item/device/reagentscanner)
 
+TYPEINFO(/obj/table/reinforced/bodmirkitchen)
+TYPEINFO_NEW(/obj/table/reinforced/bodmirkitchen)
+	. = ..()
+	smooth_list = typecacheof(/obj/table/reinforced/bodmirkitchen/auto)
+/obj/table/reinforced/bodmirkitchen
+	name = "kitchen counter"
+	desc = "An industrial grade countertop with drawers beneath."
+	icon = 'icons/obj/furniture/table_bodmirkitchen.dmi'
+	parts_type = /obj/item/furniture_parts/table/reinforced/bodmirkitchen
+	has_drawer = TRUE
+	auto
+		auto = 1
+
+/obj/table/reinforced/bodmirkitchen/auto/silverware
+	name = "silverware kitchen counter"
+	drawer_contents = list(/obj/item/kitchen/utensil/spoon = 4,
+				/obj/item/kitchen/utensil/fork = 4,
+				/obj/item/kitchen/utensil/knife = 4)
+
+/obj/table/reinforced/bodmirkitchen/auto/dishes
+	name = "dishware kitchen counter"
+	drawer_contents = list(/obj/item/plate = 6,
+				/obj/item/reagent_containers/food/drinks/bowl = 6)
+
+/obj/table/reinforced/bodmirkitchen/auto/dishes
+	name = "glassware kitchen counter"
+	drawer_contents = list(/obj/item/reagent_containers/food/drinks/drinkingglass = 13)
 
 TYPEINFO(/obj/table/reinforced/industrial)
 TYPEINFO_NEW(/obj/table/reinforced/industrial)

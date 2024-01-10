@@ -1,16 +1,13 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ag" = (
+/turf/unsimulated/floor/redwhite/corner{
+	dir = 8
+	},
+/area/space)
 "ai" = (
 /obj/rack,
 /obj/item/sponge,
 /turf/unsimulated/floor/black,
-/area/space)
-"am" = (
-/obj/machinery/camera/auto/alt/west,
-/obj/railing/steel{
-	dir = 1
-	},
-/obj/decal/cleanable/blood/gibs,
-/turf/unsimulated/floor/plating,
 /area/space)
 "as" = (
 /obj/decal/fakeobjects/pipe/heat{
@@ -20,6 +17,11 @@
 	},
 /turf/unsimulated/floor/engine/caution/east,
 /area/bodmir/outer_deck)
+"at" = (
+/turf/unsimulated/floor/redwhite{
+	dir = 8
+	},
+/area/space)
 "aA" = (
 /obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe/overfloor,
 /turf/unsimulated/wall/auto/lead/gray,
@@ -52,17 +54,26 @@
 /obj/machinery/door/airlock/pyro/weapons/noemag,
 /turf/unsimulated/floor/black,
 /area/space)
-"bn" = (
-/obj/submachine/chef_sink{
-	dir = 8
-	},
-/turf/simulated/floor/sanitary/white,
-/area/space)
 "bP" = (
 /turf/unsimulated/floor/engine/caution/corner2{
 	dir = 10
 	},
 /area/bodmir/outer_deck)
+"bX" = (
+/obj/item/circular_saw{
+	pixel_x = 3;
+	pixel_y = 12
+	},
+/obj/item/scissors/surgical_scissors,
+/obj/table/syndicate/auto,
+/obj/item/suture{
+	pixel_x = 5;
+	pixel_y = -8
+	},
+/turf/unsimulated/floor/redwhite{
+	dir = 8
+	},
+/area/space)
 "ce" = (
 /obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe/overfloor{
 	dir = 6
@@ -72,6 +83,20 @@
 "cs" = (
 /obj/machinery/lawrack/syndicate,
 /turf/unsimulated/floor/black,
+/area/space)
+"cw" = (
+/obj/table/wood/auto/desk,
+/obj/item/paper{
+	icon_state = "paper";
+	info = "I will do it all for you ill open ill wreck ill break ill offer ill kill everone if you want if you need me if you need me as bad as i need you need you need you <3 <3 <3";
+	name = "crisp note";
+	interesting = "Dried teardrops litter the page.";
+	pixel_y = -6;
+	pixel_x = 4
+	},
+/turf/unsimulated/floor/redwhite{
+	dir = 8
+	},
 /area/space)
 "cx" = (
 /obj/storage/closet/dresser,
@@ -99,27 +124,28 @@
 /obj/decal/cleanable/blood/drip/med,
 /turf/unsimulated/wall/auto/lead/gray,
 /area/space)
-"dG" = (
+"dw" = (
 /obj/table/reinforced/auto,
-/obj/item/plate/tray{
-	pixel_y = 6;
-	pixel_x = 10
+/obj/item/reagent_containers/food/snacks/cereal_box/honey{
+	pixel_x = 4;
+	pixel_y = 5
 	},
-/obj/item/reagent_containers/food/drinks/mug{
-	pixel_x = -9
-	},
-/obj/item/reagent_containers/food/drinks/mug{
-	pixel_x = -4;
-	pixel_y = 7
-	},
-/obj/item/reagent_containers/food/drinks/mug{
-	pixel_x = -7
-	},
-/turf/simulated/floor/sanitary/white,
+/obj/item/reagent_containers/food/snacks/cereal_box,
+/turf/unsimulated/floor/sanitary/white,
 /area/space)
 "dI" = (
 /obj/machinery/light/small/floor/frostedred,
 /turf/unsimulated/floor/black,
+/area/space)
+"dT" = (
+/obj/machinery/drainage/big,
+/turf/unsimulated/floor/redwhite{
+	dir = 1
+	},
+/area/space)
+"dW" = (
+/obj/submachine/chef_oven,
+/turf/unsimulated/floor/sanitary/white,
 /area/space)
 "ec" = (
 /obj/decoration/syndiepc/syndiepc2{
@@ -196,6 +222,11 @@
 	},
 /turf/unsimulated/floor/black/grime,
 /area/space)
+"fg" = (
+/turf/simulated/floor/blackwhite/side{
+	dir = 8
+	},
+/area/space)
 "fm" = (
 /obj/machinery/conveyor/SN{
 	id = "bodmir-cannon-belt";
@@ -207,6 +238,18 @@
 /obj/machinery/shower,
 /turf/unsimulated/floor/black,
 /area/space)
+"fs" = (
+/obj/machinery/door/poddoor/pyro/shutters{
+	dir = 4;
+	id = "bodmir_exam_shutter";
+	name = "Safety Shutters"
+	},
+/obj/machinery/door/airlock/pyro/glass{
+	name = "Examination Room";
+	dir = 4
+	},
+/turf/unsimulated/floor/white,
+/area/space)
 "ft" = (
 /obj/machinery/conveyor_switch{
 	name = "ammunition belt switch";
@@ -214,9 +257,30 @@
 	},
 /turf/unsimulated/floor/plating,
 /area/space)
+"fD" = (
+/obj/machinery/drainage/big,
+/obj/decal/cleanable/blood{
+	icon_state = "left_bloodygloves_c";
+	dir = 1
+	},
+/turf/unsimulated/floor/redwhite{
+	dir = 4
+	},
+/area/space)
 "fM" = (
 /turf/unsimulated/floor/engine/caution/west,
 /area/bodmir/outer_deck)
+"gd" = (
+/obj/machinery/camera/auto/alt,
+/obj/cabinet/restrictedmedical,
+/turf/unsimulated/floor/redwhite{
+	dir = 1
+	},
+/area/space)
+"gh" = (
+/obj/machinery/light/small/floor/warm,
+/turf/unsimulated/floor/white,
+/area/space)
 "gp" = (
 /obj/decal/cleanable/blood/tracks,
 /obj/item/rods/steel{
@@ -236,6 +300,9 @@
 /obj/window/auto/bulletproof,
 /turf/unsimulated/floor/black,
 /area/bodmir/outer_deck)
+"hg" = (
+/turf/unsimulated/floor/redwhite/corner,
+/area/space)
 "ho" = (
 /obj/decal/cleanable/blood/gibs,
 /obj/item/gun/kinetic/smg/empty{
@@ -255,6 +322,12 @@
 /obj/decal/cleanable/blood,
 /mob/living/critter/bodmir_cableworm/ai_controlled,
 /turf/unsimulated/floor/industrial,
+/area/space)
+"hu" = (
+/obj/cabinet/medicalmenders,
+/turf/unsimulated/floor/redwhite{
+	dir = 1
+	},
 /area/space)
 "ig" = (
 /obj/machinery/alarm{
@@ -277,6 +350,49 @@
 	},
 /turf/unsimulated/floor/black,
 /area/space)
+"iP" = (
+/obj/machinery/coffeemaker{
+	desc = "It's top of the line espresso technology! Featuring 100% Organic Locally-Grown espresso beans!"
+	},
+/turf/unsimulated/floor/sanitary/white,
+/area/space)
+"iS" = (
+/obj/table/syndicate/auto,
+/obj/item/clothing/mask/surgical_shield,
+/obj/item/clothing/mask/surgical_shield{
+	pixel_y = 8
+	},
+/obj/item/clothing/mask/surgical_shield{
+	pixel_y = 3
+	},
+/turf/unsimulated/floor/redwhite{
+	dir = 4
+	},
+/area/space)
+"je" = (
+/obj/submachine/chef_sink{
+	dir = 8
+	},
+/turf/unsimulated/floor/sanitary/white,
+/area/space)
+"jl" = (
+/obj/decal/cleanable/blood{
+	icon_state = "left_bloodygloves_c";
+	dir = 1
+	},
+/obj/machinery/door/poddoor/pyro/shutters{
+	dir = 4;
+	id = "bodmir_exam_shutter";
+	name = "Safety Shutters"
+	},
+/obj/machinery/door/airlock/pyro/glass{
+	name = "Examination Room";
+	dir = 4
+	},
+/turf/unsimulated/floor/redwhite{
+	dir = 1
+	},
+/area/space)
 "jw" = (
 /obj/decoration/syndiepc/syndiepc3,
 /turf/unsimulated/floor/black,
@@ -285,6 +401,12 @@
 /obj/item/gun/kinetic/rpg7,
 /obj/table/reinforced/industrial/auto,
 /turf/unsimulated/floor/twotone/black,
+/area/space)
+"jG" = (
+/obj/machinery/door/airlock/pyro/glass{
+	name = "Operating Theatre"
+	},
+/turf/unsimulated/floor/white,
 /area/space)
 "jT" = (
 /obj/item/deployer/barricade{
@@ -297,7 +419,6 @@
 /obj/item/deployer/barricade{
 	pixel_x = 4
 	},
-/obj/machinery/camera/auto/alt/west,
 /turf/unsimulated/floor/twotone/black,
 /area/space)
 "jV" = (
@@ -309,6 +430,11 @@
 	dir = 8
 	},
 /turf/unsimulated/floor/black/grime,
+/area/space)
+"kh" = (
+/turf/unsimulated/floor/redwhite/corner{
+	dir = 4
+	},
 /area/space)
 "ki" = (
 /obj/decal/cleanable/blood/drip/med,
@@ -388,13 +514,6 @@
 /obj/item/storage/beartrap_pouch,
 /turf/unsimulated/floor/twotone/black,
 /area/space)
-"mg" = (
-/obj/railing/steel{
-	dir = 1
-	},
-/obj/machinery/camera/auto/alt/west,
-/turf/unsimulated/floor/plating,
-/area/space)
 "mh" = (
 /obj/decal/cleanable/blood/gibs,
 /turf/unsimulated/floor/plating,
@@ -405,6 +524,28 @@
 	},
 /obj/decal/cleanable/blood/drip/med,
 /turf/unsimulated/floor/plating,
+/area/space)
+"mJ" = (
+/obj/table/syndicate/auto,
+/obj/item_dispenser/latex_gloves,
+/obj/item/reagent_containers/syringe/epinephrine{
+	pixel_x = -6;
+	pixel_y = -4
+	},
+/obj/item/storage/box/syringes{
+	pixel_x = 8
+	},
+/obj/item/reagent_containers/syringe{
+	pixel_x = 14;
+	pixel_y = 11
+	},
+/obj/item/reagent_containers/syringe{
+	pixel_x = -8;
+	pixel_y = 4
+	},
+/turf/unsimulated/floor/redwhite{
+	dir = 1
+	},
 /area/space)
 "nd" = (
 /obj/machinery/conveyor/NS{
@@ -427,6 +568,11 @@
 /obj/item/garrote,
 /obj/item/gun/kinetic/pistol/empty,
 /turf/unsimulated/floor/twotone/black,
+/area/space)
+"nI" = (
+/obj/storage/secure/closet/fridge,
+/obj/item/reagent_containers/iv_drip/blood,
+/turf/unsimulated/floor/sanitary/white,
 /area/space)
 "nR" = (
 /obj/machinery/conveyor/NS{
@@ -457,6 +603,12 @@
 	},
 /turf/unsimulated/floor/plating,
 /area/space)
+"ov" = (
+/obj/machinery/drainage/big,
+/turf/unsimulated/floor/redwhite{
+	dir = 8
+	},
+/area/space)
 "ow" = (
 /obj/decal/cleanable/dirt/dirt5,
 /turf/unsimulated/floor/industrial,
@@ -471,6 +623,19 @@
 	name = "ammunition belt"
 	},
 /turf/unsimulated/floor/black/grime,
+/area/space)
+"pb" = (
+/obj/item/surgical_spoon{
+	pixel_y = -10;
+	pixel_x = -2
+	},
+/obj/item/bandage/medicated,
+/obj/item/bandage/medicated,
+/obj/item/bandage/medicated,
+/obj/table/syndicate/auto,
+/turf/unsimulated/floor/redwhite{
+	dir = 8
+	},
 /area/space)
 "pg" = (
 /obj/item/clothing/under/towel,
@@ -487,7 +652,10 @@
 	pixel_x = -3
 	},
 /obj/table/reinforced/auto,
-/turf/simulated/floor/sanitary/white,
+/turf/unsimulated/floor/sanitary/white,
+/area/space)
+"ph" = (
+/turf/unsimulated/floor/red,
 /area/space)
 "pr" = (
 /obj/machinery/bathtub{
@@ -548,6 +716,22 @@
 	dir = 4
 	},
 /area/bodmir/outer_deck)
+"qQ" = (
+/obj/table/syndicate/auto,
+/obj/item_dispenser/medical_mask,
+/obj/item/reagent_containers/syringe/morphine,
+/obj/item/reagent_containers/syringe/morphine{
+	pixel_x = 7;
+	pixel_y = -2
+	},
+/obj/item/reagent_containers/syringe/synaptizine{
+	pixel_x = 6;
+	pixel_y = 4
+	},
+/turf/unsimulated/floor/redwhite{
+	dir = 1
+	},
+/area/space)
 "rb" = (
 /obj/decal/fakeobjects/pipe/heat{
 	name = "heat pipe";
@@ -584,6 +768,10 @@
 /obj/machinery/light/emergencyflashing,
 /turf/unsimulated/floor/engine,
 /area/bodmir/outer_deck)
+"so" = (
+/obj/machinery/light/small/floor/frostedred,
+/turf/unsimulated/floor/red,
+/area/space)
 "sy" = (
 /obj/barricade,
 /obj/decal/cleanable/machine_debris,
@@ -620,28 +808,28 @@
 /obj/machinery/atmospherics/pipe/manifold/overfloor,
 /turf/unsimulated/floor/industrial,
 /area/space)
-"tS" = (
-/obj/stove,
-/obj/item/soup_pot{
-	pixel_x = 4;
-	pixel_y = 10
-	},
-/obj/item/ladle{
-	pixel_x = -2;
-	pixel_y = 11
-	},
-/turf/simulated/floor/sanitary/white,
+"tr" = (
+/obj/table/wood/auto/desk,
+/obj/table/wood/auto/desk,
+/obj/item/gun/kinetic/veritate,
+/turf/unsimulated/floor/white,
 /area/space)
 "ua" = (
 /obj/deployable_turret/bodmir_brrt/active/north,
 /turf/unsimulated/floor/engine,
 /area/bodmir/outer_deck)
+"uR" = (
+/obj/submachine/chef_sink/chem_sink{
+	desc = "A water-filled unit intended for hand-washing purposes.";
+	dir = 8;
+	pixel_x = 2
+	},
+/turf/unsimulated/floor/redwhite{
+	dir = 6
+	},
+/area/space)
 "vo" = (
 /obj/minimap/map_computer,
-/turf/unsimulated/floor/black,
-/area/space)
-"vy" = (
-/obj/machinery/camera/auto/west,
 /turf/unsimulated/floor/black,
 /area/space)
 "vG" = (
@@ -655,6 +843,15 @@
 	},
 /turf/unsimulated/floor/black/grime,
 /area/space)
+"wc" = (
+/obj/machinery/computer/operating{
+	dir = 8
+	},
+/obj/decal/cleanable/blood{
+	icon_state = "handblood_c"
+	},
+/turf/unsimulated/floor/red,
+/area/space)
 "wp" = (
 /obj/machinery/door/poddoor/blast/pyro{
 	dir = 4
@@ -663,17 +860,6 @@
 /area/space)
 "wq" = (
 /turf/unsimulated/floor/plating,
-/area/space)
-"wI" = (
-/obj/table/reinforced/auto,
-/obj/machinery/coffeemaker{
-	desc = "It's top of the line espresso technology! Featuring 100% Organic Locally-Grown espresso beans!"
-	},
-/turf/simulated/floor/sanitary/white,
-/area/space)
-"wQ" = (
-/obj/submachine/chef_oven,
-/turf/simulated/floor/sanitary/white,
 /area/space)
 "wS" = (
 /turf/unsimulated/floor/circuit/red,
@@ -713,10 +899,21 @@
 /obj/machinery/light/small/floor,
 /turf/unsimulated/floor/twotone/black,
 /area/space)
+"yi" = (
+/obj/table/wood/auto/desk,
+/turf/unsimulated/floor/redwhite{
+	dir = 8
+	},
+/area/space)
 "yr" = (
 /obj/decoration/syndiepc/syndiepc8,
 /obj/map/light/dimred,
 /turf/unsimulated/floor/black,
+/area/space)
+"yt" = (
+/turf/simulated/floor/blackwhite/side{
+	dir = 10
+	},
 /area/space)
 "yy" = (
 /obj/railing/steel{
@@ -775,19 +972,18 @@
 /mob/living/critter/robotic/gunbot/syndicate,
 /turf/unsimulated/floor/black,
 /area/space)
+"AL" = (
+/obj/machinery/optable{
+	desc = "This one bears an uncomfortably high amount of restraints.";
+	interesting = "Surreptitiously etched on the underside - She loves me.";
+	name = "Examination Table"
+	},
+/turf/unsimulated/floor/red,
+/area/space)
 "AN" = (
 /obj/grille/catwalk,
 /turf/unsimulated/floor/engine/caution/east,
 /area/bodmir/outer_deck)
-"AW" = (
-/obj/table/reinforced/auto,
-/obj/item/reagent_containers/food/drinks/bowl,
-/obj/item/reagent_containers/food/drinks/bowl{
-	pixel_x = 4;
-	pixel_y = 6
-	},
-/turf/simulated/floor/sanitary/white,
-/area/space)
 "Bg" = (
 /obj/grille/catwalk,
 /turf/unsimulated/floor/engine/caution/north,
@@ -843,6 +1039,42 @@
 "Db" = (
 /turf/unsimulated/wall/auto/lead/white,
 /area/space)
+"Dc" = (
+/obj/machinery/door_control{
+	id = "bodmir_exam_shutter";
+	name = "Exam Room Lockdown";
+	pixel_x = -23;
+	pixel_y = 10;
+	desc = "A remote control switch to lock down the examination room."
+	},
+/turf/unsimulated/floor/redwhite{
+	dir = 8
+	},
+/area/space)
+"Dw" = (
+/obj/item/handcuffs{
+	desc = "Adjustable metal rings joined by cable, made to be applied to a person in such a way that they are unable to use their hands. Stamped into the steel of each cuff is the name LUCARNE.";
+	pixel_x = 2;
+	pixel_y = -6;
+	name = "personalized handcuffs"
+	},
+/obj/item/handcuffs/tape_roll{
+	pixel_x = 4;
+	pixel_y = 3
+	},
+/obj/table/syndicate/auto,
+/turf/unsimulated/floor/redwhite{
+	dir = 4
+	},
+/area/space)
+"Dz" = (
+/obj/table/syndicate/auto,
+/obj/item/robodefibrillator,
+/obj/item/medicaldiagnosis/stethoscope,
+/turf/unsimulated/floor/redwhite{
+	dir = 9
+	},
+/area/space)
 "Ea" = (
 /turf/unsimulated/floor/engine/caution/north,
 /area/bodmir/outer_deck)
@@ -853,18 +1085,33 @@
 	dir = 4;
 	pixel_y = -3
 	},
-/obj/machinery/camera/auto/east,
 /turf/unsimulated/floor/plating,
-/area/space)
-"Ev" = (
-/obj/machinery/camera/auto/alt/east,
-/turf/unsimulated/floor/industrial,
 /area/space)
 "EG" = (
 /turf/unsimulated/floor/engine/caution/corner2{
 	dir = 9
 	},
 /area/bodmir/outer_deck)
+"EM" = (
+/obj/stool/chair/office/syndie{
+	dir = 8
+	},
+/obj/item/clothing/suit/space/syndicate/commissar_greatcoat{
+	name = "rumpled great coat";
+	interesting = "Blue hair and tears covers the chest.";
+	desc = "A fear-inspiring, black-leather great coat, typically worn by a Syndicate Nuclear Operative Commander. So scary even the vacuum of space doesn't dare claim the wearer. This one is rumpled, old, and has been cleaned many, many times."
+	},
+/turf/unsimulated/floor/white,
+/area/space)
+"ET" = (
+/obj/storage/secure/closet/fridge/blood,
+/obj/item/organ/heart,
+/obj/item/reagent_containers/iv_drip/blood,
+/obj/item/reagent_containers/iv_drip/blood,
+/turf/unsimulated/floor/redwhite{
+	dir = 10
+	},
+/area/space)
 "Fs" = (
 /obj/railing/steel{
 	dir = 1
@@ -883,15 +1130,6 @@
 	dir = 4
 	},
 /turf/unsimulated/floor/plating,
-/area/space)
-"FS" = (
-/obj/table/reinforced/auto,
-/obj/item/reagent_containers/food/snacks/cereal_box/honey{
-	pixel_x = 4;
-	pixel_y = 5
-	},
-/obj/item/reagent_containers/food/snacks/cereal_box,
-/turf/simulated/floor/sanitary/white,
 /area/space)
 "FU" = (
 /obj/machinery/light/incandescent/warm{
@@ -921,9 +1159,6 @@
 	},
 /turf/unsimulated/floor/engine,
 /area/bodmir/outer_deck)
-"Gr" = (
-/turf/simulated/floor/sanitary/white,
-/area/space)
 "GN" = (
 /obj/decal/fakeobjects/pipe/heat{
 	dir = 4;
@@ -941,6 +1176,14 @@
 	dir = 4
 	},
 /turf/unsimulated/floor/black/grime,
+/area/space)
+"Hl" = (
+/obj/item/reagent_containers/food/drinks/bowl,
+/obj/item/reagent_containers/food/drinks/bowl{
+	pixel_x = 4;
+	pixel_y = 6
+	},
+/turf/unsimulated/floor/sanitary/white,
 /area/space)
 "Hs" = (
 /obj/railing/steel{
@@ -1009,12 +1252,28 @@
 /obj/decal/cleanable/blood/splatter{
 	icon_state = "gibbl2"
 	},
-/obj/machinery/camera/auto/alt/north,
 /obj/decal/cleanable/dirt/dirt3,
 /obj/machinery/atmospherics/unary/vent_pump{
 	dir = 4
 	},
 /turf/unsimulated/floor/plating,
+/area/space)
+"Jh" = (
+/obj/iv_stand,
+/turf/unsimulated/floor/red,
+/area/space)
+"Jj" = (
+/turf/unsimulated/floor/sanitary/white,
+/area/space)
+"JJ" = (
+/obj/table/wood/auto/desk,
+/obj/item/cigpacket{
+	pixel_x = -4;
+	pixel_y = 6
+	},
+/turf/unsimulated/floor/redwhite{
+	dir = 8
+	},
 /area/space)
 "Ka" = (
 /obj/machinery/conveyor/NS{
@@ -1025,6 +1284,10 @@
 	dir = 4
 	},
 /turf/unsimulated/floor/black/grime,
+/area/space)
+"Kh" = (
+/obj/machinery/light/small/floor/frostedred,
+/turf/unsimulated/floor/white,
 /area/space)
 "Kl" = (
 /obj/decal/cleanable/machine_debris,
@@ -1046,6 +1309,13 @@
 	pixel_x = 4
 	},
 /turf/unsimulated/floor/industrial,
+/area/space)
+"Kt" = (
+/obj/table/syndicate/auto,
+/obj/bedsheetbin,
+/turf/unsimulated/floor/redwhite{
+	dir = 5
+	},
 /area/space)
 "KD" = (
 /obj/machinery/conveyor/EW{
@@ -1144,8 +1414,24 @@
 	id = "bodmir-cannon-belt";
 	name = "ammunition belt"
 	},
-/obj/machinery/camera/auto/alt/north,
 /turf/unsimulated/floor/black/grime,
+/area/space)
+"Ml" = (
+/obj/table/syndicate/auto,
+/obj/item/scalpel{
+	pixel_x = 4;
+	pixel_y = 12
+	},
+/obj/item/scalpel{
+	pixel_x = -1;
+	pixel_y = 4
+	},
+/obj/item/staple_gun{
+	pixel_x = 5
+	},
+/turf/unsimulated/floor/redwhite{
+	dir = 8
+	},
 /area/space)
 "Mn" = (
 /obj/grille/catwalk,
@@ -1157,6 +1443,32 @@
 /obj/machinery/light/small/floor/frostedred,
 /turf/unsimulated/floor/engine,
 /area/bodmir/outer_deck)
+"ML" = (
+/obj/item/device/detective_scanner/detective{
+	pixel_y = -4;
+	pixel_x = -5
+	},
+/obj/item/cigpacket/paperpack{
+	pixel_x = 10;
+	pixel_y = -7;
+	desc = "Carefully folded, and clearly quite used.";
+	interesting = "The paper appears to be a deployment order, stamped with SCYTHE."
+	},
+/obj/item/gun/kinetic/pistol/empty{
+	name = "Lucarne's pistol";
+	desc = "A semi-automatic, 9mm caliber service pistol. The grip is shakily engraved with 'anything for her.'";
+	interesting = "Lipstick residue present on barrel."
+	},
+/obj/item/clothing/shoes/swat/heavy{
+	interesting = "The interior tag has Elizabeth Foster written in faded ink."
+	},
+/obj/storage/crate/classcrate{
+	desc = "Covered in etchings and deranged scribbles. Mostly hearts and disjointed confessions of desire.";
+	name = "Lucarne's footlocker";
+	interesting = "Countless pairs of disposable nitrile gloves have opened this box."
+	},
+/turf/unsimulated/floor/white,
+/area/space)
 "Nh" = (
 /obj/machinery/atmospherics/pipe/simple/color_pipe/green_pipe/overfloor,
 /obj/machinery/light/small/floor,
@@ -1167,6 +1479,19 @@
 	dir = 4
 	},
 /turf/unsimulated/floor/plating,
+/area/space)
+"Nn" = (
+/obj/table/syndicate/auto,
+/obj/item/implantcase/tracking,
+/obj/item/implantcase/tracking,
+/obj/item/implantcase/tracking,
+/obj/item/implanter,
+/obj/item/decoration/ashtray{
+	pixel_x = 8
+	},
+/turf/unsimulated/floor/redwhite{
+	dir = 4
+	},
 /area/space)
 "Nu" = (
 /obj/item/casing/small{
@@ -1196,6 +1521,9 @@
 	},
 /turf/unsimulated/floor/plating,
 /area/space)
+"OF" = (
+/turf/unsimulated/floor/white,
+/area/space)
 "Pf" = (
 /obj/deployable_turret/bodmir_brrt/active/north,
 /turf/unsimulated/floor/industrial,
@@ -1217,6 +1545,11 @@
 	name = "ammunition belt"
 	},
 /turf/unsimulated/floor/black/grime,
+/area/space)
+"Pv" = (
+/turf/unsimulated/floor/redwhite/corner{
+	dir = 1
+	},
 /area/space)
 "PP" = (
 /turf/unsimulated/wall/auto/lead/white,
@@ -1279,6 +1612,23 @@
 "Sl" = (
 /turf/simulated/wall/auto/reinforced/supernorn/blackred,
 /area/space)
+"Sp" = (
+/turf/unsimulated/floor/redwhite{
+	dir = 1
+	},
+/area/space)
+"Sx" = (
+/obj/table/wood/auto/desk,
+/obj/item/ammo/bullets/veritate{
+	pixel_y = -2;
+	pixel_x = -5
+	},
+/obj/item/device/light/zippo/syndicate{
+	pixel_x = 8;
+	pixel_y = 4
+	},
+/turf/unsimulated/floor/white,
+/area/space)
 "Sz" = (
 /obj/grille/catwalk,
 /turf/unsimulated/floor/engine/caution/corner{
@@ -1307,6 +1657,21 @@
 	dir = 6
 	},
 /area/bodmir/outer_deck)
+"Tq" = (
+/obj/item/plate,
+/obj/item/plate{
+	pixel_x = 1;
+	pixel_y = 3
+	},
+/obj/item/plate{
+	pixel_y = 5
+	},
+/obj/item/plate{
+	pixel_y = 7;
+	pixel_x = 1
+	},
+/turf/unsimulated/floor/sanitary/white,
+/area/space)
 "TH" = (
 /turf/unsimulated/wall/auto/reinforced/supernorn,
 /area/bodmir/outer_deck)
@@ -1319,10 +1684,6 @@
 	},
 /turf/unsimulated/floor/industrial,
 /area/bodmir/outer_deck)
-"Ut" = (
-/obj/machinery/camera/auto/alt/north,
-/turf/unsimulated/floor/industrial,
-/area/space)
 "Uv" = (
 /obj/decal/poster/wallsign/warning3,
 /turf/unsimulated/wall/auto/lead/gray,
@@ -1361,7 +1722,19 @@
 	},
 /turf/unsimulated/floor/black,
 /area/space)
-"VE" = (
+"Vt" = (
+/obj/stove,
+/obj/item/soup_pot{
+	pixel_x = 4;
+	pixel_y = 10
+	},
+/obj/item/ladle{
+	pixel_x = -2;
+	pixel_y = 11
+	},
+/turf/unsimulated/floor/sanitary/white,
+/area/space)
+"Vu" = (
 /obj/table/reinforced/auto,
 /obj/item/kitchen/utensil/fork{
 	dir = 8
@@ -1385,7 +1758,7 @@
 	pixel_x = 1;
 	pixel_y = 1
 	},
-/turf/simulated/floor/sanitary/white,
+/turf/unsimulated/floor/sanitary/white,
 /area/space)
 "VJ" = (
 /obj/decal/cleanable/machine_debris,
@@ -1394,6 +1767,16 @@
 	pixel_y = -2
 	},
 /turf/unsimulated/floor/industrial,
+/area/space)
+"VO" = (
+/obj/storage/closet/coffin/vampire{
+	desc = "Scored deep into the wood are simple words: Love never dies.";
+	name = "Lucarne's coffin";
+	anchored = 1;
+	interesting = "Long white hairs are snagged in the hinges.";
+	can_flip_bust = 0
+	},
+/turf/unsimulated/floor/white,
 /area/space)
 "Wb" = (
 /obj/item/clothing/suit/bedsheet/black{
@@ -1416,23 +1799,13 @@
 	id = "bodmir-cannon-belt";
 	name = "ammunition belt"
 	},
-/obj/machinery/camera/auto/alt/north,
 /turf/unsimulated/floor/black/grime,
-/area/space)
-"Wi" = (
-/obj/storage/secure/closet/fridge,
-/obj/item/reagent_containers/iv_drip/blood,
-/turf/simulated/floor/sanitary/white,
 /area/space)
 "Wp" = (
 /obj/machinery/light/incandescent/warm{
 	dir = 4
 	},
 /obj/decal/cleanable/dirt/dirt3,
-/turf/unsimulated/floor/plating,
-/area/space)
-"Wr" = (
-/obj/machinery/camera/auto/alt/north,
 /turf/unsimulated/floor/plating,
 /area/space)
 "WF" = (
@@ -1491,33 +1864,35 @@
 "YX" = (
 /turf/unsimulated/floor/engine/caution/east,
 /area/bodmir/outer_deck)
+"Zq" = (
+/obj/item/reagent_containers/food/drinks/mug{
+	pixel_x = -9
+	},
+/obj/item/reagent_containers/food/drinks/mug{
+	pixel_x = -4;
+	pixel_y = 7
+	},
+/obj/item/reagent_containers/food/drinks/mug{
+	pixel_x = -7
+	},
+/turf/unsimulated/floor/sanitary/white,
+/area/space)
 "Zt" = (
 /turf/unsimulated/floor/engine/caution/corner2{
 	dir = 6
 	},
 /area/bodmir/outer_deck)
+"ZF" = (
+/obj/window/auto/bulletproof,
+/obj/grille/steel,
+/turf/unsimulated/floor/red,
+/area/space)
 "ZN" = (
 /obj/machinery/light/emergencyflashing{
 	dir = 4
 	},
 /turf/unsimulated/floor/engine,
 /area/bodmir/outer_deck)
-"ZO" = (
-/obj/table/reinforced/auto,
-/obj/item/plate,
-/obj/item/plate{
-	pixel_x = 1;
-	pixel_y = 3
-	},
-/obj/item/plate{
-	pixel_y = 5
-	},
-/obj/item/plate{
-	pixel_y = 7;
-	pixel_x = 1
-	},
-/turf/simulated/floor/sanitary/white,
-/area/space)
 
 (1,1,1) = {"
 bc
@@ -57758,7 +58133,7 @@ Rc
 Rc
 kz
 Ps
-am
+Jb
 wq
 HC
 HC
@@ -58358,7 +58733,7 @@ bc
 bc
 bc
 HC
-Ut
+Rc
 Rc
 HC
 rw
@@ -59282,7 +59657,7 @@ Ps
 Qy
 HC
 qo
-mg
+Fs
 wq
 HC
 bc
@@ -61078,7 +61453,7 @@ bc
 HC
 Rc
 Rc
-Ev
+Rc
 Rc
 rv
 ce
@@ -61693,7 +62068,7 @@ wq
 wq
 wq
 HC
-Wr
+wq
 Oy
 FU
 Ni
@@ -76788,7 +77163,7 @@ rQ
 rQ
 HC
 HC
-vy
+HM
 HM
 HM
 HM
@@ -77425,12 +77800,12 @@ HM
 HM
 HM
 HM
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
+bc
+bc
+bc
+bc
+bc
+bc
 bc
 bc
 bc
@@ -77727,12 +78102,12 @@ HM
 Lu
 Lu
 Lu
-Lu
-FS
-VE
-Wi
-wI
-Lu
+bc
+bc
+bc
+bc
+bc
+bc
 bc
 bc
 bc
@@ -78029,12 +78404,12 @@ HM
 HM
 HM
 HM
-Lu
-wQ
-Gr
-Gr
-dG
-Lu
+bc
+bc
+bc
+bc
+bc
+bc
 bc
 bc
 bc
@@ -78331,12 +78706,12 @@ HM
 HM
 HM
 HM
-Lu
-tS
-Gr
-Gr
-ZO
-Lu
+bc
+bc
+bc
+bc
+bc
+bc
 Lu
 Lu
 bc
@@ -78633,12 +79008,12 @@ HM
 HM
 HM
 HM
-Lu
-Gr
-Gr
-bn
-AW
-Lu
+bc
+bc
+bc
+bc
+bc
+bc
 Lu
 Lu
 bc
@@ -78936,7 +79311,7 @@ HM
 HM
 HM
 Lu
-Gr
+Jj
 Sl
 Sl
 Sl
@@ -79238,7 +79613,7 @@ HM
 HM
 Lu
 Lu
-Gr
+Jj
 Sl
 cs
 HM
@@ -79539,8 +79914,8 @@ Sk
 HM
 HM
 Lu
-Gr
-Gr
+Jj
+Jj
 Sl
 cx
 HM
@@ -79841,8 +80216,8 @@ HM
 HM
 HM
 bl
-Gr
-Gr
+Jj
+Jj
 Sl
 ly
 HM
@@ -80143,8 +80518,8 @@ Sk
 HM
 HM
 Lu
-Gr
-Gr
+Jj
+Jj
 Sl
 HM
 HM
@@ -80446,7 +80821,7 @@ HM
 HM
 Lu
 Lu
-Gr
+Jj
 xE
 HM
 HM
@@ -80748,7 +81123,7 @@ HM
 HM
 HM
 Lu
-Gr
+Jj
 Sl
 HM
 eP
@@ -80773,10 +81148,10 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
+Lu
+Lu
+Lu
+Lu
 Lu
 bc
 bc
@@ -81016,7 +81391,7 @@ rQ
 rQ
 HC
 HC
-vy
+HM
 HM
 HM
 HM
@@ -81050,7 +81425,7 @@ HM
 HM
 HM
 Lu
-Gr
+Jj
 Sl
 Sl
 Sl
@@ -81069,16 +81444,16 @@ bc
 bc
 bc
 bc
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+Lu
 Lu
 bc
 bc
@@ -81352,7 +81727,7 @@ HM
 HM
 HM
 Lu
-Gr
+Jj
 UW
 HM
 ai
@@ -81371,16 +81746,16 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+Lu
+Dz
+pb
+bX
+Ml
+ET
+Lu
+Lu
+OF
+Lu
 Lu
 bc
 bc
@@ -81654,7 +82029,7 @@ HM
 HM
 HM
 Lu
-Gr
+Jj
 xE
 kp
 fp
@@ -81673,16 +82048,16 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+Lu
+hu
+ph
+so
+ph
+kh
+ov
+Pv
+Kh
+Lu
 Lu
 bc
 bc
@@ -81975,16 +82350,16 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+Lu
+mJ
+ph
+wc
+ph
+ph
+dT
+OF
+OF
+Lu
 Lu
 bc
 bc
@@ -82277,16 +82652,16 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+Lu
+qQ
+ph
+AL
+Jh
+ph
+dT
+OF
+OF
+Lu
 Lu
 bc
 bc
@@ -82527,7 +82902,7 @@ HC
 HC
 Vs
 Ci
-HC
+yr
 HC
 HC
 qr
@@ -82579,16 +82954,16 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+Lu
+gd
+ph
+so
+ph
+hg
+fD
+ag
+Kh
+Lu
 Lu
 bc
 bc
@@ -82881,16 +83256,16 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+Lu
+Kt
+Nn
+Dw
+iS
+uR
+Lu
+jl
+fs
+Lu
 Lu
 bc
 bc
@@ -83183,16 +83558,16 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+Lu
+Lu
+ZF
+ZF
+ZF
+Lu
+Lu
+Sp
+OF
+Lu
 Lu
 bc
 bc
@@ -83475,26 +83850,26 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
+at
+cw
+JJ
+yi
+Dc
+Lu
+Pv
+OF
+Lu
 Lu
 bc
 bc
@@ -83777,26 +84152,26 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+Lu
+OF
+OF
+OF
+OF
+OF
+OF
+OF
+OF
+OF
+OF
+OF
+Sx
+EM
+tr
+OF
+jG
+OF
+OF
+Lu
 Lu
 bc
 bc
@@ -84079,26 +84454,26 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+Lu
+OF
+OF
+OF
+OF
+OF
+OF
+OF
+OF
+OF
+OF
+OF
+OF
+gh
+OF
+OF
+jG
+OF
+Kh
+Lu
 Lu
 bc
 bc
@@ -84381,26 +84756,26 @@ bc
 bc
 bc
 bc
+Lu
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
+fg
+fg
+fg
+fg
+fg
+Lu
+yt
+OF
+Lu
 Lu
 bc
 bc
@@ -84679,30 +85054,30 @@ bc
 bc
 bc
 bc
+Lu
+Lu
+Lu
+Lu
+Lu
 bc
 bc
+Lu
+OF
+OF
+OF
+Lu
 bc
 bc
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+OF
+Lu
 Lu
 bc
 bc
@@ -84981,18 +85356,18 @@ Lu
 Lu
 Lu
 Lu
+Lu
 bc
 bc
 bc
+Lu
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
+OF
+OF
+OF
+Lu
 bc
 bc
 bc
@@ -85283,18 +85658,18 @@ bc
 bc
 bc
 bc
+Lu
 bc
 bc
 bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
+Lu
+OF
+OF
+OF
+Lu
 bc
 bc
 bc
@@ -85585,18 +85960,18 @@ bc
 bc
 bc
 bc
+Lu
 bc
 bc
 bc
+Lu
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+Lu
+Lu
+Lu
+Lu
+Lu
 bc
 bc
 bc
@@ -85887,18 +86262,18 @@ bc
 bc
 bc
 bc
+Lu
+Lu
+Lu
+Lu
+Lu
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+Lu
+OF
+ML
+OF
+Lu
 bc
 bc
 bc
@@ -86183,24 +86558,24 @@ bc
 bc
 bc
 bc
+Lu
 bc
 bc
 bc
 bc
 bc
+Lu
 bc
 bc
 bc
+Lu
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+OF
+OF
+OF
+Lu
 bc
 bc
 bc
@@ -86485,24 +86860,24 @@ bc
 bc
 bc
 bc
+Lu
+bc
+bc
+bc
+bc
+bc
+Lu
 bc
 bc
 bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+Lu
+OF
+OF
+VO
+Lu
 bc
 bc
 bc
@@ -86787,22 +87162,22 @@ bc
 bc
 bc
 bc
+Lu
 bc
 bc
 bc
 bc
 bc
+Lu
 bc
 bc
 bc
+Lu
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
+Lu
+Lu
+Lu
 Lu
 Lu
 Lu
@@ -87089,28 +87464,28 @@ Lu
 Lu
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
 Lu
 bc
 bc
 bc
 bc
 bc
+Lu
+Lu
+Lu
+Lu
+Lu
+bc
+bc
+bc
+Lu
+dw
+Vu
+nI
+iP
+Lu
+bc
+Lu
 bc
 bc
 bc
@@ -87392,27 +87767,27 @@ Lu
 Lu
 Lu
 Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
-Lu
 bc
 bc
 bc
 bc
 bc
+bc
+bc
+bc
+bc
+Lu
+bc
+bc
+bc
+Lu
+dW
+Jj
+Jj
+Zq
+Lu
+bc
+Lu
 bc
 bc
 bc
@@ -87707,14 +88082,14 @@ bc
 bc
 bc
 bc
+Lu
+Vt
+Jj
+Jj
+Tq
+Lu
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+Lu
 bc
 bc
 bc
@@ -88009,14 +88384,14 @@ bc
 bc
 bc
 bc
+Lu
+Jj
+Jj
+je
+Hl
+Lu
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+Lu
 bc
 bc
 bc
@@ -88313,12 +88688,12 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
 bc
 bc
 bc
@@ -88615,7 +88990,7 @@ Lu
 bc
 bc
 bc
-bc
+Lu
 bc
 bc
 bc
