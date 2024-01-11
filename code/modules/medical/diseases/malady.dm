@@ -92,7 +92,7 @@
 	max_stages = 3
 	cure_flags = CURE_CUSTOM
 	cure_desc = "Saline solution"
-	reagentcure = list("saline")
+	reagentcure = list("saline","bodmir_draksadd"=30)
 	recureprob = 10
 	affected_species = list("Human","Monkey")
 	stage_prob = 6
@@ -408,7 +408,7 @@
 	max_stages = 3
 	cure_flags = CURE_CUSTOM
 	cure_desc = "Cardiac Stimulants"
-	reagentcure = list("atropine"=8,"epinephrine"=10,"heparin"=5)
+	reagentcure = list("atropine"=8,"epinephrine"=10,"heparin"=5,"bodmir_draksadd"=30)
 	recureprob = 10
 	affected_species = list("Human","Monkey")
 	stage_prob = 5
@@ -498,7 +498,7 @@
 	cure_flags = CURE_ELEC_SHOCK
 	affected_species = list("Human","Monkey")
 	reagentcure = list("atropine" = 0.01, // atropine is not recommended for use in treating cardiac arrest anymore but SHRUG
-	"epinephrine" = 0.1) // epi is recommended though
+	"epinephrine" = 0.1,"bodmir_draksadd"=5) // epi is recommended though
 
 /datum/ailment/malady/flatline/stage_act(var/mob/living/affected_mob, var/datum/ailment_data/malady/D, mult)
 	if (..())

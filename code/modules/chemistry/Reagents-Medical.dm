@@ -1669,13 +1669,15 @@ datum
 			var/active_remaining = 0
 			var/damage_mult = 1
 
-			initial_metabolize(var/mob/M)
+			on_add(var/mob/M)
 				if (!M)
 					M = holder.my_atom
-				last_brute = M.get_brute_damage()
-				last_burn = M.get_burn_damage()
-				RegisterSignal(M, COMSIG_MOB_DEATH, PROC_REF(reanimate))
-				APPLY_MOVEMENT_MODIFIER(M, /datum/movement_modifier/reagent/juggernaut, src.type)
+				if(isliving(M))
+					last_brute = M.get_brute_damage()
+					last_burn = M.get_burn_damage()
+					RegisterSignal(M, COMSIG_MOB_DEATH, PROC_REF(reanimate))
+					APPLY_MOVEMENT_MODIFIER(M, /datum/movement_modifier/reagent/juggernaut, src.type)
+				..()
 
 			on_mob_life(var/mob/M, var/mult = 1)
 				if (!M)
@@ -1683,7 +1685,8 @@ datum
 				if (!isliving(M))
 					return
 
-				src.active_remaining = max(0, src.active_remaining - mult)
+				if (!M.hasStatus("critical_condition"))
+					src.active_remaining = max(0, src.active_remaining - mult)
 
 				if(M.reagents.has_reagent(src.id,5))
 					if(M.hasStatus("recent_trauma"))
@@ -1691,7 +1694,7 @@ datum
 					var/recent_damage = (M.get_brute_damage() - src.last_brute) / (HAS_ATOM_PROPERTY(M, PROP_MOB_BRUTEMULT) ? GET_ATOM_PROPERTY(M, PROP_MOB_BRUTEMULT) : 1) + (M.get_burn_damage() - src.last_burn) / (HAS_ATOM_PROPERTY(M, PROP_MOB_BURNMULT) ? GET_ATOM_PROPERTY(M, PROP_MOB_BURNMULT) : 1)
 					switch(recent_damage)
 						if(-INFINITY to -1)
-							if(M.health / M.max_health < 0.15)
+							if(M.health / M.max_health < 0.25)
 								M.make_jittery(5)
 								if(!M.reagents.has_reagent(src.id,15))
 									M.reagents.add_reagent(src.id,0.15 * mult)
@@ -1699,7 +1702,7 @@ datum
 								if (!ON_COOLDOWN(M, "dragon_voice_draksadd_healing", 15 SECONDS))
 									boutput(M, "<span class='alert'>Good. [pick("Pry your tendons together again","Staple your arteries back in place","Weld your wounds shut once more","Hammer your bones back in","Pour your blood back into your veins")], [pick("grow and progress in my name.","little soldier.","become stronger for me.","eat your flesh off the floor.")]</span>")
 								src.active_remaining += mult
-						if(10 to 25)
+						if(5 to 25)
 							src.active_remaining += 2 * mult
 							M.make_jittery(10)
 							playsound(M, 'sound/effects/welderarc_ignite.ogg', 40, TRUE)
@@ -1720,7 +1723,7 @@ datum
 							src.active_remaining += 7 * mult
 							M.make_jittery(30)
 							playsound(M, 'sound/effects/welderarc_ignite.ogg', 70, TRUE)
-							if (!ON_COOLDOWN(M, "dragon_voice_draksadd_invincible", 20 SECONDS))
+							if (!ON_COOLDOWN(M, "dragon_voice_draksadd_gore", 20 SECONDS))
 								boutput(M, "<span class='alert'>What beautiful gore. You make an exquisite walking corpse, but don't dare drop.</span>")
 								src.damage_mult = max(src.damage_mult - 0.225 * mult, 0.5)
 								M.delStatus("paralysis")
@@ -1734,7 +1737,7 @@ datum
 					REMOVE_ATOM_PROPERTY(M, PROP_MOB_BURNMULT, "r_draksadd")
 					damage_mult = 1
 				else
-					if(src.damage_mult < 0.65)
+					if(src.damage_mult < 0.65 && !ON_COOLDOWN(M, "dragon_voice_draksadd_invincible", 20 SECONDS))
 						boutput(M, "You [pick("are","feel")] [pick("unstoppable","invincible","unkillable")].")
 					APPLY_ATOM_PROPERTY(M, PROP_MOB_BRUTEMULT, "r_draksadd", src.damage_mult)
 					APPLY_ATOM_PROPERTY(M, PROP_MOB_BURNMULT, "r_draksadd", min(src.damage_mult + 0.2, 1))
@@ -1748,24 +1751,24 @@ datum
 				var/mob/living/M = source
 				if(M && M.reagents && M.reagents.has_reagent(src.id,5))
 					SPAWN(rand(10,80))
+						if(!isliving(M)) return
 						var/iterations = rand(17, 21)
 						violent_standup_twitch_parametrized(M,2,2,5,iterations * 30,2)
 						M.visible_message("<span class='alert'><B>[M]</B> starts twitching!</span>")
 						for (var/i = 0, (i < iterations / 3) && M, i++)
 							playsound(M, pick('sound/misc/meat_hork.ogg','sound/misc/hastur/growl.ogg','sound/effects/welding_arc.ogg'), 40 + i * 2, TRUE)
 							sleep(rand(20,30))
-						if(M)
-							M.addOverlayComposition(/datum/overlayComposition/draksadd)
-							violent_standup_twitch_parametrized(M,3,3,15,iterations * 11,1)
-							M.visible_message("<span class='alert'><B>[M]</B> starts convulsing violently!</span>")
+						if(!isliving(M)) return
+						M.addOverlayComposition(/datum/overlayComposition/draksadd)
+						violent_standup_twitch_parametrized(M,3,3,15,iterations * 11,1)
+						M.visible_message("<span class='alert'><B>[M]</B> starts convulsing violently!</span>")
 						for (var/i = 0, (i < iterations) && M, i++)
 							if(prob(20))
 								M.emote(pick("shiver","twitch_v","twitch"))
 								playsound(M, pick('sound/misc/meat_hork.ogg','sound/misc/hastur/growl.ogg','sound/effects/welderarc_ignite.ogg'), 40 + i * 2, TRUE)
 							playsound(M, 'sound/effects/welding_arc.ogg', 20 + i * 3, TRUE)
 							sleep(rand(8,10))
-						if(!isliving(M))
-							return
+						if(!isliving(M)) return
 						if (isdead(M))
 							M.make_jittery(250)
 							src.damage_mult = 0.75
@@ -1803,3 +1806,4 @@ datum
 					UnregisterSignal(M, COMSIG_MOB_DEATH)
 					REMOVE_MOVEMENT_MODIFIER(M, /datum/movement_modifier/reagent/juggernaut, src.type)
 					M.removeOverlayComposition(/datum/overlayComposition/draksadd)
+				..()

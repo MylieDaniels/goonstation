@@ -50,10 +50,6 @@
 	},
 /turf/unsimulated/floor/black,
 /area/space)
-"bl" = (
-/obj/machinery/door/airlock/pyro/weapons/noemag,
-/turf/unsimulated/floor/black,
-/area/bodmir)
 "bP" = (
 /turf/unsimulated/floor/engine/caution/corner2{
 	dir = 10
@@ -387,10 +383,6 @@
 /turf/unsimulated/floor/sanitary/white,
 /area/bodmir)
 "jl" = (
-/obj/decal/cleanable/blood{
-	icon_state = "left_bloodygloves_c";
-	dir = 1
-	},
 /obj/machinery/door/poddoor/pyro/shutters{
 	dir = 4;
 	id = "bodmir_exam_shutter";
@@ -403,6 +395,12 @@
 /turf/unsimulated/floor/redwhite{
 	dir = 1
 	},
+/area/bodmir)
+"ju" = (
+/obj/stool/chair/office/syndie{
+	dir = 1
+	},
+/turf/unsimulated/floor/sanitary/white,
 /area/bodmir)
 "jw" = (
 /obj/decoration/syndiepc/syndiepc3,
@@ -624,6 +622,12 @@
 /obj/map/light/dimred,
 /turf/unsimulated/floor/black,
 /area/bodmir)
+"nb" = (
+/obj/stool/chair/couch/red{
+	dir = 9
+	},
+/turf/unsimulated/floor/wood/six,
+/area/bodmir)
 "nd" = (
 /obj/machinery/conveyor/NS{
 	id = "bodmir-cannon-belt";
@@ -668,12 +672,6 @@
 	},
 /turf/unsimulated/floor/black/grime,
 /area/space)
-"nV" = (
-/obj/stool/chair/office/syndie{
-	dir = 1
-	},
-/turf/unsimulated/floor/black,
-/area/bodmir)
 "og" = (
 /obj/decoration/syndiepc/syndiepc16,
 /turf/unsimulated/floor/black,
@@ -1224,10 +1222,6 @@
 /obj/item/toy/plush/small/singuloose{
 	pixel_y = 10
 	},
-/obj/decal/poster/flag/trans{
-	pixel_x = 4;
-	pixel_y = 34
-	},
 /obj/stool/pet_bed,
 /obj/item/clothing/suit/bedsheet/green,
 /obj/item/clothing/suit/bedsheet/random{
@@ -1327,12 +1321,6 @@
 	dir = 9
 	},
 /area/bodmir)
-"DV" = (
-/obj/stool/chair/couch/red{
-	dir = 8
-	},
-/turf/unsimulated/floor/wood/six,
-/area/bodmir)
 "Ea" = (
 /turf/unsimulated/floor/engine/caution/north,
 /area/bodmir/outer_deck)
@@ -1393,6 +1381,10 @@
 /obj/stocking/very_not_safe{
 	pixel_x = -17;
 	pixel_y = 13
+	},
+/obj/decal/poster/flag/trans{
+	pixel_x = 5;
+	pixel_y = 37
 	},
 /turf/unsimulated/floor/wood/six,
 /area/bodmir)
@@ -1802,10 +1794,6 @@
 	dir = 5
 	},
 /area/bodmir/outer_deck)
-"Ms" = (
-/obj/adventurepuzzle/triggerer/bookcase,
-/turf/unsimulated/floor/wood/six,
-/area/bodmir)
 "ME" = (
 /obj/machinery/light/small/floor/frostedred,
 /turf/unsimulated/floor/engine,
@@ -1926,6 +1914,10 @@
 "PP" = (
 /turf/unsimulated/wall/auto/lead/white,
 /area/bodmir/outer_deck)
+"Qv" = (
+/obj/machinery/door/airlock/pyro/weapons/noemag,
+/turf/unsimulated/floor/sanitary/white,
+/area/bodmir)
 "Qy" = (
 /obj/railing/steel{
 	dir = 1
@@ -2128,7 +2120,9 @@
 	interesting = "Long white hairs are snagged in the hinges.";
 	can_flip_bust = 0
 	},
-/mob/living/critter/small_animal/armadillo,
+/mob/living/critter/small_animal/armadillo{
+	name = "Lucille"
+	},
 /turf/unsimulated/floor/carpet/wizard/standard/edge/se,
 /area/bodmir)
 "Wb" = (
@@ -2181,12 +2175,6 @@
 /obj/decal/poster/wallsign/warning1,
 /turf/unsimulated/wall/auto/lead/gray,
 /area/space)
-"XO" = (
-/obj/stool/chair/couch/red{
-	dir = 4
-	},
-/turf/unsimulated/floor/wood/six,
-/area/bodmir)
 "Yl" = (
 /obj/decoration/syndiepc/syndiepc9,
 /obj/map/light/dimred,
@@ -2253,6 +2241,12 @@
 	},
 /turf/unsimulated/floor/engine,
 /area/bodmir/outer_deck)
+"ZP" = (
+/obj/stool/chair/couch/red{
+	dir = 5
+	},
+/turf/unsimulated/floor/wood/six,
+/area/bodmir)
 "ZS" = (
 /obj/decal/poster/wallsign/poster_eyetest{
 	pixel_x = -27;
@@ -75147,10 +75141,10 @@ YO
 jL
 jL
 YO
-iW
-iW
-iW
-iW
+OF
+OF
+OF
+OF
 iW
 iW
 iW
@@ -75449,10 +75443,10 @@ YO
 jL
 jL
 YO
-iW
-iW
-iW
-iW
+OF
+OF
+OF
+OF
 iW
 iW
 iW
@@ -75753,8 +75747,8 @@ jL
 ok
 iW
 iW
-iW
-iW
+OF
+OF
 iW
 iW
 iW
@@ -76053,10 +76047,10 @@ ok
 ok
 ok
 ok
-iW
-iW
-iW
-iW
+ok
+ok
+OF
+OF
 iW
 iW
 iW
@@ -76356,9 +76350,9 @@ iW
 iW
 iW
 iW
-iW
-iW
-iW
+ok
+OF
+OF
 iW
 iW
 iW
@@ -76658,9 +76652,9 @@ iW
 iW
 iW
 iW
-iW
-iW
-iW
+ok
+OF
+OF
 iW
 iW
 iW
@@ -76960,15 +76954,15 @@ iW
 iW
 iW
 iW
+ok
+OF
+OF
 iW
 iW
 iW
 iW
-iW
-iW
-iW
-iW
-iW
+OF
+OF
 iW
 iW
 iW
@@ -77263,14 +77257,14 @@ iW
 iW
 iW
 iW
+OF
+OF
 iW
 iW
 iW
 iW
-iW
-iW
-iW
-iW
+OF
+OF
 iW
 iW
 iW
@@ -77564,15 +77558,15 @@ iW
 iW
 iW
 iW
+ok
+OF
+OF
 iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
+OF
+OF
+OF
+OF
+OF
 iW
 iW
 iW
@@ -77867,14 +77861,14 @@ ok
 ok
 ok
 ok
-iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
+OF
+OF
+OF
+OF
+OF
+OF
+OF
+OF
 iW
 iW
 iW
@@ -78169,11 +78163,11 @@ iW
 iW
 iW
 ok
-iW
-iW
-iW
-iW
-iW
+OF
+OF
+OF
+OF
+OF
 iW
 iW
 iW
@@ -78474,16 +78468,16 @@ ok
 ok
 ok
 ok
-ok
-ok
-ok
-iW
+OF
+OF
 iW
 ok
 ok
 ok
 ok
-bc
+ok
+ok
+Lu
 bc
 bc
 bc
@@ -78771,21 +78765,21 @@ iW
 An
 iW
 iW
+OF
+OF
+OF
+iW
+iW
+OF
+OF
 iW
 iW
 iW
+OF
+OF
+OF
 iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
-ok
-bc
+Lu
 bc
 bc
 bc
@@ -79073,21 +79067,21 @@ iW
 iW
 iW
 iW
+OF
 iW
 iW
 iW
+OF
+OF
+OF
+OF
+OF
 iW
 iW
 iW
+OF
 iW
-iW
-iW
-iW
-iW
-iW
-iW
-ok
-bc
+Lu
 bc
 bc
 bc
@@ -79375,18 +79369,19 @@ iW
 iW
 iW
 iW
+OF
 iW
+OF
+OF
+OF
+OF
+OF
+OF
+OF
+OF
+OF
 iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
+OF
 iW
 ok
 ok
@@ -79396,7 +79391,6 @@ ok
 ok
 ok
 ok
-bc
 bc
 bc
 bc
@@ -79679,14 +79673,15 @@ iW
 iW
 iW
 iW
-iW
+OF
 Sk
 Sk
 Sk
-iW
+OF
 Sk
 Sk
 Sk
+OF
 iW
 iW
 iW
@@ -79698,7 +79693,6 @@ Ik
 Ik
 Ik
 ok
-bc
 bc
 bc
 bc
@@ -79975,13 +79969,13 @@ RR
 RR
 he
 iW
-iW
 pF
 tS
 mO
 iW
 iW
-iW
+OF
+OF
 Sk
 iW
 iW
@@ -79989,9 +79983,10 @@ iW
 iW
 vo
 Sk
+OF
+OF
 iW
 iW
-ok
 ok
 OF
 Ik
@@ -80000,7 +79995,6 @@ iW
 iW
 Ik
 ok
-bc
 bc
 bc
 bc
@@ -80277,13 +80271,13 @@ RR
 RR
 he
 iW
-iW
 vE
-nV
+ju
 iW
 iW
 iW
-iW
+OF
+OF
 Sk
 iW
 iW
@@ -80291,10 +80285,11 @@ iW
 iW
 iW
 Sk
+OF
+OF
 iW
 iW
 ok
-OF
 OF
 Ik
 cx
@@ -80302,7 +80297,6 @@ LD
 iW
 Ik
 ok
-bc
 bc
 bc
 bc
@@ -80579,24 +80573,25 @@ RR
 RR
 he
 iW
-iW
 eE
-iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
-bl
 OF
+OF
+OF
+OF
+OF
+OF
+OF
+iW
+iW
+iW
+iW
+iW
+OF
+OF
+OF
+OF
+OF
+Qv
 qb
 Ik
 ly
@@ -80604,7 +80599,6 @@ iW
 iW
 Ik
 ok
-bc
 bc
 bc
 bc
@@ -80881,13 +80875,13 @@ RR
 RR
 he
 iW
-iW
 vE
-nV
+ju
 iG
 iW
 iW
-iW
+OF
+OF
 Sk
 iW
 iW
@@ -80895,10 +80889,11 @@ iW
 iW
 iW
 Sk
+OF
+OF
 iW
 iW
 ok
-OF
 OF
 Ik
 iW
@@ -80906,7 +80901,6 @@ iW
 iW
 Ik
 ok
-bc
 bc
 bc
 bc
@@ -81183,13 +81177,13 @@ RR
 RR
 he
 iW
-iW
 NT
 jw
 tl
 iW
 iW
-iW
+OF
+OF
 Sk
 iW
 iW
@@ -81197,9 +81191,10 @@ iW
 iW
 iW
 Sk
+OF
+OF
 iW
 iW
-ok
 ok
 OF
 xE
@@ -81208,7 +81203,6 @@ LD
 QY
 Ik
 ok
-bc
 bc
 bc
 bc
@@ -81491,14 +81485,15 @@ iW
 iW
 iW
 iW
-iW
+OF
 Sk
 Sk
 Sk
-iW
+OF
 Sk
 Sk
 Sk
+OF
 iW
 iW
 iW
@@ -81510,7 +81505,6 @@ eP
 kO
 Ik
 ok
-bc
 bc
 bc
 bc
@@ -81791,18 +81785,19 @@ iW
 iW
 iW
 iW
+OF
 iW
+OF
+OF
+OF
+OF
+OF
+OF
+OF
+OF
+OF
 iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
+OF
 iW
 ok
 OF
@@ -81812,7 +81807,6 @@ Ik
 Ik
 Ik
 ok
-bc
 bc
 bc
 bc
@@ -82093,18 +82087,19 @@ iW
 iW
 iW
 iW
+OF
 iW
 iW
 iW
+OF
+OF
+OF
+OF
+OF
 iW
 iW
 iW
-iW
-iW
-iW
-iW
-iW
-iW
+OF
 iW
 ok
 OF
@@ -82114,7 +82109,6 @@ ai
 ok
 ok
 ok
-bc
 bc
 bc
 bc
@@ -82395,18 +82389,19 @@ iW
 An
 iW
 iW
+OF
+OF
+OF
+iW
+iW
+OF
+OF
 iW
 iW
 iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
+OF
+OF
+OF
 iW
 ok
 OF
@@ -82414,7 +82409,6 @@ xE
 kp
 fp
 ok
-bc
 bc
 bc
 bc
@@ -82702,11 +82696,12 @@ ok
 ok
 ok
 ok
+OF
+OF
 ok
 ok
 ok
-iW
-iW
+ok
 ok
 ok
 ok
@@ -82716,7 +82711,6 @@ UW
 pr
 iW
 ok
-bc
 bc
 bc
 bc
@@ -83001,12 +82995,12 @@ iW
 iW
 iW
 ok
-iW
-iW
-iW
-iW
-iW
-iW
+OF
+OF
+OF
+OF
+OF
+ok
 iW
 iW
 iW
@@ -83016,9 +83010,9 @@ ok
 ok
 ok
 ok
+ok
 iW
 ok
-bc
 bc
 bc
 bc
@@ -83303,23 +83297,23 @@ ok
 ok
 ok
 ok
-iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
+OF
+OF
+OF
+OF
+OF
+OF
+OF
+OF
 iW
 iW
 iW
 ok
 bc
 bc
+bc
 ok
 iW
-ok
 ok
 ok
 ok
@@ -83604,19 +83598,20 @@ iW
 iW
 iW
 iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
-iW
+ok
+OF
+OF
+ok
+OF
+OF
+OF
+OF
+OF
 iW
 iW
 iW
 ok
+bc
 bc
 bc
 ok
@@ -83627,7 +83622,6 @@ iW
 iW
 iW
 LD
-iW
 iW
 iW
 iW
@@ -83906,22 +83900,22 @@ iW
 iW
 iW
 iW
+ok
+OF
+OF
+ok
 iW
 iW
 iW
-iW
-iW
-iW
-iW
-iW
-iW
+OF
+OF
 iW
 iW
 iW
 ok
 bc
 bc
-ok
+bc
 ok
 ok
 ok
@@ -84208,15 +84202,15 @@ iW
 iW
 iW
 iW
+ok
+OF
+OF
+ok
 iW
 iW
 iW
-iW
-iW
-iW
-iW
-iW
-iW
+OF
+OF
 iW
 iW
 iW
@@ -84510,10 +84504,10 @@ iW
 iW
 iW
 iW
-iW
-iW
-iW
-iW
+ok
+OF
+OF
+ok
 iW
 iW
 iW
@@ -84812,10 +84806,10 @@ iW
 iW
 iW
 iW
-iW
-iW
-iW
-iW
+ok
+OF
+OF
+ok
 iW
 iW
 iW
@@ -85113,11 +85107,11 @@ ok
 ok
 ok
 ok
-iW
-iW
-iW
-iW
-iW
+ok
+ok
+OF
+OF
+ok
 iW
 iW
 iW
@@ -85417,9 +85411,9 @@ jL
 ok
 iW
 iW
-iW
-iW
-iW
+OF
+OF
+ok
 iW
 iW
 iW
@@ -85717,11 +85711,11 @@ YO
 jL
 jL
 YO
-iW
-iW
-iW
-iW
-iW
+OF
+OF
+OF
+OF
+ok
 iW
 iW
 iW
@@ -86019,11 +86013,11 @@ YO
 jL
 jL
 YO
-iW
-iW
-iW
-iW
-iW
+OF
+OF
+OF
+OF
+ok
 iW
 iW
 iW
@@ -86325,7 +86319,7 @@ iW
 iW
 iW
 iW
-iW
+ok
 iW
 iW
 iW
@@ -87243,7 +87237,7 @@ bc
 Lu
 bc
 Ik
-Ms
+zM
 zM
 zM
 zM
@@ -87549,9 +87543,9 @@ FO
 zM
 zM
 zM
-DV
-zM
 AF
+zM
+nb
 Ik
 zM
 zM
@@ -87851,9 +87845,9 @@ FO
 zM
 zM
 zM
-XO
-zM
 AF
+zM
+ZP
 Ik
 zM
 zM

@@ -8,7 +8,10 @@
 		if (owner.bioHolder && owner.bioHolder.HasEffect("revenant") || isdead(owner)) //You also don't need to do a whole lot of this if the dude's dead.
 			return ..()
 
-		if (owner.health < 0 && !isdead(owner))
+		var/effective_health = owner.health
+		if (owner.reagents && owner.reagents.has_reagent("bodmir_draksadd"))
+			effective_health += (25 * log(2, (owner.reagents.get_reagent_amount("bodmir_draksadd")+5)/5))
+		if (effective_health < 0 && !isdead(owner))
 			owner.changeStatus("critical_condition", 10 SECONDS) // Always receive this when in crit
 			if (probmult(5))
 				owner.emote(pick("faint", "collapse", "cry","moan","gasp","shudder","shiver"))
@@ -20,7 +23,7 @@
 				owner.change_misstep_chance(2)
 			if (probmult(5))
 				owner.changeStatus("paralysis", 3 SECONDS)
-			switch(owner.health)
+			switch(effective_health)
 				if (-INFINITY to -100)
 					owner.take_oxygen_deprivation(1 * mult)
 					if (probmult(owner.health * -0.1) && !owner.hasStatus("defibbed"))
@@ -67,7 +70,7 @@
 		var/is_chg = ischangeling(owner)
 		//if (src.brain_op_stage == 4.0) // handled above in handle_organs() now
 			//death()
-		if (owner.get_brain_damage() >= 120 || death_health <= -500) //-200) a shitty test here // let's lower the weight of oxy
+		if (owner.get_brain_damage() >= 120 || (death_health <= -500 && effective_health <= -200)) //-200) a shitty test here // let's lower the weight of oxy
 			if (!is_chg || owner.suiciding)
 				owner.death()
 
@@ -76,7 +79,7 @@
 				boutput(owner, SPAN_ALERT("Your head [pick("feels like shit","hurts like fuck","pounds horribly","twinges with an awful pain")]."))
 				owner.losebreath += 10 * mult
 				owner.changeStatus("weakened", 3 SECONDS * mult)
-		if (owner.health <= -100)
+		if (effective_health <= -100)
 			if ((owner.reagents && owner.reagents.has_reagent("synaptizine") && owner.reagents.has_reagent("atropine")) || ((owner.bodytemperature < owner.base_body_temp - 100 && owner.bodytemperature > owner.base_body_temp - 275 && !owner.hasStatus("burning")) && (owner.reagents && owner.reagents.has_reagent("cryoxadone"))))
 				var/deathchance = min(99, ((owner.get_brain_damage() * -5) + (owner.health + (owner.get_oxygen_deprivation() / 2))) * -0.001)
 				if (probmult(deathchance))

@@ -96,10 +96,9 @@ TYPEINFO(/obj/item/turret_deployer/riot)
 
 /obj/item/turret_deployer/bodmir_brrt
 	name = "B.R.R.T. Deployer"
-	desc = "A high power Bodmir Rapid Rotational Turret used for eradication of intruders. Use it in your hand or throw to deploy."
+	desc = "A high power Bodmir Rotational Rapid Turret used for eradication of intruders. Use it in your hand or throw to deploy."
 	turret_health = 200
 	icon_state = "st_deployer"
-	w_class = W_CLASS_BULKY
 	icon_tag = "st"
 	quick_deploy_fuel = -1
 	associated_turret = /obj/deployable_turret/bodmir_brrt
@@ -562,14 +561,14 @@ ABSTRACT_TYPE(/obj/deployable_turret)
 
 /obj/deployable_turret/bodmir_brrt
 	name = "B.R.R.T."
-	desc = "A deadly Bodmir Rapid Rotational Turret."
+	desc = "A deadly Bodmir Rotational Rapid Turret."
 	health = 200
 	max_health = 200
 	range = 7
 	projectile_type = /datum/projectile/bullet/nine_mm_NATO
 	burst_size = 10
 	fire_rate = 18
-	angle_arc_size = 45
+	angle_arc_size = 60
 	icon_tag = "st"
 	quick_deploy_fuel = -1
 	associated_deployer = /obj/item/turret_deployer/bodmir_brrt
