@@ -1,6 +1,7 @@
 /mob/living/critter/bodmir_cableworm
 	name = "cableworm"
 	real_name = "cableworm"
+	icon_state = "bodmir_cableworm"
 	desc = "It writhes, seeking a host."
 	hand_count = 1
 	density = 0

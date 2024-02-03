@@ -233,3 +233,79 @@ TYPEINFO(/obj/item/gun/reagent/syringe)
 			return
 
 		return ..()
+
+// technically not a child of gun/reagent, but it makes more sense here
+/obj/item/gun/syringe_rifle
+	name = "Acanthaster syringe rifle"
+	desc = "A heavily modified bolt action rifle capable of launching a syringe at dangerous velocities."
+	icon = 'icons/obj/items/guns/kinetic48x32.dmi'
+	icon_state = "syringe_rifle"
+	item_state = "tranq"
+	wear_image_icon = 'icons/mob/clothing/back.dmi'
+	flags =  FPRINT | TABLEPASS | CONDUCT | USEDELAY
+	c_flags = ONBACK
+	force = MELEE_DMG_RIFLE
+	contraband = 6
+	add_residue = 1
+	can_dual_wield = 0
+	two_handed = 1
+	var/capacity = 15
+
+	New()
+		src.create_reagents(capacity)
+		set_current_projectile(new/datum/projectile/syringe)
+		src.UpdateIcon()
+		..()
+
+	move_trigger(var/mob/M, kindof)
+		if (..() && reagents)
+			reagents.move_trigger(M, kindof)
+
+	alter_projectile(var/obj/projectile/P)
+		if(P?.proj_data)
+			if (!P.reagents)
+				P.reagents = new /datum/reagents(P.proj_data.cost)
+				P.reagents.my_atom = P
+			src.reagents.trans_to(P, P.proj_data.cost)
+
+	canshoot(mob/user)
+		if (src.reagents.total_volume)
+			return 1
+		else
+			return 0
+
+	attackby(obj/item/I, mob/user)
+		if (!src.reagents.total_volume && istype(I, /obj/item/reagent_containers/syringe))
+			src.add_syringe(I, user)
+			return
+		return ..()
+
+	afterattack(obj/O as obj, mob/user as mob)
+		if (!src.reagents.total_volume && istype(O, /obj/item/reagent_containers/syringe))
+			src.add_syringe(O, user)
+		else
+			..()
+		return
+
+	update_icon()
+		if (src.reagents.total_volume)
+			inventory_counter.update_number(1)
+		else
+			inventory_counter.update_number(0)
+		return 0
+
+	process_ammo(var/mob/user)
+		if (!canshoot(user))
+			boutput(user, "<span class='alert'>\The [src] isn't loaded!</span>")
+		else
+			src.UpdateIcon()
+		return 1
+
+	proc/add_syringe(var/obj/item/reagent_containers/syringe/S, var/mob/user)
+		if(S.reagents.total_volume)
+			boutput(user, "<span class='notice'>You wedge \the [S] into \the [src].</span>")
+			S.reagents.trans_to(src, src.capacity)
+			qdel(S)
+			src.UpdateIcon()
+		else
+			boutput(user, "<span class='alert'>\The [S] is completely empty, load something with some juice!</span>")
