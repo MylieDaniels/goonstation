@@ -1675,10 +1675,12 @@ ADMIN_INTERACT_PROCS(/obj/item, proc/admin_set_stack_amount)
 
 /obj/item/proc/pickup(mob/user)
 	#ifdef COMSIG_ITEM_PICKUP
-	SEND_SIGNAL(src, COMSIG_ITEM_PICKUP, user)
+	if (SEND_SIGNAL(src, COMSIG_ITEM_PICKUP, user) & ITEM_PICKUP_DONT_PICKUP)
+		return 0
 	#endif
 	#ifdef COMSIG_MOB_PICKUP
-	SEND_SIGNAL(user, COMSIG_MOB_PICKUP, src)
+	if (SEND_SIGNAL(user, COMSIG_MOB_PICKUP, src) & ITEM_PICKUP_DONT_PICKUP)
+		return 0
 	#endif
 	src.material_on_pickup(user)
 	set_mob(user)
@@ -1687,6 +1689,7 @@ ADMIN_INTERACT_PROCS(/obj/item, proc/admin_set_stack_amount)
 		src.inventory_counter.show_count()
 	if (src.c_flags & EQUIPPED_WHILE_HELD)
 		src.equipped(user, user.get_slot_from_item(src))
+	return 1
 
 /obj/item/proc/intent_switch_trigger(mob/user)
 	return

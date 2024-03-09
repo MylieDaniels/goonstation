@@ -126,6 +126,9 @@
 //item attack bitflags
 /// The pre-attack signal doesnt want the attack to continue, so don't
 #define ATTACK_PRE_DONT_ATTACK 1
+//item pickup bitflags
+/// The pickup signal doesnt want the item to be picked up, so don't
+#define ITEM_PICKUP_DONT_PICKUP 1
 
 // Limb Kind Bitflags, to avoid the funky typecheck spam limbs usually need
 /// Limb typically belongs to one of the normal-ass mutantraces
