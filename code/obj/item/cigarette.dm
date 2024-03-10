@@ -922,7 +922,7 @@
 
 
 	pickup(mob/user)
-		..()
+		. = ..()
 		light.attach(user)
 
 	dropped(mob/user)

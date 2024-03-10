@@ -1881,10 +1881,10 @@
 			return 0
 		if (src.limbs && (!src.limbs.l_arm || istype(src.limbs.l_arm, /obj/item/parts/human_parts/arm/left/item)))
 			return 0
-		src.l_hand = I
-		src.r_hand = I
 		if (!I.pickup(src))
 			return 0
+		src.l_hand = I
+		src.r_hand = I
 		if(QDELETED(I))
 			return 0
 		I.add_fingerprint(src)
@@ -1912,9 +1912,9 @@
 						return 0
 					if (src.limbs && (!src.limbs.l_arm || istype(src.limbs.l_arm, /obj/item/parts/human_parts/arm/left/item)))
 						return 0
-					src.l_hand = I
 					if (!I.pickup(src))
 						return 0
+					src.l_hand = I
 					if(QDELETED(I))
 						return 0
 					I.add_fingerprint(src)
@@ -1930,9 +1930,9 @@
 						return 0
 					if (src.limbs && (!src.limbs.r_arm || istype(src.limbs.r_arm, /obj/item/parts/human_parts/arm/right/item)))
 						return 0
-					src.r_hand = I
 					if (!I.pickup(src))
 						return 0
+					src.r_hand = I
 					I.add_fingerprint(src)
 					I.set_loc(src)
 					src.update_inhands()

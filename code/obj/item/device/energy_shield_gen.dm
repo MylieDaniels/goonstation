@@ -68,6 +68,7 @@
 	pickup(var/mob/living/M)
 		if(active)
 			turn_off()
+		return ..()
 
 	proc/turn_on()
 		var/xa

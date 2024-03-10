@@ -59,7 +59,7 @@
 		signal_event("icon_updated")
 
 	pickup(mob/user)
-		..()
+		. = ..()
 		UpdateIcon()
 
 	dropped(mob/user)

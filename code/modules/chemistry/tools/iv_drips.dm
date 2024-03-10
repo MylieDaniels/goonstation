@@ -71,7 +71,7 @@
 		return 1
 
 	pickup(mob/user)
-		..()
+		. = ..()
 		src.UpdateIcon()
 
 	dropped(mob/user)

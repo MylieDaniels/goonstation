@@ -22,7 +22,7 @@
 			light.attach(src)
 
 	pickup(mob/user)
-		..()
+		. = ..()
 		if (light)
 			light.attach(user)
 

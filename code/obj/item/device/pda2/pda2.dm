@@ -330,7 +330,7 @@
 			..()
 
 /obj/item/device/pda2/pickup(mob/user)
-	..()
+	. = ..()
 	if (src.module)
 		src.module.relay_pickup(user)
 

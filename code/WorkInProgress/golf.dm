@@ -52,7 +52,7 @@
 		return
 
 	pickup(user)
-		..()
+		. = ..()
 		putting = TRUE
 
 /obj/ability_button/golf_swing

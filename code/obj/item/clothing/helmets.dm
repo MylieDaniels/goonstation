@@ -911,7 +911,7 @@ TYPEINFO(/obj/item/clothing/head/helmet/siren)
 			src.weeoo_in_progress = 0
 
 	pickup(mob/user)
-		..()
+		. = ..()
 		light.attach(user)
 
 	dropped(mob/user)

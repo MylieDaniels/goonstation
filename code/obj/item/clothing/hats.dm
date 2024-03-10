@@ -182,7 +182,7 @@ proc/filter_trait_hats(var/type)
 		light.attach(src)
 
 	pickup(mob/user)
-		..()
+		. = ..()
 		light.attach(user)
 
 	dropped(mob/user)

@@ -486,6 +486,7 @@ soon the light of the unwaking will rise and the shining ones will not be prepar
 
 	pickup(mob/user)
 		hear_voidSpeak("I will show them the ways, beware the lies of the kings, the confession of a jester will lead you to salvation!")
+		return ..()
 
 	proc/hear_voidSpeak(var/message)
 		if (!message)

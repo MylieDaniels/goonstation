@@ -233,7 +233,7 @@ TYPEINFO(/obj/item/camera_film/large)
 
 	// Update overlay layer for photo to show in hand/backpack
 	pickup()
-		..()
+		. = ..()
 		render_photo_image(HUD_LAYER_2)
 
 	// Update overlay layer for photo when dropping on floor or in belt/bag/container

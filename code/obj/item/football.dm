@@ -201,7 +201,7 @@
 		START_TRACKING_CAT(TR_CAT_GHOST_OBSERVABLES)
 
 	pickup(mob/M)
-		..()
+		. = ..()
 		if (indicator && src.carrier)
 			src.carrier.vis_contents -= indicator
 		if (indicator && M.mind && M.mind.special_role)

@@ -461,7 +461,7 @@
 		var/pickedup = 0
 
 		pickup(mob/user)
-			..()
+			. = ..()
 			if(!pickedup)
 				boutput(user, SPAN_ALERT("Uh oh."))
 				for(var/obj/critter/marsrobot/M in oview(4,src))

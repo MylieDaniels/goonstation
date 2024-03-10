@@ -44,7 +44,7 @@ TYPEINFO(/obj/item/magtractor)
 		return
 
 	pickup(mob/user)
-		..()
+		. = ..()
 		src.holder = user
 		src.verbs |= /obj/item/magtractor/proc/toggleHighPower
 		src.set_mob(user)

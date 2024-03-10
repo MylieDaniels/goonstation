@@ -495,7 +495,7 @@ TYPEINFO(/obj/item/reagent_containers/vape)
 				boutput(owner, "<h2>You have lost [src.name]!</h2>")
 			owner = user
 			DEBUG_MESSAGE("The new artifact owner is [owner.name]")
-		..()
+		return ..()
 
 	dropped(mob/user)
 		. = ..()

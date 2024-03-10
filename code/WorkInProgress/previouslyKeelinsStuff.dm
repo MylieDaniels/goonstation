@@ -296,6 +296,7 @@ var/reverse_mode = 0
 	pickup(mob/living/M)
 		SPAWN(1 MINUTE)
 			processing_items.Add(src)
+		return ..()
 
 	disposing()
 		processing_items.Remove(src)

@@ -1002,7 +1002,7 @@ proc/delete_abcu_blueprint(mob/user, var/browse_all_users = FALSE)
 	pickup(mob/user)
 		using = user
 		updateOverlays()
-		return
+		return ..()
 
 	equipped(var/mob/user, var/slot)
 		..()

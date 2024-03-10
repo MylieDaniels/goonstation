@@ -512,4 +512,4 @@ TYPEINFO(/obj/item/card/emag)
 				if (is_very_visible)
 					owner.vis_contents -= indicator
 			owner = user
-		..()
+		return ..()

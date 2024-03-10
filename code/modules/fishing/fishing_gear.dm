@@ -666,7 +666,7 @@ TYPEINFO(/obj/item/syndie_fishing_rod)
 	pickup(mob/user)
 		if (src.try_embed(user))
 			return
-		..()
+		. = ..()
 
 	pull(mob/user)
 		if (src.try_embed(user))
