@@ -15,6 +15,10 @@
 /mob/proc/do_help(var/mob/living/M)
 	if (!istype(M))
 		return
+	if(SEND_SIGNAL(src, COMSIG_MOB_HELP, M))
+		return
+	if(SEND_SIGNAL(M, COMSIG_MOB_HELPED, src))
+		return
 	src.lastattacked = M
 	if (src != M && M.getStatusDuration("burning")) //help others put out fires!!
 		src.help_put_out_fire(M)

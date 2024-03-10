@@ -231,6 +231,10 @@
 	#define COMSIG_MOB_POINT "mob_point"
 	/// Sent when the mob starts sprinting, return TRUE to prevent other sprint code from running
 	#define COMSIG_MOB_SPRINT "mob_sprint"
+	/// Sent when the mob tries to help another mob, return TRUE to prevent other help code from running (target)
+	#define COMSIG_MOB_HELP "mob_help"
+	/// Sent when the mob is helped by another mob, return TRUE to prevent other help code from running (help user)
+	#define COMSIG_MOB_HELPED "mob_help"
 
 	// ---- cloaking device signal ----
 
