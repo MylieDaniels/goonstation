@@ -54,7 +54,9 @@ var/global/current_state = GAME_STATE_INVALID
 
 
 
-	var/did_mapvote = 0
+	var/did_mapvote = FALSE
+	var/did_reminder = FALSE
+
 	#ifdef LIVE_SERVER
 	if (!player_capa)
 		new /obj/overlay/zamujasa/round_start_countdown/encourage()
@@ -71,7 +73,16 @@ var/global/current_state = GAME_STATE_INVALID
 				// as part of the early start most people might not even see it at 150
 				// so this makes it show up a minute before the game starts
 				handle_mapvote()
-				did_mapvote = 1
+				did_mapvote = TRUE
+
+			if (pregame_timeleft <= 30 && !did_reminder)
+				// hey boo the rounds starting and you didnt ready up
+				var/list/targets = list()
+				for_by_tcl(P, /mob/new_player)
+					if (!P.ready)
+						targets += P
+				playsound_global(targets, 'sound/misc/clock_tick.ogg', 50)
+				did_reminder = TRUE
 
 			if (title_countdown)
 				title_countdown.update_time(pregame_timeleft)
@@ -110,16 +121,43 @@ var/global/current_state = GAME_STATE_INVALID
 	set background = 1
 	//Create and announce mode
 
-	switch(master_mode)
-		if("random","secret") src.mode = config.pick_random_mode()
-		if("action") src.mode = config.pick_mode(pick("nuclear","wizard","blob"))
-		if("intrigue") src.mode = config.pick_mode(pick(prob(300);"mixed_rp", prob(200); "traitor", prob(75);"changeling","vampire", prob(50); "spy_theft","arcfiend","salvager", prob(50); "extended", prob(50); "gang"))
-		if("pod_wars") src.mode = config.pick_mode("pod_wars")
-		else src.mode = config.pick_mode(master_mode)
+	// try to roll a gamemode 10 times before giving up
+	var/attempts_left = 10
+	var/list/failed_modes = list()
+	while(attempts_left > 0)
+		switch(master_mode)
+			if("random","secret") src.mode = config.pick_random_mode(failed_modes)
+			if("action")
+				src.mode = config.pick_mode(pick("nuclear","wizard","blob"))
+			if("intrigue")
+				src.mode = config.pick_mode(pick(prob(300);"traitor", prob(200);"mixed_rp", prob(75);"changeling",prob(75);"vampire", prob(50);"spy_theft", prob(50);"arcfiend", prob(50);"salvager", prob(50);"extended", prob(50);"gang"))
+			if("pod_wars") src.mode = config.pick_mode("pod_wars")
+			else src.mode = config.pick_mode(master_mode)
 
-#if defined(MAP_OVERRIDE_POD_WARS)
-	src.mode = config.pick_mode("pod_wars")
-#endif
+		#if defined(MAP_OVERRIDE_POD_WARS)
+		src.mode = config.pick_mode("pod_wars")
+		#endif
+
+		//Configure mode and assign player to special mode stuff
+		var/can_continue = src.mode.pre_setup()
+
+		if(can_continue)
+			break
+		attempts_left--
+		failed_modes += src.mode.config_tag
+		// no point trying to do this 9 more times if we know whats gonna happen
+		if(src.mode.config_tag == master_mode)
+			attempts_left = 0
+		logTheThing(LOG_DEBUG, null, "Error setting up [mode] for [master_mode], trying [attempts_left] more times.")
+		qdel(src.mode)
+		src.mode = null
+
+	if(!src.mode)
+		logTheThing(LOG_DEBUG, null, "Gamemode selection on mode [master_mode] failed, reverting to pre-game lobby.")
+		boutput(world, "<B>Error setting up [master_mode].</B> reverting to pre-game lobby.")
+		current_state = GAME_STATE_PREGAME
+		SPAWN(0) pregame()
+		return 0
 
 	if(hide_mode)
 		#ifdef RP_MODE
@@ -134,20 +172,8 @@ var/global/current_state = GAME_STATE_INVALID
 	else
 		src.mode.announce()
 
-	//Configure mode and assign player to special mode stuff
-	var/can_continue = src.mode.pre_setup()
-
-	if(!can_continue)
-		qdel(mode)
-
-		current_state = GAME_STATE_PREGAME
-		boutput(world, "<B>Error setting up [master_mode].</B> Reverting to pre-game lobby.")
-
-		SPAWN(0) pregame()
-
-		return 0
-
 	logTheThing(LOG_DEBUG, null, "Chosen game mode: [mode] ([master_mode]) on map [getMapNameFromID(map_setting)].")
+	message_admins("Chosen game mode: [mode] ([master_mode]).")
 
 	//Tell the participation recorder to queue player data while the round starts up
 	participationRecorder.setHold()
@@ -240,7 +266,15 @@ var/global/current_state = GAME_STATE_INVALID
 
 		logTheThing(LOG_STATION, null, "<b>Current round begins</b>")
 		boutput(world, "<FONT class='notice'><B>Enjoy the game!</B></FONT>")
-		boutput(world, "<span class='notice'><b>Tip:</b> [pick(dd_file2list("strings/roundstart_hints.txt"))]</span>")
+
+		for(var/mob/new_player/lobby_player in mobs)
+			if(lobby_player.client)
+				if(lobby_player.client.antag_tokens > 0)
+					winset(lobby_player, "joinmenu", "size=240x200")
+					winset(lobby_player, "joinmenu.observe", "pos=18,136")
+					winset(lobby_player, "joinmenu.button_ready_antag", "is-disabled=true;is-visible=false")
+				winset(lobby_player, "joinmenu.button_joingame", "is-disabled=false;is-visible=true")
+				winset(lobby_player, "joinmenu.button_ready", "is-disabled=true;is-visible=false")
 
 		//Setup the hub site logging
 		var hublog_filename = "data/stats/data.txt"
@@ -252,6 +286,7 @@ var/global/current_state = GAME_STATE_INVALID
 
 		//Tell the participation recorder that we're done FAFFING ABOUT
 		participationRecorder.releaseHold()
+		roundManagement.recordUpdate(mode)
 
 #ifdef BAD_MONKEY_NO_BANANA
 	for_by_tcl(monke, /mob/living/carbon/human/npc/monkey)
@@ -305,6 +340,7 @@ var/global/current_state = GAME_STATE_INVALID
 		DivideOccupations()
 
 	proc/create_characters()
+		// SHOULD_NOT_SLEEP(TRUE)
 		for (var/mob/new_player/player in mobs)
 #ifdef TWITCH_BOT_ALLOWED
 			if (player.twitch_bill_spawn)
@@ -313,9 +349,14 @@ var/global/current_state = GAME_STATE_INVALID
 #endif
 
 			if (player.ready)
-				if (player.mind && player.mind.ckey)
+				var/datum/player/P
+				if (player.mind)
+					P = player.mind.get_player()
+
+				if (player.mind.ckey)
 					//Record player participation in this round via the goonhub API
-					participationRecorder.record(player.mind.ckey)
+					SPAWN(0)
+						participationRecorder.record(P)
 
 				if (player.mind && player.mind.assigned_role == "AI")
 					player.close_spawn_windows()
@@ -325,17 +366,20 @@ var/global/current_state = GAME_STATE_INVALID
 				else if (player.mind && player.mind.special_role == ROLE_WRAITH)
 					player.close_spawn_windows()
 					logTheThing(LOG_DEBUG, player, "<b>Late join</b>: assigned antagonist role: wraith.")
-					antagWeighter.record(role = ROLE_WRAITH, ckey = player.ckey)
+					SPAWN(0)
+						antagWeighter.record(role = ROLE_WRAITH, P = P)
 
 				else if (player.mind && player.mind.special_role == ROLE_BLOB)
 					player.close_spawn_windows()
 					logTheThing(LOG_DEBUG, player, "<b>Late join</b>: assigned antagonist role: blob.")
-					antagWeighter.record(role = ROLE_BLOB, ckey = player.ckey)
+					SPAWN(0)
+						antagWeighter.record(role = ROLE_BLOB, P = P)
 
 				else if (player.mind && player.mind.special_role == ROLE_FLOCKMIND)
 					player.close_spawn_windows()
 					logTheThing(LOG_DEBUG, player, "<b>Late join</b>: assigned antagonist role: flockmind.")
-					antagWeighter.record(role = ROLE_FLOCKMIND, ckey = player.ckey)
+					SPAWN(0)
+						antagWeighter.record(role = ROLE_FLOCKMIND, P = P)
 
 				else if (player.mind)
 					if (player.client.using_antag_token && ticker.mode.antag_token_support)
@@ -344,6 +388,7 @@ var/global/current_state = GAME_STATE_INVALID
 					qdel(player)
 
 	proc/add_minds(var/periodic_check = 0)
+		// SHOULD_NOT_SLEEP(TRUE)
 		for (var/mob/player in mobs)
 			// Who cares about NPCs? Adding them here breaks all antagonist objectives
 			// that attempt to scale with total player count (Convair880).
@@ -377,10 +422,12 @@ var/global/current_state = GAME_STATE_INVALID
 			logTheThing(LOG_DEBUG, null, "<B>SpyGuy/collar key:</B> Did not implant a key because there was not enough players.")
 
 	proc/equip_characters()
+		// SHOULD_NOT_SLEEP(TRUE)
 		for(var/mob/living/carbon/human/player in mobs)
 			if(player.mind && player.mind.assigned_role)
 				if(player.mind.assigned_role != "MODE")
 					player.Equip_Rank(player.mind.assigned_role)
+				spawn_rules_controller.apply_to(player)
 
 	proc/process()
 		if(current_state != GAME_STATE_PLAYING)
@@ -442,12 +489,16 @@ var/global/current_state = GAME_STATE_INVALID
 			current_state = GAME_STATE_FINISHED
 
 			// This does a little more than just declare - it handles all end of round processing
-			//logTheThing(LOG_DEBUG, null, "Zamujasa: [world.timeofday] Starting declare_completion.")
 			try
 				declare_completion()
 			catch(var/exception/e)
 				logTheThing(LOG_DEBUG, null, "Game Completion Runtime: [e.file]:[e.line] - [e.name] - [e.desc]")
 				logTheThing(LOG_DIARY, null, "Game Completion Runtime: [e.file]:[e.line] - [e.name] - [e.desc]", "debug")
+
+			// Various round end tracking for Goonhub
+			src.sendEvents()
+			record_player_playtime()
+			roundManagement.recordEnd()
 
 			// In a funny twist of fate there was no actual logging that the round was officially over.
 			var/total_round_time = (TIME - round_start_time) / (1 SECOND)
@@ -487,7 +538,7 @@ var/global/current_state = GAME_STATE_INVALID
 				if (game_end_delayed == 1)
 					roundend_countdown.update_delayed()
 
-					message_admins("<span class='internal'>Server would have restarted now, but the restart has been delayed[game_end_delayer ? " by [game_end_delayer]" : null]. Remove the delay for an immediate restart.</span>")
+					message_admins(SPAN_INTERNAL("Server would have restarted now, but the restart has been delayed[game_end_delayer ? " by [game_end_delayer]" : null]. Remove the delay for an immediate restart."))
 					game_end_delayed = 2
 					var/ircmsg[] = new()
 					ircmsg["msg"] = "Server would have restarted now, but the restart has been delayed[game_end_delayer ? " by [game_end_delayer]" : null]."
@@ -510,15 +561,38 @@ var/global/current_state = GAME_STATE_INVALID
 			if (elapsed > 0)
 				ticker.round_elapsed_ticks += elapsed
 
+	proc/sendEvents()
+		try
+			// Antags and antag objectives
+			for (var/datum/antagonist/antagonist_role as anything in get_all_antagonists())
+				var/datum/mind/M = antagonist_role.owner
+				var/datum/eventRecord/Antag/antagEvent = new()
+				antagEvent.buildAndSend(antagonist_role)
+
+				if (M.objectives)
+					for (var/datum/objective/objective in M.objectives)
+		#ifdef CREW_OBJECTIVES
+						if (istype(objective, /datum/objective/crew)) continue
+		#endif
+						var/datum/eventRecord/AntagObjective/antagObjectiveEvent = new()
+						antagObjectiveEvent.buildAndSend(antagonist_role, objective)
+
+			// AI Laws
+			for_by_tcl(aiPlayer, /mob/living/silicon/ai)
+				var/laws[] = new()
+				if (aiPlayer.law_rack_connection)
+					laws = aiPlayer.law_rack_connection.format_for_irc()
+				for (var/key in laws)
+					var/datum/eventRecord/AILaw/aiLawEvent = new()
+					aiLawEvent.buildAndSend(aiPlayer, key, laws[key])
+		catch(var/exception/e)
+			logTheThing(LOG_DEBUG, null, "Gameticker Send Events Runtime: [e.file]:[e.line] - [e.name] - [e.desc]")
+			logTheThing(LOG_DIARY, null, "Gameticker Send Events Runtime: [e.file]:[e.line] - [e.name] - [e.desc]", "debug")
+
+
 /datum/controller/gameticker/proc/declare_completion()
 	//End of round statistic collection for goonhub
 	save_flock_stats()
-	//logTheThing(LOG_DEBUG, null, "Zamujasa: [world.timeofday] statlog_traitors")
-	statlog_traitors()
-	//logTheThing(LOG_DEBUG, null, "Zamujasa: [world.timeofday] statlog_ailaws")
-	statlog_ailaws(0)
-	//logTheThing(LOG_DEBUG, null, "Zamujasa: [world.timeofday] round_end_data")
-	round_end_data(1) //Export round end packet (normal completion)
 
 	var/pets_rescued = 0
 	for(var/pet in by_cat[TR_CAT_PETS])
@@ -574,12 +648,12 @@ var/global/current_state = GAME_STATE_INVALID
 			count++
 			if(CO.check_completion())
 				crewMind.completed_objs++
-				boutput(crewMind.current, "<B>Objective #[count]</B>: [CO.explanation_text] <span class='success'><B>Success</B></span>")
+				boutput(crewMind.current, "<B>Objective #[count]</B>: [CO.explanation_text] [SPAN_SUCCESS("<B>Success</B>")]")
 				logTheThing(LOG_DIARY, crewMind, "completed objective: [CO.explanation_text]")
 				if (!isnull(CO.medal_name) && !isnull(crewMind.current))
 					crewMind.current.unlock_medal(CO.medal_name, CO.medal_announce)
 			else
-				boutput(crewMind.current, "<B>Objective #[count]</B>: [CO.explanation_text] <span class='alert'>Failed</span>")
+				boutput(crewMind.current, "<B>Objective #[count]</B>: [CO.explanation_text] [SPAN_ALERT("Failed")]")
 				logTheThing(LOG_DIARY, crewMind, "failed objective: [CO.explanation_text]. Bummer!")
 				allComplete = 0
 				crewMind.all_objs = 0
@@ -594,6 +668,8 @@ var/global/current_state = GAME_STATE_INVALID
 
 	score_tracker.calculate_score()
 	//logTheThing(LOG_DEBUG, null, "Zamujasa: [world.timeofday] score calculated")
+
+	src.creds = new /datum/crewCredits
 
 	var/final_score = score_tracker.final_score_all
 	if (final_score > 200)
@@ -662,7 +738,11 @@ var/global/current_state = GAME_STATE_INVALID
 			job_wage = job_wage_converted
 
 			if (isrobot(player))
-				job_wage = PAY_DOCTORATE
+				var/mob/living/silicon/robot/borg = player
+				if(borg.shell) // is this secretly an AI??
+					job_wage = PAY_IMPORTANT
+				else
+					job_wage = PAY_DOCTORATE
 			if (isAI(player) || isshell(player))
 				job_wage = PAY_IMPORTANT
 
@@ -764,26 +844,31 @@ var/global/current_state = GAME_STATE_INVALID
 					logTheThing(LOG_DEBUG, null, "[player.ckey] lost held item")
 					player.client.persistent_bank_item = "none"
 
-				bulk_commit[player.ckey] = list(
-					"persistent_bank" = list(
-						"command" = "add",
-						"value" = earnings
-					),
-					"persistent_bank_item" = list(
-						"command" = "replace",
+				if (player.client.player.id)
+					if (player.client.persistent_bank_valid)
+						bulk_commit["[bulk_commit.len + 1]"] = list(
+							"player_id" = player.client.player.id,
+							"key" = "persistent_bank",
+							"value" = player.client.persistent_bank + earnings
+						)
+					bulk_commit["[bulk_commit.len + 1]"] = list(
+						"player_id" = player.client.player.id,
+						"key" = "persistent_bank_item",
 						"value" = player.client.persistent_bank_item
 					)
-				)
+
 				SPAWN(0)
 					bank_earnings.pilot_bonus = pilot_bonus
 					bank_earnings.final_payout = earnings
-					bank_earnings.held_item = player.client.persistent_bank_item
-					bank_earnings.new_balance = player.client.persistent_bank + earnings
-					bank_earnings.Subscribe( player.client )
+					if (player.client) // client shit
+						bank_earnings.held_item = player.client.persistent_bank_item
+					if (player.client)
+						bank_earnings.new_balance = player.client.persistent_bank + earnings
+					bank_earnings.Subscribe(player.client)
 
 	//do bulk commit
 	SPAWN(0)
-		cloud_put_bulk(json_encode(bulk_commit))
+		cloud_saves_put_data_bulk(bulk_commit)
 		logTheThing(LOG_DEBUG, null, "Done with spacebux")
 
 	for_by_tcl(P, /obj/bookshelf/persistent) //make the bookshelf save its contents
@@ -803,44 +888,25 @@ var/global/current_state = GAME_STATE_INVALID
 	logTheThing(LOG_DEBUG, null, "Power Generation: [json_encode(station_power_generation)]")
 
 	SPAWN(0)
-		//logTheThing(LOG_DEBUG, null, "Zamujasa: [world.timeofday] creds/new")
-		creds = new /datum/crewCredits
-		//logTheThing(LOG_DEBUG, null, "Zamujasa: [world.timeofday] displaying tickets and scores")
 		for(var/mob/E in mobs)
 			if(E.client)
-				E.verbs += /mob/proc/show_credits
+				if (!E.abilityHolder)
+					E.add_ability_holder(/datum/abilityHolder/generic)
+				E.addAbility(/datum/targetable/crew_credits)
 				if (E.client.preferences.view_tickets)
-					//logTheThing(LOG_DEBUG, null, "Zamujasa: [world.timeofday] sending tickets to [E.ckey]")
 					E.showtickets()
-					//logTheThing(LOG_DEBUG, null, "Zamujasa: [world.timeofday] done sending tickets to [E.ckey]")
-
 				if (E.client.preferences.view_score)
-					//logTheThing(LOG_DEBUG, null, "Zamujasa: [world.timeofday] sending crew credits to [E.ckey]")
 					creds.ui_interact(E)
-					//logTheThing(LOG_DEBUG, null, "Zamujasa: [world.timeofday] done crew credits to [E.ckey]")
 				SPAWN(0) show_xp_summary(E.key, E)
-
-		//logTheThing(LOG_DEBUG, null, "Zamujasa: [world.timeofday] done showing tickets/scores")
-
 	logTheThing(LOG_DEBUG, null, "Did credits")
-
-	//logTheThing(LOG_DEBUG, null, "Zamujasa: [world.timeofday] finished spacebux updates")
-
-	var/list/playtimes = list() //associative list with the format list("ckeys\[[player_ckey]]" = playtime_in_seconds)
-	for_by_tcl(P, /datum/player)
-		if (!P.ckey)
-			continue
-		P.log_leave_time() //get our final playtime for the round (wont cause errors with people who already d/ced bc of smart code)
-		if (!P.current_playtime)
-			continue
-		playtimes["ckeys\[[P.ckey]]"] = round((P.current_playtime / (1 SECOND))) //rounds 1/10th seconds to seconds
-	try
-		apiHandler.queryAPI("playtime/record-multiple", playtimes)
-	catch(var/exception/e)
-		logTheThing(LOG_DEBUG, null, "playtime was unable to be logged because of: [e.name]")
-		logTheThing(LOG_DIARY, null, "playtime was unable to be logged because of: [e.name]", "debug")
 
 	if(global.lag_detection_process.automatic_profiling_on)
 		global.lag_detection_process.automatic_profiling(force_stop=TRUE)
 
 	return 1
+
+/datum/controller/gameticker/proc/get_credits()
+	RETURN_TYPE(/datum/crewCredits)
+	if (!src.creds)
+		src.creds = new /datum/crewCredits
+	return src.creds

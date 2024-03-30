@@ -24,8 +24,8 @@
 		..()
 		BLOCK_SETUP(BLOCK_ROD)
 
-	attack(mob/living/carbon/M, mob/user)
-		if (!wrench_surgery(M, user))
+	attack(mob/target, mob/user, def_zone, is_special = FALSE, params = null)
+		if (!wrench_surgery(target, user))
 			return ..()
 
 /obj/item/wrench/gold
@@ -53,8 +53,8 @@
 	stamina_damage = 55
 
 	New()
-		..()
 		START_TRACKING_CAT(TR_CAT_NUKE_OP_STYLE)
+		..()
 
 	disposing()
 		STOP_TRACKING_CAT(TR_CAT_NUKE_OP_STYLE)

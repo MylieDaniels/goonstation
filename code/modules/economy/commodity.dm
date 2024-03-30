@@ -431,32 +431,32 @@
 /datum/commodity/drugs/poppies
 	comname = "Poppies"
 	comtype = /obj/item/plant/herb/poppy
-	price = PAY_DOCTORATE/2
+	price = PAY_UNTRAINED
 
 /datum/commodity/drugs/shrooms
 	comname = "Psilocybin"
 	comtype = /obj/item/reagent_containers/food/snacks/mushroom/psilocybin
-	price = PAY_DOCTORATE
+	price = PAY_UNTRAINED
 
 /datum/commodity/drugs/cannabis
 	comname = "Cannabis"
 	comtype = /obj/item/plant/herb/cannabis
-	price = PAY_UNTRAINED
+	price = PAY_UNTRAINED/2
 
 /datum/commodity/drugs/cannabis_mega
 	comname = "Rainbow Cannabis"
 	comtype = /obj/item/plant/herb/cannabis/mega
-	price = PAY_DOCTORATE
+	price = PAY_UNTRAINED
 
 /datum/commodity/drugs/cannabis_white
 	comname = "White Cannabis"
 	comtype = /obj/item/plant/herb/cannabis/white
-	price = PAY_DOCTORATE
+	price = PAY_UNTRAINED
 
 /datum/commodity/drugs/cannabis_omega
 	comname = "Omega Cannabis"
 	comtype = /obj/item/plant/herb/cannabis/omega
-	price = PAY_EMBEZZLED
+	price = PAY_TRADESMAN
 
 ///// things you can buy from the traders
 
@@ -494,12 +494,6 @@
 	comname = "Krokodil (1x syringe)"
 	comtype = /obj/item/reagent_containers/syringe/krokodil
 	desc = "A sketchy homemade opiate often used by disgruntled Cosmonauts."
-	price = PAY_UNTRAINED
-
-/datum/commodity/drugs/jenkem
-	comname = "Jenkem (1x syringe)"
-	comtype = /obj/item/reagent_containers/syringe/jenkem
-	desc = "A low quality sewage drug used by no one in the right state of mind."
 	price = PAY_UNTRAINED
 
 /datum/commodity/drugs/lsd
@@ -642,6 +636,12 @@
 	desc = "Pretty much exactly what it sounds like."
 	price = PAY_IMPORTANT
 
+/datum/commodity/contraband/swatmask/NT
+	comname = "Scary NanoTrasen Gasmask"
+	comtype = /obj/item/clothing/mask/gas/swat/NT
+	desc = "Pretty much exactly what it sounds like, but in blue."
+	price = PAY_IMPORTANT
+
 /datum/commodity/contraband/plutonium
 	comname = "Plutonium Core"
 	comtype = /obj/item/plutonium_core
@@ -759,16 +759,13 @@
 	comname = "Scrap Metal"
 	comtype = /obj/item/scrap
 	price = PAY_UNTRAINED/10
+	desc_buy = "We are interested in recycling ground metal scrap."
 
-/datum/commodity/salvage/machinedebris
-	comname = "Twisted Shrapnel"
-	comtype = /obj/decal/cleanable/machine_debris
-	price = PAY_UNTRAINED
-
-/datum/commodity/salvage/robotdebris
-	comname = "Robot Debris"
-	comtype = /obj/decal/cleanable/robot_debris
-	price = PAY_UNTRAINED
+/datum/commodity/salvage/electronic_debris
+	comname = "Electronic Debris"
+	comtype = /obj/item/electronics
+	price = PAY_UNTRAINED/10
+	desc_buy = "We will recover metals from resistors, fuses, and other electronic debris."
 
 /datum/commodity/salvage/robot_upgrades
 	comname = "Cyborg Upgrade"
@@ -2000,7 +1997,7 @@
 	desc = "In respect of those lost during the colonization of the frontier, we are now offering poppies."
 	comtype = /obj/item/plant/herb/poppy
 	onmarket = 0
-	price = PAY_DOCTORATE/2
+	price = PAY_UNTRAINED
 
 /datum/commodity/owlpaint
 	comtype = /obj/item/pod/paintjob/owl

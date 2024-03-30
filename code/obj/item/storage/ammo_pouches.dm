@@ -106,6 +106,7 @@
 		name = "shuriken pouch"
 		desc = "A pouch for carrying shurikens. Guaranteed to not shred."
 		slots = 4
+		can_hold = list(/obj/item/implant/projectile/shuriken)
 		spawn_contents = list(/obj/item/implant/projectile/shuriken = 4)
 
 /obj/item/storage/grenade_pouch
@@ -245,6 +246,18 @@
 	prevent_holding = list(/obj/item/storage)
 	spawn_contents = list(/obj/item/old_grenade/spawner/wasp = 5)
 
+/obj/item/storage/custom_chem_grenade_pouch
+	name = "chemical grenade pouch"
+	desc = "A pouch designed to hold chemical grenades."
+	icon_state = "ammopouch-customchem"
+	health = 6
+	w_class = W_CLASS_SMALL
+	slots = 5
+	opens_if_worn = TRUE
+	prevent_holding = list(/obj/item/storage)
+	spawn_contents = list(/obj/item/chem_grenade/custom = 5)
+
+
 /obj/item/storage/tactical_grenade_pouch
 	name = "tactical grenade pouch"
 	desc = "A pouch designed to hold assorted special-ops grenades."
@@ -313,6 +326,7 @@
 	slots = 3
 	opens_if_worn = TRUE
 	prevent_holding = list(/obj/item/storage)
+	can_hold = list(/obj/item/mine)
 	var/static/list/possible_contents = list(/obj/item/mine/radiation, /obj/item/mine/incendiary, /obj/item/mine/stun, /obj/item/mine/blast)
 
 	make_my_stuff()
@@ -330,6 +344,9 @@
 	slots = 6
 	opens_if_worn = TRUE
 	can_hold = list(/obj/item/ammo, /obj/item/old_grenade, /obj/item/chem_grenade, /obj/item/reagent_containers, /obj/item/deployer/barricade, /obj/item/tool, /obj/item/breaching_charge, /obj/item/pinpointer, /obj/item/mine, /obj/item/remote, /obj/item/device/)
+	midcap //! weaker pouch for gangs
+		desc = "A moderately sized pouch for carrying multiple miscellaneous things at once."
+		slots = 4
 
 /obj/item/storage/sawfly_pouch
 	name = "sawfly pouch"

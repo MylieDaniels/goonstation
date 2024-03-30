@@ -76,6 +76,7 @@ Alien/mutant/other fish:
 #define FISH_CATEGORY_OCEAN "ocean"
 #define FISH_CATEGORY_AQUARIUM "aquarium"
 
+ABSTRACT_TYPE(/obj/item/reagent_containers/food/fish)
 /obj/item/reagent_containers/food/fish
 	icon = 'icons/obj/foodNdrink/food_fish.dmi'
 	inhand_image_icon = 'icons/mob/inhand/hand_food.dmi'
@@ -105,7 +106,7 @@ Alien/mutant/other fish:
 	src.setItemSpecial(/datum/item_special/swipe)
 	src.make_reagents()
 
-/obj/item/reagent_containers/food/fish/attack(mob/M, mob/user)
+/obj/item/reagent_containers/food/fish/attack(mob/target, mob/user, def_zone, is_special = FALSE, params = null)
 	if(user?.bioHolder.HasEffect("clumsy") && prob(50))
 		user.changeStatus("weakened", 2 * src.force SECONDS)
 		JOB_XP(user, "Clown", 1)
@@ -533,6 +534,7 @@ Alien/mutant/other fish:
 	icon_state = "lavafish"
 	inhand_color = "#eb2d2d"
 	rarity = ITEM_RARITY_EPIC
+	firesource = FIRESOURCE_OPEN_FLAME
 
 	New()
 		global.processing_items += src
@@ -545,6 +547,12 @@ Alien/mutant/other fish:
 	process()
 		if (ismob(src.loc) && prob(60))
 			src.loc.changeStatus("burning", pick(3, 5) SECONDS)
+
+	attack(mob/target, mob/user, def_zone, is_special, params)
+		. = ..()
+		if (prob(50))
+			playsound(target, 'sound/impact_sounds/burn_sizzle.ogg', 50, TRUE)
+			target.changeStatus("burning", 2 SECONDS)
 
 /obj/item/reagent_containers/food/fish/igneous_fish
 	name = "igneous fish"
@@ -564,6 +572,10 @@ Alien/mutant/other fish:
 	slice_product = /obj/item/material_piece/wad/blob/random
 
 //other
+
+TYPEINFO(/obj/item/reagent_containers/food/fish/real_goldfish)
+	mat_appearances_to_ignore = list("gold")
+
 /obj/item/reagent_containers/food/fish/real_goldfish
 	name = "prosperity pilchard"
 	desc = "A symbol of good fortune, this fish's shining scales are said to be extremely valuable!."
@@ -571,6 +583,10 @@ Alien/mutant/other fish:
 	inhand_color = "#f0ec08"
 	rarity = ITEM_RARITY_LEGENDARY
 	slice_product = /obj/item/raw_material/gold
+	default_material = "gold"
+
+TYPEINFO(/obj/item/reagent_containers/food/fish/treefish)
+	mat_appearances_to_ignore = list("wood")
 
 /obj/item/reagent_containers/food/fish/treefish
 	name = "arboreal bass"
@@ -580,6 +596,7 @@ Alien/mutant/other fish:
 	inhand_color = "#22c912"
 	rarity = ITEM_RARITY_RARE
 	slice_product = /obj/item/material_piece/organic/wood
+	default_material = "wood"
 
 	slapsound()
 		playsound(src.loc, 'sound/impact_sounds/Bush_Hit.ogg', 50, 1, -1)
@@ -591,3 +608,11 @@ Alien/mutant/other fish:
 			var/fish = pick(/obj/item/reagent_containers/food/fish/salmon,/obj/item/reagent_containers/food/fish/carp,/obj/item/reagent_containers/food/fish/bass)
 			new fish(get_turf(src))
 			qdel(src)
+/obj/item/reagent_containers/food/fish/borgfish
+	name = "Cyborg Fish"
+	desc = "This must be an experiment from a bored roboticist."
+	icon_state = "borgfish"
+	inhand_color = "#b6b5b5"
+	slice_product = /obj/item/material_piece/steel
+	default_material = "steel"
+	rarity = ITEM_RARITY_RARE

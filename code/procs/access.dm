@@ -43,7 +43,7 @@
 							if (!isnull(access_code))
 								// numerical code
 								access_group += access_code
-							else
+							// else
 								// string code
 								// TODO: some sensible lookup, possibly using access_name_lookup (but they're VERY wordy)
 					// add to the src.req_access list (assuming non-empty)
@@ -351,7 +351,7 @@
 			return list(access_maint_tunnels)
 		if("Assistant", "Staff Assistant", "Technical Assistant", "Radio Show Host")
 			return list(access_maint_tunnels, access_tech_storage)
-		if("Mailman")
+		if("Mail Courier")
 			return list(access_maint_tunnels, access_mail, access_heads, access_cargo, access_hangar)
 
 		//////////////////////////// Other or gimmick
