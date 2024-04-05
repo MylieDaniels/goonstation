@@ -772,6 +772,21 @@
 		amount_left = 1
 		max_amount = 1
 
+//0.600
+/*
+/obj/item/ammo/bullets/revolver_600_nitro
+	sname = ".600 Nitro Express"
+	name = ".600 Nitro Express rounds"
+	desc = "A revolver speedoader of .600 Nitro Express rifle rounds. Good lord."
+	icon_state = "38-7"
+	amount_left = 6
+	max_amount = 6
+	ammo_type = new/datum/projectile/bullet/nitro_600
+	ammo_cat = AMMO_RIFLE_600
+	icon_dynamic = 0
+	icon_short = "38"
+	icon_empty = "speedloader_empty"
+*/
 //0.72
 /obj/item/ammo/bullets/a12
 	sname = "12ga Buckshot"

@@ -213,7 +213,8 @@ ABSTRACT_TYPE(/obj/item/gun/kinetic)
 				var/flick_state = src.has_fire_anim_state && src.fire_anim_state ? src.fire_anim_state : src.icon_state
 				flick(flick_state, src)
 
-		if(..() && istype(user.loc, /turf/space) || user.no_gravity)
+		. = ..()
+		if(. && istype(user.loc, /turf/space) || user.no_gravity)
 			user.inertia_dir = get_dir(target, user)
 			step(user, user.inertia_dir)
 
@@ -1710,6 +1711,48 @@ ABSTRACT_TYPE(/obj/item/survival_rifle_barrel)
 			dir_y /= len
 			E.setdir(dir_x, dir_y)
 		. = ..()
+
+//0.600
+/obj/item/gun/kinetic/handcannon
+	name = "\improper Gacrux handcannon"
+	desc = "Almagest Weapons Fabrication's largest revolver, chambered in .600 Nitro Express. Just in case a bull moose gets into space."
+	icon = 'icons/obj/items/guns/kinetic48x32.dmi'
+	icon_state = "handcannon"
+	item_state = "handcannon"
+	force = MELEE_DMG_RIFLE
+	ammo_cats = list(AMMO_CANNON_20MM)
+	max_ammo_capacity = 6
+	//default_magazine = /obj/item/ammo/bullets/revolver_600_nitro
+	default_magazine = /obj/item/ammo/bullets/cannon
+	fire_animation = TRUE
+	recoil_inaccuracy_max = 40
+	recoil_strength = 15
+	recoil_max = 40
+	icon_recoil_cap = 145
+
+	New()
+		ammo = new default_magazine
+		//set_current_projectile(new/datum/projectile/bullet/600_nitro)
+		set_current_projectile(new/datum/projectile/bullet/cannon)
+		..()
+
+	shoot(turf/target, turf/start, mob/user, POX, POY, is_dual_wield, atom/called_target = null)
+		. = ..()
+		if(!.)
+			return
+		var/thrown_x = start.x + ((start.x - target.x) - POX / world.icon_size) + 0.5
+		var/thrown_y = start.y + ((start.y - target.y) - POY / world.icon_size) + 0.5
+		user.throw_at(locate(thrown_x,thrown_y,start.z),round(recoil / 16),3)
+		if(recoil >= 20)
+			if(ishuman(user))
+				boutput(user, SPAN_ALERT("OUGH! Your wrist!"))
+				var/mob/living/carbon/human/H = user
+				H.TakeDamage(H.hand ? "l_arm" : "r_arm", (recoil / 5 - 1) ** 2)
+			else(user.TakeDamage("All", (recoil / 5 - 1) ** 2))
+		if(prob(recoil))
+			user.visible_message(SPAN_ALERT("\The [src] flies out of [user]'s grip!"), SPAN_ALERT("\The [src] flies out of your grip!"))
+			if (user.drop_item(src))
+				src.throw_at(locate(thrown_x,thrown_y,start.z),9,3)
 
 //0.72
 /obj/item/gun/kinetic/spes
