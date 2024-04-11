@@ -797,6 +797,13 @@
 	max_wclass = W_CLASS_NORMAL
 	item_function_flags = IMMUNE_TO_ACID
 
+/obj/item/storage/belt/tactical
+	name = "tactical assault belt"
+	desc = "A military belt with large pouches and sturdy loops, designed to hold larger supplies than a standard belt."
+	icon_state = "tactical_belt"
+	item_state = "tactical_belt"
+	max_wclass = W_CLASS_NORMAL
+
 /obj/item/storage/belt/security
 	name = "security toolbelt"
 	desc = "For the trend-setting officer on the go. Has a place on it to clip a baton and a holster for a small gun."
