@@ -1603,3 +1603,143 @@ ABSTRACT_TYPE(/obj/item/podarmor)
 					if(prob(2)) //we don't want to do this forever so let's explode
 						shipdeath()
 					sleep(0.4 SECONDS)
+
+/obj/machinery/vehicle/pod_massive
+	name = "Dropship C-"
+	icon = 'icons/obj/large/160x160.dmi'
+	icon_state = "placeholder"
+	uses_weapon_overlays = 0
+	var/armor_score_multiplier = 0.2
+	capacity = 2
+	weapon_class = 1
+	health = 1000
+	maxhealth = 1000
+	bound_width = 160
+	bound_height = 160
+	view_offset_x = 64
+	view_offset_y = 64
+	var/maxboom = 0
+
+	New()
+		..()
+		src.sec_system = new /obj/item/shipcomponent/secondary_system/cargo( src )
+		src.sec_system.ship = src
+		src.components += src.sec_system
+		qdel(src.lights)
+		src.lights = new /obj/item/shipcomponent/pod_lights/pod_2x2
+		src.lights.ship = src
+		src.components += src.lights
+		myhud.update_systems()
+		myhud.update_states()
+		return
+
+	AmmoPerShot()
+		return 2
+
+	ShootProjectiles(var/mob/user, var/datum/projectile/PROJ, var/shoot_dir)
+		var/H = (shoot_dir & 3) ? 1 : 0
+		var/V = (shoot_dir & 12) ? 1 : 0
+
+		//fucK ME
+		if (shoot_dir & (shoot_dir-1))
+			if (shoot_dir == SOUTHEAST)
+				var/obj/projectile/P = shoot_projectile_DIR(get_step(get_turf(src), SOUTHEAST), PROJ, shoot_dir, remote_sound_source = src)
+				if (P)
+					P.shooter = src
+					P.mob_shooter = user
+				var/turf/E = get_step(get_turf(src), EAST)
+				P = shoot_projectile_DIR(get_step(E, EAST), PROJ, shoot_dir, remote_sound_source = src)
+				if (P)
+					P.shooter = src
+					P.mob_shooter = user
+			if (shoot_dir == SOUTHWEST)
+				var/obj/projectile/P = shoot_projectile_DIR(get_step(get_turf(src), WEST), PROJ, shoot_dir, remote_sound_source = src)
+				if (P)
+					P.shooter = src
+					P.mob_shooter = user
+				P = shoot_projectile_DIR(get_step(get_turf(src), SOUTH), PROJ, shoot_dir, remote_sound_source = src)
+				if (P)
+					P.shooter = src
+					P.mob_shooter = user
+
+			if (shoot_dir == NORTHEAST)
+				var/turf/NE = get_step(get_turf(src), NORTHEAST)
+
+				var/obj/projectile/P = shoot_projectile_DIR(get_step(NE, NORTH), PROJ, shoot_dir, remote_sound_source = src)
+				if (P)
+					P.shooter = src
+					P.mob_shooter = user
+				P = shoot_projectile_DIR(get_step(NE, EAST), PROJ, shoot_dir, remote_sound_source = src)
+				if (P)
+					P.shooter = src
+					P.mob_shooter = user
+
+			if (shoot_dir == NORTHWEST)
+				var/turf/N = get_step(get_turf(src), NORTH)
+				var/obj/projectile/P = shoot_projectile_DIR(get_step(N, WEST), PROJ, shoot_dir, remote_sound_source = src)
+				if (P)
+					P.mob_shooter = user
+					P.shooter = src
+				P = shoot_projectile_DIR(get_step(N, NORTH), PROJ, shoot_dir, remote_sound_source = src)
+				if (P)
+					P.shooter = src
+					P.mob_shooter = user
+		else
+			if (shoot_dir == SOUTH || shoot_dir == WEST)
+				var/obj/projectile/P = shoot_projectile_DIR(src, PROJ, shoot_dir, remote_sound_source = src)
+				if (P)
+					P.shooter = src
+					P.mob_shooter = user
+					P.pixel_x = H * -5
+					P.pixel_y = V * -5
+			if (shoot_dir == SOUTH || shoot_dir == EAST)
+				var/obj/projectile/P = shoot_projectile_DIR(get_step(get_turf(src), EAST), PROJ, shoot_dir, remote_sound_source = src)
+				if (P)
+					P.shooter = src
+					P.mob_shooter = user
+					P.pixel_x = H * 5
+					P.pixel_y = V * -5
+			if (shoot_dir == NORTH || shoot_dir == WEST)
+				var/obj/projectile/P = shoot_projectile_DIR(get_step(get_turf(src), NORTH), PROJ, shoot_dir, remote_sound_source = src)
+				if (P)
+					P.shooter = src
+					P.mob_shooter = user
+					P.pixel_x = H * -5
+					P.pixel_y = V * 5
+			if (shoot_dir == NORTH || shoot_dir == EAST)
+				var/obj/projectile/P = shoot_projectile_DIR(get_step(get_turf(src), NORTHEAST), PROJ, shoot_dir, remote_sound_source = src)
+				if (P)
+					P.shooter = src
+					P.mob_shooter = user
+					P.pixel_x = H * 5
+					P.pixel_y = V * 5
+
+	ex_act(severity)
+		if(!maxboom)
+			SPAWN(0.1 SECONDS)
+				..()
+				maxboom = 0
+		maxboom = max(severity, maxboom)
+
+/obj/machinery/vehicle/pod_massive/ignis
+	name = "Dropship IGNIS-"
+	desc = "A formidable IGNIS Cell dropship, ready to carry operatives into battle and support them from above. Can accommodate up to eight passengers and a pilot."
+	armor_score_multiplier = 1.25
+	icon_state = "naegling"
+	health = 2000
+	maxhealth = 2000
+	speed = 1.25
+	capacity = 9
+	numbers_in_name = FALSE
+	var/icon/digit_base
+
+	New()
+		..()
+		digit_base = icon("icons/effects/16x16.dmi", "blank")
+		for(var/i=1 to 3)
+			var/digit = rand(0,9)
+			var/icon/digit_icon = icon("icons/effects/number_overlay4x5.dmi", "[digit]")
+			digit_base.Blend(digit_icon, ICON_OVERLAY, 5 * (i - 1) + 1, 1)
+			name += "[digit]"
+		src.UpdateOverlays(image(digit_base,pixel_x=113,pixel_y=79), "digit_overlay")
+

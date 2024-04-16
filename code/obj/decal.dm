@@ -949,3 +949,18 @@ obj/decal/fakeobjects/teleport_pad
 		animate(pixel_y = 64, pixel_x = rand(-64, 0), alpha = 0, time = 1.5 SECONDS, easing = SINE_EASING)
 		SPAWN(2 SECONDS)
 			qdel(src)
+
+/obj/decal/fakeobjects/parked_naegling
+	name = "Naegling-281"
+	desc = "A large dropship used to provide transport and aerial support to Ignis strike teams."
+	icon = 'icons/obj/large/160x160.dmi'
+	icon_state = "naegling"
+	bound_width = 160
+	bound_height = 160
+	pixel_x = -64
+	pixel_y = -64
+	bound_x = -64
+	bound_y = -64
+	anchored = ANCHORED_ALWAYS
+	density = TRUE
+	layer = EFFECTS_LAYER_BASE

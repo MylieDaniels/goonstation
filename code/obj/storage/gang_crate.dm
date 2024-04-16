@@ -6,6 +6,7 @@
 #define GANG_CRATE_AMMO_LIMITED 3 // ammo, but keeps magazines per gun to 1~2 so you dont get 2 knives and 1 gun with 3+ mags
 #define GANG_CRATE_GEAR 2 // healing, cool stuff that stops you dying or helps you
 #define GIMMICK 1 // fun stuff, can be helpful
+#define UNROLLABLE_LOOT -1 // used for loot that is only used in fillers
 
 
 /// Large storage object that spawns in anchored, then can be unlocked by a gang locker, for gang hotzones.
@@ -297,7 +298,6 @@
 	/// Fills all remaining space with instances of random size
 	proc/fill_remaining(loc, tier)
 		var/done = FALSE
-		var/spawnedLootInstances = list()
 		var/pos = new/list(2)
 		pos[1] = 1
 		pos[2] = 1
@@ -308,14 +308,28 @@
 			var/lootSize = choose_random_loot_size(maxSize[1],maxSize[2],tier)
 			place_random_loot_sized(loc, pos[1],pos[2],lootSize[1],lootSize[2],tier)
 
-		return spawnedLootInstances
-
 	/// place a loot object that's been created externally
 	proc/place_loot_instance(loc, x,y,obj/randomloot_spawner/loot, invisible)
 		var/override = add_loot_instance(loc,loot,x,y)
 		if (!invisible && !override)
 			lootGrid.mark_used(x,y,loot.xSize,loot.ySize)
 
+	/// Fills all remaining space with as many instances as possible of a loot object that's been created externally
+	proc/fill_remaining_with_instance(loc, obj/randomloot_spawner/loot)
+		var/done = FALSE
+		var/pos = new/list(2)
+		pos[1] = 1
+		pos[2] = 1
+		while (!done)
+			pos = lootGrid.get_next_empty_space(pos[1],pos[2])
+			if (!pos) break
+			var/maxSize = lootGrid.get_largest_space(pos[1],pos[2])
+			if (maxSize[1] < loot.xSize)
+				pos[2]++
+			else
+				var/override = add_loot_instance(loc,loot,pos[1],pos[2])
+				if (!override)
+					lootGrid.mark_used(pos[1],pos[2],loot.xSize,loot.ySize)
 
 	/// Place a random loot instance of a specific size at a specific position
 	proc/place_random_loot_sized(loc, xPos,yPos,sizeX,sizeY, tier, invisible = FALSE)
@@ -356,6 +370,9 @@
 
 				for(var/childType in childtypes)
 					var/obj/randomloot_spawner/item = new childType()
+					if (item.tier == UNROLLABLE_LOOT)
+						continue
+
 					if (length(totalWeights[spawner]) < item.tier)
 						totalWeights[spawner].len = item.tier
 						weights[spawner].len = item.tier
@@ -801,6 +818,12 @@ ABSTRACT_TYPE(/obj/randomloot_spawner/short)
 	drugs
 		spawn_loot(var/C,var/datum/loot_spawner_info/I)
 			spawn_item(C,I,pick(drug_items),scale_x=0.75,scale_y=0.75)
+	// UNROLLABLE FILLERS
+	two_stx_grenades
+		tier = UNROLLABLE_LOOT
+		spawn_loot(var/C,var/datum/loot_spawner_info/I)
+			spawn_item(C,I,/obj/item/chem_grenade/saxitoxin,off_y=2,scale_x=0.825,scale_y=0.65)
+			spawn_item(C,I,/obj/item/chem_grenade/saxitoxin,off_y=-2,scale_x=0.825,scale_y=0.65)
 
 ABSTRACT_TYPE(/obj/randomloot_spawner/medium)
 /obj/randomloot_spawner/medium //2x1
