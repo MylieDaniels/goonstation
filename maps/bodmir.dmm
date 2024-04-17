@@ -66,6 +66,12 @@
 	},
 /turf/unsimulated/floor/black,
 /area/space)
+"bz" = (
+/obj/cable{
+	icon_state = "4-8"
+	},
+/turf/simulated/floor/plating,
+/area/space)
 "bP" = (
 /turf/unsimulated/floor/engine/caution/corner2{
 	dir = 10
@@ -320,10 +326,6 @@
 "fM" = (
 /turf/unsimulated/floor/engine/caution/west,
 /area/bodmir/outer_deck)
-"fY" = (
-/obj/decal/fakeobjects/parked_naegling,
-/turf/space,
-/area/space)
 "gd" = (
 /obj/machinery/camera/auto/alt,
 /obj/cabinet/restrictedmedical,
@@ -643,6 +645,12 @@
 	dir = 1
 	},
 /area/bodmir/outer_deck)
+"kS" = (
+/obj/lattice,
+/obj/machinery/light/runway_light/delay5,
+/obj/machinery/vehicle/pod_massive/ignis,
+/turf/space,
+/area/space)
 "lq" = (
 /obj/machinery/light/emergencyflashing{
 	dir = 1
@@ -693,6 +701,18 @@
 	dir = 6
 	},
 /turf/simulated/floor/red/redblackchecker,
+/area/space)
+"lT" = (
+/obj/item/dagger/syndicate{
+	pixel_x = 13;
+	pixel_y = -5
+	},
+/mob/living/critter/small_animal/slug/snail{
+	desc = "Entombed for eternity, and now you look upon it. You fool.";
+	nodamage = 1;
+	name = "immortal snail"
+	},
+/turf/simulated/floor/plating,
 /area/space)
 "mu" = (
 /turf/unsimulated/floor/carpet/wizard,
@@ -1227,9 +1247,6 @@
 	pixel_x = 8
 	},
 /obj/table/syndicate/auto,
-/obj/machinery/camera/auto{
-	dir = 6
-	},
 /turf/simulated/floor/red/redblackchecker,
 /area/space)
 "wM" = (
@@ -1265,6 +1282,9 @@
 	pixel_y = -2
 	},
 /obj/table/syndicate/auto,
+/obj/machinery/camera/auto{
+	dir = 8
+	},
 /turf/simulated/floor/red/redblackchecker,
 /area/space)
 "wS" = (
@@ -1938,6 +1958,10 @@
 	},
 /turf/simulated/wall/auto/reinforced/supernorn/blackred,
 /area/bodmir)
+"Ig" = (
+/obj/machinery/computer/power_monitor/smes,
+/turf/simulated/floor/plating,
+/area/space)
 "Ik" = (
 /turf/simulated/wall/auto/reinforced/supernorn/blackred,
 /area/bodmir)
@@ -2002,6 +2026,17 @@
 /obj/item/clothing/suit/bedsheet/black,
 /turf/unsimulated/floor/carpet/wizard/standard/edge/sw,
 /area/bodmir)
+"JQ" = (
+/obj/machinery/power/smes{
+	charge = 1e+006;
+	chargelevel = 15000;
+	output = 10000
+	},
+/obj/cable{
+	icon_state = "0-4"
+	},
+/turf/simulated/floor/plating,
+/area/space)
 "Ka" = (
 /obj/machinery/conveyor/NS{
 	id = "bodmir-cannon-belt";
@@ -2199,6 +2234,9 @@
 /obj/machinery/light/small/floor/frostedred,
 /turf/unsimulated/floor/engine,
 /area/bodmir/outer_deck)
+"MG" = (
+/turf/simulated/floor/red/redblackchecker,
+/area/space)
 "ML" = (
 /obj/item/device/detective_scanner/detective{
 	pixel_y = -4;
@@ -55224,16 +55262,16 @@ bc
 bc
 bc
 Lu
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
 Lu
 bc
 bc
@@ -56930,14 +56968,14 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+HC
+HC
+HC
+HC
+HC
+HC
+HC
+HC
 bc
 bc
 bc
@@ -57232,14 +57270,14 @@ bc
 bc
 bc
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+HC
+MG
+MG
+MG
+MG
+MG
+MG
+HC
 bc
 bc
 bc
@@ -57535,12 +57573,12 @@ bc
 bc
 HC
 HC
-bc
-bc
-bc
-bc
-bc
-bc
+MG
+MG
+MG
+MG
+MG
+MG
 HC
 HC
 HC
@@ -57813,7 +57851,7 @@ eX
 eX
 eX
 HC
-HC
+bc
 bc
 bc
 bc
@@ -57837,12 +57875,12 @@ wp
 HC
 Lu
 HC
-bc
-bc
-bc
-bc
-bc
-bc
+MG
+MG
+MG
+MG
+MG
+MG
 HC
 kK
 Jg
@@ -58114,7 +58152,7 @@ HC
 HC
 eX
 eX
-eX
+HC
 HC
 bc
 bc
@@ -58139,12 +58177,12 @@ eX
 HC
 Ow
 HC
-bc
+MG
 aa
 MR
-bc
-HC
-bc
+MG
+MG
+MG
 HC
 Mf
 eA
@@ -58713,7 +58751,7 @@ uT
 zo
 oV
 Ja
-rx
+kS
 gx
 Eu
 eX
@@ -59315,7 +59353,7 @@ bc
 bc
 bc
 pp
-fY
+bc
 bc
 pp
 bc
@@ -60231,14 +60269,14 @@ eX
 eX
 HC
 SV
-SV
+Ig
 SV
 SV
 HC
 OA
 OA
 OA
-SV
+HC
 OA
 OA
 OA
@@ -60533,10 +60571,10 @@ eX
 HC
 HC
 SV
+JQ
 SV
 SV
 SV
-HC
 oc
 oc
 oc
@@ -60835,10 +60873,10 @@ eX
 iB
 SV
 SV
+bz
 SV
 SV
 SV
-HC
 SV
 SV
 SV
@@ -61140,14 +61178,14 @@ SV
 SV
 SV
 SV
-HC
-HC
-HC
-HC
-HC
 SV
 SV
-HC
+SV
+SV
+SV
+SV
+SV
+SV
 HC
 cW
 ho
@@ -62070,7 +62108,7 @@ ho
 ho
 ot
 HC
-HC
+lT
 HC
 CN
 Jg
@@ -63680,16 +63718,16 @@ bc
 bc
 bc
 Lu
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
+Lu
 Lu
 bc
 bc

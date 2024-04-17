@@ -1725,7 +1725,7 @@ ABSTRACT_TYPE(/obj/item/podarmor)
 	name = "Dropship IGNIS-"
 	desc = "A formidable IGNIS Cell dropship, ready to carry operatives into battle and support them from above. Can accommodate up to eight passengers and a pilot."
 	armor_score_multiplier = 1.25
-	icon_state = "naegling"
+	icon_state = "ignis"
 	health = 2000
 	maxhealth = 2000
 	speed = 1.25
