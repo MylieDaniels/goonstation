@@ -1731,15 +1731,31 @@ ABSTRACT_TYPE(/obj/item/podarmor)
 	speed = 1.25
 	capacity = 9
 	numbers_in_name = FALSE
-	var/icon/digit_base
+	var/image/digit_image
 
 	New()
-		..()
-		digit_base = icon("icons/effects/16x16.dmi", "blank")
+		. = ..()
+		var/icon/digit_base = icon("icons/effects/16x16.dmi", "blank")
 		for(var/i=1 to 3)
 			var/digit = rand(0,9)
 			var/icon/digit_icon = icon("icons/effects/number_overlay4x5.dmi", "[digit]")
 			digit_base.Blend(digit_icon, ICON_OVERLAY, 5 * (i - 1) + 1, 1)
 			name += "[digit]"
-		src.UpdateOverlays(image(digit_base,pixel_x=113,pixel_y=79), "digit_overlay")
+		digit_image = image(digit_base,pixel_x=31,pixel_y=99)
+		digit_image.transform = matrix(180, MATRIX_ROTATE)
+		src.UpdateOverlays(digit_image, "digit_overlay")
+
+	set_dir(new_dir)
+		if (src.dir != new_dir)
+			switch(new_dir)
+				if(SOUTH)
+					digit_image.transform = matrix(180, MATRIX_ROTATE)
+					digit_image.pixel_x = 31
+					digit_image.pixel_y = 99
+				if(NORTH)
+					digit_image.transform = null
+					digit_image.pixel_x = 113
+					digit_image.pixel_y = 74
+			src.UpdateOverlays(digit_image, "digit_overlay")
+		. = ..()
 

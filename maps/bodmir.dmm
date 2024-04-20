@@ -66,6 +66,19 @@
 	},
 /turf/unsimulated/floor/black,
 /area/space)
+"bp" = (
+/obj/item/storage/belt/tactical,
+/obj/table/syndicate/auto,
+/obj/machinery/light/small/floor/warm,
+/obj/item/dagger/syndicate/specialist{
+	pixel_x = 5
+	},
+/obj/item/gun/kinetic/smg/empty{
+	pixel_y = 9;
+	pixel_x = -5
+	},
+/turf/simulated/floor/red/redblackchecker,
+/area/space)
 "bz" = (
 /obj/cable{
 	icon_state = "4-8"
@@ -220,15 +233,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/space)
-"eH" = (
-/obj/item/gun/kinetic/smg/empty{
-	pixel_y = 5;
-	pixel_x = -5
-	},
-/obj/item/storage/belt/tactical,
-/obj/table/syndicate/auto,
-/turf/simulated/floor/red/redblackchecker,
-/area/space)
 "eN" = (
 /obj/table/reinforced/industrial/auto,
 /obj/item/sheet/glass/reinforced/fullstack{
@@ -323,6 +327,35 @@
 	dir = 4
 	},
 /area/bodmir)
+"fI" = (
+/obj/table/reinforced/industrial/auto,
+/obj/item/breaching_charge{
+	pixel_x = -5;
+	pixel_y = 14
+	},
+/obj/item/breaching_charge{
+	pixel_x = 7;
+	pixel_y = 11
+	},
+/obj/item/breaching_charge{
+	pixel_x = 7;
+	pixel_y = 4
+	},
+/obj/item/breaching_charge{
+	pixel_x = -5;
+	pixel_y = 8
+	},
+/obj/item/breaching_charge{
+	pixel_x = 7;
+	pixel_y = -2
+	},
+/obj/item/breaching_charge{
+	pixel_x = -5;
+	pixel_y = 1
+	},
+/obj/machinery/light/small/floor/warm,
+/turf/simulated/floor/red/redblackchecker,
+/area/space)
 "fM" = (
 /turf/unsimulated/floor/engine/caution/west,
 /area/bodmir/outer_deck)
@@ -376,29 +409,6 @@
 	dir = 1
 	},
 /area/bodmir)
-"ig" = (
-/obj/machinery/alarm{
-	pixel_y = 20
-	},
-/obj/table/reinforced/industrial/auto,
-/obj/item/dagger/syndicate/specialist{
-	pixel_x = 15
-	},
-/obj/item/dagger/syndicate/specialist{
-	pixel_x = 10
-	},
-/obj/item/dagger/syndicate/specialist{
-	pixel_x = -10
-	},
-/obj/item/dagger/syndicate/specialist{
-	pixel_x = -5
-	},
-/obj/item/dagger/syndicate/specialist,
-/obj/item/dagger/syndicate/specialist{
-	pixel_x = 5
-	},
-/turf/simulated/floor/red/redblackchecker,
-/area/space)
 "iB" = (
 /obj/machinery/door/poddoor/blast/pyro,
 /turf/simulated/floor/plating,
@@ -477,20 +487,6 @@
 /obj/decoration/syndiepc/syndiepc3,
 /turf/unsimulated/floor/black,
 /area/bodmir)
-"jF" = (
-/obj/item/deployer/barricade{
-	pixel_y = -6
-	},
-/obj/item/deployer/barricade{
-	pixel_y = 4;
-	pixel_x = -2
-	},
-/obj/item/deployer/barricade{
-	pixel_x = 4
-	},
-/obj/item_dispenser/barricade,
-/turf/simulated/floor/red/redblackchecker,
-/area/space)
 "jG" = (
 /obj/machinery/door/airlock/pyro/glass{
 	name = "Operating Theatre"
@@ -500,34 +496,6 @@
 "jL" = (
 /turf/space,
 /area/bodmir)
-"jT" = (
-/obj/table/reinforced/industrial/auto,
-/obj/item/implanter/freedom{
-	pixel_y = 17;
-	pixel_x = 1
-	},
-/obj/item/implanter/freedom{
-	pixel_y = 13;
-	pixel_x = -4
-	},
-/obj/item/implanter/freedom{
-	pixel_y = 10;
-	pixel_x = 2
-	},
-/obj/item/implanter/freedom{
-	pixel_y = 4;
-	pixel_x = -4
-	},
-/obj/item/implanter/freedom{
-	pixel_y = 13
-	},
-/obj/item/implanter/freedom{
-	pixel_y = 4;
-	pixel_x = 5
-	},
-/obj/machinery/light/small/floor/warm,
-/turf/simulated/floor/red/redblackchecker,
-/area/space)
 "jV" = (
 /obj/machinery/conveyor/NE{
 	id = "bodmir-cannon-belt";
@@ -648,7 +616,9 @@
 "kS" = (
 /obj/lattice,
 /obj/machinery/light/runway_light/delay5,
-/obj/machinery/vehicle/pod_massive/ignis,
+/obj/machinery/vehicle/pod_massive/ignis{
+	dir = 1
+	},
 /turf/space,
 /area/space)
 "lq" = (
@@ -817,6 +787,26 @@
 /obj/item/reagent_containers/iv_drip/blood,
 /turf/unsimulated/floor/sanitary/white,
 /area/bodmir)
+"nN" = (
+/obj/table/reinforced/industrial/auto,
+/obj/item/dagger/syndicate/specialist{
+	pixel_x = 15
+	},
+/obj/item/dagger/syndicate/specialist{
+	pixel_x = 10
+	},
+/obj/item/dagger/syndicate/specialist{
+	pixel_x = -10
+	},
+/obj/item/dagger/syndicate/specialist{
+	pixel_x = -5
+	},
+/obj/item/dagger/syndicate/specialist,
+/obj/item/dagger/syndicate/specialist{
+	pixel_x = 5
+	},
+/turf/simulated/floor/red/redblackchecker,
+/area/space)
 "nR" = (
 /obj/machinery/conveyor/NS{
 	id = "bodmir-cannon-belt";
@@ -863,16 +853,6 @@
 "ok" = (
 /turf/unsimulated/wall/auto/reinforced/supernorn,
 /area/bodmir)
-"ot" = (
-/obj/item/gun/kinetic/smg/empty{
-	pixel_y = 5;
-	pixel_x = -5
-	},
-/obj/machinery/light/small/floor/warm,
-/obj/item/storage/belt/tactical,
-/obj/table/syndicate/auto,
-/turf/simulated/floor/red/redblackchecker,
-/area/space)
 "ov" = (
 /obj/machinery/drainage/big,
 /turf/unsimulated/floor/redwhite{
@@ -959,6 +939,18 @@
 	},
 /turf/unsimulated/floor/black,
 /area/bodmir)
+"ps" = (
+/obj/item/storage/belt/tactical,
+/obj/table/syndicate/auto,
+/obj/item/dagger/syndicate/specialist{
+	pixel_x = 5
+	},
+/obj/item/gun/kinetic/smg/empty{
+	pixel_y = 9;
+	pixel_x = -5
+	},
+/turf/simulated/floor/red/redblackchecker,
+/area/space)
 "pF" = (
 /obj/decoration/syndiepc/syndiepc5,
 /obj/map/light/dimred,
@@ -1303,6 +1295,45 @@
 	},
 /turf/simulated/floor/twotone/black,
 /area/space)
+"xr" = (
+/obj/table/reinforced/industrial/auto,
+/obj/item/storage/firstaid/oxygen{
+	pixel_x = 4;
+	pixel_y = 15
+	},
+/obj/item/storage/firstaid/toxin{
+	pixel_y = 12;
+	pixel_x = -7
+	},
+/obj/item/storage/firstaid/brain{
+	pixel_x = -3;
+	pixel_y = 14
+	},
+/obj/item/storage/firstaid/fire{
+	pixel_x = -7
+	},
+/obj/item/storage/firstaid/fire{
+	pixel_y = 3;
+	pixel_x = 6
+	},
+/obj/item/storage/firstaid/fire{
+	pixel_y = 5
+	},
+/obj/item/storage/firstaid/brute{
+	pixel_x = 6;
+	pixel_y = -5
+	},
+/obj/item/storage/firstaid/brute{
+	pixel_x = -5;
+	pixel_y = -3
+	},
+/obj/item/storage/firstaid/brute{
+	pixel_x = 2;
+	pixel_y = -1
+	},
+/obj/machinery/light/small/floor/warm,
+/turf/simulated/floor/red/redblackchecker,
+/area/space)
 "xE" = (
 /turf/unsimulated/floor/blackwhite,
 /area/bodmir)
@@ -1342,6 +1373,12 @@
 	dir = 9
 	},
 /area/bodmir)
+"yf" = (
+/obj/machinery/alarm{
+	pixel_y = 20
+	},
+/turf/space,
+/area/space)
 "yi" = (
 /obj/table/wood/auto/desk,
 /turf/unsimulated/floor/redwhite{
@@ -1687,15 +1724,6 @@
 	dir = 9
 	},
 /area/bodmir/outer_deck)
-"EI" = (
-/obj/item/gun/kinetic/smg/empty{
-	pixel_y = 9
-	},
-/obj/item/storage/belt/tactical,
-/obj/table/syndicate/auto,
-/obj/machinery/light/small/floor/warm,
-/turf/simulated/floor/red/redblackchecker,
-/area/space)
 "EM" = (
 /obj/stool/chair/office/syndie{
 	dir = 8
@@ -1726,6 +1754,35 @@
 	pixel_y = 32
 	},
 /turf/simulated/floor/plating,
+/area/space)
+"Fo" = (
+/obj/table/reinforced/industrial/auto,
+/obj/machinery/light/small/floor/warm,
+/obj/item/storage/grenade_pouch/smoke{
+	pixel_y = 6;
+	pixel_x = 11
+	},
+/obj/item/storage/grenade_pouch/smoke{
+	pixel_y = 1;
+	pixel_x = 11
+	},
+/obj/item/storage/grenade_pouch/smoke{
+	pixel_y = -4;
+	pixel_x = 11
+	},
+/obj/item/storage/grenade_pouch/smoke{
+	pixel_y = 6;
+	pixel_x = -3
+	},
+/obj/item/storage/grenade_pouch/smoke{
+	pixel_y = 1;
+	pixel_x = -3
+	},
+/obj/item/storage/grenade_pouch/smoke{
+	pixel_y = -4;
+	pixel_x = -3
+	},
+/turf/simulated/floor/red/redblackchecker,
 /area/space)
 "Fr" = (
 /obj/decal/poster/wallsign/danger_highvolt{
@@ -1806,6 +1863,18 @@
 	},
 /turf/unsimulated/floor/wood/six,
 /area/bodmir)
+"FV" = (
+/obj/item/storage/belt/tactical,
+/obj/table/syndicate/auto,
+/obj/item/dagger/syndicate/specialist{
+	pixel_x = 5
+	},
+/obj/item/gun/kinetic/smg/empty{
+	pixel_y = 5;
+	pixel_x = -5
+	},
+/turf/simulated/floor/red/redblackchecker,
+/area/space)
 "FY" = (
 /obj/table/reinforced/industrial/auto,
 /obj/item/breaching_charge{
@@ -2187,14 +2256,6 @@
 /obj/machinery/light/small/floor/warm,
 /turf/simulated/floor/red/redblackchecker,
 /area/space)
-"LL" = (
-/obj/item/gun/kinetic/smg/empty{
-	pixel_y = 9
-	},
-/obj/item/storage/belt/tactical,
-/obj/table/syndicate/auto,
-/turf/simulated/floor/red/redblackchecker,
-/area/space)
 "Mf" = (
 /obj/machinery/conveyor/SN{
 	id = "bodmir-cannon-belt";
@@ -2225,11 +2286,6 @@
 	dir = 5
 	},
 /area/bodmir/outer_deck)
-"MD" = (
-/obj/storage/crate/stxcrate/filled,
-/obj/machinery/light/small/floor/warm,
-/turf/simulated/floor/red/redblackchecker,
-/area/space)
 "ME" = (
 /obj/machinery/light/small/floor/frostedred,
 /turf/unsimulated/floor/engine,
@@ -2538,6 +2594,34 @@
 	dir = 8
 	},
 /area/bodmir/outer_deck)
+"SF" = (
+/obj/item/storage/pouch/bullet_9mm/smg{
+	pixel_y = 11;
+	pixel_x = 7
+	},
+/obj/item/storage/pouch/bullet_9mm/smg{
+	pixel_y = 11;
+	pixel_x = -7
+	},
+/obj/item/storage/pouch/bullet_9mm/smg{
+	pixel_y = 6;
+	pixel_x = -7
+	},
+/obj/item/storage/pouch/bullet_9mm/smg{
+	pixel_y = 6;
+	pixel_x = 7
+	},
+/obj/item/storage/pouch/bullet_9mm/smg{
+	pixel_y = 1;
+	pixel_x = -7
+	},
+/obj/item/storage/pouch/bullet_9mm/smg{
+	pixel_y = 1;
+	pixel_x = 7
+	},
+/obj/storage/crate/classcrate,
+/turf/simulated/floor/red/redblackchecker,
+/area/space)
 "SV" = (
 /turf/simulated/floor/plating,
 /area/space)
@@ -2599,6 +2683,30 @@
 	dir = 4
 	},
 /turf/simulated/floor/plating,
+/area/space)
+"Vk" = (
+/obj/item/deployer/barricade{
+	pixel_y = -6
+	},
+/obj/item/deployer/barricade{
+	pixel_y = 4;
+	pixel_x = -2
+	},
+/obj/item/deployer/barricade{
+	pixel_x = 4
+	},
+/obj/item/deployer/barricade{
+	pixel_y = 1;
+	pixel_x = 8
+	},
+/obj/item/deployer/barricade{
+	pixel_x = -5;
+	pixel_y = -3
+	},
+/obj/item/deployer/barricade{
+	pixel_x = 3
+	},
+/turf/simulated/floor/red/redblackchecker,
 /area/space)
 "Vm" = (
 /obj/machinery/light/incandescent/warm{
@@ -2689,6 +2797,19 @@
 /obj/item/reagent_containers/glass/oilcan,
 /obj/item/clothing/gloves/black,
 /turf/simulated/floor/plating,
+/area/space)
+"Xf" = (
+/obj/machinery/light/small/floor/warm,
+/obj/item/storage/belt/tactical,
+/obj/table/syndicate/auto,
+/obj/item/dagger/syndicate/specialist{
+	pixel_x = 5
+	},
+/obj/item/gun/kinetic/smg/empty{
+	pixel_y = 5;
+	pixel_x = -5
+	},
+/turf/simulated/floor/red/redblackchecker,
 /area/space)
 "Xk" = (
 /obj/railing/steel{
@@ -2803,6 +2924,12 @@
 /obj/grille/steel,
 /turf/unsimulated/floor/red,
 /area/bodmir)
+"ZJ" = (
+/obj/machinery/light/incandescent/warm{
+	dir = 1
+	},
+/turf/simulated/floor/industrial,
+/area/space)
 "ZN" = (
 /obj/machinery/light/emergencyflashing{
 	dir = 4
@@ -58809,15 +58936,15 @@ bc
 bc
 bc
 bc
+xr
+ho
+ho
+LK
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+MG
+ho
+ho
+MG
 bc
 bc
 bc
@@ -59111,15 +59238,15 @@ bc
 bc
 bc
 bc
+MG
+ho
+ho
+QB
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+MG
+ho
+ho
+MG
 bc
 bc
 bc
@@ -59413,15 +59540,15 @@ bc
 bc
 bc
 bc
+nN
+ho
+ho
+sR
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+MG
+ho
+ho
+MG
 bc
 bc
 bc
@@ -59715,15 +59842,15 @@ bc
 bc
 bc
 bc
+Fo
+ho
+ho
+fI
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+MG
+ho
+ho
+MG
 bc
 bc
 bc
@@ -60006,10 +60133,10 @@ HC
 HC
 HC
 HC
-HC
-HC
 bc
 bc
+HC
+HC
 bc
 bc
 bc
@@ -60307,8 +60434,10 @@ qo
 HC
 wq
 HC
+MG
 ho
 ho
+MG
 HC
 bc
 bc
@@ -60317,17 +60446,15 @@ bc
 bc
 bc
 bc
+SF
+ho
+ho
+Vk
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+MG
+ho
+ho
+MG
 bc
 bc
 bc
@@ -60593,9 +60720,9 @@ eX
 HC
 Ow
 HC
-jT
 FK
-FY
+ho
+ho
 LK
 HC
 Av
@@ -60609,8 +60736,10 @@ qo
 Fs
 SV
 HC
+MG
 ho
 ho
+MG
 HC
 bc
 bc
@@ -60619,17 +60748,15 @@ bc
 bc
 bc
 bc
+bp
+ho
+ho
+Xf
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+MG
+ho
+ho
+MG
 bc
 bc
 bc
@@ -60895,7 +61022,7 @@ wp
 HC
 Lu
 HC
-jF
+Vk
 ho
 ho
 QB
@@ -60911,8 +61038,10 @@ qo
 SV
 wu
 HC
+MG
 ho
 ho
+MG
 HC
 bc
 bc
@@ -60921,17 +61050,15 @@ bc
 bc
 bc
 bc
+FV
+ho
+ho
+ps
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+MG
+ho
+ho
+MG
 bc
 bc
 bc
@@ -61192,12 +61319,12 @@ ho
 ho
 gf
 HC
-eX
-eX
+ho
+ho
 HC
 HC
 HC
-ig
+nN
 ho
 ho
 sR
@@ -61213,8 +61340,10 @@ Fe
 SV
 ox
 HC
+MG
 ho
 ho
+MG
 HC
 bc
 bc
@@ -61223,17 +61352,15 @@ bc
 bc
 bc
 bc
+bp
+ho
+ho
+Xf
 bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
-bc
+MG
+ho
+ho
+MG
 bc
 bc
 bc
@@ -61494,15 +61621,15 @@ ho
 ho
 Zg
 HC
-yX
-eX
-eX
-eX
+ZJ
+ho
+ho
+ho
 HC
 lH
 ho
 ho
-MD
+FY
 HC
 aM
 YD
@@ -61515,11 +61642,11 @@ fj
 SV
 WM
 HC
+HC
 ho
 ho
 HC
-bc
-bc
+HC
 bc
 bc
 bc
@@ -61796,14 +61923,14 @@ ho
 ho
 Se
 HC
-eX
-eX
-eX
-eX
-HC
-HC
 ho
 ho
+ho
+ho
+HC
+HC
+yf
+bc
 HC
 HC
 HC
@@ -61817,11 +61944,11 @@ qo
 Fs
 SV
 HC
+MG
 ho
 ho
+MG
 HC
-bc
-bc
 bc
 bc
 bc
@@ -62104,9 +62231,9 @@ ho
 ho
 ho
 ho
-ho
-ho
-ot
+bc
+bc
+bc
 HC
 lT
 HC
@@ -62119,11 +62246,11 @@ qo
 HC
 ki
 HC
+MG
 ho
 ho
+MG
 HC
-bc
-bc
 bc
 bc
 bc
@@ -62407,8 +62534,8 @@ Nf
 ho
 Vm
 ho
-ho
-LL
+bc
+bc
 HC
 HC
 HC
@@ -62421,11 +62548,11 @@ HC
 HC
 SV
 HC
+MG
 ho
 ho
+MG
 HC
-bc
-bc
 bc
 bc
 bc
@@ -62707,10 +62834,10 @@ HC
 Av
 Rs
 HC
-HC
-ho
-ho
-ot
+bc
+bc
+bc
+bc
 HC
 YC
 SV
@@ -62723,11 +62850,11 @@ SV
 SV
 SV
 HC
+MG
 ho
 ho
+MG
 HC
-bc
-bc
 bc
 bc
 bc
@@ -63009,10 +63136,10 @@ Eg
 vf
 np
 HC
-EI
-ho
-ho
-HC
+bc
+bc
+bc
+bc
 HC
 HC
 HC
@@ -63025,11 +63152,11 @@ HC
 HC
 HC
 HC
+HC
 ho
 ho
 HC
-bc
-bc
+HC
 bc
 bc
 bc
@@ -63311,10 +63438,10 @@ rn
 HP
 NZ
 HC
-eH
-ho
-ho
-ho
+bc
+bc
+bc
+bc
 ho
 ho
 ho
@@ -63329,8 +63456,8 @@ ho
 ho
 ho
 ho
+ho
 HC
-bc
 bc
 bc
 bc
@@ -63613,10 +63740,10 @@ Ad
 MZ
 AY
 HC
-EI
-ho
-Vm
-ho
+bc
+bc
+bc
+bc
 ho
 ho
 Vm
@@ -63631,8 +63758,8 @@ Vm
 ho
 ho
 ho
+ho
 HC
-bc
 bc
 bc
 bc
@@ -63934,7 +64061,7 @@ HC
 HC
 HC
 HC
-bc
+HC
 bc
 bc
 bc
