@@ -505,37 +505,8 @@ TYPEINFO(/obj/storage/crate/chest)
 	icon_closed = "attachecase"
 	weld_image_offset_Y = -5
 
-	demo
-		name = "Class Crate - Grenadier"
-		desc = "A crate containing a Specialist Operative loadout. This one features a hand-held grenade launcher and a pile of ordnance."
-		spawn_contents = list(/obj/item/gun/kinetic/grenade_launcher,
-		/obj/item/storage/pouch/grenade_round,
-		/obj/item/storage/grenade_pouch/mixed_explosive,
-		/obj/item/clothing/suit/space/syndicate/specialist/grenadier,
-		/obj/item/clothing/head/helmet/space/syndicate/specialist)
-
-	heavy
-		name = "Class Crate - Heavy Weapons Specialist"
-		desc = "A crate containing a Specialist Operative loadout. This one features a light machine gun, several belts of ammunition and a pouch of grenades."
-		spawn_contents = list(/obj/item/gun/kinetic/light_machine_gun,
-		/obj/item/storage/pouch/lmg,
-		/obj/item/storage/grenade_pouch/high_explosive,
-		/obj/item/storage/fanny/syndie,
-		/obj/item/clothing/suit/space/industrial/syndicate/specialist,
-		/obj/item/clothing/head/helmet/space/syndicate/specialist)
-
-	assault
-		name = "Class Crate - Assault Trooper"
-		desc = "A crate containing a Specialist Operative loadout. This one includes a customized assault rifle, several additional magazines as well as an assortment of breach and clear grenades."
-		spawn_contents = list(/obj/item/gun/kinetic/assault_rifle,
-		/obj/item/storage/pouch/assault_rifle/mixed,
-		/obj/item/storage/grenade_pouch/mixed_standard,
-		/obj/item/breaching_charge = 2,
-		/obj/item/clothing/suit/space/syndicate/specialist,
-		/obj/item/clothing/head/helmet/space/syndicate/specialist)
-
 	agent // not avaliable for purchase
-		name = "Class Crate - Infiltrator"
+		name = "Class Crate - Agent"
 		desc = "A crate containing a Specialist Operative loadout. This one includes a pair of semi-automatic pistols, a combat knife, an electromagnetic card (EMAG) and a cloaking device."
 		spawn_contents = list(/obj/item/gun/kinetic/pistol = 2,
 		/obj/item/storage/pouch/bullet_9mm,
@@ -547,34 +518,7 @@ TYPEINFO(/obj/storage/crate/chest)
 		/obj/item/clothing/suit/space/syndicate/specialist/infiltrator,
 		/obj/item/clothing/head/helmet/space/syndicate/specialist/infiltrator)
 
-	infiltrator
-		name = "Class Crate - Infiltrator" // for actually fitting in among the crew.
-		desc = "A crate containing a Specialist Operative loadout."
-		spawn_contents = list(/obj/item/gun/kinetic/tranq_pistol,
-		/obj/item/storage/pouch/tranq_pistol_dart,
-		/obj/item/pinpointer/disk,
-		/obj/item/dna_scrambler,
-		/obj/item/voice_changer,
-		/obj/item/card/emag,
-		/obj/item/storage/backpack/chameleon,
-		/obj/item/device/chameleon,
-		/obj/item/clothing/suit/space/syndicate/specialist,
-		/obj/item/clothing/head/helmet/space/syndicate/specialist/infiltrator)
-
-	scout
-		name = "Class Crate - Scout" // sneaky invisible flanker
-		desc = "A crate containing a Specialist Operative loadout. Includes a submachine gun, a cloaking device and an electromagnetic card (EMAG)."
-		spawn_contents = list(/obj/item/gun/kinetic/smg,
-		/obj/item/storage/pouch/bullet_9mm/smg,
-		/obj/item/clothing/glasses/nightvision,
-		/obj/item/pinpointer/disk,
-		/obj/item/cloaking_device,
-		/obj/item/card/emag,
-		/obj/item/lightbreaker,
-		/obj/item/clothing/suit/space/syndicate/specialist/infiltrator,
-		/obj/item/clothing/head/helmet/space/syndicate/specialist/infiltrator)
-
-	medic
+	old_medic // not avaliable for purchase
 		name = "Class Crate - Combat Medic"
 		desc = "A crate containing a Specialist Operative loadout. This one is packed with medical supplies, some poison and a syringe gun delivery system."
 		spawn_contents = list(/obj/item/gun/reagent/syringe,
@@ -589,9 +533,110 @@ TYPEINFO(/obj/storage/crate/chest)
 		/obj/item/clothing/suit/space/syndicate/specialist/medic,
 		/obj/item/clothing/head/helmet/space/syndicate/specialist/medic)
 
+	qm //Hi Gannets, I like your crate and wanted to use it for some QM stuff. Come yell at Azungar if this is not ok.
+		name = "Weapons crate"
+		desc = "Just a fancy crate that may or may not contain weapons."
+
+ABSTRACT_TYPE(/obj/loot_spawner/nukeop_classcrate)
+/obj/loot_spawner/nukeop_classcrate
+
+	demo
+		spawn_loot(var/C,var/datum/loot_spawner_info/I)
+			spawn_item(C,I,/obj/item/clothing/head/helmet/space/syndicate/specialist, off_x=-7,off_y=-2,scale_x=0.75,scale_y=0.75,layer_offset=0.5)
+			spawn_item(C,I,/obj/item/clothing/suit/space/syndicate/specialist/grenadier, off_x=-10,off_y=-1,scale_x=1,scale_y=1,layer_offset=0.4)
+			spawn_item(C,I,/obj/item/gun/kinetic/grenade_launcher, off_x=-16,off_y=4,scale_x=0.75,scale_y=0.75,layer_offset=0.3)
+			spawn_item(C,I,/obj/item/storage/pouch/grenade_round, off_x=12,off_y=-6,scale_x=0.75,scale_y=0.75,layer_offset=0.2)
+			spawn_item(C,I,/obj/item/storage/grenade_pouch/mixed_explosive, off_x=2,off_y=-6,scale_x=0.75,scale_y=0.75,layer_offset=0.1)
+
+	heavy
+		spawn_loot(var/C,var/datum/loot_spawner_info/I)
+			spawn_item(C,I,/obj/item/clothing/head/helmet/space/syndicate/specialist, off_x=-10,off_y=2,scale_x=0.75,scale_y=0.75,layer_offset=0.6)
+			spawn_item(C,I,/obj/item/gun/kinetic/light_machine_gun, off_x=-16,off_y=-2,scale_x=0.875,scale_y=0.875,layer_offset=0.5)
+			spawn_item(C,I,/obj/item/clothing/suit/space/industrial/syndicate/specialist, off_x=-11,off_y=2,scale_x=0.825,scale_y=0.825,layer_offset=0.4)
+			spawn_item(C,I,/obj/item/storage/pouch/lmg, off_x=-2,off_y=3,scale_x=0.875,scale_y=0.875,layer_offset=0.3)
+			spawn_item(C,I,/obj/item/storage/grenade_pouch/high_explosive, off_x=10,off_y=3,scale_x=0.875,scale_y=0.875,layer_offset=0.2)
+			spawn_item(C,I,/obj/item/storage/fanny/syndie, off_x=7,off_y=-4,scale_x=0.875,scale_y=0.875,layer_offset=0.1)
+
+	assault
+		spawn_loot(var/C,var/datum/loot_spawner_info/I)
+			spawn_item(C,I,/obj/item/gun/kinetic/assault_rifle, off_x=-16,off_y=-4,scale_x=0.875,scale_y=0.875,layer_offset=0.7)
+			spawn_item(C,I,/obj/item/clothing/head/helmet/space/syndicate/specialist, off_x=1,off_y=6,scale_x=0.75,scale_y=0.75,layer_offset=0.6)
+			spawn_item(C,I,/obj/item/clothing/suit/space/syndicate/specialist, off_x=-1,off_y=3,scale_x=1,scale_y=1,layer_offset=0.5)
+			spawn_item(C,I,/obj/item/storage/pouch/assault_rifle/mixed, off_x=-12,off_y=-2,scale_x=0.875,scale_y=0.875,layer_offset=0.4)
+			spawn_item(C,I,/obj/item/storage/grenade_pouch/mixed_standard, off_x=-12,off_y=3,scale_x=0.875,scale_y=0.875,layer_offset=0.3)
+			spawn_item(C,I,/obj/item/breaching_charge, off_x=12,off_y=0,scale_x=0.875,scale_y=0.875,layer_offset=0.2)
+			spawn_item(C,I,/obj/item/breaching_charge, off_x=12,off_y=4,scale_x=0.875,scale_y=0.875,layer_offset=0.1)
+
+	infiltrator
+		spawn_loot(var/C,var/datum/loot_spawner_info/I)
+			spawn_item(C,I,/obj/item/gun/kinetic/tranq_pistol, off_x=-2,off_y=0,rot=-90,scale_x=0.875,scale_y=0.875,layer_offset=0.5)
+			spawn_item(C,I,/obj/item/card/emag, off_x=1,off_y=0,rot=90,scale_x=0.875,scale_y=0.875,layer_offset=0.45)
+			spawn_item(C,I,/obj/item/dna_scrambler, off_x=12,off_y=11,rot=-135,scale_x=0.875,scale_y=0.875,layer_offset=0.4)
+			spawn_item(C,I,/obj/item/device/chameleon, off_x=10,off_y=2,scale_x=1,scale_y=0.75,layer_offset=0.35)
+			spawn_item(C,I,/obj/item/pinpointer/disk, off_x=10,off_y=6,scale_x=0.625,scale_y=0.625,layer_offset=0.3)
+			spawn_item(C,I,/obj/item/storage/pouch/tranq_pistol_dart, off_x=12,off_y=-8,scale_x=0.75,scale_y=0.75,layer_offset=0.25)
+			spawn_item(C,I,/obj/item/storage/backpack/chameleon, off_x=-10,off_y=-4,scale_x=0.875,scale_y=0.875,layer_offset=0.2)
+			spawn_item(C,I,/obj/item/clothing/head/helmet/space/syndicate/specialist/infiltrator, off_x=-8,off_y=7,scale_x=0.75,scale_y=0.75,layer_offset=0.15)
+			spawn_item(C,I,/obj/item/clothing/suit/space/syndicate/specialist, off_x=-7,off_y=2,scale_x=1,scale_y=1,layer_offset=0.1)
+			spawn_item(C,I,/obj/item/voice_changer, off_x=-12,off_y=8,scale_x=0.75,scale_y=0.75,layer_offset=0.05)
+
+	melee
+		spawn_loot(var/C,var/datum/loot_spawner_info/I)
+			spawn_item(C,I,/obj/item/clothing/head/helmet/space/syndicate/specialist/knight, off_x=-4,off_y=-6,scale_x=0.875,scale_y=0.875,layer_offset=0.5)
+			spawn_item(C,I,/obj/item/clothing/shoes/swat/knight, off_x=-12,off_y=-6,scale_x=0.875,scale_y=0.875,layer_offset=0.4)
+			spawn_item(C,I,/obj/item/clothing/gloves/swat/knight, off_x=-11,off_y=-2,scale_x=0.875,scale_y=0.875,layer_offset=0.3)
+			spawn_item(C,I,/obj/item/heavy_power_sword, off_x=-16,off_y=1,rot=30,scale_x=0.875,scale_y=0.875,layer_offset=0.2)
+			spawn_item(C,I,/obj/item/clothing/suit/space/syndicate/knight, off_x=8,off_y=0,scale_x=0.875,scale_y=0.875,layer_offset=0.1)
+
+ABSTRACT_TYPE(/obj/storage/crate/classcrate/sorted)
+/obj/storage/crate/classcrate/sorted
+	var/obj/loot_spawner/loot_spawner
+	var/x_size = 1
+	var/y_size = 1
+
+	New()
+		var/datum/loot_generator/nukeop_loot
+		src.vis_controller = new(src)
+		nukeop_loot =  new /datum/loot_generator(x_size,y_size)
+		nukeop_loot.place_loot_instance(src, 1, 1, new loot_spawner)
+		..()
+
+	demo
+		name = "Class Crate - Grenadier"
+		desc = "A crate containing a Specialist Operative loadout. This one features a hand-held grenade launcher and a pile of ordnance."
+		loot_spawner = /obj/loot_spawner/nukeop_classcrate/demo
+
+	heavy
+		name = "Class Crate - Heavy Weapons Specialist"
+		desc = "A crate containing a Specialist Operative loadout. This one features a light machine gun, several belts of ammunition and a pouch of grenades."
+		loot_spawner = /obj/loot_spawner/nukeop_classcrate/heavy
+
+	assault
+		name = "Class Crate - Assault Trooper"
+		desc = "A crate containing a Specialist Operative loadout. This one includes a customized assault rifle, several additional magazines as well as an assortment of breach and clear grenades."
+		loot_spawner = /obj/loot_spawner/nukeop_classcrate/assault
+
+	infiltrator
+		name = "Class Crate - Infiltrator" // for actually fitting in among the crew.
+		desc = "A crate containing a Specialist Operative loadout. This one packs a potent tranq pistol, several magazines of darts, and tools for disguise and entry into a target fortification."
+		loot_spawner = /obj/loot_spawner/nukeop_classcrate/infiltrator
+
+	scout
+		name = "Class Crate - Scout" // sneaky invisible flanker
+		desc = "A crate containing a Specialist Operative loadout. Includes a submachine gun, a cloaking device and an electromagnetic card (EMAG)."
+		spawn_contents = list(/obj/item/gun/kinetic/smg,
+		/obj/item/storage/pouch/bullet_9mm/smg,
+		/obj/item/clothing/glasses/nightvision,
+		/obj/item/pinpointer/disk,
+		/obj/item/cloaking_device,
+		/obj/item/card/emag,
+		/obj/item/lightbreaker,
+		/obj/item/clothing/suit/space/syndicate/specialist/infiltrator,
+		/obj/item/clothing/head/helmet/space/syndicate/specialist/infiltrator)
+
 	medic_rework
 		name = "Class Crate - Field Medic"
-		desc = "A crate containing a Specialist Operative loadout. This one is packed with medical supplies."
+		desc = "A crate containing a Specialist Operative loadout. This one is packed with medical supplies for your allies, along with a PDW for your enemies."
 		spawn_contents = list(/obj/item/gun/kinetic/veritate,
 		/obj/item/storage/pouch/veritate,
 		/obj/item/device/analyzer/healthanalyzer/upgraded,
@@ -636,14 +681,10 @@ TYPEINFO(/obj/storage/crate/chest)
 		/obj/item/clothing/suit/space/syndicate/specialist/sniper,
 		/obj/item/clothing/head/helmet/space/syndicate/specialist/sniper)
 
-	melee //wip, not ready for use
+	melee
 		name = "Class Crate - Knight"
-		desc = "A crate containing a Specialist Operative loadout."
-		spawn_contents = list(/obj/item/heavy_power_sword,
-		/obj/item/clothing/shoes/swat/knight,
-		/obj/item/clothing/gloves/swat/knight,
-		/obj/item/clothing/suit/space/syndicate/knight,
-		/obj/item/clothing/head/helmet/space/syndicate/specialist/knight)
+		desc = "A crate containing a Specialist Operative loadout. This one contains highly protective armor, and more importantly, a heavy power sword."
+		loot_spawner = /obj/loot_spawner/nukeop_classcrate/melee
 
 	bard
 		name = "Class Crate - Bard"
@@ -653,10 +694,6 @@ TYPEINFO(/obj/storage/crate/chest)
 		/obj/item/storage/fanny/syndie,
 		/obj/item/clothing/suit/space/syndicate/specialist/bard,
 		/obj/item/clothing/head/helmet/space/syndicate/specialist/bard)
-
-	qm //Hi Gannets, I like your crate and wanted to use it for some QM stuff. Come yell at Azungar if this is not ok.
-		name = "Weapons crate"
-		desc = "Just a fancy crate that may or may not contain weapons."
 
 
 //trench loots : gps, clothing/armor, meds, shipcomponents, foods, etc

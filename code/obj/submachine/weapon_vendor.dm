@@ -431,57 +431,57 @@
 
 /datum/materiel/loadout/assault
 	name = "Assault Trooper"
-	path = /obj/storage/crate/classcrate/assault
+	path = /obj/storage/crate/classcrate/sorted/assault
 	description = "A good all-rounder combat class centered around an assault rifle with selectable fire-modes as well as standard and armor-piercing rounds."
 
 /datum/materiel/loadout/heavy
 	name = "Heavy Weapons Specialist"
-	path = /obj/storage/crate/classcrate/heavy
+	path = /obj/storage/crate/classcrate/sorted/heavy
 	description = "Light machine gun, five boxes of ammunition and a pouch of high explosive grenades."
 
 /datum/materiel/loadout/grenadier
 	name = "Grenadier"
-	path = /obj/storage/crate/classcrate/demo
+	path = /obj/storage/crate/classcrate/sorted/demo
 	description = "Grenade launcher, two pouches containing 40mm grenade rounds and mixed explosive grenades."
 
 /datum/materiel/loadout/infiltrator
 	name = "Infiltrator"
-	path = /obj/storage/crate/classcrate/infiltrator
+	path = /obj/storage/crate/classcrate/sorted/infiltrator
 	description = "Tranquilizer pistol with a pouch of darts, EMAG and a variety of tools to help you blend in with regular crew."
 
 /datum/materiel/loadout/scout
 	name = "Scout"
-	path = /obj/storage/crate/classcrate/scout
+	path = /obj/storage/crate/classcrate/sorted/scout
 	description = "Burst-fire submachine gun, personal cloaking device, light breaker and an EMAG for sneaky flanking actions."
 
 /datum/materiel/loadout/medic
 	name = "Field Medic"
-	path = /obj/storage/crate/classcrate/medic_rework
+	path = /obj/storage/crate/classcrate/sorted/medic_rework
 	description = "Comprehensive combat casualty care supplies provided in a satchel, belt and pouch. As well as an armor-piercing personal defence weapon with single and burst fire capability."
 
 /datum/materiel/loadout/firebrand
 	name = "Firebrand"
-	path = /obj/storage/crate/classcrate/pyro
+	path = /obj/storage/crate/classcrate/sorted/pyro
 	description = "Napalm flamethrower, incendiery grenade pouch and a door-breaching fire-axe that can be two-handed to increase damage to both foes and airlocks."
 
 /datum/materiel/loadout/engineer
 	name = "Combat Engineer"
-	path = /obj/storage/crate/classcrate/engineer
+	path = /obj/storage/crate/classcrate/sorted/engineer
 	description = "Automated gun turret with an important guide on how to deploy it, full toolbelt with high-capacity welder and a combat shotgun."
 
 /datum/materiel/loadout/marksman
 	name = "Marksman"
-	path = /obj/storage/crate/classcrate/sniper
+	path = /obj/storage/crate/classcrate/sorted/sniper
 	description = "High-powered sniper rifle that can fire through two solid walls, optical thermal scanner and a pouch of smoke grenades"
 
 /datum/materiel/loadout/knight
 	name = "Knight"
-	path = /obj/storage/crate/classcrate/melee
+	path = /obj/storage/crate/classcrate/sorted/melee
 	description = "A powerful melee focused class. Equipped with massive, heavy armour and a versatile sword that can switch special attack modes."
 
 /datum/materiel/loadout/bard
 	name = "Bard"
-	path = /obj/storage/crate/classcrate/bard
+	path = /obj/storage/crate/classcrate/sorted/bard
 	description = "A musical support class that buffs their team with area of effect songs centered around amp stacks and hitting things with their cool guitar."
 
 /datum/materiel/loadout/custom
