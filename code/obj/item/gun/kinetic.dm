@@ -1727,6 +1727,8 @@ ABSTRACT_TYPE(/obj/item/survival_rifle_barrel)
 	recoil_inaccuracy_max = 40
 	recoil_strength = 15
 	recoil_max = 40
+	recoil_reset = 15 DECI SECONDS // substantial time before recoil recovery begins
+	recoil_reset_mult = 0.875 // and slightly slower recovery, combining to really tempt people to fire unsafely
 	icon_recoil_cap = 145
 
 	New()
@@ -1739,18 +1741,21 @@ ABSTRACT_TYPE(/obj/item/survival_rifle_barrel)
 		. = ..()
 		if(!.)
 			return
-		var/thrown_x = start.x + ((start.x - target.x) - POX / world.icon_size) + 0.5
-		var/thrown_y = start.y + ((start.y - target.y) - POY / world.icon_size) + 0.5
-		user.throw_at(locate(thrown_x,thrown_y,start.z),round(recoil / 16),3)
+
 		if(recoil >= 20)
 			if(ishuman(user))
 				boutput(user, SPAN_ALERT("OUGH! Your wrist!"))
 				var/mob/living/carbon/human/H = user
 				H.TakeDamage(H.hand ? "l_arm" : "r_arm", (recoil / 5 - 1) ** 2)
-			else(user.TakeDamage("All", (recoil / 5 - 1) ** 2))
+			else
+				user.TakeDamage("All", (recoil / 5 - 1) ** 2)
+
 		if(prob(recoil))
-			user.visible_message(SPAN_ALERT("\The [src] flies out of [user]'s grip!"), SPAN_ALERT("\The [src] flies out of your grip!"))
+			var/thrown_x = start.x + ((start.x - target.x) - POX / world.icon_size) + 0.5
+			var/thrown_y = start.y + ((start.y - target.y) - POY / world.icon_size) + 0.5
+			user.throw_at(locate(thrown_x,thrown_y,start.z),round(recoil / 16),3)
 			if (user.drop_item(src))
+				user.visible_message(SPAN_ALERT("\The [src] flies out of [user]'s grip!"), SPAN_ALERT("\The [src] flies out of your grip!"))
 				src.throw_at(locate(thrown_x,thrown_y,start.z),9,3)
 
 //0.72

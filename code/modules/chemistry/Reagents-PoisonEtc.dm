@@ -2227,30 +2227,52 @@ datum
 					else
 						M.take_toxin_damage(1 * mult)
 
-		harmful/alphacarbon_hemotoxin
-			name = "alchaemotoxin"
-			id = "alphacarbon_hemotoxin"
-			description = "Seek immediate purgatives and blood transfusion if ingested."
+		harmful/hemotoxin // Time To Kill - roughly 2 minutes for 150 units, 2.75 minutes for 50, 3.5 minutes for 15. Very good at weakening or in combination with a slashing weapon, though.
+			name = "hemotoxin"
+			id = "hemotoxin"
+			description = "A highly potent targeted toxin that rapidly destroys red blood cells, leading to inability to transport oxygen. Counteracted by proconvertin and filgrastim."
 			reagent_state = LIQUID
 			fluid_r = 120
 			fluid_g = 15
 			fluid_b = 10
-			depletion_rate = 0.4
-			flushing_multiplier = 0.4
+			depletion_rate = 0.2 //proconvertin causes depletion to rise
+			flushing_multiplier = 0.25 //however flushing is fairly ineffective
 
 			on_mob_life(var/mob/M, var/mult = 1)
 				if (!M) M = holder.my_atom
 				var/poison_amount = holder?.get_reagent_amount(src.id)
 
 				if (isliving(M))
-					var/mob/living/H = M
-					H.blood_volume -= max(sqrt(H.blood_volume) - clamp(20 - poison_amount / 6, 13, 19), 0) * clamp(poison_amount / 40, 1, 3) * mult
-					if (probmult(clamp(poison_amount * 2, 15, 50)))
-						M.setStatus("slowed", max(M.getStatusDuration("slowed"), 2 SECONDS))
-						if (prob(15))
-							if (!isdead(M))
-								M.emote(pick("shake", "tremble", "shudder"))
-								boutput(M, pick("<span class='alert'><b>You feel so cold.</b></span>","<span class='alert'><b>You can tell you're going to die.</b></span>"))
-						M.remove_stamina(clamp(poison_amount, 10, 25))
-				..()
-				return
+					var/mob/living/L = M
+					if(isvampire(L))
+						return
+					if(L.reagents?.has_reagent("proconvertin"))
+						depletion_rate += 0.05 * mult
+					else
+						depletion_rate = 0.2
+
+					var/toxicity = (poison_amount ** 0.33) * mult
+					L.blood_volume -= (L.blood_volume / 150) * toxicity
+
+					if (L.blood_volume < 375 && ishuman(L))
+						var/mob/living/carbon/human/H = L
+						if (H.organHolder)
+							H.organHolder.damage_organs(0, 0, min(round(toxicity),8), list("spleen"), max((400 - L.blood_volume) / 2, 0))
+
+					if (probmult(min(poison_amount + 10, 50)))
+						L.setStatus("slowed", max(M.getStatusDuration("slowed"), 3 SECONDS))
+						L.remove_stamina(clamp(poison_amount, 5, 30))
+						if (prob(20))
+							if (!isdead(L))
+								M.emote(pick("shake", "tremble", "shudder", "twitch_v"))
+								boutput(L, pick("<span class='alert'><b>You feel so cold.</b></span>","<span class='alert'><b>You feel you're going to die.</b></span>"))
+						else if (prob(25))
+							L.emote(pick("cough", "cry", "twitch"))
+							L.visible_message(pick(SPAN_ALERT("<B>[L]</B> coughs up blood!"),\
+													SPAN_ALERT("<B>[L]</B> oozes blood from their pores!"),\
+													SPAN_ALERT("<B>[L]</B> bleeds from every wound!")))
+							playsound(M, 'sound/impact_sounds/Slimy_Splat_1.ogg', 30, TRUE) //some bloody effects
+							make_cleanable(/obj/decal/cleanable/blood/splatter,L.loc)
+						else if (prob(50))
+							make_cleanable(/obj/decal/cleanable/blood/splatter,L.loc) //some extra bloody effects
+				return ..()

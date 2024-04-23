@@ -298,7 +298,7 @@ toxic - poisons
 			silentshot = 1
 
 	alphacarbon
-		reagent_payload = "alphacarbon_hemotoxin"
+		reagent_payload = "hemotoxin"
 		icon_state = "tranqdart_red_barbed"
 		implanted = /obj/item/implant/projectile/body_visible/dart/tranq_dart_sleepy_barbed
 
