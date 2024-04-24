@@ -708,6 +708,24 @@ ABSTRACT_TYPE(/datum/trait/job)
 	disability_name = "Hemophilia"
 	disability_desc = "Prone to blood loss"
 
+/datum/trait/hyperventilator
+	name = "Hyperventilator"
+	desc = "You inhale over twice as much, which is especially bad in space."
+	id = "hyperventilator"
+	points = 1
+	afterlife_blacklisted = TRUE
+	disability_type = TRAIT_DISABILITY_MINOR
+	disability_name = "Hyperventilation"
+	disability_desc = "Poor regulation of breathing"
+
+	onAdd(var/mob/owner)
+		if(isliving(owner))
+			APPLY_ATOM_PROPERTY(owner, PROB_MOB_BREATH_VOLUME_MULT, "trait_hv", 2.5)
+
+	onRemove(var/mob/owner)
+		if(isliving(owner))
+			REMOVE_ATOM_PROPERTY(owner, PROB_MOB_BREATH_VOLUME_MULT, "trait_hv")
+
 /datum/trait/weakorgans
 	name = "Frail Constitution"
 	desc = "Your internal organs (brain included) are extremely vulnerable to damage."
