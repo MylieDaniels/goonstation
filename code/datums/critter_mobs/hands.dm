@@ -1,4 +1,4 @@
-/obj/item/parts/dummy
+/obj/item/parts/critter
 	name = "dummyholder"
 
 /datum/handHolder 								// pun

@@ -25,7 +25,7 @@
 #define INTENT_HELP "help"
 #define INTENT_GRAB "grab"
 
-//missing limb flags
+//missing limb flags, also used to match limb type
 #define LIMB_LEFT_ARM 1
 #define LIMB_RIGHT_ARM 2
 #define LIMB_LEFT_LEG 4
