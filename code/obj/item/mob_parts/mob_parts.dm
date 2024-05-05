@@ -290,7 +290,7 @@ ABSTRACT_TYPE(/obj/item/mob_part/humanoid_part)
 		attachee.update_clothing()
 		attachee.update_body()
 		attachee.UpdateDamageIcon()
-		if (src.slot == "l_arm" || src.slot == "r_arm")
+		if (src.slot & LIMB_BOTH_ARMS)
 			attachee.hud.update_hands()
 
 		return TRUE
@@ -414,8 +414,8 @@ ABSTRACT_TYPE(/obj/item/mob_part/humanoid_part/artifact_part)
 	proc/on_remove()
 		return ishuman(src.holder)
 
-ABSTRACT_TYPE(/obj/item/parts/artifact_parts/eldritch)
-/obj/item/parts/artifact_parts/eldritch
+ABSTRACT_TYPE(/obj/item/mob_part/humanoid_part/artifact_part/eldritch)
+/obj/item/mob_part/humanoid_part/artifact_part/eldritch
 	item_state = "eldritch-limb"
 	artifact_type = "eldritch"
 
@@ -425,8 +425,8 @@ ABSTRACT_TYPE(/obj/item/parts/artifact_parts/eldritch)
 		src.saw_messages = list("gradually saws through", "gradually saw through")
 		src.limb_material = list("twisted sinew","dark ivory","shriveling tendons")
 
-ABSTRACT_TYPE(/obj/item/parts/artifact_parts/eldritch/arm)
-/obj/item/parts/artifact_parts/eldritch/arm
+ABSTRACT_TYPE(/obj/item/mob_part/humanoid_part/artifact_part/eldritch/arm)
+/obj/item/mob_part/humanoid_part/artifact_part/eldritch/arm
 	limb_type = /datum/limb/eldritch
 	can_hold_items = TRUE
 
@@ -449,8 +449,8 @@ ABSTRACT_TYPE(/obj/item/parts/artifact_parts/eldritch/arm)
 		handlistPart = "arm-eldritch-R-attached"
 
 
-ABSTRACT_TYPE(/obj/item/parts/artifact_parts/eldritch/leg)
-/obj/item/parts/artifact_parts/eldritch/leg
+ABSTRACT_TYPE(/obj/item/mob_part/humanoid_part/artifact_part/eldritch/leg)
+/obj/item/mob_part/humanoid_part/artifact_part/eldritch/leg
 
 	New()
 		..()
@@ -461,7 +461,7 @@ ABSTRACT_TYPE(/obj/item/parts/artifact_parts/eldritch/leg)
 			return
 		var/mob/living/carbon/human/H = holder
 		H.update_clothing()
-		if (istype(H.limbs.get_limb("l_leg"), /obj/item/parts/artifact_parts/leg/eldritch/left) && istype(H.limbs.get_limb("r_leg"), /obj/item/parts/artifact_parts/leg/eldritch/right))
+		if (istype(H.limbs.get_limb("l_leg"), /obj/item/mob_part/humanoid_part/artifact_part/leg/eldritch/left) && istype(H.limbs.get_limb("r_leg"), /obj/item/mob_part/humanoid_part/artifact_part/leg/eldritch/right))
 			src.holder.addAbility(/datum/targetable/artifact_limb_ability/eldritch_run)
 
 	on_remove()
@@ -485,8 +485,8 @@ ABSTRACT_TYPE(/obj/item/parts/artifact_parts/eldritch/leg)
 		icon_state = "leg-eldritch-R"
 		handlistPart = "leg-eldritch-R-attached"
 
-ABSTRACT_TYPE(/obj/item/parts/artifact_parts/martian)
-/obj/item/parts/artifact_parts/martian
+ABSTRACT_TYPE(/obj/item/mob_part/humanoid_part/artifact_part/martian)
+/obj/item/mob_part/humanoid_part/artifact_part/martian
 	item_state = "martian-limb"
 	artifact_type = "martian"
 
@@ -496,8 +496,8 @@ ABSTRACT_TYPE(/obj/item/parts/artifact_parts/martian)
 		src.saw_messages = list("easily saws through", "easily saw through")
 		src.limb_material = list("woven tendrils","denser tentacles","wriggling strands")
 
-ABSTRACT_TYPE(/obj/item/parts/artifact_parts/martian/arm)
-/obj/item/parts/artifact_parts/martian/arm
+ABSTRACT_TYPE(/obj/item/mob_part/humanoid_part/artifact_part/martian/arm)
+/obj/item/mob_part/humanoid_part/artifact_part/martian/arm
 	can_hold_items = TRUE
 
 	New(atom/new_holder)
@@ -508,7 +508,7 @@ ABSTRACT_TYPE(/obj/item/parts/artifact_parts/martian/arm)
 		if (!..())
 			return
 		var/mob/living/carbon/human/H = holder
-		if (istype(H.limbs.get_limb("l_arm"), /obj/item/parts/artifact_parts/arm/martian/left) && istype(H.limbs.get_limb("r_arm"), /obj/item/parts/artifact_parts/arm/martian/right))
+		if (istype(H.limbs.get_limb(LIMB_LEFT_ARM), /obj/item/mob_part/humanoid_part/artifact_part/arm/martian/left) && istype(H.limbs.get_limb(LIMB_RIGHT_ARM), /obj/item/mob_part/humanoid_part/artifact_part/arm/martian/right))
 			src.holder.addAbility(/datum/targetable/artifact_limb_ability/martian_pull)
 
 	on_remove()
@@ -518,20 +518,20 @@ ABSTRACT_TYPE(/obj/item/parts/artifact_parts/martian/arm)
 
 	left
 		name = "martian left arm"
-		slot = "l_arm"
+		slot = LIMB_LEFT_ARM
 		side = "left"
 		icon_state = "arm-martian-L"
 		handlistPart = "arm-martian-L-attached"
 
 	right
 		name = "martian right arm"
-		slot = "r_arm"
+		slot = LIMB_RIGHT_ARM
 		side = "right"
 		icon_state = "arm-martian-R"
 		handlistPart = "arm-martian-R-attached"
 
-ABSTRACT_TYPE(/obj/item/parts/artifact_parts/martian/leg)
-/obj/item/parts/artifact_parts/martian/leg
+ABSTRACT_TYPE(/obj/item/mob_part/humanoid_part/artifact_part/martian/leg)
+/obj/item/mob_part/humanoid_part/artifact_part/martian/leg
 
 	New()
 		..()
@@ -539,7 +539,7 @@ ABSTRACT_TYPE(/obj/item/parts/artifact_parts/martian/leg)
 
 	left
 		name = "martian left leg"
-		slot = "l_leg"
+		slot = LIMB_LEFT_LEG
 		side = "left"
 		step_image_state = "footprintsL"
 		icon_state = "leg-martian-L"
@@ -548,15 +548,15 @@ ABSTRACT_TYPE(/obj/item/parts/artifact_parts/martian/leg)
 
 	right
 		name = "martian right leg"
-		slot = "r_leg"
+		slot = LIMB_RIGHT_LEG
 		side = "right"
 		step_image_state = "footprintsR"
 		icon_state = "leg-martian-R"
 		partlistPart = "leg-martian-R-attached"
 		movement_modifier = /datum/movement_modifier/martian_legs/right
 
-ABSTRACT_TYPE(/obj/item/parts/artifact_parts/precursor)
-/obj/item/parts/artifact_parts/precursor
+ABSTRACT_TYPE(/obj/item/mob_part/humanoid_part/artifact_part/precursor)
+/obj/item/mob_part/humanoid_part/artifact_part/precursor
 	item_state = "precursor-limb"
 	artifact_type = "precursor"
 
@@ -566,8 +566,8 @@ ABSTRACT_TYPE(/obj/item/parts/artifact_parts/precursor)
 		src.saw_messages = list("messily saws through", "messily saw through")
 		src.limb_material = list("smooth metal","shifting doodads","integral supports")
 
-ABSTRACT_TYPE(/obj/item/parts/artifact_parts/precursor/arm)
-/obj/item/parts/artifact_parts/precursor/arm
+ABSTRACT_TYPE(/obj/item/mob_part/humanoid_part/artifact_part/precursor/arm)
+/obj/item/mob_part/humanoid_part/artifact_part/precursor/arm
 	can_hold_items = TRUE
 
 	New(atom/new_holder)
@@ -578,7 +578,7 @@ ABSTRACT_TYPE(/obj/item/parts/artifact_parts/precursor/arm)
 		if (!..())
 			return
 		var/mob/living/carbon/human/H = holder
-		if (istype(H.limbs.get_limb("l_arm"), /obj/item/parts/artifact_parts/arm/precursor/left) && istype(H.limbs.get_limb("r_arm"), /obj/item/parts/artifact_parts/arm/precursor/right))
+		if (istype(H.limbs.get_limb(LIMB_LEFT_ARM), /obj/item/mob_part/humanoid_part/artifact_part/arm/precursor/left) && istype(H.limbs.get_limb(LIMB_RIGHT_ARM), /obj/item/mob_part/humanoid_part/artifact_part/arm/precursor/right))
 			src.holder.addAbility(/datum/targetable/artifact_limb_ability/precursor_heal)
 
 	on_remove()
@@ -588,20 +588,20 @@ ABSTRACT_TYPE(/obj/item/parts/artifact_parts/precursor/arm)
 
 	left
 		name = "precursor left arm"
-		slot = "l_arm"
+		slot = LIMB_LEFT_ARM
 		side = "left"
 		icon_state = "arm-precursor-L"
 		handlistPart = "arm-precursor-L-attached"
 
 	right
 		name = "precursor right arm"
-		slot = "r_arm"
+		slot = LIMB_RIGHT_ARM
 		side = "right"
 		icon_state = "arm-precursor-R"
 		handlistPart = "arm-precursor-R-attached"
 
-ABSTRACT_TYPE(/obj/item/parts/artifact_parts/precursor/leg)
-/obj/item/parts/artifact_parts/precursor/leg
+ABSTRACT_TYPE(/obj/item/mob_part/humanoid_part/artifact_part/precursor/leg)
+/obj/item/mob_part/humanoid_part/artifact_part/precursor/leg
 
 	New()
 		..()
@@ -644,7 +644,7 @@ ABSTRACT_TYPE(/obj/item/parts/artifact_parts/precursor/leg)
 
 	left
 		name = "precursor left leg"
-		slot = "l_leg"
+		slot = LIMB_LEFT_LEG
 		side = "left"
 		step_image_state = "footprintsL"
 		icon_state = "leg-precursor-L"
@@ -652,8 +652,38 @@ ABSTRACT_TYPE(/obj/item/parts/artifact_parts/precursor/leg)
 
 	right
 		name = "precursor right leg"
-		slot = "r_leg"
+		slot = LIMB_RIGHT_LEG
 		side = "right"
 		step_image_state = "footprintsR"
 		icon_state = "leg-precursor-R"
 		partlistPart = "leg-precursor-R-attached"
+
+
+var/global/list/all_valid_random_right_arms = filtered_concrete_typesof(/obj/item/mob_part/humanoid_part, /proc/goes_in_right_arm_slot)
+var/global/list/all_valid_random_left_arms = filtered_concrete_typesof(/obj/item/mob_part/humanoid_part, /proc/goes_in_left_arm_slot)
+var/global/list/all_valid_random_right_legs = filtered_concrete_typesof(/obj/item/mob_part/humanoid_part, /proc/goes_in_right_leg_slot)
+var/global/list/all_valid_random_left_legs = filtered_concrete_typesof(/obj/item/mob_part/humanoid_part, /proc/goes_in_left_leg_slot)
+
+/proc/goes_in_right_arm_slot(var/type)
+	var/obj/item/mob_part/humanoid_part/fakeInstance = type
+	return (((initial(fakeInstance.slot) & LIMB_RIGHT_ARM)) && !(initial(fakeInstance.random_limb_blacklisted)))
+
+/proc/goes_in_left_arm_slot(var/type)
+	var/obj/item/mob_part/humanoid_part/fakeInstance = type
+	return (((initial(fakeInstance.slot) & LIMB_LEFT_ARM)) && !(initial(fakeInstance.random_limb_blacklisted)))
+
+/proc/goes_in_right_leg_slot(var/type)
+	var/obj/item/mob_part/humanoid_part/fakeInstance = type
+	return (((initial(fakeInstance.slot) & LIMB_RIGHT_LEG)) && !(initial(fakeInstance.random_limb_blacklisted)))
+
+/proc/goes_in_left_leg_slot(var/type)
+	var/obj/item/mob_part/humanoid_part/fakeInstance = type
+	return (((initial(fakeInstance.slot) & LIMB_LEFT_LEG)) && !(initial(fakeInstance.random_limb_blacklisted)))
+
+/proc/randomize_mob_limbs(var/mob/living/carbon/human/target, var/mob/user, var/zone = LIMB_ALL_LIMBS, var/showmessage = 1)
+	if (!target)
+		return 0
+	var/datum/human_limbs/targetlimbs = target.limbs
+	if (!targetlimbs)
+		return 0
+	return targetlimbs.randomize(zone, user, showmessage)

@@ -25,11 +25,15 @@
 #define INTENT_HELP "help"
 #define INTENT_GRAB "grab"
 
-//missing limb flags, also used to match limb type
+// limb slot bitflags
+#define LIMB_NOTHING 0
 #define LIMB_LEFT_ARM 1
 #define LIMB_RIGHT_ARM 2
 #define LIMB_LEFT_LEG 4
 #define LIMB_RIGHT_LEG 8
+#define LIMB_BOTH_ARMS 3
+#define LIMB_BOTH_LEGS 12
+#define LIMB_ALL_LIMBS 15
 
 //hand values
 #define LEFT_HAND 1

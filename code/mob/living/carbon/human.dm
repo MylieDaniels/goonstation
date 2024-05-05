@@ -254,144 +254,102 @@
 /datum/human_limbs
 	var/mob/living/carbon/human/holder = null
 
-	var/obj/item/parts/l_arm = null
-	var/obj/item/parts/r_arm = null
-	var/obj/item/parts/l_leg = null
-	var/obj/item/parts/r_leg = null
+	/// the parts contained
+	var/list/obj/item/mob_part/humanoid_part/parts = list()
+	/// the bitfield of the currently filled slots
+	var/filled_slots = LIMB_NOTHING
 
 	New(mob/new_holder, var/ling) // to prevent lings from spawning a shitload of limbs in unspeakable locations
 		..()
 		holder = new_holder
-		if (holder && !ling) create(holder.AH_we_spawned_with)
+		if (holder && !ling)
+			for (var/part in holder.mutantrace.limb_parts)
+				var/obj/item/mob_part/humanoid_part/new_part = new part(holder, holder.AH_we_spawned_with)
+				src.add_part(new_part)
 
 	disposing()
-		if (l_arm)
-			l_arm.holder = null
-			l_arm?.bones?.donor = null
-		if (r_arm)
-			r_arm.holder = null
-			r_arm?.bones?.donor = null
-		if (l_leg)
-			l_leg.holder = null
-			l_leg?.bones?.donor = null
-		if (r_leg)
-			r_leg.holder = null
-			r_leg?.bones?.donor = null
-		holder = null
+		for(var/obj/item/mob_part/humanoid_part/part in src.parts)
+			part.holder = null
 		..()
 
-	proc/create(var/datum/appearanceHolder/AHolLimb)
-		if (!l_arm) l_arm = new /obj/item/parts/human_parts/arm/left(holder, AHolLimb)
-		if (!r_arm) r_arm = new /obj/item/parts/human_parts/arm/right(holder, AHolLimb)
-		if (!l_leg) l_leg = new /obj/item/parts/human_parts/leg/left(holder, AHolLimb)
-		if (!r_leg) r_leg = new /obj/item/parts/human_parts/leg/right(holder, AHolLimb)
+	/// Does NOT check if slot is filled, can lead to unexpected behavior if called without a slot_filled() check.
+	proc/add_part(var/obj/item/mob_part/humanoid_part/part)
+		src.filled_slots |= part.slot
+		src.parts += part
+
+	/// Does NOT check if part is in parts, will runtime if it isn't. This is intentional.
+	proc/remove_part(var/obj/item/mob_part/humanoid_part/part)
+		src.filled_slots &= ~part.slot
+		src.parts -= part
+
+	proc/slot_filled(var/slot)
+		if (slot & src.filled_slots)
+			return TRUE
+		return FALSE
 
 	proc/mend(var/howmany = 4)
-		if (!holder)
+		if (!holder || !holder.mutantrace)
 			return
 
-		if (!l_arm && howmany > 0)
-			if (holder?.mutantrace?.l_limb_arm_type_mutantrace)
-				l_arm = new holder.mutantrace.l_limb_arm_type_mutantrace(holder)
-			else
-				l_arm = new /obj/item/parts/human_parts/arm/left(holder)
-			l_arm.holder = holder
-			boutput(holder, SPAN_NOTICE("Your left arm regrows!"))
-			l_arm:original_holder = holder
-			l_arm:set_skin_tone()
-			holder.hud.update_hands()
+		for (var/part in holder.mutantrace.limb_parts)
+			if (!howmany)
+				break
+			if (src.slot_filled(initial(part.slot)))
+				continue
+			var/obj/item/mob_part/humanoid_part/new_part = new part(holder, holder.AH_we_spawned_with)
+			src.add_part(new_part)
+			boutput(holder, SPAN_NOTICE("Your [new_part] regrows."))
 			howmany--
 
-		if (!r_arm && howmany > 0)
-			if (holder?.mutantrace?.r_limb_arm_type_mutantrace)
-				r_arm = new holder.mutantrace.r_limb_arm_type_mutantrace(holder)
-			else
-				r_arm = new /obj/item/parts/human_parts/arm/right(holder)
-			r_arm.holder = holder
-			boutput(holder, SPAN_NOTICE("Your right arm regrows!"))
-			r_arm:original_holder = holder
-			r_arm:set_skin_tone()
-			holder.hud.update_hands()
-			howmany--
-
-		if (!l_leg && howmany > 0)
-			if (holder?.mutantrace?.l_limb_leg_type_mutantrace)
-				l_leg = new holder.mutantrace.l_limb_leg_type_mutantrace(holder)
-			else
-				l_leg = new /obj/item/parts/human_parts/leg/left(holder)
-			l_leg.holder = holder
-			boutput(holder, SPAN_NOTICE("Your left leg regrows!"))
-			l_leg:original_holder = holder
-			l_leg:set_skin_tone()
-			howmany--
-
-		if (!r_leg && howmany > 0)
-			if (holder?.mutantrace?.r_limb_leg_type_mutantrace)
-				r_leg = new holder.mutantrace.r_limb_leg_type_mutantrace(holder)
-			else
-				r_leg = new /obj/item/parts/human_parts/leg/right(holder)
-			r_leg.holder = holder
-			boutput(holder, SPAN_NOTICE("Your right leg regrows!"))
-			r_leg:original_holder = holder
-			r_leg:set_skin_tone()
-			howmany--
+		holder.hud.update_hands()
 
 		if (holder.client) holder.next_move = world.time + 7 //Fix for not being able to move after you got new limbs.
 
 	proc/reset_stone() // reset skintone to whatever the holder's s_tone is
-		if (l_arm && istype(l_arm, /obj/item/parts/human_parts))
-			l_arm:set_skin_tone()
-		if (r_arm && istype(r_arm, /obj/item/parts/human_parts))
-			r_arm:set_skin_tone()
-		if (l_leg && istype(l_leg, /obj/item/parts/human_parts))
-			l_leg:set_skin_tone()
-		if (r_leg && istype(r_leg, /obj/item/parts/human_parts))
-			r_leg:set_skin_tone()
+		for (var/obj/item/mob_part/humanoid_part/carbon_part/part in src.parts)
+			part.set_skin_tone()
 
-	proc/sever(var/target = "all", var/mob/user)
+	proc/sever(var/target = LIMB_ALL_LIMBS, var/mob/user)
 		if (!target)
 			return 0
-		if (istext(target))
-			var/list/limbs_to_sever = list()
-			switch (target)
-				if ("all")
-					limbs_to_sever += list(src.l_arm, src.r_arm, src.l_leg, src.r_leg)
-				if ("both_arms")
-					limbs_to_sever += list(src.l_arm, src.r_arm)
-				if ("both_legs")
-					limbs_to_sever += list(src.l_leg, src.r_leg)
-				if ("l_arm")
-					limbs_to_sever += list(src.l_arm)
-				if ("r_arm")
-					limbs_to_sever += list(src.r_arm)
-				if ("l_leg")
-					limbs_to_sever += list(src.l_leg)
-				if ("r_leg")
-					limbs_to_sever += list(src.r_leg)
-			if (length(limbs_to_sever))
-				for (var/obj/item/parts/P in limbs_to_sever)
-					P.sever(user)
-				return 1
-		else if (istype(target, /obj/item/parts))
-			var/obj/item/parts/P = target
-			P.sever(user)
+		if (isnum(target))
+			. = 0
+			for (var/obj/item/mob_part/humanoid_part/part in src.parts)
+				if (part.slot & target)
+					part.sever(user)
+					. = 1
+			return
+		else if (istype(target, /obj/item/mob_part/humanoid_part))
+			var/obj/item/mob_part/humanoid_part/part = target
+			part.sever(user)
 			return 1
 
-	// quick hacky thing to have similar functionality to get_organ
-	// maybe one day one of us will make this better - cirr
-	proc/get_limb(var/limb)
-		RETURN_TYPE(/obj/item/parts)
+	proc/delete(var/target = LIMB_ALL_LIMBS, var/delete_transplanted = TRUE)
+		if (!target)
+			return 0
+		. = 0
+		if (isnum(target))
+			if(src.slot_filled(target))
+				for (var/obj/item/mob_part/humanoid_part/part in src.parts)
+					if ((part.slot & target) && (delete_transplanted || !(part.limb_is_unnatural || part.limb_is_transplanted)))
+						part.delete()
+						. = 1
+			return
+		else if (istype(target, /obj/item/mob_part/humanoid_part) && (delete_transplanted || !(part.limb_is_unnatural || part.limb_is_transplanted)))
+			var/obj/item/mob_part/humanoid_part/part = target
+			part.delete()
+			. = 1
+		return
+
+	// Returns first match. If this is not the only match, something is adding limbs wrong.
+	proc/get_limb(var/target)
+		RETURN_TYPE(/obj/item/mob_part/humanoid_part)
 		if(!limb)
 			return
-		switch(limb)
-			if("l_arm")
-				. = l_arm
-			if("r_arm")
-				. = r_arm
-			if("l_leg")
-				. = l_leg
-			if("r_leg")
-				. = r_leg
+		if (src.slot_filled(target))
+			for (var/obj/item/mob_part/humanoid_part/part in src.parts)
+				if (part.slot & target)
+					return part
 
 	proc/replace_with(var/target, var/new_type, var/mob/user, var/show_message = 1, var/no_drop = FALSE)
 		if (!target || !new_type || !src.holder)
@@ -466,24 +424,23 @@
 	proc/randomize(var/target, var/mob/user, var/show_message = 1)
 		if (!src.holder || !target)
 			return 0
-		if (istext(target))
-			var/randlimb = null
-			if (target == "all" || target == "both_arms" || target == "l_arm")
-				randlimb = pick(all_valid_random_left_arms)
-				. += src.replace_with("l_arm", randlimb, user, show_message)
-			if (target == "all" || target == "both_arms" || target == "r_arm")
-				randlimb = pick(all_valid_random_right_arms)
-				. += src.replace_with("r_arm", randlimb, user, show_message)
-			if (target == "all" || target == "both_legs" || target == "r_leg")
-				randlimb = pick(all_valid_random_right_legs)
-				. += src.replace_with("r_leg", randlimb, user, show_message)
-			if (target == "all" || target == "both_legs" || target == "l_leg")
-				randlimb = pick(all_valid_random_left_legs)
-				. += src.replace_with("l_leg", randlimb, user, show_message)
-		return .
+		var/randpart = null
+		if (target & LIMB_LEFT_ARM)
+			randpart = pick(all_valid_random_left_arms)
+			. += src.replace_with(LIMB_LEFT_ARM, randpart, user, show_message)
+		if (target & LIMB_RIGHT_ARM)
+			randpart = pick(all_valid_random_right_arms)
+			. += src.replace_with(LIMB_RIGHT_ARM, randpart, user, show_message)
+		if (target & LIMB_LEFT_LEG)
+			randpart = pick(all_valid_random_right_legs)
+			. += src.replace_with(LIMB_LEFT_LEG, randpart, user, show_message)
+		if (target & LIMB_RIGHT_LEG)
+			randpart = pick(all_valid_random_left_legs)
+			. += src.replace_with(LIMB_RIGHT_LEG, randpart, user, show_message)
+		return
 
 	proc/rename_limbs(user_name)
-		for(var/atom/limb in list(l_arm, r_arm, l_leg, r_leg))
+		for(var/obj/item/mob_part/humanoid_part/limb in src.parts)
 			var/list/limb_name_parts = splittext(limb.name, "'s")
 			if(length(limb_name_parts) == 2)
 				limb.name = "[user_name]'s [limb_name_parts[2]]"

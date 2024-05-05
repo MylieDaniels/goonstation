@@ -398,35 +398,3 @@ ABSTRACT_TYPE(/obj/item/parts)
 				if (ispath(streak_splatter))
 					make_cleanable(streak_splatter,src.loc)
 			sleep(0.1 SECONDS)
-
-
-var/global/list/all_valid_random_right_arms = filtered_concrete_typesof(/obj/item/parts, /proc/goes_in_right_arm_slot)
-var/global/list/all_valid_random_left_arms = filtered_concrete_typesof(/obj/item/parts, /proc/goes_in_left_arm_slot)
-var/global/list/all_valid_random_right_legs = filtered_concrete_typesof(/obj/item/parts, /proc/goes_in_right_leg_slot)
-var/global/list/all_valid_random_left_legs = filtered_concrete_typesof(/obj/item/parts, /proc/goes_in_left_leg_slot)
-
-/proc/goes_in_right_arm_slot(var/type)
-	var/obj/item/parts/fakeInstance = type
-	return (((initial(fakeInstance.slot) == "r_arm")) && !(initial(fakeInstance.random_limb_blacklisted)))
-
-/proc/goes_in_left_arm_slot(var/type)
-	var/obj/item/parts/fakeInstance = type
-	return (((initial(fakeInstance.slot) == "l_arm")) && !(initial(fakeInstance.random_limb_blacklisted)))
-
-/proc/goes_in_right_leg_slot(var/type)
-	var/obj/item/parts/fakeInstance = type
-	return (((initial(fakeInstance.slot) == "r_leg")) && !(initial(fakeInstance.random_limb_blacklisted)))
-
-/proc/goes_in_left_leg_slot(var/type)
-	var/obj/item/parts/fakeInstance = type
-	return (((initial(fakeInstance.slot) == "l_leg")) && !(initial(fakeInstance.random_limb_blacklisted)))
-
-/proc/randomize_mob_limbs(var/mob/living/carbon/human/target, var/mob/user, var/zone = "all", var/showmessage = 1)
-	if (!target)
-		return 0
-	var/datum/human_limbs/targetlimbs = target.limbs
-	if (!targetlimbs)
-		return 0
-	return targetlimbs.randomize(zone, user, showmessage)
-
-
