@@ -461,11 +461,10 @@
 			if (ishuman(holder.target))
 				var/mob/living/carbon/human/H = holder.target
 				var/limbless = TRUE
-				for (var/limb in list("l_leg", "r_leg", "l_arm", "r_arm"))
-					if (H.limbs.vars[limb]) // sue me
-						spooker.zone_sel.select_zone(limb)
-						limbless = FALSE
-						break
+				for (var/obj/item/mob_part/humanoid_part/part in H.limbs.parts)
+					spooker.zone_sel.select_zone(limb.slot)
+					limbless = FALSE
+					break
 				if (limbless) // >:^)
 					spooker.zone_sel.select_zone("head")
 

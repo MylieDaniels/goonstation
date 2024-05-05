@@ -840,27 +840,12 @@ TYPEINFO(/obj/machinery/transception_pad)
 		var/dethflavor = pick("suddenly vanishes","tears off in the teleport stream","disappears in a flash","violently disintegrates")
 		var/limb_ripped = FALSE
 
-		switch(rand(1,4))
-			if(1)
-				if(M.limbs.l_arm)
-					limb_ripped = TRUE
-					M.limbs.l_arm.delete()
-					M.visible_message(SPAN_ALERT("<B>[M]</B>'s arm [dethflavor]!"))
-			if(2)
-				if(M.limbs.r_arm)
-					limb_ripped = TRUE
-					M.limbs.r_arm.delete()
-					M.visible_message(SPAN_ALERT("<B>[M]</B>'s arm [dethflavor]!"))
-			if(3)
-				if(M.limbs.l_leg)
-					limb_ripped = TRUE
-					M.limbs.l_leg.delete()
-					M.visible_message(SPAN_ALERT("<B>[M]</B>'s leg [dethflavor]!"))
-			if(4)
-				if(M.limbs.r_leg)
-					limb_ripped = TRUE
-					M.limbs.r_leg.delete()
-					M.visible_message(SPAN_ALERT("<B>[M]</B>'s leg [dethflavor]!"))
+		var/obj/item/mob_part/humanoid_part/part = pick(M.limbs.parts)
+
+		if(part)
+			limb_ripped = TRUE
+			M.visible_message(SPAN_ALERT("<B>[M]</B>'s [part.name] [dethflavor]!"))
+			M.limbs.delete(part)
 
 		if(limb_ripped)
 			playsound(M.loc, 'sound/impact_sounds/Flesh_Tear_2.ogg', 75)

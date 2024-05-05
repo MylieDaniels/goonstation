@@ -40,10 +40,10 @@ TYPEINFO(/datum/component/explode_on_touch)
 			thing.set_loc(T)
 	if(remove_limbs && ishuman(user))
 		var/mob/living/carbon/human/H = user
-		var/list/limbs = list("r_arm", "l_arm", "l_leg", "r_leg")
+		var/list/obj/item/mob_part/humanoid_part/limbs = H.limbs.parts
 		shuffle_list(limbs)
 		for(var/i in 1 to remove_limbs)
-			H.sever_limb(limbs[i])
+			H.limbs.sever(limbs[i])
 	if(src.gib)
 		user.gib()
 	if(src.delete_self)

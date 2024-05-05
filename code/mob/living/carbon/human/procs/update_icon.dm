@@ -1016,7 +1016,7 @@ var/list/update_body_limbs = list("r_leg" = "stump_leg_right", "l_leg" = "stump_
 										human_decomp_image.icon_state = part_icon_s
 										human_decomp_image.pixel_y = armleg_offset
 										var/oldlayer
-										if (sleeveless && (limb.slot == "l_arm" || limb.slot == "r_arm"))
+										if (sleeveless && (limb.slot & LIMB_BOTH_ARMS))
 											oldlayer = human_decomp_image.layer // ugh
 											human_decomp_image.layer = MOB_HAND_LAYER1
 										src.body_standing.overlays += human_decomp_image
@@ -1032,7 +1032,7 @@ var/list/update_body_limbs = list("r_leg" = "stump_leg_right", "l_leg" = "stump_
 									else
 										human_untoned_decomp_image.icon_state = part_icon_s
 										var/oldlayer
-										if (sleeveless && (limb.slot == "l_arm" || limb.slot == "r_arm"))
+										if (sleeveless && (limb.slot & LIMB_BOTH_ARMS))
 											oldlayer = human_untoned_decomp_image.layer // ugh
 											human_untoned_decomp_image.layer = MOB_HAND_LAYER1
 										src.body_standing.overlays += human_untoned_decomp_image
@@ -1253,22 +1253,22 @@ var/list/update_body_limbs = list("r_leg" = "stump_leg_right", "l_leg" = "stump_
 			src.head_damage_standing = SafeGetOverlayImage("head_damage", 'icons/mob/dam_human.dmi', "00", MOB_DAMAGE_LAYER)//image('icons/mob/dam_human.dmi', "00", MOB_DAMAGE_LAYER)
 
 		//Limb damage
-		if(src.limbs && src.limbs.l_arm)
+		if(src.limbs && src.limbs.slot_filled(LIMB_LEFT_ARM))
 			src.l_arm_damage_standing = SafeGetOverlayImage("l_arm_damage", 'icons/mob/dam_human.dmi',"l_arm[brute_state][burn_state]", MOB_DAMAGE_LAYER)
 		else
 			src.l_arm_damage_standing = SafeGetOverlayImage("l_arm_damage", 'icons/mob/dam_human.dmi',"00")
 
-		if(src.limbs && src.limbs.r_arm)
+		if(src.limbs && src.limbs.slot_filled(LIMB_RIGHT_ARM))
 			src.r_arm_damage_standing = SafeGetOverlayImage("r_arm_damage", 'icons/mob/dam_human.dmi',"r_arm[brute_state][burn_state]", MOB_DAMAGE_LAYER)
 		else
 			src.r_arm_damage_standing = SafeGetOverlayImage("r_arm_damage", 'icons/mob/dam_human.dmi',"00")
 
-		if(src.limbs && src.limbs.l_leg)
+		if(src.limbs && src.limbs.slot_filled(LIMB_LEFT_LEG))
 			src.l_leg_damage_standing = SafeGetOverlayImage("l_leg_damage", 'icons/mob/dam_human.dmi',"l_leg[brute_state][burn_state]", MOB_DAMAGE_LAYER)
 		else
 			src.l_leg_damage_standing = SafeGetOverlayImage("l_leg_damage", 'icons/mob/dam_human.dmi',"00")
 
-		if(src.limbs && src.limbs.r_leg)
+		if(src.limbs && src.limbs.slot_filled(LIMB_RIGHT_LEG))
 			src.r_leg_damage_standing = SafeGetOverlayImage("r_leg_damage", 'icons/mob/dam_human.dmi',"r_leg[brute_state][burn_state]", MOB_DAMAGE_LAYER)
 		else
 			src.r_leg_damage_standing = SafeGetOverlayImage("r_leg_damage", 'icons/mob/dam_human.dmi',"00")

@@ -753,12 +753,12 @@
 	proc/update_hands()
 		if(QDELETED(master))
 			return
-		if (master.limbs && !master.limbs.l_arm)
+		if (master.limbs && !master.limbs.slot_filled(LIMB_LEFT_ARM))
 			lhand.icon_state = "handl[master.hand]d"
 		else
 			lhand.icon_state = "handl[master.hand]"
 
-		if (master.limbs && !master.limbs.r_arm)
+		if (master.limbs && !master.limbs.slot_filled(LIMB_RIGHT_ARM))
 			rhand.icon_state = "handr[!master.hand]d"
 		else
 			rhand.icon_state = "handr[!master.hand]"

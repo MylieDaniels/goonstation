@@ -16,16 +16,16 @@
 
 		var/mob/living/carbon/human/H = holder.owner
 
-		if (!ishuman(H) || !(H.limbs.l_arm || H.limbs.r_arm))
+		if (!ishuman(H) || !(H.limbs.slot_filled(LIMB_RIGHT_ARM) || H.limbs.slot_filled(LIMB_LEFT_ARM)))
 			boutput(holder.owner, SPAN_NOTICE("We have no arms to transform!"))
 			return 1
 
-		if (H.limbs.l_arm && H.limbs.r_arm) //if both arms are available, replace the active one
+		if (H.limbs.slot_filled(LIMB_BOTH_ARMS)) //if both arms are available, replace the active one
 			if (H.hand)
 				return replace_arm(H, "l_arm")
 			else
 				return replace_arm(H, "r_arm")
-		else if (H.limbs.l_arm)
+		else if (H.limbs.slot_filled(LIMB_RIGHT_ARM))
 			return replace_arm(H, "r_arm")
 		else
 			return replace_arm(H, "l_arm")

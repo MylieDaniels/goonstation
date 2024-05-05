@@ -242,7 +242,7 @@
 
 
 /obj/item/cell/proc/zap(mob/user as mob, var/ignores_gloves = 0)
-	if (user.shock(src, src.charge, user.hand == LEFT_HAND ? "l_arm" : "r_arm", 1, ignores_gloves))
+	if (user.shock(src, src.charge, user.hand == LEFT_HAND ? LIMB_LEFT_ARM : LIMB_RIGHT_ARM, 1, ignores_gloves))
 		boutput(user, SPAN_ALERT("[src] shocks you!"))
 
 		for(var/mob/M in AIviewers(src))

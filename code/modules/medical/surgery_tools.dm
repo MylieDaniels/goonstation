@@ -261,7 +261,7 @@ CONTAINS:
 				H.lastgasp()
 			return
 
-		if (!ishuman(target) || !(user.zone_sel && (user.zone_sel.selecting in list("l_arm","r_arm","l_leg","r_leg", "head"))))
+		if (!ishuman(target) || !(user.zone_sel && (user.zone_sel.selecting in list(LIMB_LEFT_ARM, LIMB_RIGHT_ARM, LIMB_LEFT_LEG, LIMB_RIGHT_LEG, "head"))))
 			return ..()
 
 		var/mob/living/carbon/human/H = target

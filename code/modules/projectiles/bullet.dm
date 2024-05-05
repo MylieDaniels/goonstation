@@ -705,7 +705,8 @@ toxic - poisons
 					M.organHolder.damage_organ(proj.power/M.get_ranged_protection(), 0, 0, prob(5) ? "heart" : targetorgan) //5% chance to hit the heart
 
 			if(prob(proj.power/4) && power > 50) //only for strong. Lowish chance
-				M.sever_limb(pick("l_arm","r_arm","l_leg","r_leg"))
+				var/obj/item/mob_part/humanoid_part/the_limb = pick(M.limbs.parts)
+				M.limbs.sever(the_limb)
 			..()
 
 	weak

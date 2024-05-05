@@ -299,10 +299,10 @@ TYPEINFO_NEW(/obj/table)
 				slaps += 1
 				src.visible_message(SPAN_ALERT("<b>[H] slams [his_or_her(H)] palms against [src]!</b>"))
 				if (slaps > 10 && prob(1)) //owned
-					if (H.hand && H.limbs && H.limbs.l_arm)
-						H.limbs.l_arm.sever()
-					if (!H.hand && H.limbs && H.limbs.r_arm)
-						H.limbs.r_arm.sever()
+					if (H.hand && H.limbs)
+						H.limbs.sever(LIMB_LEFT_ARM)
+					if (!H.hand && H.limbs)
+						H.limbs.sever(LIMB_RIGHT_ARM)
 
 				playsound(src.loc, 'sound/impact_sounds/Generic_Hit_Heavy_1.ogg', 50, 1)
 				src.material_trigger_when_attacked(user, user, 1)

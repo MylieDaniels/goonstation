@@ -594,7 +594,7 @@
 
 	critter_ability_attack(var/target) // Kinda hacky
 		var/missing_arm = target_missing_limb(target)
-		if ((missing_arm == "r_arm" || missing_arm == "l_arm") && ishuman(target))
+		if (missing_arm && ishuman(target))
 			var/mob/living/carbon/human/H = target
 			src.visible_message(SPAN_ALERT("<b>[src] latches onto [H]'s stump!!</b>"))
 			boutput(H, SPAN_ALERT("OH FUCK OH FUCK GET IT OFF GET IT OFF IT STINGS!"))
@@ -603,14 +603,14 @@
 			H.changeStatus("stunned", 2 SECONDS)
 			random_brute_damage(H, 5)
 			switch (missing_arm)
-				if ("r_arm")
+				if (LIMB_RIGHT_ARM)
 					var/obj/item/parts/human_parts/arm/meat_mutant/part = new /obj/item/parts/human_parts/arm/meat_mutant/right {remove_stage = 2;} (H)
-					H.limbs.vars["r_arm"] = part
+					H.limbs.add_part(part)
 					part.holder = H
 
-				if ("l_arm")
+				if (LIMB_LEFT_ARM)
 					var/obj/item/parts/human_parts/arm/meat_mutant/part = new /obj/item/parts/human_parts/arm/meat_mutant/left {remove_stage = 2;} (H)
-					H.limbs.vars["l_arm"] = part
+					H.limbs.add_part(part)
 					part.holder = H
 
 			H.update_body()
@@ -637,10 +637,10 @@
 		if (!istype(testhuman) || !testhuman.limbs)
 			return null
 
-		if (!testhuman.limbs.l_arm)
-			return "l_arm"
-		else if (!testhuman.limbs.r_arm)
-			return "r_arm"
+		if (!testhuman.limbs.slot_filled(LIMB_LEFT_ARM))
+			return LIMB_LEFT_ARM
+		else if (!testhuman.limbs.slot_filled(LIMB_RIGHT_ARM))
+			return LIMB_RIGHT_ARM
 
 		return null
 

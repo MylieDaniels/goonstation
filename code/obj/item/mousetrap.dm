@@ -55,9 +55,7 @@
 		else
 			icon_state = "mousetrap"
 			if ((user.get_brain_damage() >= 60 || user.bioHolder.HasEffect("clumsy")) && prob(50))
-				var/which_hand = "l_arm"
-				if (!user.hand)
-					which_hand = "r_arm"
+				var/which_hand = H.hand == LEFT_HAND ? LIMB_LEFT_ARM : LIMB_RIGHT_ARM
 				src.triggered(user, which_hand)
 				JOB_XP(user, "Clown", 1)
 				user.visible_message(SPAN_ALERT("<B>[user] accidentally sets off the mousetrap, breaking their fingers.</B>"),\
@@ -91,9 +89,7 @@
 				return
 		if (src.armed)
 			if ((user.get_brain_damage() >= 60 || user.bioHolder.HasEffect("clumsy")) && prob(50))
-				var/which_hand = "l_arm"
-				if (!user.hand)
-					which_hand = "r_arm"
+				var/which_hand = H.hand == LEFT_HAND ? LIMB_LEFT_ARM : LIMB_RIGHT_ARM
 				src.triggered(user, which_hand)
 				JOB_XP(user, "Clown", 1)
 				user.visible_message(SPAN_ALERT("<B>[user] accidentally sets off the mousetrap, breaking their fingers.</B>"),\
@@ -356,9 +352,9 @@
 			switch(type)
 				if ("feet")
 					if (!H.shoes && !H.mutantrace?.can_walk_on_shards)
-						zone = pick("l_leg", "r_leg")
+						zone = pick(LIMB_LEFT_LEG, LIMB_RIGHT_LEG)
 						H.changeStatus("weakened", 3 SECONDS)
-				if ("l_arm", "r_arm")
+				if (LIMB_LEFT_ARM, LIMB_RIGHT_ARM)
 					if (!H.gloves)
 						zone = type
 						H.changeStatus("stunned", 3 SECONDS)

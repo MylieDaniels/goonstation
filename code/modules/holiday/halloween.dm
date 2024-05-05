@@ -90,7 +90,7 @@
 		if (user.a_intent == "harm")
 			user.visible_message(SPAN_COMBAT("<b>[user]</b> punches the [src]!"),"You punch the [src].  Your hand hurts.")
 			playsound(src.loc, pick(sounds_punch), 100, 1)
-			user.TakeDamage(user.hand == LEFT_HAND ? "l_arm" : "r_arm", 0, rand(1, 4))
+			user.TakeDamage(user.hand == LEFT_HAND ? LIMB_LEFT_ARM : LIMB_RIGHT_ARM, 0, rand(1, 4))
 			return
 		else
 			src.visible_message("<b>[user]</b> thumps the [src]!  Ayy!")

@@ -753,7 +753,7 @@ TRAYS
 		if(src.cant_drop == TRUE)
 			if (istype(user, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = user
-				H.sever_limb(H.hand == LEFT_HAND ? "l_arm" : "r_arm")
+				H.limbs.sever(H.hand == LEFT_HAND ? LIMB_LEFT_ARM : LIMB_RIGHT_ARM)
 		else
 			user.drop_item()
 			src.set_loc(get_turf(M))
@@ -946,7 +946,7 @@ TRAYS
 				user.visible_message(SPAN_ALERT("[user] gets their finger caught in \the [src] when closing it. That thing is made out of cardboard! How is that possible?!"), \
 				SPAN_ALERT("You close \the [src] with your finger in it! Yeow!"))
 				user.setStatus("stunned", 1 SECOND)
-				user.TakeDamage((pick(TRUE, FALSE) ? "l_arm" : "r_arm"), 2, 0, 0, DAMAGE_BLUNT)
+				user.TakeDamage((pick(TRUE, FALSE) ? LIMB_LEFT_ARM : LIMB_RIGHT_ARM), 2, 0, 0, DAMAGE_BLUNT)
 				bleed(user, 1, 1)
 				playsound(user.loc, 'sound/impact_sounds/Flesh_Stab_1.ogg', 80, 0)
 				user.emote("scream") // Sounds specially painful when you get your finger stuck in a steel pizza box

@@ -53,7 +53,7 @@
 				boutput(H, SPAN_NOTICE("Your [G] protect you from the flames!"))
 		else
 			M.update_burning(-1.2)
-			H.TakeDamage(prob(50) ? "l_arm" : "r_arm", 0, rand(1,2))
+			H.TakeDamage(prob(50) ? LIMB_LEFT_ARM : LIMB_RIGHT_ARM, 0, rand(1,2))
 			playsound(src, 'sound/impact_sounds/burn_sizzle.ogg', 30, TRUE)
 			boutput(src, SPAN_ALERT("Your hands burn from patting the flames!"))
 	else
@@ -1092,9 +1092,7 @@
 	return def_zone
 
 /mob/living/carbon/human/check_target_zone(var/def_zone)
-	if (limbs && !limbs.l_arm && def_zone == "l_arm")
-		return "chest"
-	if (limbs && !limbs.r_arm && def_zone == "r_arm")
+	if (src.limbs && !(def_zone & src.limbs.filled_spots))
 		return "chest"
 	return def_zone
 

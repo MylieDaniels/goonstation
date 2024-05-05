@@ -700,7 +700,7 @@ TYPEINFO(/obj/item/syndie_fishing_rod)
 				return TRUE
 			if (do_weaken)
 				M.changeStatus("weakened", 5 SECONDS)
-				M.TakeDamage(M.hand == LEFT_HAND ? "l_arm": "r_arm", 15, 0, 0, DAMAGE_STAB)
+				M.TakeDamage(M.hand == LEFT_HAND ? LIMB_LEFT_ARM: LIMB_RIGHT_ARM, 15, 0, 0, DAMAGE_STAB)
 			M.force_laydown_standup()
 
 			src.owner = M

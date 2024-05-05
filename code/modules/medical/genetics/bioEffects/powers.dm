@@ -2261,14 +2261,14 @@
 			var/obj/item/parts/thrown_limb = null
 			var/datum/bioEffect/power/shoot_limb/SL = linked_power
 
-			if (H.has_limb("l_arm"))
-				thrown_limb = H.limbs.l_arm.remove(0)
-			else if (H.has_limb("r_leg"))
-				thrown_limb = H.limbs.r_leg.remove(0)
-			else if (H.has_limb("l_leg"))
-				thrown_limb = H.limbs.l_leg.remove(0)
-			else if (H.has_limb("r_arm"))
-				thrown_limb = H.limbs.r_arm.remove(0)
+			if (H.limbs.slot_filled(LIMB_LEFT_ARM))
+				thrown_limb = H.limbs.remove(LIMB_LEFT_ARM)
+			else if (H.limbs.slot_filled(LIMB_RIGHT_ARM))
+				thrown_limb = H.limbs.remove(LIMB_RIGHT_ARM)
+			else if (H.limbs.slot_filled(LIMB_LEFT_LEG))
+				thrown_limb = H.limbs.remove(LIMB_LEFT_LEG)
+			else if (H.limbs.slot_filled(LIMB_RIGHT_LEG))
+				thrown_limb = H.limbs.remove(LIMB_RIGHT_LEG)
 			else
 				return 1
 			SPAWN(1 DECI SECOND)

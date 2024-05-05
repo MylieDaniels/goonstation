@@ -462,10 +462,10 @@ var/global
 	// for translating a zone_sel's id to its name
 	list/zone_sel2name = list("head" = "head",
 	"chest" = "chest",
-	"l_arm" = "left arm",
-	"r_arm" = "right arm",
-	"l_leg" = "left leg",
-	"r_leg" = "right leg")
+	LIMB_LEFT_ARM = "left arm",
+	LIMB_RIGHT_ARM = "right arm",
+	LIMB_LEFT_LEG = "left leg",
+	LIMB_RIGHT_LEG = "right leg")
 
 	transparentColor = "#ff00e4"
 

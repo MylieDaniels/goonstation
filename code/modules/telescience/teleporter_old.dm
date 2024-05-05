@@ -259,9 +259,9 @@ proc/splinch(var/mob/M as mob, var/probability)
 			var/mob/living/carbon/human/H = M
 			var/part_splinched
 
-			part_splinched = pick("l_arm", "r_arm", "l_leg", "l_leg","left_eye", "right_eye", "left_lung", "right_lung", "butt", "left_kidney", "right_kidney", "spleen", "pancreas", "appendix", "stomach", "intestines", "tail")
-			if (part_splinched == "l_arm" || part_splinched == "r_arm" || part_splinched == "l_leg" || part_splinched == "l_leg")
-				return H.sever_limb(part_splinched)
+			part_splinched = pick(LIMB_LEFT_ARM, LIMB_RIGHT_ARM, LIMB_LEFT_LEG, LIMB_RIGHT_LEG,"left_eye", "right_eye", "left_lung", "right_lung", "butt", "left_kidney", "right_kidney", "spleen", "pancreas", "appendix", "stomach", "intestines", "tail")
+			if (isnum(part_splinched))
+				return H.limbs.sever(part_splinched)
 			else
 				return H.organHolder.drop_organ(part_splinched)
 

@@ -32,8 +32,7 @@
 						stay_behind.dropped(H)
 						stay_behind.layer = initial(stay_behind.layer)
 
-						H.sever_limb("l_leg")
-						H.sever_limb("r_leg")
+						H.limbs.sever(LIMB_BOTH_LEGS)
 						random_brute_damage(H, rand(15, 45))
 						take_bleeding_damage(H, null, 10, DAMAGE_CRUSH)
 

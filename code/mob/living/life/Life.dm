@@ -337,28 +337,13 @@
 
 	//Attaching a limb that didn't originally belong to you can do stuff
 	if(!isdead(src) && prob(2) && src.limbs)
-		if(src.limbs.l_arm && istype(src.limbs.l_arm, /obj/item/parts/human_parts/arm/))
-			var/obj/item/parts/human_parts/arm/A = src.limbs.l_arm
-			if(A.original_holder && src != A.original_holder)
-				A.foreign_limb_effect()
-		if(src.limbs.r_arm && istype(src.limbs.r_arm, /obj/item/parts/human_parts/arm/))
-			var/obj/item/parts/human_parts/arm/B = src.limbs.r_arm
-			if(B.original_holder && src != B.original_holder)
-				B.foreign_limb_effect()
-		if(src.limbs.l_leg && istype(src.limbs.l_leg, /obj/item/parts/human_parts/leg/))
-			var/obj/item/parts/human_parts/leg/C = src.limbs.l_leg
-			if(C.original_holder && src != C.original_holder)
-				C.foreign_limb_effect()
-		if(src.limbs.r_leg && istype(src.limbs.r_leg, /obj/item/parts/human_parts/leg/))
-			var/obj/item/parts/human_parts/leg/D = src.limbs.r_leg
-			if(D.original_holder && src != D.original_holder)
-				D.foreign_limb_effect()
+		for (var/obj/item/mob_part/humanoid_part/part in src.limbs.parts)
+			if(part.original_holder && src != part.original_holder)
+				part.foreign_limb_effect()
 
-	if (!isdead(src)) // Marq was here, breaking everything.
-		src.limbs.l_arm?.on_life(parent)
-		src.limbs.r_arm?.on_life(parent)
-		src.limbs.l_leg?.on_life(parent)
-		src.limbs.r_leg?.on_life(parent)
+	if (!isdead(src)) // Marq was here, breaking everything. Mylie was also here, trying to fix.
+		for (var/obj/item/mob_part/humanoid_part/part in src.limbs.parts)
+			if(part.on_life(parent))
 
 		if (src.sims && src.ckey) // ckey will be null if it's an npc, so they're skipped
 			src.sims.Life()
@@ -661,7 +646,7 @@
 			return 0
 		var/protection = 0
 		var/a_zone = zone
-		if (a_zone in list("l_leg", "r_arm", "l_leg", "r_leg"))
+		if (a_zone & LIMB_ALL_LIMBS)
 			a_zone = "chest"
 			//protection from clothing
 		if(a_zone == "All")

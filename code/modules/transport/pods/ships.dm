@@ -1559,9 +1559,9 @@ ABSTRACT_TYPE(/obj/item/podarmor)
 				if(ishuman(pilot))
 					var/mob/living/carbon/human/H = pilot
 					if(prob(40))
-						var/limb = pick(list("l_arm","r_arm","l_leg","r_leg"))
+						var/obj/item/mob_part/humanoid_part/limb = pick(H.limbs.parts)
 						SPAWN(rand(0,5))
-							H.sever_limb(limb)
+							H.limbs.sever(limb)
 				src.leave_pod(pilot)
 				src.icon_state = "escape_nowindow"
 				while(src)

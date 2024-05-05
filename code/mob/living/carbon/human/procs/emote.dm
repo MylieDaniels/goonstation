@@ -2174,7 +2174,7 @@
 				if(ishuman(src))
 					H = src
 				var/obj/item/I = get_id_card(src.wear_id)
-				if(H && (!H.limbs.l_arm || !H.limbs.r_arm || H.restrained()))
+				if(H && (!H.limbs.slot_filled(LIMB_BOTH_ARMS) || H.restrained()))
 					src.show_text("You can't do that without free arms!")
 				else if((src.mind && (src.mind.assigned_role in list("Clown", "Staff Assistant", "Captain"))) || istraitor(H) || isconspirator(H) || isnukeop(H) || isnukeopgunbot(H) || istype(src.head, /obj/item/clothing/head/bighat/syndicate/) || istype(I, /obj/item/card/id/dabbing_license) || (src.reagents && src.reagents.has_reagent("puredabs")) || (src.reagents && src.reagents.has_reagent("extremedabs"))) //only clowns and the useless know the true art of dabbing
 					var/obj/item/card/id/dabbing_license/dab_id = null
@@ -2218,14 +2218,12 @@
 						playsound(src.loc, 'sound/misc/deepfrieddabs.ogg', 25,0, channel=VOLUME_CHANNEL_EMOTE)
 						shake_camera(src, 40, 8)
 						if(H)
-							if(H.limbs.l_arm)
-								src.limbs.l_arm.sever()
-								if(dab_id)
-									dab_id.arm_count++
-							if(H.limbs.r_arm)
-								src.limbs.r_arm.sever()
-								if(dab_id)
-									dab_id.arm_count++
+							if(dab_id)
+							if (H.limbs.slot_filled(LIMB_LEFT_ARM))
+								dab_id.arm_count++
+							if (H.limbs.slot_filled(LIMB_RIGHT_ARM))
+								dab_id.arm_count++
+							H.limbs.sever(LIMB_BOTH_ARMS)
 							H.emote("scream")
 					if(!(istype(src.head, /obj/item/clothing/head/bighat/syndicate) || src.reagents.has_reagent("puredabs")))
 						src.take_brain_damage(10)
@@ -2233,14 +2231,12 @@
 						if(src.get_brain_damage() > 60)
 							src.show_text(SPAN_ALERT("Your head hurts!"))
 					if(locate(/obj/item/bible) in src.loc)
-						if(H.limbs.l_arm)
-							src.limbs.l_arm.sever()
-							dab_id?.arm_count++
-						if(H.limbs.r_arm)
-							src.limbs.r_arm.sever()
-							dab_id?.arm_count++
-						src.limbs.r_leg?.sever()
-						src.limbs.l_leg?.sever()
+						if(dab_id)
+							if (H.limbs.slot_filled(LIMB_LEFT_ARM))
+								dab_id.arm_count++
+							if (H.limbs.slot_filled(LIMB_RIGHT_ARM))
+								dab_id.arm_count++
+						H.limbs.sever(LIMB_ALL_LIMBS)
 						message = SPAN_ALERT("[src] does a sick dab on the bible!")
 						src.visible_message(SPAN_ALERT("An unseen force smites [src]'s' limbs off</B>!"))
 						playsound(src.loc, 'sound/misc/deepfrieddabs.ogg', 25,0, channel=VOLUME_CHANNEL_EMOTE)

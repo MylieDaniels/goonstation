@@ -280,29 +280,28 @@
 	return_to_master()
 		if (ishuman(hivemind_owner.owner))
 			var/mob/living/carbon/human/C = hivemind_owner.owner
-			if(!C.limbs.l_arm || !C.limbs.r_arm)
-				if(!C.limbs.l_arm)
-					if (isabomination(C))
-						C.limbs.l_arm = new /obj/item/parts/human_parts/arm/left/abomination(C)
-					else //mbc todo : use type of handspider to get diff arms
-						C.limbs.l_arm = new /obj/item/parts/human_parts/arm/left(C)
-					C.limbs.l_arm.holder = C
-					C.limbs.l_arm:original_holder = C
-					C.limbs.l_arm:set_skin_tone()
-					C.set_body_icon_dirty()
-				else if(!C.limbs.r_arm)
-					if (isabomination(C))
-						C.limbs.r_arm = new /obj/item/parts/human_parts/arm/right/abomination(C)
-					else
-						C.limbs.r_arm = new /obj/item/parts/human_parts/arm/right(C)
-					C.limbs.r_arm.holder = C
-					C.limbs.r_arm:original_holder = C
-					C.limbs.r_arm:set_skin_tone()
-					C.set_body_icon_dirty()
-				if (isdead(src))
-					hivemind_owner.owner.visible_message(SPAN_ALERT("<B>[hivemind_owner.owner] grabs on to [src] and attaches it to their own body!</B>"))
+			if(!C.limbs.slot_filled(LIMB_LEFT_ARM))
+				if (isabomination(C))
+					C.limbs.add_part(new /obj/item/parts/human_parts/arm/left/abomination(C))
+				else //mbc todo : use type of handspider to get diff arms
+					C.limbs.add_part(new /obj/item/parts/human_parts/arm/left(C))
+				C.limbs.l_arm.holder = C
+				C.limbs.l_arm:original_holder = C
+				C.limbs.l_arm:set_skin_tone()
+				C.set_body_icon_dirty()
+			else if(!C.limbs.slot_filled(LIMB_RIGHT_ARM))
+				if (isabomination(C))
+					C.limbs.add_part(new /obj/item/parts/human_parts/arm/right/abomination(C))
 				else
-					hivemind_owner.owner.visible_message(SPAN_ALERT("<B>[src] climbs on to [hivemind_owner.owner] and attaches itself to their arm stump!</B>"))
+					C.limbs.add_part(new /obj/item/parts/human_parts/arm/right(C))
+				C.limbs.r_arm.holder = C
+				C.limbs.r_arm:original_holder = C
+				C.limbs.r_arm:set_skin_tone()
+				C.set_body_icon_dirty()
+			if (isdead(src))
+				hivemind_owner.owner.visible_message(SPAN_ALERT("<B>[hivemind_owner.owner] grabs on to [src] and attaches it to their own body!</B>"))
+			else
+				hivemind_owner.owner.visible_message(SPAN_ALERT("<B>[src] climbs on to [hivemind_owner.owner] and attaches itself to their arm stump!</B>"))
 
 		var/dna_gain = absorbed_dna
 		if (isdead(src))	//if the handspider is dead, the changeling can only gain half of what they collected

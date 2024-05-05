@@ -10,9 +10,9 @@
 /datum/hud/zone_sel
 
 	// list of current zone sel to the next zone sel if you scroll up
-	var/static/list/zone_sels_positive_delta = list("head" = "head", "chest" = "head", "l_arm" = "chest", "r_arm" = "l_arm", "l_leg" = "r_arm", "r_leg" = "l_leg")
+	var/static/list/zone_sels_positive_delta = list("head" = "head", "chest" = "head", LIMB_LEFT_ARM = "chest", LIMB_RIGHT_ARM = LIMB_LEFT_ARM, LIMB_LEFT_LEG = LIMB_RIGHT_ARM, LIMB_RIGHT_LEG = LIMB_LEFT_LEG)
 	// list of current zone sel to the next zone sel if you scroll down
-	var/static/list/zone_sels_negative_delta = list("head" = "chest", "chest" = "l_arm", "l_arm" = "r_arm", "r_arm" = "l_leg", "l_leg" = "r_leg", "r_leg" = "r_leg")
+	var/static/list/zone_sels_negative_delta = list("head" = "chest", "chest" = LIMB_LEFT_ARM, LIMB_LEFT_ARM = LIMB_RIGHT_ARM, LIMB_RIGHT_ARM = LIMB_LEFT_LEG, LIMB_LEFT_LEG = LIMB_RIGHT_LEG, LIMB_RIGHT_LEG = LIMB_RIGHT_LEG)
 
 	var/atom/movable/screen/hud/zone_zel/background
 	var/atom/movable/screen/hud/zone_zel/head
@@ -49,10 +49,10 @@
 		background = create_screen("background", "Zone Selection", src.icon_hud, "zone_sel", src.slocation, HUD_LAYER, customType=/atom/movable/screen/hud/zone_zel)
 		head = create_screen("head", "Target Head", src.icon_hud, "sel-head", src.slocation, HUD_LAYER+1, customType=/atom/movable/screen/hud/zone_zel)
 		chest = create_screen("chest", "Target Chest", src.icon_hud, "sel-chest", src.slocation, HUD_LAYER+1, customType=/atom/movable/screen/hud/zone_zel)
-		l_arm = create_screen("l_arm", "Target Left Arm", src.icon_hud, "sel-l_arm", src.slocation, HUD_LAYER+1, customType=/atom/movable/screen/hud/zone_zel)
-		r_arm = create_screen("r_arm", "Target Right Arm", src.icon_hud, "sel-r_arm", src.slocation, HUD_LAYER+1, customType=/atom/movable/screen/hud/zone_zel)
-		l_leg = create_screen("l_leg", "Target Left Leg", src.icon_hud, "sel-l_leg", src.slocation, HUD_LAYER+1)
-		r_leg = create_screen("r_leg", "Target Right Leg", src.icon_hud, "sel-r_leg", src.slocation, HUD_LAYER+1, customType=/atom/movable/screen/hud/zone_zel)
+		l_arm = create_screen(LIMB_LEFT_ARM, "Target Left Arm", src.icon_hud, "sel-l_arm", src.slocation, HUD_LAYER+1, customType=/atom/movable/screen/hud/zone_zel)
+		r_arm = create_screen(LIMB_RIGHT_ARM, "Target Right Arm", src.icon_hud, "sel-r_arm", src.slocation, HUD_LAYER+1, customType=/atom/movable/screen/hud/zone_zel)
+		l_leg = create_screen(LIMB_LEFT_LEG, "Target Left Leg", src.icon_hud, "sel-l_leg", src.slocation, HUD_LAYER+1)
+		r_leg = create_screen(LIMB_RIGHT_LEG, "Target Right Leg", src.icon_hud, "sel-r_leg", src.slocation, HUD_LAYER+1, customType=/atom/movable/screen/hud/zone_zel)
 		selection = create_screen("selection", "Current Target ([capitalize(zone_sel2name[src.selecting])])", src.icon_hud, src.selecting, src.slocation, HUD_LAYER+2, customType=/atom/movable/screen/hud/zone_zel)
 
 	clear_master()

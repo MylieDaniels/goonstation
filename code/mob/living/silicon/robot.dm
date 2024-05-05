@@ -961,13 +961,13 @@
 			switch(M.zone_sel.selecting)
 				if ("head")
 					PART = src.part_head
-				if ("r_arm")
+				if (LIMB_RIGHT_ARM)
 					PART = src.part_arm_r
-				if ("r_leg")
+				if (LIMB_RIGHT_LEG)
 					PART = src.part_leg_r
-				if ("l_arm")
+				if (LIMB_LEFT_ARM)
 					PART = src.part_arm_l
-				if ("l_leg")
+				if (LIMB_LEFT_LEG)
 					PART = src.part_leg_l
 				else
 					PART = src.part_chest

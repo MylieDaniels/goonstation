@@ -89,9 +89,9 @@ ABSTRACT_TYPE(/datum/targetable/changeling/critter)
 
 		var/obj/item/parts/original_arm = null
 
-		if (owner.limbs.l_arm && owner.limbs.r_arm) //if both arms are available, remove the inactive one
+		if (owner.limbs.slots_filled(LIMB_BOTH_ARMS)) //if both arms are available, remove the inactive one
 			if (owner.hand)
-				original_arm = owner.limbs.r_arm.remove(FALSE)
+				original_arm = owner.limbs.remove(LIMB_RIGHT_ARM)
 				owner.changeStatus("c_regrow-r_arm", 75 SECONDS)
 			else
 				original_arm = owner.limbs.l_arm.remove(FALSE)

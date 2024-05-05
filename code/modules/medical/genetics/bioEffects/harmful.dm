@@ -367,24 +367,16 @@
 		if (!ishuman(owner))
 			return
 		var/mob/living/carbon/human/H = owner
-		var/list/possible_limbs = list()
-		if (H.limbs.l_arm)
-			possible_limbs += H.limbs.l_arm
-		if (H.limbs.r_arm)
-			possible_limbs += H.limbs.r_arm
-		if (H.limbs.l_leg)
-			possible_limbs += H.limbs.l_leg
-		if (H.limbs.r_leg)
-			possible_limbs += H.limbs.r_leg
-		if (!possible_limbs.len)
+		var/list/obj/item/mob_part/humanoid_part/possible_limbs = H.limbs.parts
+		if (!length(possible_limbs))
 			return
 
 		src.limb = pick(possible_limbs)
 
-		if (istype(src.limb, /obj/item/parts/human_parts/arm) || istype(src.limb, /obj/item/parts/robot_parts/arm))
+		if (src.limb.slot & LIMB_BOTH_ARMS)
 			src.limb_type = LIMB_IS_ARM
 			return 1
-		else if (istype(src.limb, /obj/item/parts/human_parts/leg) || istype(src.limb, /obj/item/parts/robot_parts/leg))
+		else if (src.limb.slot & LIMB_BOTH_LEGS)
 			src.limb_type = LIMB_IS_LEG
 			return 1
 

@@ -1291,9 +1291,6 @@
 	if (src.limbs && (src.hand ? !src.limbs.l_arm : !src.limbs.r_arm))
 		return 1
 
-	/*if (src.limbs && (src.hand ? !src.limbs.l_arm:can_hold_items : !src.limbs.r_arm:can_hold_items)) // this was fucking stupid and broke item limbs, I mean really, how do you restrain someone whos arm is a goddamn CHAINSAW
-		return 1*/
-
 /mob/living/carbon/human/set_pulling(atom/movable/A)
 	. = ..()
 	hud.update_pulling()
@@ -2647,18 +2644,10 @@
 	var/list/ret = list()
 	var/list/processed = list()
 	if (limbs)
-		if (limbs.l_arm && prob(75) && limbs.l_arm.loc == src)
-			ret += limbs.l_arm
-			processed += limbs.l_arm
-		if (limbs.r_arm && prob(75) && limbs.r_arm.loc == src)
-			ret += limbs.r_arm
-			processed += limbs.r_arm
-		if (limbs.l_leg && prob(75) && limbs.l_leg.loc == src)
-			ret += limbs.l_leg
-			processed += limbs.l_leg
-		if (limbs.r_leg && prob(75) && limbs.r_leg.loc == src)
-			ret += limbs.r_leg
-			processed += limbs.r_leg
+		for (var/obj/item/mob_part/humanoid_part/part in src.limbs.parts)
+			if (prob(75) && part.loc = src)
+				ret += limbs.r_leg
+				processed += limbs.r_leg
 	if (src.organHolder)
 		if (organHolder.chest)
 			processed += organHolder.chest
@@ -2779,38 +2768,6 @@
 		return
 	if (other != src)
 		sims.affectMotive("social", 5)
-
-/mob/living/carbon/human/proc/lose_limb(var/limb)
-	if (!src.limbs)
-		return
-	if(!(limb in list("l_arm","r_arm","l_leg","r_leg"))) return
-
-	//not exactly elegant, but fuck it, src.vars[limb].remove() didn't want to work :effort:
-	if(limb == "l_arm" && src.limbs.l_arm) src.limbs.l_arm.remove()
-	else if(limb == "r_arm" && src.limbs.r_arm) src.limbs.r_arm.remove()
-	else if(limb == "l_leg" && src.limbs.l_leg) src.limbs.l_leg.remove()
-	else if(limb == "r_leg" && src.limbs.r_leg) src.limbs.r_leg.remove()
-
-/mob/living/carbon/human/proc/sever_limb(var/limb)
-	if (!src.limbs)
-		return
-	if(!(limb in list("l_arm","r_arm","l_leg","r_leg"))) return
-
-	//not exactly elegant, but fuck it, src.vars[limb].sever() didn't want to work :effort:
-	if(limb == "l_arm" && src.limbs.l_arm) src.limbs.l_arm.sever()
-	else if(limb == "r_arm" && src.limbs.r_arm) src.limbs.r_arm.sever()
-	else if(limb == "l_leg" && src.limbs.l_leg) src.limbs.l_leg.sever()
-	else if(limb == "r_leg" && src.limbs.r_leg) src.limbs.r_leg.sever()
-
-/mob/living/carbon/human/proc/has_limb(var/limb)
-	if (!src.limbs)
-		return
-	if(!(limb in list("l_arm","r_arm","l_leg","r_leg"))) return
-
-	if(limb == "l_arm" && src.limbs.l_arm) return 1
-	else if(limb == "r_arm" && src.limbs.r_arm) return 1
-	else if(limb == "l_leg" && src.limbs.l_leg) return 1
-	else if(limb == "r_leg" && src.limbs.r_leg) return 1
 
 /mob/living/carbon/human/hand_attack(atom/target, params, location, control)
 	if (src.lying && src.buckled != target) //lol we need to allow unbuckling here i guess...

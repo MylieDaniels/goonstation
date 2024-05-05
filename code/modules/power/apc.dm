@@ -976,10 +976,12 @@ ADMIN_INTERACT_PROCS(/obj/machinery/power/apc, proc/toggle_operating, proc/zapSt
 		if(H.gloves && bite == 0)
 			var/obj/item/clothing/gloves/G = H.gloves
 			prot = (G.hasProperty("conductivity") ? G.getProperty("conductivity") : 1)
-		if (H.limbs.l_arm)
-			prot = min(prot,H.limbs.l_arm.siemens_coefficient)
-		if (H.limbs.r_arm)
-			prot = min(prot,H.limbs.r_arm.siemens_coefficient)
+		var/obj/item/mob_part/humanoid_part/part = H.limbs.get_limb(LIMB_RIGHT_ARM)
+		if (part)
+			prot = min(prot,part.siemens_coefficient)
+		part = H.limbs.get_limb(LIMB_LEFT_ARM)
+		if (part)
+			prot = min(prot,part.siemens_coefficient)
 
 	else if (issilicon(user) || isAI(user))
 		return 0
@@ -1022,7 +1024,7 @@ ADMIN_INTERACT_PROCS(/obj/machinery/power/apc, proc/toggle_operating, proc/zapSt
 		boutput(user, SPAN_NOTICE("You feel electricity course through you harmlessly!"))
 		return
 
-	user.TakeDamage(user.hand == LEFT_HAND ? "l_arm" : "r_arm", 0, shock_damage)
+	user.TakeDamage(user.hand == LEFT_HAND ? LIMB_LEFT_ARM : LIMB_RIGHT_ARM, 0, shock_damage)
 	boutput(user, SPAN_ALERT("<B>You feel a powerful shock course through your body!</B>"))
 	user.unlock_medal("HIGH VOLTAGE", 1)
 	if (isliving(user))

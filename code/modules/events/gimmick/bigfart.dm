@@ -94,48 +94,40 @@
 
 	/// If that didn't work, try severing a limb or tail
 	else if (!is_bot && prob(limbloss_prob)) // It'll try to sever an arm, then a leg, then an arm, then a leg
-		var/list/possible_limbs = list()
-		if (H.limbs.l_leg)
-			possible_limbs[H.limbs.l_leg] = "leg"
-		if (H.limbs.r_arm)
-			possible_limbs[H.limbs.r_arm] = "arm"
-		if (H.limbs.r_leg)
-			possible_limbs[H.limbs.r_leg] = "leg"
-		if (H.limbs.l_arm)
-			possible_limbs[H.limbs.l_arm] = "arm"
+		var/list/possible_limbs = H.limbs.parts
 
 		if (length(possible_limbs)) /// Dont want your tail removed? Keep all your limbs intact!
 			if(istype(H.organHolder.tail) && prob(100 - (25 * length(possible_limbs)))) // 25% chance to lose a tail per missing limb
 				H.visible_message(SPAN_ALERT("<b>[H]</b>'s [magical ? "tægl" : "tail"] is torn free from [his_or_her(H)] body[magical ? " in a magical explosion" : null]!"),\
 				SPAN_ALERT("[changer ? "Our" : "Your"] [magical ? "tægl" : "tail"] is torn free from [changer ? "our" : "your"] body[magical ? " in a magical explosion" : null]!"))
 				H.drop_and_throw_organ("tail", dist = 6, speed = 1, showtext = 1)
-			for(var/obj/item/parts/L in possible_limbs)
-				if(length(possible_limbs) > 2) // Lets not remove both limbs unless that's all that's left
-					if(possible_limbs[L] == "arm" && (!H.limbs.l_arm || !H.limbs.l_arm))
-						possible_limbs -= L
+			for(var/obj/item/mob_part/humanoid_part/part in possible_limbs)
+				if(length(possible_limbs) > 2) // Lets not remove both limbs of a type in a row unless theres no alternative
+					if(L & LIMB_BOTH_ARMS && !H.limbs.slot_filled(LIMB_BOTH_ARMS))
+						possible_limbs -= part
 						continue
-					if(possible_limbs[L] == "leg" && (!H.limbs.l_leg || !H.limbs.l_leg))
-						possible_limbs -= L
+					if(L & LIMB_BOTH_LEGS && !H.limbs.slot_filled(LIMB_BOTH_LEGS))
+						possible_limbs -= part
 						continue
 				if(length(possible_limbs) > 1 && prob(25))
-					possible_limbs -= L
+					possible_limbs -= part
 					continue
 				var/ass_exploded = ass_explosion_limb_success(L)
 				switch(ass_exploded)
 					if(0)
-						ass_explosion_message(L, H, magical, possible_limbs[L], 0)
+						ass_explosion_message(part, H, magical, L & LIMB_BOTH_ARMS ? "arm" : "leg", 0)
 						continue
 					if(1)
-						ass_explosion_message(L, H, magical, possible_limbs[L], 1)
+						ass_explosion_message(part, H, magical, L & LIMB_BOTH_ARMS ? "arm" : "leg", 1)
 						L.sever()
 						break
 					if(2)
 						if(prob(50))
-							ass_explosion_message(L, H, magical, possible_limbs[L], 1)
+							ass_explosion_message(L, H, magical, L & LIMB_BOTH_ARMS ? "arm" : "leg", 1)
 							L.sever()
 							break
 						else
-							ass_explosion_message(L, H, magical, possible_limbs[L], 0)
+							ass_explosion_message(L, H, magical, L & LIMB_BOTH_ARMS ? "arm" : "leg", 0)
 							continue
 
 	// ehhh blow their missing ass out anyway

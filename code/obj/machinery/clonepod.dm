@@ -315,7 +315,7 @@ TYPEINFO(/obj/machinery/clonepod)
 				if (ishuman(src.occupant))
 					var/mob/living/carbon/human/P = src.occupant
 					if (P.limbs)
-						var/list/limbs = list("l_arm", "r_arm", "l_leg", "r_leg")
+						var/list/limbs = list(LIMB_LEFT_ARM, LIMB_RIGHT_ARM, LIMB_LEFT_LEG, LIMB_RIGHT_LEG)
 						for (var/limb in limbs)
 							if (prob(50))
 								P.limbs.sever(limb)

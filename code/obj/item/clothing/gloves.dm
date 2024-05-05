@@ -694,7 +694,7 @@ ABSTRACT_TYPE(/obj/item/clothing/gloves)
 							logTheThing(LOG_COMBAT, user, "harm-zaps [constructTarget(target_r,"combat")] with power gloves at [log_loc(user)], power = [PN.avail]")
 							src.electrocute(victim, 100, netnum, ignore_range = TRUE)
 							if(uses)
-								victim.shock(src, 1000 * uses, victim.hand == LEFT_HAND ? "l_arm": "r_arm", 1)
+								victim.shock(src, 1000 * uses, victim.hand == LEFT_HAND ? LIMB_LEFT_ARM, LIMB_RIGHT_ARM, 1)
 								uses--
 								charges_used = TRUE
 							break

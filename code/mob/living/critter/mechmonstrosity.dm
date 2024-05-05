@@ -357,10 +357,7 @@
 			return TRUE
 
 		M.visible_message(SPAN_ALERT("<B>With their double saw whirling, [M] swiftly severs all [target]'s limbs!</B>"))
-		H.sever_limb("r_arm")
-		H.sever_limb("l_arm")
-		H.sever_limb("r_leg")
-		H.sever_limb("l_leg")
+		H.limbs.sever(LIMB_ALL_LIMBS)
 		playsound(M.loc, 'sound/effects/sawhit.ogg', 90,1)
 		boutput(target, SPAN_ALERT("All of your limbs were severed by [M]!"))
 

@@ -1197,7 +1197,7 @@ ADMIN_INTERACT_PROCS(/obj/item/gimmickbomb, proc/arm, proc/detonate)
 
 				if ((src.bootleg_level == 2) && (ishuman(user)))
 					var/mob/living/carbon/human/H = user
-					H.sever_limb(H.hand == LEFT_HAND ? "l_arm" : "r_arm") // copied from weapon_racks.dm
+					H.limbs.sever(H.hand == LEFT_HAND ? LIMB_LEFT_ARM : LIMB_RIGHT_ARM)
 
 			else
 				elecflash(src,power = 2)

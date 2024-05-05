@@ -281,10 +281,10 @@ var/maniac_previous_victim = "Unknown"
 			SPAWN(0.5 SECONDS)
 				boutput(target, "You better run..")
 
-				var/the_limb = null
 				var/mob/living/carbon/human/H = target
-				the_limb = pick("l_arm","r_arm","l_leg","r_leg")
-				H.sever_limb(the_limb)
+				if (ishuman(H))
+					var/obj/item/mob_part/humanoid_part/the_limb = pick(H.limbs.parts)
+					H.limbs.sever(the_limb)
 				random_brute_damage(target, rand(40,70),1)
 				qdel(src)
 				maniac_active &= ~1

@@ -497,8 +497,9 @@
 			L.bodytemperature = max(power/1e4, L.bodytemperature)
 			L.TakeDamage("chest", 0, power/1e7) //ow
 			if(ishuman(L) && prob(min(power/1e7,50)))
-				var/limb = pick("l_arm","r_arm","l_leg","r_leg")
-				L:sever_limb(limb)
+				var/mob/living/carbon/human/H = L
+				var/obj/item/mob_part/humanoid_part/the_limb = pick(H.limbs.parts)
+				H.limbs.sever(the_limb)
 				L.visible_message("<b>The [src.name] slices off one of [L.name]'s limbs!</b>")
 		if(200 MEGA WATTS + 1 to 5 GIGA WATTS) //you really fucked up this time buddy
 			make_cleanable( /obj/decal/cleanable/ash,src.loc)

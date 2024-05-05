@@ -39,13 +39,13 @@
 					if (M.wear_id) stolenItem = M.wear_id
 				if ("head")
 					if (M.wear_mask) stolenItem = M.wear_mask
-				if ("r_arm")
+				if (LIMB_RIGHT_ARM)
 					stolenItem = M.r_hand ? M.r_hand : M.l_hand ? M.l_hand : null
-				if ("l_arm")
+				if (LIMB_LEFT_ARM)
 					stolenItem = M.l_hand ? M.l_hand : M.r_hand ? M.r_hand : null
-				if ("r_leg")
+				if (LIMB_RIGHT_LEG)
 					stolenItem = M.r_store ? M.r_store : M.l_store ? M.l_store : null
-				if ("l_leg")
+				if (LIMB_LEFT_LEG)
 					stolenItem = M.l_store ? M.l_store : M.r_store ? M.r_store : null
 			if (stolenItem) // Found a thing to steal, hurrah
 				if (stolenItem.cant_other_remove)
@@ -75,10 +75,10 @@
 							linkedGun.heldItem.set_loc(get_turf(M))
 							linkedGun.heldItem.layer = initial(linkedGun.heldItem.layer)
 							boutput(M, "\A [linkedGun.heldItem] suddenly thwacks into your head! [pick(strikeFlavor)]")
-					if ("r_arm", "l_arm") // TODO: Maybe switch arm-targetting to try to put things into backpack. Less sensical but more useful
+					if (LIMB_RIGHT_ARM, LIMB_LEFT_ARM) // TODO: Maybe switch arm-targetting to try to put things into backpack. Less sensical but more useful
 						if (!M.put_in_hand_or_drop(linkedGun.heldItem))
 							boutput(M, "\A [linkedGun.heldItem] brushes insistently at your hands! [pick(strikeFlavor)]")
-					if ("r_leg")
+					if (LIMB_RIGHT_LEG)
 						if (!M.r_store && M.can_equip(linkedGun.heldItem, SLOT_R_STORE))
 							M.equip_if_possible(linkedGun.heldItem, SLOT_R_STORE)
 						else if (!M.l_store && M.can_equip(linkedGun.heldItem, SLOT_L_STORE))
@@ -87,7 +87,7 @@
 							linkedGun.heldItem.set_loc(get_turf(M))
 							linkedGun.heldItem.layer = initial(linkedGun.heldItem.layer)
 							boutput(M, "\A [linkedGun.heldItem] tries to cram itself into your pockets! [pick(strikeFlavor)]")
-					if ("l_leg")
+					if (LIMB_LEFT_LEG)
 						if (!M.l_store && M.can_equip(linkedGun.heldItem, SLOT_L_STORE))
 							M.equip_if_possible(linkedGun.heldItem, SLOT_L_STORE)
 						else if (!M.r_store && M.can_equip(linkedGun.heldItem, SLOT_R_STORE))
@@ -134,7 +134,7 @@
 					else // Eye gouge
 						boutput(M, SPAN_ALERT("Something suddenly gouges you in the eyes! JESUS FUCK OW"))
 						M.take_eye_damage(10)
-				if ("r_arm") // Stop hitting yourself, stop hitting yourself
+				if (LIMB_RIGHT_ARM) // Stop hitting yourself, stop hitting yourself
 					if (M.r_hand && isitem(M.r_hand))
 						var/obj/item/stopHittingYourself = M.r_hand
 						boutput(M, "You suddenly take a swing at yourself with \the [stopHittingYourself]!")
@@ -142,7 +142,7 @@
 					else
 						boutput(M, "You suddenly take a swing at yourself!")
 						M.melee_attack(M)
-				if ("l_arm")
+				if (LIMB_LEFT_ARM)
 					if (M.l_hand && isitem(M.l_hand))
 						var/obj/item/stopHittingYourself = M.l_hand
 						boutput(M, "You suddenly take a swing at yourself with \the [stopHittingYourself]!")
@@ -150,7 +150,7 @@
 					else
 						boutput(M, "You suddenly take a swing at yourself!")
 						M.melee_attack(M)
-				if ("r_leg", "l_leg") // Tie shoelaces
+				if (LIMB_RIGHT_LEG, LIMB_LEFT_LEG) // Tie shoelaces
 					if (M.shoes && M.shoes.laces == LACES_NORMAL)
 						M.shoes.laces = LACES_TIED
 						M.shoes.tooltip_rebuild = 1

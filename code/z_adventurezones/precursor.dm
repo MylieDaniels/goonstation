@@ -937,7 +937,7 @@
 				boutput(user, SPAN_NOTICE("You feel electricity course through you harmlessly!"))
 				return
 
-			user.TakeDamage(user.hand == LEFT_HAND ? "l_arm" : "r_arm", 0, shock_damage)
+			user.TakeDamage(user.hand == LEFT_HAND ? LIMB_LEFT_ARM : LIMB_RIGHT_ARM, 0, shock_damage)
 			boutput(user, SPAN_ALERT("<B>You feel a powerful shock course through your body sending you flying!</B>"))
 			user.unlock_medal("HIGH VOLTAGE", 1)
 			user.Virus_ShockCure(100)

@@ -140,8 +140,7 @@
 			src.icon_state = "disarm"
 			if(literal_disarm && ishuman(user))
 				var/mob/living/carbon/human/H = user
-				H.limbs.l_arm.sever()
-				H.limbs.r_arm.sever()
+				H.limbs.sever(LIMB_BOTH_ARMS)
 		else //Upper Left
 			user.set_a_intent(INTENT_HELP)
 			src.icon_state = "help"

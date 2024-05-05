@@ -172,7 +172,7 @@
 		if (W.cant_drop == 1)
 			var/mob/living/carbon/human/H = user
 			if(istype(H))
-				H.sever_limb(H.hand == LEFT_HAND ? "l_arm" : "r_arm")
+				H.limbs.sever(H.hand == LEFT_HAND ? LIMB_LEFT_ARM : LIMB_RIGHT_ARM)
 				boutput(user, "The [src]'s automated loader wirrs and rips off [H]'s arm!")
 			return
 		else
@@ -226,7 +226,7 @@
 			return
 
 		if (src.malfunction)
-			user.shock(src, 7500, user.hand == LEFT_HAND ? "l_arm" : "r_arm", 1, 0)
+			user.shock(src, 7500, user.hand == LEFT_HAND ? LIMB_LEFT_ARM, LIMB_RIGHT_ARM, 1, 0)
 
 			//Due to using attack_hand with items in hand this makes sure nothing unintended happenes while hacking like taking a weapon out with a tool
 		if ((user.find_tool_in_hand(TOOL_SNIPPING) || user.find_tool_in_hand(TOOL_PULSING)) && user.equipped())

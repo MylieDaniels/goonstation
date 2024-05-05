@@ -265,15 +265,8 @@
 
 
 		if (H.client)
-			if (H.limbs.get_limb("l_arm"))
-				organ_bounties += list(list(H.limbs.get_limb("l_arm"), H.job))
-			if (H.limbs.get_limb("r_arm"))
-				organ_bounties += list(list(H.limbs.get_limb("r_arm"), H.job))
-			if (H.limbs.get_limb("l_leg"))
-				organ_bounties += list(list(H.limbs.get_limb("l_leg"), H.job))
-			if (H.limbs.get_limb("r_leg"))
-				organ_bounties += list(list(H.limbs.get_limb("r_leg"), H.job))
-
+			for (var/obj/item/mob_part/humanoid_part/part in H.limbs.parts)
+				organ_bounties += list(list(part, H.job))
 
 		//Add photographs of the crew
 		photo_bounties += H.real_name

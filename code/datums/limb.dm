@@ -938,18 +938,18 @@
 	harm(mob/target, var/mob/living/user, var/no_logs = 0)
 
 		var/mob/living/carbon/human/H = target
-		var/list/limbs = list("l_arm","r_arm","l_leg","r_leg")
+		var/list/limbs = list(LIMB_LEFT_ARM, LIMB_RIGHT_ARM, LIMB_LEFT_LEG, LIMB_RIGHT_LEG)
 		var/the_limb = null
 		if (user.zone_sel.selecting in limbs)
 			the_limb = user.zone_sel.selecting
 		else
-			the_limb = pick("l_arm","r_arm","l_leg","r_leg")
+			the_limb = pick(H.limbs.parts)
 
 		if (!the_limb)
 			return //who knows
 
 		if (prob(8))
-			H.sever_limb(the_limb)
+			H.limbs.sever(the_limb)
 
 		if (no_logs != 1)
 			logTheThing(LOG_COMBAT, user, "slashes [constructTarget(target,"combat")] with dual saw at [log_loc(user)].")
@@ -1294,39 +1294,28 @@
 		else
 			if (prob(25) && ishuman(target))
 				var/mob/living/carbon/human/HH = target
-				var/limb_name = "unknown limb"
 
 				if (!HH || !ishuman(HH))
 					..() // Something went very wrong, fall back to default disarm proc.
 					return
 
 				if (HH.l_hand)
-					HH.sever_limb("l_arm")
+					HH.limbs.sever(LIMB_LEFT_ARM)
 					limb_name = "left arm"
 				else if (HH.r_hand)
-					HH.sever_limb("r_arm")
+					HH.limbs.sever(LIMB_RIGHT_ARM)
 					limb_name = "right arm"
 				else
-					var/list/limbs = list("l_arm","r_arm","l_leg","r_leg")
-					var/the_limb = pick(limbs)
-					if (!HH.has_limb(the_limb))
+					var/obj/item/mob_parts/humanoid_parts/the_limb = pick(HH.limbs.parts)
+					if(!the_limb)
 						return 0
-					HH.sever_limb(the_limb)
-					switch (the_limb)
-						if ("l_arm")
-							limb_name = "left arm"
-						if ("r_arm")
-							limb_name = "right arm"
-						if ("l_leg")
-							limb_name = "left leg"
-						if ("r_leg")
-							limb_name = "right leg"
+					HH.limbs.sever(the_limb)
 
 				if (prob(50) && !isdead(HH))
 					HH.emote("scream")
 
 				msgs.played_sound = 'sound/impact_sounds/Flesh_Stab_1.ogg'
-				msgs.base_attack_message = SPAN_COMBAT("<b>[user] whips [HH] with the sharp edge of a chitinous tendril, shearing off their [limb_name]!")
+				msgs.base_attack_message = SPAN_COMBAT("<b>[user] whips [HH] with the sharp edge of a chitinous tendril, shearing off their [the_limb]!")
 				msgs.damage_type = DAMAGE_CUT // We just lost a limb.
 
 				msgs.damage = rand(1,5)

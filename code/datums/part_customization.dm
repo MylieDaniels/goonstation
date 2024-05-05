@@ -60,7 +60,7 @@ ABSTRACT_TYPE(/datum/part_customization/human)
 
 	default_left
 		id = "arm_default_left"
-		slot = "l_arm"
+		slot = LIMB_LEFT_ARM
 		part_type = /obj/item/parts/human_parts/arm/left
 
 		apply_to(mob/living/carbon/human/human)
@@ -73,7 +73,7 @@ ABSTRACT_TYPE(/datum/part_customization/human)
 
 	default_right
 		id = "arm_default_right"
-		slot = "r_arm"
+		slot = LIMB_RIGHT_ARM
 		part_type = /obj/item/parts/human_parts/arm/right
 
 		apply_to(mob/living/carbon/human/human)
@@ -86,37 +86,37 @@ ABSTRACT_TYPE(/datum/part_customization/human)
 
 	robo_left
 		id = "arm_robo_left"
-		slot = "l_arm"
+		slot = LIMB_LEFT_ARM
 		part_type = /obj/item/parts/robot_parts/arm/left/light
 
 	robo_right
 		id = "arm_robo_right"
-		slot = "r_arm"
+		slot = LIMB_RIGHT_ARM
 		part_type = /obj/item/parts/robot_parts/arm/right/light
 
 	robo_standard_left
 		id = "arm_robo_standard_left"
-		slot = "l_arm"
+		slot = LIMB_LEFT_ARM
 		part_type = /obj/item/parts/robot_parts/arm/left/standard
 		trait_cost = 1
 		incompatible_parts = list("arm_robo_standard_right")
 
 	robo_standard_right
 		id = "arm_robo_standard_right"
-		slot = "r_arm"
+		slot = LIMB_RIGHT_ARM
 		part_type = /obj/item/parts/robot_parts/arm/right/standard
 		trait_cost = 1
 		incompatible_parts = list("arm_robo_standard_left")
 
 	plant_left
 		id = "arm_plant_left"
-		slot = "l_arm"
+		slot = LIMB_LEFT_ARM
 		trait_cost = 1
 		part_type = list(/obj/item/parts/human_parts/arm/left/synth/bloom, /obj/item/parts/human_parts/arm/left/synth)
 
 	plant_right
 		id = "arm_plant_right"
-		slot = "r_arm"
+		slot = LIMB_RIGHT_ARM
 		trait_cost = 1
 		part_type = list(/obj/item/parts/human_parts/arm/right/synth/bloom, /obj/item/parts/human_parts/arm/right/synth)
 
@@ -132,7 +132,7 @@ ABSTRACT_TYPE(/datum/part_customization/human/missing)
 
 	left
 		id = "arm_missing_left"
-		slot = "l_arm"
+		slot = LIMB_LEFT_ARM
 		incompatible_parts = list("arm_missing_right")
 
 		get_name()
@@ -140,7 +140,7 @@ ABSTRACT_TYPE(/datum/part_customization/human/missing)
 
 	right
 		id = "arm_missing_right"
-		slot = "r_arm"
+		slot = LIMB_RIGHT_ARM
 		incompatible_parts = list("arm_missing_left")
 
 		get_name()

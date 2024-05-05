@@ -206,12 +206,11 @@ ABSTRACT_TYPE(/datum/cloner_defect)
 	severity = CLONER_DEFECT_SEVERITY_MINOR
 
 	init()
-		src.data = list("lost_limb_string" = pick("l_arm", "r_arm", "l_leg", "r_leg"))
+		src.data = list("lost_limb_bitflag" = pick(LIMB_LEFT_ARM, LIMB_RIGHT_ARM, LIMB_LEFT_LEG, LIMB_RIGHT_LEG))
 
 	on_add()
 		. = ..()
-		var/obj/item/parts/lost_limb = src.owner.limbs.get_limb(data["lost_limb_string"])
-		lost_limb?.delete()
+		src.owner.limbs.delete(data["lost_limb_bitflag"])
 
 /// Get some histamine after cloning
 /datum/cloner_defect/allergic

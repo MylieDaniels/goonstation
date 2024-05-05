@@ -344,17 +344,17 @@
 			if ("Right")
 				if (!H.limbs.r_arm)
 					var/obj/item/saw/syndie/S = the_item
-					S.end_replace_arm("r_arm", H)
+					S.end_replace_arm(LIMB_RIGHT_ARM, H)
 					return
 				boutput(H, SPAN_ALERT("You need to hold still..."))
-				SETUP_GENERIC_ACTIONBAR(H, the_item, 3 SECONDS, /obj/item/saw/syndie/proc/end_replace_arm, list("r_arm", H), the_item.icon, the_item.icon_state,"", INTERRUPT_MOVE | INTERRUPT_STUNNED | INTERRUPT_ACTION)
+				SETUP_GENERIC_ACTIONBAR(H, the_item, 3 SECONDS, /obj/item/saw/syndie/proc/end_replace_arm, list(LIMB_RIGHT_ARM, H), the_item.icon, the_item.icon_state,"", INTERRUPT_MOVE | INTERRUPT_STUNNED | INTERRUPT_ACTION)
 			if ("Left")
 				if (!H.limbs.l_arm)
 					var/obj/item/saw/syndie/S = the_item
-					S.end_replace_arm("l_arm", H)
+					S.end_replace_arm(LIMB_LEFT_ARM, H)
 					return
 				boutput(H, SPAN_ALERT("You need to hold still..."))
-				SETUP_GENERIC_ACTIONBAR(H, the_item, 3 SECONDS, /obj/item/saw/syndie/proc/end_replace_arm, list("l_arm", H), the_item.icon, the_item.icon_state,"", INTERRUPT_MOVE | INTERRUPT_STUNNED | INTERRUPT_ACTION)
+				SETUP_GENERIC_ACTIONBAR(H, the_item, 3 SECONDS, /obj/item/saw/syndie/proc/end_replace_arm, list(LIMB_LEFT_ARM, H), the_item.icon, the_item.icon_state,"", INTERRUPT_MOVE | INTERRUPT_STUNNED | INTERRUPT_ACTION)
 		..()
 
 ////////////////////////////////////////////////////////////

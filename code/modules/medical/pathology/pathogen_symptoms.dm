@@ -1818,14 +1818,13 @@ datum/pathogeneffects/malevolent/leprosy
 					M.show_message(pick(SPAN_ALERT("You feel a bit loose..."), SPAN_ALERT("You feel like you're falling apart.")))
 			if (4 to 5)
 				if (prob(2 + origin.stage))
-					var/limb_name = pick("l_arm","r_arm","l_leg","r_leg")
-					var/obj/item/parts/limb = M.limbs.vars[limb_name]
-					if (istype(limb))
-						if (limb.remove_stage < 2)
-							limb.remove_stage = 2
-							M.show_message(SPAN_ALERT("Your [limb] comes loose!"))
-							SPAWN(rand(150, 200))
-								if (limb.remove_stage == 2)
+					var/obj/item/mob_part/humanoid_part/part = pick(H.limbs.parts)
+					if (istype(part))
+						if (part.remove_stage < 2)
+							part.remove_stage = 2
+							M.show_message(SPAN_ALERT("Your [part] comes loose!"))
+							SPAWN(rand(15,20) SECONDS)
+								if(limb.remove_stage == 2)
 									limb.remove(0)
 	may_react_to()
 		return "The pathogen appears to be rapidly breaking down certain materials around it."

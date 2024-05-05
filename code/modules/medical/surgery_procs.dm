@@ -268,7 +268,7 @@ var/global/list/chestitem_whitelist = list(/obj/item/gnomechompski, /obj/item/gn
 		else if (oH.back_op_stage <= BACK_SURGERY_OPENED)
 			return_thing += oH.back_op_stage
 
-	if (zone in list("l_arm","r_arm","l_leg","r_leg"))
+	if (zone in list(LIMB_LEFT_ARM, LIMB_RIGHT_ARM, LIMB_LEFT_LEG, LIMB_RIGHT_LEG))
 		var/obj/item/parts/surgery_limb = src.limbs.vars[zone]
 		if (istype(surgery_limb))
 			return_thing += surgery_limb.remove_stage
@@ -276,7 +276,7 @@ var/global/list/chestitem_whitelist = list(/obj/item/gnomechompski, /obj/item/gn
 			return_thing ++
 
 	if(!zone)
-		for(var/actual_zone in list("l_arm","r_arm","l_leg","r_leg"))
+		for(var/actual_zone in list(LIMB_LEFT_ARM, LIMB_RIGHT_ARM, LIMB_LEFT_LEG, LIMB_RIGHT_LEG))
 			var/obj/item/parts/surgery_limb = src.limbs.vars[actual_zone]
 			if (istype(surgery_limb))
 				return_thing += surgery_limb.remove_stage
@@ -583,7 +583,7 @@ var/global/list/chestitem_whitelist = list(/obj/item/gnomechompski, /obj/item/gn
 
 /* ---------- SCALPEL - LIMBS ---------- */
 
-	else if (surgeon.zone_sel.selecting in list("l_arm","r_arm","l_leg","r_leg"))
+	else if (surgeon.zone_sel.selecting in list(LIMB_LEFT_ARM, LIMB_RIGHT_ARM, LIMB_LEFT_LEG, LIMB_RIGHT_LEG))
 		var/obj/item/parts/surgery_limb = patient.limbs.vars[surgeon.zone_sel.selecting]
 		if (istype(surgery_limb))
 			if (surgery_limb.surgery(src))
@@ -823,7 +823,7 @@ var/global/list/chestitem_whitelist = list(/obj/item/gnomechompski, /obj/item/gn
 
 /* ---------- SAW - LIMBS ---------- */
 
-	else if (surgeon.zone_sel.selecting in list("l_arm","r_arm","l_leg","r_leg"))
+	else if (surgeon.zone_sel.selecting in list(LIMB_LEFT_ARM, LIMB_RIGHT_ARM, LIMB_LEFT_LEG, LIMB_RIGHT_LEG))
 		var/obj/item/parts/surgery_limb = patient.limbs.vars[surgeon.zone_sel.selecting]
 		if (istype(surgery_limb))
 			if (surgery_limb.surgery(src))

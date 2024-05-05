@@ -611,7 +611,7 @@
 	playsound(src.loc, src.sound_stepped, 50, 1)
 	H.changeStatus("weakened", 3 SECONDS)
 	H.force_laydown_standup()
-	var/zone = pick("l_leg", "r_leg")
+	var/zone = pick(LIMB_LEFT_LEG, LIMB_RIGHT_LEG)
 	H.TakeDamage(zone, force, 0, 0, DAMAGE_CUT)
 
 /obj/item/raw_material/chitin

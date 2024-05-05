@@ -1979,7 +1979,7 @@
 		switch(limb_or_organ)
 			if ("limb")
 				var/mob/living/carbon/human/H = owner
-				return H.limbs.get_limb(regrow_target_id)
+				return H.limbs.slot_filled(regrow_target_id)
 
 			if ("organ")
 				var/mob/living/carbon/human/H = owner
@@ -2008,25 +2008,25 @@
 /datum/statusEffect/changeling_regrow/limb/l_arm
 	id = "c_regrow-l_arm"
 	icon_state = "cspider-hand"
-	regrow_target_id = "l_arm"
+	regrow_target_id = LIMB_LEFT_ARM
 	regrow_target_name = "left arm"
 	regrow_target_path = /obj/item/parts/human_parts/arm/left
 /datum/statusEffect/changeling_regrow/limb/r_arm
 	id = "c_regrow-r_arm"
 	icon_state = "cspider-hand"
-	regrow_target_id = "r_arm"
+	regrow_target_id = LIMB_RIGHT_ARM
 	regrow_target_name = "right arm"
 	regrow_target_path = /obj/item/parts/human_parts/arm/right
 /datum/statusEffect/changeling_regrow/limb/l_leg
 	id = "c_regrow-l_leg"
 	icon_state = "cspider-leg"
-	regrow_target_id = "l_leg"
+	regrow_target_id = LIMB_LEFT_LEG
 	regrow_target_name = "left leg"
 	regrow_target_path = /obj/item/parts/human_parts/leg/left
 /datum/statusEffect/changeling_regrow/limb/r_leg
 	id = "c_regrow-r_leg"
 	icon_state = "cspider-leg"
-	regrow_target_id = "r_leg"
+	regrow_target_id = LIMB_RIGHT_LEG
 	regrow_target_name = "right leg"
 	regrow_target_path = /obj/item/parts/human_parts/leg/right
 

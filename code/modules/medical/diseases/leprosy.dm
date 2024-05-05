@@ -25,12 +25,11 @@
 				affected_mob.cure_disease(D)
 			if(probmult(D.stage) && ishuman(affected_mob))
 				var/mob/living/carbon/human/M = affected_mob
-				var/limb_name = pick("l_arm","r_arm","l_leg","r_leg")
-				var/obj/item/parts/limb = M.limbs.vars[limb_name]
-				if (istype(limb))
-					if (limb.remove_stage < 2)
-						limb.remove_stage = 2
-						M.show_message(SPAN_ALERT("Your [limb] comes loose!"))
+				var/obj/item/mob_part/humanoid_part/part = pick(H.limbs.parts)
+				if (istype(part))
+					if (part.remove_stage < 2)
+						part.remove_stage = 2
+						M.show_message(SPAN_ALERT("Your [part] comes loose!"))
 						SPAWN(rand(15,20) SECONDS)
 							if(limb.remove_stage == 2)
 								limb.remove(0)

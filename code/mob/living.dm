@@ -2099,12 +2099,15 @@
 	if (ishuman(src))
 		H = src
 		var/obj/item/clothing/gloves/G = H.gloves
-		if (G && !ignore_gloves)
-			prot = (G.hasProperty("conductivity") ? G.getProperty("conductivity") : 1)
-		if (H.limbs.l_arm && !ignore_gloves)
-			prot = min(prot,H.limbs.l_arm.siemens_coefficient)
-		if (H.limbs.r_arm && !ignore_gloves)
-			prot = min(prot,H.limbs.r_arm.siemens_coefficient)
+		if(!ignore_gloves)
+			if (G)
+				prot = (G.hasProperty("conductivity") ? G.getProperty("conductivity") : 1)
+			var/obj/item/mob_part/humanoid_part/part = H.limbs.get_limb(LIMB_RIGHT_ARM)
+			if (part)
+				prot = min(prot,part.siemens_coefficient)
+			part = H.limbs.get_limb(LIMB_LEFT_ARM)
+			if (part)
+				prot = min(prot,part.siemens_coefficient)
 		if (prot <= 0.29)
 			return 0
 

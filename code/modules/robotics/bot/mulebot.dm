@@ -738,10 +738,10 @@
 
 		H.TakeDamage("head", 2*damage, 0)
 		H.TakeDamage("chest",2*damage, 0)
-		H.TakeDamage("l_leg",0.5*damage, 0)
-		H.TakeDamage("r_leg",0.5*damage, 0)
-		H.TakeDamage("l_arm",0.5*damage, 0)
-		H.TakeDamage("r_arm",0.5*damage, 0)
+		H.TakeDamage(LIMB_LEFT_LEG,0.5*damage, 0)
+		H.TakeDamage(LIMB_RIGHT_LEG,0.5*damage, 0)
+		H.TakeDamage(LIMB_LEFT_ARM,0.5*damage, 0)
+		H.TakeDamage(LIMB_RIGHT_ARM,0.5*damage, 0)
 
 		take_bleeding_damage(H, null, 2 * damage, DAMAGE_BLUNT)
 

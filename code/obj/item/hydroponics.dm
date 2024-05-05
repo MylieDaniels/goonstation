@@ -374,18 +374,18 @@ TYPEINFO(/obj/item/saw/elimbinator)
 			if (check_target_immunity(target=target, ignore_everything_but_nodamage=FALSE, source=user))
 				return ..()
 			var/mob/living/carbon/human/H = target
-			var/list/limbs = list("l_arm","r_arm","l_leg","r_leg")
+			var/list/limbs = list(LIMB_LEFT_ARM, LIMB_RIGHT_ARM, LIMB_LEFT_LEG, LIMB_RIGHT_LEG)
 			var/the_limb = null
 
 			if (user.zone_sel.selecting in limbs)
 				the_limb = user.zone_sel.selecting
 			else
-				the_limb = pick("l_arm","r_arm","l_leg","r_leg")
+				the_limb = pick(H.limbs.parts)
 
 			if (!the_limb)
 				return //who knows
 
-			H.sever_limb(the_limb)
+			H.limbs.sever(the_limb)
 			H.changeStatus("stunned", 3 SECONDS)
 			bleed(H, 3, 5)
 		return ..()

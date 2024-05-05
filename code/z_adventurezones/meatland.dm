@@ -1382,8 +1382,10 @@ meaty thoughts from cogwerks to his spacepal aibm:
 				boutput(L, SPAN_NOTICE("You just barely slip by the clenching teeth unharmed!"))
 			else if (prob(80))
 				L.visible_message(SPAN_ALERT("<b>[src] slams shut on [L]!</b>"))
-				if (ishuman(L))
-					L:sever_limb(pick("l_arm", "r_arm", "L_leg", "r_leg"))
+				var/mob/living/carbon/human/H = L
+				if (ishuman(H))
+					var/obj/item/mob_part/humanoid_part/the_limb = pick(H.limbs.parts)
+					H.limbs.sever(the_limb)
 				else
 					random_brute_damage(L, 25, 1)
 			else

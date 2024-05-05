@@ -14,7 +14,7 @@
 	elecflash(src)
 
 	if(ignore_range || in_interact_range(src, user))
-		return user.shock(src, PN ? PN.avail : 0, user.hand == LEFT_HAND ? "l_arm": "r_arm", 1, ignore_gloves ? 1 : 0)
+		return user.shock(src, PN ? PN.avail : 0, user.hand == LEFT_HAND ? LIMB_LEFT_ARM : LIMB_RIGHT_ARM, 1, ignore_gloves ? 1 : 0)
 
 /// attach a wire to a power machine - leads from the turf you are standing on
 /obj/machinery/power/attackby(obj/item/W, mob/user)

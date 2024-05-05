@@ -193,13 +193,11 @@
 		delib_chance = round(delib_chance / 2)
 
 	if (prob(delib_chance) && !shielded)
-		if (src.traitHolder && src.traitHolder.hasTrait("explolimbs"))
-			if(prob(50))
-				boutput(src, SPAN_NOTICE("<b>Your unusually strong bones keep your limbs attached through the blast!</b>"))
-			else
-				src.sever_limb(pick(list("l_arm","r_arm","l_leg","r_leg")))
+		if (src.traitHolder && src.traitHolder.hasTrait("explolimbs") && prob(50))
+			boutput(src, SPAN_NOTICE("<b>Your unusually strong bones keep your limbs attached through the blast!</b>"))
 		else
-			src.sever_limb(pick(list("l_arm","r_arm","l_leg","r_leg"))) //max one delimb at once
+			var/obj/item/mob_part/humanoid_part/the_limb = pick(src.limbs.parts)
+			src.limbs.sever(the_limb) //max one delimb at once
 
 	switch (power)
 		if (-INFINITY to 0) //blocked
@@ -246,7 +244,7 @@
 	if (src.spellshield)
 		boutput(src, SPAN_ALERT("<b>Your Spell Shield absorbs some damage!</b>"))
 
-	var/list/zones = list("head", "chest", "l_arm", "r_arm", "l_leg", "r_leg")
+	var/list/zones = list("head", "chest", LIMB_LEFT_ARM, LIMB_RIGHT_ARM, LIMB_LEFT_LEG, LIMB_RIGHT_LEG)
 
 	var/zone = pick(zones)
 
@@ -280,25 +278,25 @@
 					src.lastgasp() // calling lastgasp() here because we just got knocked out
 			src.TakeDamage("chest", damage, 0, 0, DAMAGE_BLUNT)
 
-		if ("l_arm")
-			src.TakeDamage("l_arm", damage, 0, 0, DAMAGE_BLUNT)
+		if (LIMB_LEFT_ARM)
+			src.TakeDamage(LIMB_LEFT_ARM, damage, 0, 0, DAMAGE_BLUNT)
 			if (prob(20) && equipped())
 				visible_message(SPAN_ALERT("<b>The blob has knocked [equipped()] out of [src]'s hand!</b>"))
 				drop_item()
-		if ("r_arm")
-			src.TakeDamage("r_arm", damage, 0, 0, DAMAGE_BLUNT)
+		if (LIMB_RIGHT_ARM)
+			src.TakeDamage(LIMB_RIGHT_ARM, damage, 0, 0, DAMAGE_BLUNT)
 			if (prob(20) && equipped())
 				visible_message(SPAN_ALERT("<b>The blob has knocked [equipped()] out of [src]'s hand!</b>"))
 				drop_item()
-		if ("l_leg")
-			src.TakeDamage("l_leg", damage, 0, 0, DAMAGE_BLUNT)
+		if (LIMB_LEFT_LEG)
+			src.TakeDamage(LIMB_LEFT_LEG, damage, 0, 0, DAMAGE_BLUNT)
 			if (prob(5))
 				visible_message(SPAN_ALERT("<b>The blob has knocked [src] off-balance!</b>"))
 				drop_item()
 				if (prob(50))
 					src.changeStatus("weakened", 1 SECOND)
-		if ("r_leg")
-			src.TakeDamage("r_leg", damage, 0, 0, DAMAGE_BLUNT)
+		if (LIMB_RIGHT_LEG)
+			src.TakeDamage(LIMB_RIGHT_LEG, damage, 0, 0, DAMAGE_BLUNT)
 			if (prob(5))
 				visible_message(SPAN_ALERT("<b>The blob has knocked [src] off-balance!</b>"))
 				drop_item()
@@ -368,7 +366,7 @@
 					src.organHolder.damage_organs(brute/5, 0, 0, list("liver", "left_kidney", "right_kidney", "stomach", "intestines","appendix", "pancreas", "tail"), 30)
 				else if (prob(30))
 					src.organHolder.damage_organs(brute/10, 0, 0, list("spleen", "left_lung", "right_lung"), 50)
-		if("l_leg", "l_arm", "r_leg", "r_arm")
+		if(LIMB_LEFT_LEG, LIMB_LEFT_ARM, LIMB_RIGHT_LEG, LIMB_RIGHT_ARM)
 			var/obj/item/parts/P = src.limbs?.get_limb(zone)
 			if(istype(P))
 				if (brute > 30 && prob(brute - 30) && !disallow_limb_loss)
@@ -399,19 +397,10 @@
 	var/armor_mod = 0
 	//var/z_name = zone
 	var/a_zone = zone
-	if (a_zone in list("l_leg", "r_arm", "l_leg", "r_leg"))
+	if (a_zone in list(LIMB_LEFT_LEG, LIMB_RIGHT_ARM, LIMB_LEFT_LEG, LIMB_RIGHT_LEG))
 		a_zone = "chest"
 
 	armor_mod = get_melee_protection(zone, damage_type)
-	/*switch (zone)
-		if ("l_arm")
-			z_name = "left arm"
-		if ("r_arm")
-			z_name = "right arm"
-		if ("l_leg")
-			z_name = "left leg"
-		if ("r_leg")
-			z_name = "right leg"*/
 
 	brute = max(0, brute - armor_mod)
 	burn = max(0, burn - armor_mod)
@@ -564,14 +553,14 @@
 
 /mob/living/carbon/human/get_valid_target_zones()
 	var/list/ret = list("chest")
-	if(src.limbs.get_limb("l_arm"))
-		ret += "l_arm"
-	if(src.limbs.get_limb("r_arm"))
-		ret += "r_arm"
-	if(src.limbs.get_limb("l_leg"))
-		ret += "l_leg"
-	if(src.limbs.get_limb("r_leg"))
-		ret += "r_leg"
+	if(src.limbs.slot_filled(LIMB_LEFT_ARM))
+		ret += LIMB_LEFT_ARM
+	if(src.limbs.slot_filled(LIMB_RIGHT_ARM))
+		ret += LIMB_RIGHT_ARM
+	if(src.limbs.slot_filled(LIMB_LEFT_LEG))
+		ret += LIMB_LEFT_LEG
+	if(src.limbs.slot_filled(LIMB_RIGHT_LEG))
+		ret += LIMB_RIGHT_LEG
 	if(src.organHolder.get_organ("head"))
 		ret += "head"
 	return ret

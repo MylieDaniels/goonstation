@@ -629,7 +629,7 @@ var/global/current_state = GAME_STATE_INVALID
 								break
 						if (bullets > 0)
 							H.unlock_medal("It's just a flesh wound!", 1)
-					if (H.limbs && (!H.limbs.l_arm && !H.limbs.r_arm))
+					if (!(H.limbs & LIMB_BOTH_ARMS))
 						H.unlock_medal("Mostly Armless", 1)
 
 #ifdef CREW_OBJECTIVES

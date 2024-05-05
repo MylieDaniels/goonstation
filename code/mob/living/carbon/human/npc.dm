@@ -195,9 +195,9 @@
 
 	// Strange to have this so high up, but we're considered 'restrained' if we have a missing limb on our active hand
 	// thus the AI thinks it's cuffed or whatever and never does anything other than moving if it loses the active arm
-	if(!src.limbs.l_arm)
+	if(!src.limbs.slot_filled(LIMB_LEFT_ARM))
 		src.swap_hand(0)
-	else if(!src.limbs.r_arm)
+	else if(!src.limbs.slot_filled(LIMB_RIGHT_ARM))
 		src.swap_hand(1)
 
 	if(!src.restrained() && !src.lying && !src.buckled)
@@ -411,7 +411,7 @@
 					src.say(pick("Fuck you, [ai_target.name]!", "You're [prob(10) ? "fucking " : ""]dead, [ai_target.name]!", "I will kill you, [ai_target.name]!!"))
 
 				if(prob(20))
-					src.zone_sel.select_zone(pick(prob(150); "head", prob(200); "chest", "l_arm", "r_arm", "l_leg", "r_leg"))
+					src.zone_sel.select_zone(pick(prob(150); "head", prob(200); "chest", LIMB_LEFT_ARM, LIMB_RIGHT_ARM, LIMB_LEFT_LEG, LIMB_RIGHT_LEG))
 
 				if(src.r_hand && src.l_hand)
 					if(prob(src.hand ? 90 : 5))
