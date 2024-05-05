@@ -211,7 +211,7 @@
 	src.apply_sonic_stun(0, 0, 0, 0, 0, round(power*7), round(power*7), power*40)
 
 	if (prob(b_loss) && !shielded && !reduction)
-		src.changeStatus("paralysis", b_loss DECI SECONDS)
+		src.changeStatus("unconscious", b_loss DECI SECONDS)
 		src.force_laydown_standup()
 
 	TakeDamage(zone="All", brute=b_loss, burn=f_loss, tox=0, damage_type=0, disallow_limb_loss=1)
@@ -257,7 +257,7 @@
 					src.show_message(SPAN_ALERT("You have been protected from a hit to the head."))
 				return
 			if (damage > 4.9)
-				changeStatus("weakened", 2 SECONDS)
+				changeStatus("knockdown", 2 SECONDS)
 				for (var/mob/O in viewers(src, null))
 					O.show_message(SPAN_ALERT("<B>The blob has weakened [src]!</B>"), 1, SPAN_ALERT("You hear someone fall."), 2)
 			src.TakeDamage("head", damage, 0, 0, DAMAGE_BLUNT)
@@ -267,7 +267,7 @@
 				return
 			if (damage > 4.9)
 				if (prob(50))
-					src.changeStatus("weakened", 5 SECONDS)
+					src.changeStatus("knockdown", 5 SECONDS)
 					for (var/mob/O in viewers(src, null))
 						O.show_message(SPAN_ALERT("<B>The blob has knocked down [src]!</B>"), 1, SPAN_ALERT("You hear someone fall."), 2)
 				else
@@ -294,14 +294,14 @@
 				visible_message(SPAN_ALERT("<b>The blob has knocked [src] off-balance!</b>"))
 				drop_item()
 				if (prob(50))
-					src.changeStatus("weakened", 1 SECOND)
+					src.changeStatus("knockdown", 1 SECOND)
 		if (LIMB_RIGHT_LEG)
 			src.TakeDamage(LIMB_RIGHT_LEG, damage, 0, 0, DAMAGE_BLUNT)
 			if (prob(5))
 				visible_message(SPAN_ALERT("<b>The blob has knocked [src] off-balance!</b>"))
 				drop_item()
 				if (prob(50))
-					src.changeStatus("weakened", 1 SECOND)
+					src.changeStatus("knockdown", 1 SECOND)
 
 	src.force_laydown_standup()
 
