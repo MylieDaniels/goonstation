@@ -700,7 +700,7 @@ proc/chem_helmet_check(mob/living/carbon/human/H, var/what_liquid="hot")
 		for(var/current_id in reagent_list)
 			var/datum/reagent/current_reagent = reagent_list[current_id]
 			if (current_reagent.flammable)
-				current_reagent.is_burning = TRUE
+				src.is_combusting = TRUE
 				composite_combust_speed += current_reagent.burn_speed * current_reagent.volume
 				composite_combust_temp += current_reagent.burn_temperature * current_reagent.volume
 				composite_volatility += current_reagent.burn_volatility * current_reagent.volume

@@ -24,17 +24,18 @@ datum
 
 			flammable = TRUE
 			combusts_on_fire_contact = TRUE
-			burn_speed = 25
+			burn_speed = 15
 			burn_temperature = 3500
 			burn_volatility = 11
 			minimum_reaction_temperature = T0C - 50
 
 			reaction_turf(var/turf/T, var/volume)
-				is_burning = TRUE
+				if (holder && holder.total_temperature >= minimum_reaction_temperature)
+					is_burning = TRUE
 				. = ..()
 
 			reaction_temperature(exposed_temperature, exposed_volume)
-				if(!is_burning)
+				if (!is_burning && istype(src.holder,/datum/reagents/fluid_group))
 					is_burning = TRUE
 
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume_passed)
@@ -73,7 +74,7 @@ datum
 			mob_burning = 15
 			flammable = TRUE
 			combusts_on_fire_contact = TRUE
-			burn_speed = 10
+			burn_speed = 5
 			burn_temperature = 1500
 			burn_volatility = 6
 			minimum_reaction_temperature = T0C
@@ -91,7 +92,7 @@ datum
 
 			flammable = TRUE
 			combusts_on_fire_contact = TRUE
-			burn_speed = 2
+			burn_speed = 1
 			burn_temperature = 2600
 			burn_volatility = 3
 			minimum_reaction_temperature = T0C + 100
@@ -131,7 +132,7 @@ datum
 				name = "syndicate napalm"
 				id = "syndicate_napalm"
 				description = "Extra sticky, extra burny"
-				burn_speed = 1
+				burn_speed = 0.5
 				burn_temperature = 2900
 				burn_volatility = 3.5
 
@@ -158,7 +159,7 @@ datum
 			volatility = 2
 			flammable = TRUE
 			combusts_on_fire_contact = TRUE
-			burn_speed = 14
+			burn_speed = 8
 			burn_temperature = 6000
 			burn_volatility = 14
 			minimum_reaction_temperature = T0C+600
@@ -331,17 +332,17 @@ datum
 
 			flammable = TRUE
 			combusts_on_fire_contact = TRUE
-			burn_speed = 12
+			burn_speed = 8
 			burn_temperature = 4000
 			burn_volatility = 8
-			minimum_reaction_temperature = T0C - 50
+			minimum_reaction_temperature = -INFINITY
 
 			reaction_turf(var/turf/T, var/volume)
 				is_burning = TRUE
 				. = ..()
 
 			reaction_temperature(exposed_temperature, exposed_volume)
-				if(!is_burning)
+				if (!is_burning && istype(src.holder,/datum/reagents/fluid_group))
 					is_burning = TRUE
 
 			reaction_obj(var/obj/O, var/volume)
@@ -385,7 +386,7 @@ datum
 					L.changeStatus("burning", 10 SECONDS * mult)
 				..()
 
-		combustible/foof // this doesn't work yet
+		combustible/foof
 			name = "FOOF"
 			id = "foof"
 			description = "Dioxygen Diflouride, a ludicrously powerful oxidizer. Run away."
@@ -400,13 +401,18 @@ datum
 
 			flammable = TRUE
 			combusts_on_fire_contact = TRUE
-			burn_speed = 35
+			burn_speed = 30
 			burn_temperature = 9000
 			burn_volatility = 20
+			minimum_reaction_temperature = -INFINITY
 
 			reaction_turf(var/turf/T, var/volume)
 				is_burning = TRUE
 				. = ..()
+
+			reaction_temperature(exposed_temperature, exposed_volume)
+				if (!is_burning && istype(src.holder,/datum/reagents/fluid_group))
+					is_burning = TRUE
 
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
 				. = ..()

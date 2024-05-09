@@ -34,7 +34,6 @@ datum
 		var/volatility = 0 // Volatility determines effectiveness in pipebomb. This is 0 for a bad additive, otherwise a positive number which linerally affects explosive power.
 		var/flammable = FALSE  // Determines if the chemical can burn at all
 		var/combusts_on_fire_contact = FALSE // Determines if the chemical burns when in direct contact with fire
-		var/is_burning = FALSE // Determines if the chemical is currently burning
 		var/burn_speed = 0 // Speed at which a chem burns
 		var/burn_volatility = 0 // How violently it burns
 		var/burn_temperature = 0 // Temperature at which a chem burns
