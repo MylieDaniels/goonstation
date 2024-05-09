@@ -1273,8 +1273,8 @@ datum
 			var/smoke_counter = 0
 
 			reaction_temperature(exposed_temperature, exposed_volume)
-				if (!src.reacting && (holder && !holder.has_reagent("chlorine"))) // need this to be higher to make propylene possible
-					is_burning = TRUE
+				if(holder && !holder.is_combusting)
+					holder.start_combusting()
 
 			do_burn(reacting_volume)
 				if (istype(holder,/datum/reagents/fluid_group))
@@ -1316,7 +1316,7 @@ datum
 			reaction_turf(var/turf/target, var/volume)
 				var/turf/simulated/T = target
 				if (istype(T)) //Wire: fix for Undefined variable /turf/space/var/wet (&& T.wet)
-					if (T.wet >= 2 || src.is_burning) return ..()
+					if (T.wet >= 2 || holder?.is_combusting) return ..()
 					var/image/wet = image('icons/effects/water.dmi',"wet_floor")
 					wet.blend_mode = BLEND_ADD
 					wet.alpha = 60

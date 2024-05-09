@@ -155,9 +155,9 @@ datum
 				..()
 
 			reaction_temperature(exposed_temperature, exposed_volume)
-				if (ismob(holder?.my_atom) && volume < 50) // We don't want this stuff exploding inside people..
+				if (!holder || ismob(holder?.my_atom) && volume < 50) // We don't want this stuff exploding inside people..
 					return
-				is_burning = TRUE
+				holder.start_combusting()
 				return
 
 			on_mob_life(var/mob/M, var/mult = 1)

@@ -364,6 +364,8 @@ proc/chem_helmet_check(mob/living/carbon/human/H, var/what_liquid="hot")
 		if (update_target_reagents)
 			target_reagents.update_total()
 			target_reagents.handle_reactions()
+			if(src.is_combusting)
+				target_reagents.is_combusting = TRUE
 
 		reagents_transferred()
 		return amount
@@ -639,7 +641,7 @@ proc/chem_helmet_check(mob/living/carbon/human/H, var/what_liquid="hot")
 
 			var/continue_burn = FALSE
 			var/burn_volatility = src.composite_volatility *  clamp(((src.combustible_volume ** 0.33) / max(1, covered_area)), 0, 1)
-			burn_volatility = clamp(burn_volatility, 0, 20)
+			burn_volatility = clamp(burn_volatility, 0, 30)
 			var/burn_speed = src.composite_combust_speed
 
 			switch (burn_volatility)
@@ -663,7 +665,7 @@ proc/chem_helmet_check(mob/living/carbon/human/H, var/what_liquid="hot")
 
 			for (var/reagent_id in src.reagent_list)
 				var/datum/reagent/reagent = src.reagent_list[reagent_id]
-				if (reagent.is_burning)
+				if (reagent.flammable)
 					var/amount_to_remove = (burn_speed * mult * covered_area) * (reagent.volume / src.combustible_volume)
 					reagent.do_burn(amount_to_remove)
 					src.remove_reagent(reagent_id, amount_to_remove)
@@ -675,7 +677,7 @@ proc/chem_helmet_check(mob/living/carbon/human/H, var/what_liquid="hot")
 		if (src.my_atom && src.my_atom.is_open_container())
 			var/continue_burn = FALSE
 			var/burn_volatility = src.composite_volatility * ((clamp(src.combustible_volume / src.my_atom.reagents.maximum_volume, 0, 1) + 1)/2)
-			burn_volatility = clamp(burn_volatility - 1, 0, 20)
+			burn_volatility = clamp(burn_volatility, 0, 30)
 			var/burn_speed = src.composite_combust_speed
 
 			if (src.combustible_volume >= 1) // A minimum amount to prevent low volume fuckery
@@ -702,7 +704,7 @@ proc/chem_helmet_check(mob/living/carbon/human/H, var/what_liquid="hot")
 
 			for (var/reagent_id in src.reagent_list)
 				var/datum/reagent/reagent = src.reagent_list[reagent_id]
-				if (reagent.is_burning)
+				if (reagent.flammable)
 					var/amount_to_remove = (burn_speed * mult) * (reagent.volume / src.combustible_volume)
 					reagent.do_burn(amount_to_remove)
 					src.remove_reagent(reagent_id, amount_to_remove)
@@ -714,7 +716,9 @@ proc/chem_helmet_check(mob/living/carbon/human/H, var/what_liquid="hot")
 	proc/update_total()
 		total_volume = 0
 		combustible_volume = 0
-		var/will_proc_burn = FALSE
+		composite_combust_speed = 0
+		composite_combust_temp = 0
+		composite_volatility = 0
 
 		for(var/current_id in reagent_list)
 			var/datum/reagent/current_reagent = reagent_list[current_id]
@@ -725,12 +729,20 @@ proc/chem_helmet_check(mob/living/carbon/human/H, var/what_liquid="hot")
 					current_reagent.volume = max(round(current_reagent.volume, 0.001), 0.001)
 					composite_heat_capacity = total_volume/(total_volume+current_reagent.volume)*composite_heat_capacity + current_reagent.volume/(total_volume+current_reagent.volume)*current_reagent.heat_capacity
 					total_volume += current_reagent.volume
-					if (current_reagent.is_burning)
-						will_proc_burn = TRUE
 					if (current_reagent.flammable)
 						combustible_volume += current_reagent.volume
+						composite_combust_speed += current_reagent.burn_speed * current_reagent.volume
+						composite_combust_temp += current_reagent.burn_temperature * current_reagent.volume
+						composite_volatility += current_reagent.burn_volatility * current_reagent.volume
 
-		if (will_proc_burn)
+		if(combustible_volume)
+			composite_combust_speed = composite_combust_speed / combustible_volume
+			composite_combust_temp = composite_combust_temp / combustible_volume
+			composite_volatility = composite_volatility / combustible_volume
+		else
+			is_combusting = FALSE
+
+		if (is_combusting)
 			test_chem_burning()
 
 		if(isitem(my_atom))
@@ -744,32 +756,18 @@ proc/chem_helmet_check(mob/living/carbon/human/H, var/what_liquid="hot")
 
 		return 0
 
-	proc/test_chem_burning() // Handles logic checking if chems should burn
-		if (combustible_volume <= (total_volume/5) && !is_combusting)
-			for(var/current_id in reagent_list)
-				var/datum/reagent/current_reagent = reagent_list[current_id]
-				current_reagent.is_burning = FALSE
+	proc/test_chem_burning() // Handles logic to shut down combustion
+		if (combustible_volume <= (total_volume/5))
 			is_combusting = FALSE
 			return
-		if (!is_combusting)
-			if (!ON_COOLDOWN(global, "burning_messages", 4 SECONDS)) // Fuck you chemical message spam
-				for(var/mob/living/M in AIviewers(7, get_turf(my_atom)))
-					boutput(M, SPAN_NOTICE("[bicon(my_atom)] The mixture begins burning!"))
+
+	proc/start_combusting()
+		if (!src.is_combusting)
+			for(var/mob/living/M in AIviewers(7, get_turf(src.my_atom)))
+				if (!ON_COOLDOWN(M, "burning_messages", 2 SECONDS)) // lessen chemical message spam
+					boutput(M, SPAN_NOTICE("[bicon(src.my_atom)] The mixture begins burning!"))
 			active_reagent_holders += src
-		is_combusting = TRUE
-
-		for(var/current_id in reagent_list)
-			var/datum/reagent/current_reagent = reagent_list[current_id]
-			if (current_reagent.flammable)
-				src.is_combusting = TRUE
-				composite_combust_speed += current_reagent.burn_speed * current_reagent.volume
-				composite_combust_temp += current_reagent.burn_temperature * current_reagent.volume
-				composite_volatility += current_reagent.burn_volatility * current_reagent.volume
-
-		var/combustible_safe = max(1, combustible_volume)
-		composite_combust_temp = composite_combust_temp / combustible_safe
-		composite_combust_speed = composite_combust_speed / combustible_safe
-		composite_volatility = composite_volatility / combustible_safe
+			src.is_combusting = TRUE
 
 	proc/grenade_effects(var/obj/grenade, var/atom/A)
 		for (var/id in src.reagent_list)

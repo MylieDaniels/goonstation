@@ -31,12 +31,12 @@ datum
 
 			reaction_turf(var/turf/T, var/volume)
 				if (holder && holder.total_temperature >= minimum_reaction_temperature)
-					is_burning = TRUE
+					holder.start_combusting()
 				. = ..()
 
 			reaction_temperature(exposed_temperature, exposed_volume)
-				if (!is_burning && istype(src.holder,/datum/reagents/fluid_group))
-					is_burning = TRUE
+				if(holder && !holder.is_combusting && istype(holder,/datum/reagents/fluid_group))
+					holder.start_combusting()
 
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume_passed)
 				. = ..()
@@ -92,14 +92,14 @@ datum
 
 			flammable = TRUE
 			combusts_on_fire_contact = TRUE
-			burn_speed = 1
+			burn_speed = 0.75
 			burn_temperature = 2600
-			burn_volatility = 3
+			burn_volatility = 2
 			minimum_reaction_temperature = T0C + 100
 
 			reaction_temperature(exposed_temperature, exposed_volume)
-				if(!is_burning)
-					is_burning = TRUE
+				if(holder && !holder.is_combusting)
+					holder.start_combusting()
 
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume, var/paramslist = 0, var/raw_volume)
 				. = ..()
@@ -109,8 +109,8 @@ datum
 					if(istype(L) && burn)
 						L.changeStatus("burning", 2 * raw_volume SECONDS)
 						burn.counter += 10 * raw_volume
-						L.TakeDamage("All", 0, (1 - L.get_heat_protection()/100) * clamp(2 * raw_volume * (burn.getStage()-1.25), 0, 25), 0, DAMAGE_BURN)
-						if(!M.stat && !ON_COOLDOWN(M, "napalm_scream", 1 SECOND))
+						if(!M.stat && !ON_COOLDOWN(M, "napalm_damage", 1 SECOND))
+							L.TakeDamage("All", 0, (1 - L.get_heat_protection()/100) * clamp(2 * raw_volume * (burn.getStage()-1.25), 0, 25), 0, DAMAGE_BURN)
 							M.emote("scream")
 					return 0
 				return 1
@@ -134,7 +134,7 @@ datum
 				description = "Extra sticky, extra burny"
 				burn_speed = 0.5
 				burn_temperature = 2900
-				burn_volatility = 3.5
+				burn_volatility = 3
 
 				reaction_mob(var/mob/M, var/method=TOUCH, var/volume, var/paramslist = 0, var/raw_volume)
 					. = ..()
@@ -165,8 +165,8 @@ datum
 			minimum_reaction_temperature = T0C+600
 
 			reaction_temperature(exposed_temperature, exposed_volume)
-				if(!is_burning)
-					is_burning = TRUE
+				if(holder && !holder.is_combusting)
+					holder.start_combusting()
 
 			reaction_obj(var/obj/O, var/volume)
 				if (!holder)
@@ -186,7 +186,7 @@ datum
 				if (T.material && T.material.getID() == "steel")
 					//T.visible_message(SPAN_ALERT("[T] melts!"))
 					T.ex_act(2)
-				is_burning = TRUE
+				holder.start_combusting()
 				. = ..()
 
 		combustible/thermite
@@ -338,12 +338,13 @@ datum
 			minimum_reaction_temperature = -INFINITY
 
 			reaction_turf(var/turf/T, var/volume)
-				is_burning = TRUE
+				if (holder && holder.total_temperature)
+					holder.start_combusting()
 				. = ..()
 
 			reaction_temperature(exposed_temperature, exposed_volume)
-				if (!is_burning && istype(src.holder,/datum/reagents/fluid_group))
-					is_burning = TRUE
+				if(holder && !holder.is_combusting && istype(holder,/datum/reagents/fluid_group))
+					holder.start_combusting()
 
 			reaction_obj(var/obj/O, var/volume)
 				var/datum/reagents/old_holder = src.holder //mbc pls, ZeWaka fix: null.holder
@@ -407,12 +408,13 @@ datum
 			minimum_reaction_temperature = -INFINITY
 
 			reaction_turf(var/turf/T, var/volume)
-				is_burning = TRUE
+				if (holder && holder.total_temperature)
+					holder.start_combusting()
 				. = ..()
 
 			reaction_temperature(exposed_temperature, exposed_volume)
-				if (!is_burning && istype(src.holder,/datum/reagents/fluid_group))
-					is_burning = TRUE
+				if(holder && !holder.is_combusting)
+					holder.start_combusting()
 
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
 				. = ..()
@@ -558,7 +560,8 @@ datum
 			var/smoke_counter = 0
 
 			reaction_temperature(exposed_temperature, exposed_volume)
-				is_burning = TRUE
+				if(holder && !holder.is_combusting)
+					holder.start_combusting()
 
 			do_burn(reacting_volume)
 				if (istype(holder,/datum/reagents/fluid_group))

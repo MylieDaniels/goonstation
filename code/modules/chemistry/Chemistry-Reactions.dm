@@ -274,4 +274,5 @@
 	for (var/reagent_id in FG.reagent_list)
 		var/datum/reagent/reagent = FG.reagent_list[reagent_id]
 		if (reagent.combusts_on_fire_contact == TRUE)
-			reagent.is_burning = TRUE
+			FG.start_combusting()
+			return

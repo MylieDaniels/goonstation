@@ -430,8 +430,8 @@
 	minimum_reaction_temperature = T0C + 100
 
 	reaction_temperature(exposed_temperature, exposed_volume)
-		if(!is_burning)
-			is_burning = TRUE
+		if(holder && !holder.is_combusting)
+			holder.start_combusting()
 
 	on_mob_life(var/mob/M, var/mult = 1)
 		if(!M) M = holder.my_atom
@@ -445,7 +445,7 @@
 		. = ..()
 		if(method == TOUCH)
 			var/mob/living/L = M
-			if(istype(L) && (L.getStatusDuration("burning") || is_burning))
+			if(istype(L) && (L.getStatusDuration("burning") || holder?.is_combusting))
 				L.changeStatus("burning", 30 SECONDS)
 		return 1
 
