@@ -550,54 +550,35 @@ datum
 			minimum_reaction_temperature = T0C + 200
 			depletion_rate = 0.6
 			heat_capacity = 5
-
-			var/max_radius = 7
-			var/min_radius = 0
-			var/volume_radius_modifier = -0.15
-			var/volume_radius_multiplier = 0.09
-			var/explosion_threshold = 100
-			var/min_explosion_radius = 0
-			var/max_explosion_radius = 4
-			var/volume_explosion_radius_multiplier = 0.005
-			var/volume_explosion_radius_modifier = 0
-
-
-			var/caused_fireflash = 0
-			var/min_req_fluid = 0.1 //at least 10% of the fluid needs to be oil for it to ignite
+			flammable = TRUE
+			combusts_on_fire_contact = TRUE
+			burn_speed = 0.8 // Oil is a slow burner
+			burn_temperature = 1920 + T0C
+			burn_volatility = 5
+			var/smoke_counter = 0
 
 			reaction_temperature(exposed_temperature, exposed_volume)
-				if(volume < 1)
-					if (holder)
-						holder.del_reagent(id)
-					return
+				is_burning = TRUE
 
-				if (caused_fireflash)
-					return
-				else
+			do_burn(reacting_volume)
+				if (istype(holder,/datum/reagents/fluid_group))
 					var/list/covered = holder.covered_turf()
-					if (length(covered) < 4 || (volume / holder.total_volume) > min_req_fluid)
-						if(length(covered) > 0) //possible fix for bug where caused_fireflash was set to 1 without fireflash going off, allowing fuel to reach any temp without igniting
-							caused_fireflash = 1
-						for(var/turf/turf in covered)
-							var/radius = clamp(((volume/covered.len) * volume_radius_multiplier + volume_radius_modifier), min_radius, max_radius)
-							fireflash_melting(turf, radius, 2200 + radius * 250, radius * 50)
-							if(holder && volume/length(covered) >= explosion_threshold)
-								if(holder.my_atom)
-									holder.my_atom.visible_message(SPAN_ALERT("<b>[holder.my_atom] explodes!</b>"))
-									// Added log entries (Convair880).
-									if(holder.my_atom.fingerprintslast || usr?.last_ckey)
-										message_admins("Welding Fuel explosion (inside [holder.my_atom], reagent type: [id]) at [log_loc(holder.my_atom)]. Last touched by: [holder.my_atom.fingerprintslast ? "[key_name(holder.my_atom.fingerprintslast)]" : "*null*"] (usr: [ismob(usr) ? key_name(usr) : usr]).")
-									logTheThing(LOG_BOMBING, holder.my_atom.fingerprintslast, "Welding Fuel explosion (inside [holder.my_atom], reagent type: [id]) at [log_loc(holder.my_atom)]. Last touched by: [holder.my_atom.fingerprintslast ? "[key_name(holder.my_atom.fingerprintslast)]" : "*null*"] (usr: [ismob(usr) ? key_name(usr) : usr]).")
-								else
-									turf.visible_message(SPAN_ALERT("<b>[holder.my_atom] explodes!</b>"))
-									// Added log entries (Convair880).
-									message_admins("Welding Fuel explosion ([turf], reagent type: [id]) at [log_loc(turf)].")
-									logTheThing(LOG_BOMBING, null, "Welding Fuel explosion ([turf], reagent type: [id]) at [log_loc(turf)].")
-
-								var/boomrange = clamp(round((volume/covered.len) * volume_explosion_radius_multiplier + volume_explosion_radius_modifier), min_explosion_radius, max_explosion_radius)
-								explosion(holder.my_atom, turf, -1,-1,boomrange,1)
-				if (caused_fireflash)
-					holder?.del_reagent(id)
+					if (prob(5 + smoke_counter))
+						var/turf/location = pick(covered)
+						var/datum/effects/system/bad_smoke_spread/smoke = new /datum/effects/system/bad_smoke_spread()
+						smoke.set_up(max(round(length(covered)/3), 1), 0, location)
+						smoke.start()
+						smoke_counter = 0
+					else
+						smoke_counter += reacting_volume * 2
+				if (holder.my_atom && holder.my_atom.is_open_container())
+					if (prob(5 + smoke_counter) && src.volume >= 20)
+						var/datum/effects/system/bad_smoke_spread/smoke = new /datum/effects/system/bad_smoke_spread()
+						smoke.set_up(1, 0, holder.my_atom)
+						smoke.start()
+						smoke_counter = 0
+					else
+						smoke_counter += reacting_volume * 2
 
 			reaction_obj(var/obj/O, var/volume)
 				return 1

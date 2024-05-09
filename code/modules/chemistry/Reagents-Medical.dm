@@ -132,6 +132,11 @@ datum
 			depletion_rate = 0.2
 			overdose = 40   //Ether is known for having a big difference in effective to toxic dosage
 			var/counter = 1 //Data is conserved...so some jerkbag could inject a monkey with this, wait for data to build up, then extract some instant KO juice.  Dumb.
+			flammable = TRUE
+			combusts_on_fire_contact = TRUE
+			burn_speed = 25
+			burn_temperature = 2120 + T0C
+			burn_volatility = 15 // Very Dangerous
 			minimum_reaction_temperature = T0C + 80 //This stuff is extremely flammable
 			var/temp_reacted = 0
 			value = 5
@@ -149,36 +154,10 @@ datum
 					REMOVE_ATOM_PROPERTY(M, PROP_MOB_STAMINA_REGEN_BONUS, "r_ether")
 				..()
 
-			proc/ether_fireflash(var/volume) // Proc for all of the fireflash reactions
-				if(!temp_reacted)
-					temp_reacted = 1
-					var/radius = clamp(volume*0.25, 0, 3) // Even the smoke might make a big problem here
-					var/list/covered = holder.covered_turf()
-					for(var/turf/t in covered)
-						radius = clamp((volume/covered.len)*0.25, 0, 5)
-						fireflash(t, radius, rand(2000, 3000), 500)
-				holder?.del_reagent(id)
-
 			reaction_temperature(exposed_temperature, exposed_volume)
 				if (ismob(holder?.my_atom) && volume < 50) // We don't want this stuff exploding inside people..
 					return
-				ether_fireflash(volume)
-				return
-
-			reaction_obj(var/obj/O, var/volume)
-				if (isnull(O)) return
-				if(isitem(O))
-					var/obj/item/I = O
-					if(I.firesource) // Direct contact with any firesource is enough to cause the ether to combust
-						ether_fireflash(volume)
-				return
-
-			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
-				. = ..()
-				if(method == TOUCH)
-					var/mob/living/L = M
-					if(istype(L) && L.getStatusDuration("burning"))
-						ether_fireflash(volume)
+				is_burning = TRUE
 				return
 
 			on_mob_life(var/mob/M, var/mult = 1)

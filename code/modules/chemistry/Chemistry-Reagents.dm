@@ -132,6 +132,9 @@ datum
 		proc/reaction_temperature(exposed_temperature, exposed_volume) //By default we do nothing.
 			return
 
+		proc/do_burn(var/reacting_volume)
+			return
+
 		//reaction_mob, reaction_obj reaction_turf and reaction_blob all return 1 by default. Children procs should override return value with 0.
 		// This is for fluid interactions : returning 0 means 'this reaction consumed fluid'
 		// YES i know this is kind of backwards - however it's much easier to change these return values to 1 than to change every single reagent
