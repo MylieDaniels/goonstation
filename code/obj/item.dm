@@ -723,7 +723,7 @@ ADMIN_INTERACT_PROCS(/obj/item, proc/admin_set_stack_amount)
 	if (!src.anchored)
 		click_drag_tk(over_object, src_location, over_location, over_control, params)
 
-	if (usr.stat || usr.restrained() || !can_reach(usr, src) || usr.getStatusDuration("paralysis") || usr.sleeping || usr.lying || isAIeye(usr) || isAI(usr) || isrobot(usr) || isghostcritter(usr) || (over_object && over_object.event_handler_flags & NO_MOUSEDROP_QOL) || isintangible(usr))
+	if (usr.stat || usr.restrained() || !can_reach(usr, src) || usr.getStatusDuration("unconscious") || usr.sleeping || usr.lying || isAIeye(usr) || isAI(usr) || isrobot(usr) || isghostcritter(usr) || (over_object && over_object.event_handler_flags & NO_MOUSEDROP_QOL) || isintangible(usr))
 		return
 
 	var/on_turf = isturf(src.loc)
@@ -1031,11 +1031,17 @@ ADMIN_INTERACT_PROCS(/obj/item, proc/admin_set_stack_amount)
 	src.equipped_in_slot = null
 	user.update_equipped_modifiers()
 
+/// Call this proc inplace of afterattack(...)
 /obj/item/proc/AfterAttack(atom/target, mob/user, reach, params)
 	SHOULD_NOT_OVERRIDE(TRUE)
 	SEND_SIGNAL(src, COMSIG_ITEM_AFTERATTACK, target, user, reach, params)
 	. = src.afterattack(target, user, reach, params)
 
+/**
+ * DO NOT CALL THIS PROC - Call AfterAttack(...) Instead!
+ *
+ * Only override this proc!
+ */
 /obj/item/proc/afterattack(atom/target, mob/user, reach, params)
 	set waitfor = 0
 	PROTECTED_PROC(TRUE)
@@ -1161,7 +1167,9 @@ ADMIN_INTERACT_PROCS(/obj/item, proc/admin_set_stack_amount)
 
 /obj/item/attack_hand(mob/user)
 	var/obj/item/checkloc = src.loc
-	if (!ismob(src.loc)) // Skip this loop if the FIRST loc is a mob, allowing component/hattable to proc take_hat_off on AIs/ghostdrones
+	var/mob/mobloc = src.loc //hehehhohoo
+	// Skip this loop if the FIRST loc is a mob, allowing component/hattable to proc take_hat_off on AIs/ghostdrones
+	if (!ismob(src.loc) || (src in mobloc.equipped_list())) //but don't skip if it's in their hand because that causes DUPE BUGS AAAA
 		while(checkloc && !istype(checkloc,/turf))
 			if(isliving(checkloc) && checkloc != user) // This heinous block is to make sure you're not swiping things from other people's backpacks
 				if(src in bible_contents) // Bibles share their contents globally, so magically taking stuff from them is fine

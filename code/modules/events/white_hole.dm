@@ -88,6 +88,7 @@ TYPEINFO(/datum/random_event/major/white_hole)
 		var/obj/whitehole/whitehole = new (T, grow_duration, duration, source_location, TRUE)
 		whitehole.activity_modifier = activity_modifier
 		message_admins("White Hole anomaly with origin [whitehole.source_location] spawning in [log_loc(T)]")
+		message_ghosts("<b>\A [whitehole.source_location] white hole</b> is spawning at [log_loc(T, ghostjump=TRUE)].")
 		logTheThing(LOG_ADMIN, usr, "Spawned a white hole anomaly with origin [whitehole.source_location] at [log_loc(T)]")
 
 
@@ -529,8 +530,8 @@ ADMIN_INTERACT_PROCS(/obj/whitehole, proc/admin_activate)
 			/obj/item/paper = 2,
 			/obj/item/clothing/suit/cardboard_box/ai = 1,
 			/obj/item/disk/data/floppy/manudrive/ai = 1,
-			/obj/item/aiModule/ability_expansion/doctor_vision = 1,
-			/obj/item/aiModule/ability_expansion/proto_teleman = 0.5
+			/obj/item/aiModule/ability_expansion/doctor_vision = 0.5,
+			/obj/item/aiModule/ability_expansion/proto_teleman = 0.2
 		),
 		"bridge" = list(
 			/obj/item/reagent_containers/food/drinks/drinkingglass/flute = 10,
