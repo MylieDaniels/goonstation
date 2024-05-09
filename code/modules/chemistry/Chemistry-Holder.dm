@@ -697,7 +697,7 @@ proc/chem_helmet_check(mob/living/carbon/human/H, var/what_liquid="hot")
 					if (14 to 20) // Here be explosions
 						burn_speed *= 2
 						var/explosion_size = clamp(((burn_volatility - 14) * (combustible_volume ** 0.33) / 3), 0, 10)
-						explosion(src.my_atom, src.my_atom, -1,-1,explosion_size/2,explosion_size)
+						explosion(src.my_atom, get_turf(src.my_atom), -1,-1,explosion_size/2,explosion_size)
 						if(istype(src?.my_atom, /obj))
 							var/obj/container = src.my_atom
 							container.shatter_chemically(projectiles = TRUE)
