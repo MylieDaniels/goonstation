@@ -673,6 +673,7 @@ proc/chem_helmet_check(mob/living/carbon/human/H, var/what_liquid="hot")
 
 			src.is_combusting = continue_burn
 			return
+
 		// Open containers burning
 		if (src.my_atom && src.my_atom.is_open_container())
 			var/continue_burn = FALSE
@@ -686,11 +687,11 @@ proc/chem_helmet_check(mob/living/carbon/human/H, var/what_liquid="hot")
 						src.temperature_reagents(src.composite_combust_temp, burn_volatility, change_min = 1)
 						// Some sort of indication that something is burning goes here
 					if (2 to 8) // Unsafe, leaking up flames
-						fireflash(src.my_atom, 0, src.composite_combust_temp)
+						fireflash(get_turf(src.my_atom), 0, src.composite_combust_temp)
 					if (8 to 14) // Very spicy fire that maybe breaks stuff
 						burn_speed *= 1.25
 						var/explosion_size = clamp(((burn_volatility - 8) * (combustible_volume ** 0.33) / 3), 0, 6)
-						fireflash_melting(src.my_atom, explosion_size, src.composite_combust_temp, 0)
+						fireflash_melting(get_turf(src.my_atom), explosion_size, src.composite_combust_temp, 0)
 						if(istype(src?.my_atom, /obj))
 							var/obj/container = src.my_atom
 							container.shatter_chemically(projectiles = TRUE)
@@ -705,6 +706,45 @@ proc/chem_helmet_check(mob/living/carbon/human/H, var/what_liquid="hot")
 			for (var/reagent_id in src.reagent_list)
 				var/datum/reagent/reagent = src.reagent_list[reagent_id]
 				if (reagent.flammable)
+					var/amount_to_remove = (burn_speed * mult) * (reagent.volume / src.combustible_volume)
+					reagent.do_burn(amount_to_remove)
+					src.remove_reagent(reagent_id, amount_to_remove)
+					continue_burn = TRUE
+
+			src.is_combusting = continue_burn
+			return
+
+		// Closed containers burning (not mobs)
+		if (src.my_atom && !src.my_atom.is_open_container() && istype(src?.my_atom, /obj))
+			var/continue_burn = FALSE
+			var/burn_volatility = src.composite_volatility * ((clamp(src.combustible_volume / src.my_atom.reagents.maximum_volume, 0, 1) + 1)/2)
+			burn_volatility = clamp(burn_volatility - 1, 0, 20)
+			var/burn_speed = src.composite_combust_speed
+
+			if (src.combustible_volume >= 1) // A minimum amount to prevent low volume fuckery
+				switch (burn_volatility)
+					if (0 to 4) // Safe to handle, flames cannot burn and put themselves out
+						src.is_combusting = FALSE
+						return
+						// Some sort of indication that something is burning goes here
+					if (4 to 10) // Causes a mild explosion and releases the pressure
+						burn_speed *= 2
+						var/explosion_size = clamp(((burn_volatility - 4) * (combustible_volume ** 0.33) / 3), 0, 6)
+						fireflash_melting(get_turf(src.my_atom), explosion_size, src.composite_combust_temp, 0)
+						explosion(src.my_atom, get_turf(src.my_atom), -1,-1,explosion_size/2,explosion_size)
+						var/obj/container = src.my_atom
+						container.shatter_chemically(projectiles = TRUE)
+					if (10 to 20) // Causes a larger explosion and releases even more pressure
+						burn_speed *= 4
+						var/explosion_size = clamp(((burn_volatility - 10) * (combustible_volume ** 0.33) / 3), 0, 10)
+						fireflash_melting(get_turf(src.my_atom), explosion_size, src.composite_combust_temp, 0)
+						explosion(src.my_atom, get_turf(src.my_atom), -1,explosion_size/4,explosion_size/2,explosion_size)
+						var/obj/container = src.my_atom
+						container.shatter_chemically(projectiles = TRUE)
+
+			for (var/reagent_id in src.reagent_list)
+				var/datum/reagent/reagent = src.reagent_list[reagent_id]
+				if (reagent.is_burning)
 					var/amount_to_remove = (burn_speed * mult) * (reagent.volume / src.combustible_volume)
 					reagent.do_burn(amount_to_remove)
 					src.remove_reagent(reagent_id, amount_to_remove)
