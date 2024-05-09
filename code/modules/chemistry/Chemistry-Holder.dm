@@ -637,8 +637,8 @@ proc/chem_helmet_check(mob/living/carbon/human/H, var/what_liquid="hot")
 				covered_area += 1
 
 			var/continue_burn = FALSE
-			var/burn_volatility = src.composite_volatility *  src.combustible_volume / max(1, covered_area)
-			burn_volatility = clamp((burn_volatility / 20) - 1, 0, 20)
+			var/burn_volatility = src.composite_volatility * clamp((src.combustible_volume ** 0.33) / (max(1, covered_area)), 0, 1)
+			burn_volatility = clamp(burn_volatility, 0, 30)
 
 			for (var/turf/T in src.covered_turf())
 				fireflash_melting(T, burn_volatility/4, src.composite_combust_temp, 0)
@@ -705,10 +705,10 @@ proc/chem_helmet_check(mob/living/carbon/human/H, var/what_liquid="hot")
 				composite_combust_temp += current_reagent.burn_temperature * current_reagent.volume
 				composite_volatility += current_reagent.burn_volatility * current_reagent.volume
 
-		composite_combust_temp = composite_combust_temp / combustible_volume
-		composite_combust_speed = composite_combust_speed / combustible_volume
-		composite_volatility = composite_volatility / combustible_volume
-
+		var/combustible_safe = max(1, combustible_volume)
+		composite_combust_temp = composite_combust_temp / combustible_safe
+		composite_combust_speed = composite_combust_speed / combustible_safe
+		composite_volatility = composite_volatility / combustible_safe
 
 	proc/grenade_effects(var/obj/grenade, var/atom/A)
 		for (var/id in src.reagent_list)

@@ -421,18 +421,16 @@
 	combusts_on_fire_contact = TRUE
 	burn_speed = 10
 	burn_temperature = 2520 + T0C
-	burn_volatility = 10
+	burn_volatility = 8
 
 	fluid_r = 130
 	fluid_g = 40
 	fluid_b = 160
 	transparency = 222
 	minimum_reaction_temperature = T0C + 100
-	var/reacted_to_temp = 0 // prevent infinite loop in a fluid
 
 	reaction_temperature(exposed_temperature, exposed_volume)
-		if(!reacted_to_temp)
-			reacted_to_temp = 1
+		if(!is_burning)
 			is_burning = TRUE
 
 	on_mob_life(var/mob/M, var/mult = 1)

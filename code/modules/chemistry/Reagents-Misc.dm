@@ -1264,24 +1264,17 @@ datum
 			hygiene_value = -1.5
 			value = 3 // 1c + 1c + 1c
 			viscosity = 0.13
+
+			flammable = TRUE
+			combusts_on_fire_contact = TRUE
+			burn_speed = 0.25
+			burn_temperature = 900
+			burn_volatility = 2
 			minimum_reaction_temperature = T0C + 200
-			var/min_req_fluid = 0.25 //at least 1/4 of the fluid needs to be oil for it to ignite
 
 			reaction_temperature(exposed_temperature, exposed_volume)
-				if (!src.reacting && (holder && !holder.has_reagent("chlorine"))) // need this to be higher to make propylene possible
-					src.reacting = 1
-					var/list/covered = holder.covered_turf()
-					if (length(covered) < 4 || (volume / holder.total_volume) > min_req_fluid)
-						for(var/turf/location in covered)
-							fireflash(location, clamp(volume/40, 0, 8))
-							if (length(covered) < 4 || prob(10))
-								location.visible_message("<b>The oil burns!</b>")
-								var/datum/effects/system/bad_smoke_spread/smoke = new /datum/effects/system/bad_smoke_spread()
-								smoke.set_up(1, 0, location)
-								smoke.start()
-					if (holder)
-						holder.add_reagent("ash", round(src.volume/2), null)
-						holder.del_reagent(id)
+				if(!is_burning)
+					is_burning = TRUE
 
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
 				. = ..()

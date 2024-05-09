@@ -17,27 +17,25 @@ datum
 			fluid_g = 175
 			volatility = 2
 			transparency = 175
-			var/temp_fire = 4000
-			var/temp_deviance = 1000
-			var/size_divisor = 40
 			var/mob_burning = 33
+
 			hygiene_value = 1 // with purging fire
 			viscosity = 0.7
 
+			flammable = TRUE
+			combusts_on_fire_contact = TRUE
+			burn_speed = 25
+			burn_temperature = 3500
+			burn_volatility = 11
+			minimum_reaction_temperature = T0C - 50
+
 			reaction_turf(var/turf/T, var/volume)
-				if (!holder) //Wire: Fix for Cannot read null.total_temperature
-					return
-				if(holder.total_temperature <= T0C - 50) return //Too cold. Doesnt work.
-				var/SD = size_divisor
+				is_burning = TRUE
+				. = ..()
 
-				var/list/covered = holder.covered_turf()
-
-				if (length(covered) > 9)
-					volume = (volume/covered.len)
-
-				var/radius = clamp(volume/SD, 0, 8)
-				fireflash_melting(T, radius, rand(temp_fire - temp_deviance, temp_fire + temp_deviance), 500)
-				return
+			reaction_temperature(exposed_temperature, exposed_volume)
+				if(!is_burning)
+					is_burning = TRUE
 
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume_passed)
 				. = ..()
@@ -71,11 +69,14 @@ datum
 			id = "firedust"
 			description = "And this is solid fire. However that works."
 			dispersal = 4
-			temp_fire = 1500
-			temp_deviance = 500
 			transparency = 255
-			size_divisor = 80
 			mob_burning = 15
+			flammable = TRUE
+			combusts_on_fire_contact = TRUE
+			burn_speed = 10
+			burn_temperature = 1500
+			burn_volatility = 6
+			minimum_reaction_temperature = T0C
 
 		combustible/napalm_goo  // adapated from weldfuel
 			name = "napalm goo"
@@ -87,19 +88,17 @@ datum
 			fluid_g = 100
 			transparency = 150
 			viscosity = 0.8
+
+			flammable = TRUE
+			combusts_on_fire_contact = TRUE
+			burn_speed = 2
+			burn_temperature = 2600
+			burn_volatility = 3
 			minimum_reaction_temperature = T0C + 100
-			var/temp_reacted = 0
 
 			reaction_temperature(exposed_temperature, exposed_volume)
-				if(!temp_reacted)
-					temp_reacted = 1
-					var/radius = clamp(volume*0.15, 0, 8)
-					var/list/covered = holder.covered_turf()
-					for(var/turf/t in covered)
-						radius = clamp((volume/covered.len)*0.15, 0, 8)
-						fireflash(t, radius, rand(3000, 6000), 500)
-				holder?.del_reagent(id)
-				return
+				if(!is_burning)
+					is_burning = TRUE
 
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume, var/paramslist = 0, var/raw_volume)
 				. = ..()
@@ -109,7 +108,7 @@ datum
 					if(istype(L) && burn)
 						L.changeStatus("burning", 2 * raw_volume SECONDS)
 						burn.counter += 10 * raw_volume
-						L.TakeDamage("All", 0, (1 - L.get_heat_protection()/100) * clamp(3 * raw_volume * (burn.getStage()-1.25), 0, 35), 0, DAMAGE_BURN)
+						L.TakeDamage("All", 0, (1 - L.get_heat_protection()/100) * clamp(2 * raw_volume * (burn.getStage()-1.25), 0, 25), 0, DAMAGE_BURN)
 						if(!M.stat && !ON_COOLDOWN(M, "napalm_scream", 1 SECOND))
 							M.emote("scream")
 					return 0
@@ -132,6 +131,9 @@ datum
 				name = "syndicate napalm"
 				id = "syndicate_napalm"
 				description = "Extra sticky, extra burny"
+				burn_speed = 1
+				burn_temperature = 2900
+				burn_volatility = 3.5
 
 				reaction_mob(var/mob/M, var/method=TOUCH, var/volume, var/paramslist = 0, var/raw_volume)
 					. = ..()
@@ -154,7 +156,16 @@ datum
 			transparency = 255
 			viscosity = 0.4
 			volatility = 2
+			flammable = TRUE
+			combusts_on_fire_contact = TRUE
+			burn_speed = 14
+			burn_temperature = 6000
+			burn_volatility = 14
 			minimum_reaction_temperature = T0C+600
+
+			reaction_temperature(exposed_temperature, exposed_volume)
+				if(!is_burning)
+					is_burning = TRUE
 
 			reaction_obj(var/obj/O, var/volume)
 				if (!holder)
@@ -163,28 +174,19 @@ datum
 					O.visible_message(SPAN_ALERT("[O] melts!"))
 					qdel(O)
 
-			reaction_temperature(exposed_temperature, exposed_volume)
-				var/radius = clamp(volume*0.15, 0, 8)
-				var/list/covered = holder.covered_turf()
-				var/list/affected = list()
-				for(var/turf/t in covered)
-					radius = clamp((volume/covered.len)*0.15, 0, 8)
-					affected += fireflash_melting(t, radius, rand(3000, 6000), 500)
-
-				for (var/turf/T in affected)
-					for (var/obj/steel_beams/O in T)
-						O.visible_message(SPAN_ALERT("[O] melts!"))
-						qdel(O)
-				holder?.del_reagent(id)
-
 			reaction_turf(var/turf/simulated/T, var/volume)
 				if (!holder)
 					return
 				if (!istype(T) || volume < 5 || holder.total_temperature < T0C + 400)
 					return
+				for (var/obj/steel_beams/O in T)
+					O.visible_message(SPAN_ALERT("[O] melts!"))
+					qdel(O)
 				if (T.material && T.material.getID() == "steel")
 					//T.visible_message(SPAN_ALERT("[T] melts!"))
 					T.ex_act(2)
+				is_burning = TRUE
+				. = ..()
 
 		combustible/thermite
 			name = "thermite"
@@ -327,6 +329,21 @@ datum
 			hygiene_value = 2 // with purging fire
 			viscosity = 0.5
 
+			flammable = TRUE
+			combusts_on_fire_contact = TRUE
+			burn_speed = 12
+			burn_temperature = 4000
+			burn_volatility = 8
+			minimum_reaction_temperature = T0C - 50
+
+			reaction_turf(var/turf/T, var/volume)
+				is_burning = TRUE
+				. = ..()
+
+			reaction_temperature(exposed_temperature, exposed_volume)
+				if(!is_burning)
+					is_burning = TRUE
+
 			reaction_obj(var/obj/O, var/volume)
 				var/datum/reagents/old_holder = src.holder //mbc pls, ZeWaka fix: null.holder
 				var/id = src.id
@@ -345,24 +362,6 @@ datum
 					if (covered.len>4)
 						old_holder.remove_reagent(id, I.health * 0.25)
 				return
-
-			reaction_turf(var/turf/T, var/volume)
-				var/datum/reagents/old_holder = src.holder
-				var/list/covered = old_holder.covered_turf()
-				if(length(covered) > 9)
-					volume = volume/length(covered)
-				if (volume < 3)
-					return
-
-				var/fail = 0
-				if (covered.len>4)
-					fail = 1
-					if (prob(volume+6))
-						fail = 0
-
-				if (!fail)
-					var/radius = min((volume - 3) * 0.15, 3)
-					fireflash_melting(T, radius, 4500 + volume * 500, 350)
 
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume, var/paramslist = 0, var/raw_volume)
 				. = ..()
@@ -399,19 +398,15 @@ datum
 			viscosity = 0.6
 			volatility = 4
 
+			flammable = TRUE
+			combusts_on_fire_contact = TRUE
+			burn_speed = 35
+			burn_temperature = 9000
+			burn_volatility = 20
+
 			reaction_turf(var/turf/T, var/volume)
-				fireflash(T, clamp(volume/10, 0, 8), 7000)
-				if(!istype(T, /turf/space))
-					SPAWN(max(10, rand(20))) // let's burn right the fuck through the floor
-						switch(volume)
-							if(0 to 15)
-								if(prob(15))
-									//T.visible_message(SPAN_ALERT("[T] melts!"))
-									T.ex_act(2)
-							if(16 to INFINITY)
-								//T.visible_message(SPAN_ALERT("[T] melts!"))
-								T.ex_act(2)
-				return
+				is_burning = TRUE
+				. = ..()
 
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
 				. = ..()
