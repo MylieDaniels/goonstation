@@ -24,9 +24,9 @@ datum
 
 			flammable = TRUE
 			combusts_on_fire_contact = TRUE
-			burn_speed = 15
-			burn_temperature = 3500
-			burn_volatility = 11
+			burn_speed = 12
+			burn_temperature = 2500
+			burn_volatility = 10
 			minimum_reaction_temperature = T0C - 50
 
 			reaction_turf(var/turf/T, var/volume)
@@ -74,7 +74,7 @@ datum
 			mob_burning = 15
 			flammable = TRUE
 			combusts_on_fire_contact = TRUE
-			burn_speed = 5
+			burn_speed = 4
 			burn_temperature = 1500
 			burn_volatility = 6
 			minimum_reaction_temperature = T0C
@@ -93,7 +93,7 @@ datum
 			flammable = TRUE
 			combusts_on_fire_contact = TRUE
 			burn_speed = 0.75
-			burn_temperature = 2600
+			burn_temperature = 1200
 			burn_volatility = 2
 			minimum_reaction_temperature = T0C + 100
 
@@ -133,7 +133,7 @@ datum
 				id = "syndicate_napalm"
 				description = "Extra sticky, extra burny"
 				burn_speed = 0.5
-				burn_temperature = 2900
+				burn_temperature = 1800
 				burn_volatility = 3
 
 				reaction_mob(var/mob/M, var/method=TOUCH, var/volume, var/paramslist = 0, var/raw_volume)
@@ -159,8 +159,8 @@ datum
 			volatility = 2
 			flammable = TRUE
 			combusts_on_fire_contact = TRUE
-			burn_speed = 8
-			burn_temperature = 6000
+			burn_speed = 5
+			burn_temperature = 5000
 			burn_volatility = 14
 			minimum_reaction_temperature = T0C+600
 
@@ -333,7 +333,7 @@ datum
 			flammable = TRUE
 			combusts_on_fire_contact = TRUE
 			burn_speed = 8
-			burn_temperature = 4000
+			burn_temperature = 3500
 			burn_volatility = 8
 			minimum_reaction_temperature = -INFINITY
 
@@ -402,7 +402,7 @@ datum
 
 			flammable = TRUE
 			combusts_on_fire_contact = TRUE
-			burn_speed = 30
+			burn_speed = 15
 			burn_temperature = 9000
 			burn_volatility = 20
 			minimum_reaction_temperature = -INFINITY
@@ -554,8 +554,8 @@ datum
 			heat_capacity = 5
 			flammable = TRUE
 			combusts_on_fire_contact = TRUE
-			burn_speed = 0.8 // Oil is a slow burner
-			burn_temperature = 1920 + T0C
+			burn_speed = 0.8
+			burn_temperature = 1300
 			burn_volatility = 5
 			var/smoke_counter = 0
 

@@ -139,9 +139,9 @@
 	overdose = 100 // ethanol poisoning
 	flammable = TRUE
 	combusts_on_fire_contact = TRUE
-	burn_speed = 3
-	burn_temperature = 1920 + T0C
-	burn_volatility = 5
+	burn_speed = 6
+	burn_temperature = 900
+	burn_volatility = 4
 	thirst_value = -0.02
 	bladder_value = -0.2
 	hygiene_value = 1
@@ -420,7 +420,7 @@
 	flammable = TRUE
 	combusts_on_fire_contact = TRUE
 	burn_speed = 10
-	burn_temperature = 2520 + T0C
+	burn_temperature = 2700
 	burn_volatility = 8
 
 	fluid_r = 130

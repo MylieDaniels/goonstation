@@ -1267,7 +1267,7 @@ datum
 			flammable = TRUE
 			combusts_on_fire_contact = TRUE
 			burn_speed = 0.25 // Oil is a slow burner
-			burn_temperature = 1920 + T0C
+			burn_temperature = 600 + T0C
 			burn_volatility = 3
 			minimum_reaction_temperature = T0C + 200
 			var/smoke_counter = 0

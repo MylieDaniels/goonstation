@@ -685,27 +685,36 @@ proc/chem_helmet_check(mob/living/carbon/human/H, var/what_liquid="hot")
 			return
 
 		// Open containers burning
-		if (src.my_atom && src.my_atom.is_open_container())
+		if (src.my_atom && src.my_atom.is_open_container()) // this includes headless people, fun fact
 			var/continue_burn = FALSE
-			var/burn_volatility = src.composite_volatility * clamp((src.combustible_volume ** 0.5) / 15, 0, 1)
+			var/burn_volatility = src.composite_volatility * clamp((src.combustible_volume ** 0.5) / 10, 0, 1.25)
 			burn_volatility = clamp(burn_volatility, 0, 30)
 			var/burn_speed = src.composite_combust_speed
 			switch(burn_volatility)
 				if (0 to 2) // Safe to handle, flames contained inside
 					src.temperature_reagents(src.composite_combust_temp, burn_volatility * 4, change_cap = 300, change_min = 1)
 					// Some sort of indication that something is burning goes here
-				if (2 to 7) // Unsafe, leaking flames
+				if (2 to 5) // Unsafe, leaking flames
 					fireflash(get_turf(src.my_atom), 0, src.composite_combust_temp)
-				if (7 to 14) // Very spicy fire that maybe breaks stuff
-					burn_speed *= 1.25
+				if (5 to 14) // Very spicy fire that maybe breaks stuff
+					burn_speed *= 3
 					var/fireflash_size = clamp(((burn_volatility - 8) / 3), 0, 2)
 					fireflash_melting(get_turf(src.my_atom), fireflash_size, src.composite_combust_temp, 0)
-				if (14 to INFINITY) // splatter chems and break, usually
-					burn_speed *= 10
+					if (istype(src.my_atom, /obj) && prob(burn_volatility * (src.total_temperature / 10000)))
+						var/obj/O = src.my_atom
+						O.shatter_chemically(projectiles = TRUE)
+				if (14 to INFINITY) // splatter chems and break
+					burn_speed *= 20
+					var/turf/T = get_turf(src.my_atom)
 					var/explosion_size = clamp(((burn_volatility - 8) / 3), 0, 4)
-					fireflash_melting(get_turf(src.my_atom), explosion_size, src.composite_combust_temp, 0)
+					fireflash_melting(T, explosion_size, src.composite_combust_temp, 0)
 					explosion_size = clamp(((burn_volatility - 14) * (combustible_volume ** 0.33) / 3), 0, 6)
-					explosion(src.my_atom, get_turf(src.my_atom), -1,-1,explosion_size/2,explosion_size)
+					explosion(src.my_atom, T, -1,-1,explosion_size/2,explosion_size)
+					if (istype(src.my_atom, /obj))
+						var/obj/O = src.my_atom
+						O.shatter_chemically(projectiles = TRUE)
+					else
+						burn_speed = INFINITY
 
 			for (var/reagent_id in src.reagent_list)
 				var/datum/reagent/reagent = src.reagent_list[reagent_id]
@@ -722,27 +731,27 @@ proc/chem_helmet_check(mob/living/carbon/human/H, var/what_liquid="hot")
 		if (src.my_atom && istype(src?.my_atom, /obj))
 			var/obj/O = src.my_atom
 			var/continue_burn = FALSE
-			var/burn_volatility = src.composite_volatility * clamp((src.combustible_volume ** 0.5) / 20, 0, 2)
+			var/burn_volatility = src.composite_volatility * clamp((src.combustible_volume ** 0.5) / 20, 0, 1.25)
 			burn_volatility = clamp(burn_volatility, 0, 30)
 			var/burn_speed = src.composite_combust_speed
 
 			src.temperature_reagents(src.composite_combust_temp, burn_volatility * 10, change_cap = 300, change_min = 1)
 
-			src.combustible_pressure += burn_volatility / 60
+			src.combustible_pressure += burn_volatility / 45
 
 			if (src.combustible_pressure >= 0.1) // inform people
 				burn_speed *= 1 + src.combustible_pressure
 				if (prob(src.combustible_pressure * 10) && !ON_COOLDOWN(O, "pressure_rattle", (30 - burn_volatility) DECI SECONDS))
 					animate_storage_thump(O)
 
-			if (src.combustible_pressure >= 2) // drain pressure, even when unrealistic
+			if (src.combustible_pressure >= 3) // drain pressure, even when unrealistic
 				if (prob(src.combustible_pressure * 10) && !ON_COOLDOWN(O, "pressure_vent", (100 - burn_volatility * 2) DECI SECONDS))
-					fireflash_melting(get_turf(src.my_atom), max(round(src.combustible_pressure) - 2.75, 0), src.composite_combust_temp, 0)
+					fireflash_melting(get_turf(src.my_atom), max(round(src.combustible_pressure) / 3 - 2, 0), src.composite_combust_temp, 0)
 					O.visible_message(SPAN_ALERT("[bicon(src.my_atom)] \The [O] vents flames violently!"), SPAN_ALERT("You hear a fiery hiss!"), "pressure_venting_\ref[src]")
 					src.combustible_pressure *= 0.9
-					burn_speed *= 10
+					burn_speed *= 5
 
-			if (src.combustible_pressure >= 4)
+			if (src.combustible_pressure >= 10)
 				var/turf/T = get_turf(O)
 				var/explosion_size = clamp((burn_volatility - 3) / 3 * min((combustible_volume ** 0.33) / 10, 1), 1, 8)
 				explosion(O, T, explosion_size/3 - 1,explosion_size/3 - 0.5,explosion_size/2,explosion_size)
