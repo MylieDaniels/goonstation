@@ -726,37 +726,42 @@ proc/chem_helmet_check(mob/living/carbon/human/H, var/what_liquid="hot")
 			burn_volatility = clamp(burn_volatility, 0, 30)
 			var/burn_speed = src.composite_combust_speed
 
-			src.temperature_reagents(src.composite_combust_temp, burn_volatility * 4, change_cap = 300, change_min = 1)
+			src.temperature_reagents(src.composite_combust_temp, burn_volatility * 10, change_cap = 300, change_min = 1)
 
 			src.combustible_pressure += burn_volatility / 60
 
 			if (src.combustible_pressure >= 0.1) // inform people
 				burn_speed *= 1 + src.combustible_pressure
-				if (prob(src.combustible_pressure * 10) && !ON_COOLDOWN(O, "pressure_rattle", 30 - burn_volatility DECI SECONDS))
+				if (prob(src.combustible_pressure * 10) && !ON_COOLDOWN(O, "pressure_rattle", (30 - burn_volatility) DECI SECONDS))
 					animate_storage_thump(O)
 
 			if (src.combustible_pressure >= 2) // drain pressure, even when unrealistic
-				if (prob(src.combustible_pressure * 20) && !ON_COOLDOWN(O, "pressure_vent", 60 - burn_volatility DECI SECONDS))
-					fireflash_melting(get_turf(src.my_atom), round(src.combustible_pressure) - 2, src.composite_combust_temp, 0)
+				if (prob(src.combustible_pressure * 10) && !ON_COOLDOWN(O, "pressure_vent", (100 - burn_volatility * 2) DECI SECONDS))
+					fireflash_melting(get_turf(src.my_atom), max(round(src.combustible_pressure) - 2.75, 0), src.composite_combust_temp, 0)
 					O.visible_message(SPAN_ALERT("[bicon(src.my_atom)] \The [O] vents flames violently!"), SPAN_ALERT("You hear a fiery hiss!"), "pressure_venting_\ref[src]")
-				src.combustible_pressure *= 0.95
+					src.combustible_pressure *= 0.9
+					burn_speed *= 10
 
 			if (src.combustible_pressure >= 4)
-				var/explosion_size = clamp((burn_volatility - 5) / 2 * min((combustible_volume ** 0.33) / 10, 1), 1, 9)
-				explosion(O, get_turf(O),explosion_size/3 - 1,explosion_size/3 - 0.5,explosion_size/2,explosion_size)
-				fireflash_melting(get_turf(O), explosion_size / 2, src.composite_combust_temp, 0)
+				var/turf/T = get_turf(O)
+				var/explosion_size = clamp((burn_volatility - 3) / 3 * min((combustible_volume ** 0.33) / 10, 1), 1, 8)
+				explosion(O, T, explosion_size/3 - 1,explosion_size/3 - 0.5,explosion_size/2,explosion_size)
+				fireflash_melting(T, 3 + explosion_size / 4, src.composite_combust_temp, 0)
 				O.visible_message(SPAN_ALERT("[bicon(src.my_atom)] \The [O] explodes!"), SPAN_ALERT("You hear a loud bang!"))
-				O.shatter_chemically(projectiles = TRUE)
+				if (!O.shatter_chemically(projectiles = TRUE))
+					src.clear_reagents()
 
 			for (var/reagent_id in src.reagent_list)
 				var/datum/reagent/reagent = src.reagent_list[reagent_id]
 				if (reagent.flammable)
-					var/amount_to_remove = 0.25 * (burn_speed * mult) * (reagent.volume / src.combustible_volume)
+					var/amount_to_remove = (burn_speed * mult) / 15 * (reagent.volume / src.combustible_volume)
 					reagent.do_burn(amount_to_remove)
 					src.remove_reagent(reagent_id, amount_to_remove)
 					continue_burn = TRUE
 
 			src.is_combusting = continue_burn
+			if(!continue_burn) // not sure about this, honestly
+				src.combustible_pressure = 0
 			return
 
 	proc/update_total()

@@ -413,7 +413,7 @@ datum
 				. = ..()
 
 			reaction_temperature(exposed_temperature, exposed_volume)
-				if(holder && !holder.is_combusting)
+				if(holder && !holder.is_combusting && !istype(holder.my_atom,/obj/item/reagent_containers/glass/wateringcan/artifact))
 					holder.start_combusting()
 
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
