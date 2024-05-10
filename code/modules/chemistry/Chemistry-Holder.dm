@@ -742,7 +742,7 @@ proc/chem_helmet_check(mob/living/carbon/human/H, var/what_liquid="hot")
 				src.combustible_pressure *= 0.95
 
 			if (src.combustible_pressure >= 4)
-				var/explosion_size = clamp(((burn_volatility - 5) / 2 * min((combustible_volume ** 0.33) / 10), 1), 1, 9)
+				var/explosion_size = clamp((burn_volatility - 5) / 2 * min((combustible_volume ** 0.33) / 10, 1), 1, 9)
 				explosion(O, get_turf(O),explosion_size/3 - 1,explosion_size/3 - 0.5,explosion_size/2,explosion_size)
 				fireflash_melting(get_turf(O), explosion_size / 2, src.composite_combust_temp, 0)
 				O.visible_message(SPAN_ALERT("[bicon(src.my_atom)] \The [O] explodes!"), SPAN_ALERT("You hear a loud bang!"))
