@@ -24,7 +24,7 @@ datum
 
 			flammable = TRUE
 			combusts_on_fire_contact = TRUE
-			burn_speed = 12
+			burn_speed = 8
 			burn_temperature = 2500
 			burn_volatility = 10
 			minimum_reaction_temperature = T0C - 50
@@ -74,7 +74,7 @@ datum
 			mob_burning = 15
 			flammable = TRUE
 			combusts_on_fire_contact = TRUE
-			burn_speed = 4
+			burn_speed = 3
 			burn_temperature = 1500
 			burn_volatility = 6
 			minimum_reaction_temperature = T0C
@@ -159,7 +159,7 @@ datum
 			volatility = 2
 			flammable = TRUE
 			combusts_on_fire_contact = TRUE
-			burn_speed = 5
+			burn_speed = 2
 			burn_temperature = 5000
 			burn_volatility = 14
 			minimum_reaction_temperature = T0C+600
@@ -332,9 +332,9 @@ datum
 
 			flammable = TRUE
 			combusts_on_fire_contact = TRUE
-			burn_speed = 8
+			burn_speed = 6
 			burn_temperature = 3500
-			burn_volatility = 8
+			burn_volatility = 9
 			minimum_reaction_temperature = -INFINITY
 
 			reaction_turf(var/turf/T, var/volume)
@@ -402,7 +402,7 @@ datum
 
 			flammable = TRUE
 			combusts_on_fire_contact = TRUE
-			burn_speed = 15
+			burn_speed = 3
 			burn_temperature = 9000
 			burn_volatility = 20
 			minimum_reaction_temperature = -INFINITY
@@ -554,7 +554,7 @@ datum
 			heat_capacity = 5
 			flammable = TRUE
 			combusts_on_fire_contact = TRUE
-			burn_speed = 0.8
+			burn_speed = 1
 			burn_temperature = 1300
 			burn_volatility = 5
 			var/smoke_counter = 0
