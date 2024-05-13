@@ -208,7 +208,7 @@ datum
 
 				if(holder.get_reagent_amount(id) >= 15) //no more thermiting walls with 1u tyvm
 					holder.del_reagent(id)
-					fireflash_melting(A, 0, rand(20000, 25000), 0, TRUE, FALSE, TRUE) // Bypasses the RNG roll to melt walls (Convair880).
+					fireflash_melting(A, 0, rand(20000, 25000), 0, TRUE, CHEM_FIRE_DARKRED, FALSE, TRUE) // Bypasses the RNG roll to melt walls (Convair880).
 
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
 				. = ..()
@@ -233,8 +233,13 @@ datum
 						T.UpdateOverlays(image('icons/effects/effects.dmi',icon_state = "thermite"), "thermite")
 
 					T.reagents.add_reagent("thermite", volume, null)
-					if (T.active_hotspot)
-						T.reagents.temperature_reagents(T.active_hotspot.temperature, T.active_hotspot.volume, 350, 300, 1)
+					if (length(T.active_hotspots))
+						var/max_temp = T.active_hotspots[1].temperature
+						var/max_vol = T.active_hotspots[1].volume
+						if (length(T.active_hotspots) > 1)
+							max_temp = max(max_temp, T.active_hotspots[2].temperature)
+							max_vol = max(max_vol, T.active_hotspots[2].volume)
+						T.reagents.temperature_reagents(max_temp, max_vol, 350, 300, 1)
 
 
 		combustible/smokepowder
@@ -657,7 +662,7 @@ datum
 									holder.del_reagent(id)
 							if(21 to 80)
 								holder.my_atom.visible_message("<b>[holder.my_atom] flares up!</b>")
-								fireflash(location,0)
+								fireflash(location,0, chemfire = CHEM_FIRE_RED)
 								explosion(holder.my_atom, location, -1, -1, 1, 2)
 								if (length(covered) > 1)
 									holder.remove_reagent(id, our_amt)
