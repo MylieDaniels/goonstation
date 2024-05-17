@@ -31,7 +31,8 @@
 
 	proc/smash()
 		var/turf/T = get_turf(src)
-		T.fluid_react(src.reagents, min(src.reagents.total_volume,10000))
+		if(T)
+			T.fluid_react(src.reagents, min(src.reagents.total_volume,10000))
 		src.reagents.clear_reagents()
 		qdel(src)
 
@@ -392,9 +393,7 @@ TYPEINFO(/obj/reagent_dispensers/watertank/fountain)
 			circle.pellet_shot_volume = 0
 			circle.pellets_to_fire = 12
 			shoot_projectile_ST_pixel_spread(get_turf(src), circle, get_step(src, NORTH))
-		var/turf/T = get_turf(src)
-		T.fluid_react(src.reagents, min(src.reagents.total_volume,10000))
-		src.reagents.clear_reagents()
+		src.smash()
 		return TRUE
 
 /obj/reagent_dispensers/heliumtank
@@ -543,8 +542,7 @@ TYPEINFO(/obj/reagent_dispensers/watertank/fountain)
 		. = ..()
 
 	shatter_chemically(var/projectiles = FALSE) //needs sound probably definitely for sure
-		for(var/mob/M in AIviewers(src))
-			boutput(M, SPAN_ALERT("The <B>[src.name]</B> breaks open!"))
+		visible_message(SPAN_ALERT("The <B>[src.name]</B> breaks open!"), SPAN_ALERT("You hear a loud bang!"))
 		if(projectiles)
 			var/datum/projectile/special/spreader/uniform_burst/circle/circle = new /datum/projectile/special/spreader/uniform_burst/circle/(get_turf(src))
 			circle.shot_sound = null //no grenade sound ty

@@ -754,8 +754,8 @@ proc/chem_helmet_check(mob/living/carbon/human/H, var/what_liquid="hot")
 
 			if (src.combustible_pressure >= 10) // kaboom
 				var/turf/T = get_turf(O)
-				var/explosion_size = clamp((burn_volatility) / 3 * min((combustible_volume ** 0.33) / 8, 1), 1, 8)
-				explosion(O, T, explosion_size/3 - 0.5,explosion_size / 2 - 0.5,explosion_size - 1,explosion_size + 1)
+				var/explosion_size = clamp((burn_volatility) / 3 * min((combustible_volume ** 0.33) / 10, 1), 1, 8)
+				explosion(O, T, explosion_size / 4, explosion_size / 2, explosion_size - 1,explosion_size + 1)
 				fireflash_melting(T, 1 + explosion_size / 2, src.composite_combust_temp, 0, chemfire = CHEM_FIRE_RED)
 				O.visible_message(SPAN_ALERT("[bicon(src.my_atom)] \The [O] explodes!"), SPAN_ALERT("You hear a loud bang!"))
 				if (!O.shatter_chemically(projectiles = TRUE))
