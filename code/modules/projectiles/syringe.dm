@@ -16,3 +16,8 @@
 	syringe_barbed
 		icon_state = "syringeproj_barbed"
 		implanted = /obj/item/implant/projectile/body_visible/syringe/syringe_barbed
+
+	syringe_sniper
+		dissipation_delay = 20
+		projectile_speed = 72
+

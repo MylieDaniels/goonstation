@@ -250,14 +250,13 @@ TYPEINFO(/obj/item/gun/reagent/syringe)
 	add_residue = 1
 	can_dual_wield = 0
 	two_handed = 1
-	inventory_counter_enabled = 1
 	var/capacity = 15
 
 	New()
-		src.create_reagents(capacity)
-		set_current_projectile(new/datum/projectile/syringe)
-		src.UpdateIcon()
 		..()
+		src.create_reagents(capacity)
+		set_current_projectile(new/datum/projectile/syringe/syringe_sniper)
+		src.UpdateIcon()
 
 	move_trigger(var/mob/M, kindof)
 		if (..() && reagents)
@@ -304,10 +303,13 @@ TYPEINFO(/obj/item/gun/reagent/syringe)
 		return 1
 
 	proc/add_syringe(var/obj/item/reagent_containers/syringe/S, var/mob/user)
-		if(S.reagents.total_volume)
-			boutput(user, "<span class='notice'>You wedge \the [S] into \the [src].</span>")
-			S.reagents.trans_to(src, src.capacity)
-			qdel(S)
-			src.UpdateIcon()
-		else
+		if(S.reagents.maximum_volume > src.capacity)
+			boutput(user, "<span class='alert'>\The [S] could never fit, load something smaller!</span>")
+			return
+		if(!S.reagents.total_volume)
 			boutput(user, "<span class='alert'>\The [S] is completely empty, load something with some juice!</span>")
+			return
+		boutput(user, "<span class='notice'>You wedge \the [S] into \the [src].</span>")
+		S.reagents.trans_to(src, src.capacity)
+		qdel(S)
+		src.UpdateIcon()
