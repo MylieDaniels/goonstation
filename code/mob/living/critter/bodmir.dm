@@ -10,7 +10,7 @@
 	ai_retaliates = TRUE
 	ai_retaliate_persistence = RETALIATE_UNTIL_DEAD
 
-	faction = FACTION_SYNDICATE
+	faction = list(FACTION_SYNDICATE)
 
 	specific_emotes(var/act, var/param = null, var/voluntary = 0)
 		switch (act)

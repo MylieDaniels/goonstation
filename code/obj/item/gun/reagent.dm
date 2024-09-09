@@ -250,6 +250,7 @@ TYPEINFO(/obj/item/gun/reagent/syringe)
 	add_residue = 1
 	can_dual_wield = 0
 	two_handed = 1
+	inventory_counter_enabled = 1
 	var/capacity = 15
 
 	New()
