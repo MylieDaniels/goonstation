@@ -88,10 +88,9 @@
 			if (BC)
 				BC.stage += 1
 			else
-				BC = new /datum/ailment_data/parasite
-				BC.master = get_disease_from_path(/datum/ailment/parasite/bodmir_cable)
+				BC = get_disease_from_path(/datum/ailment/parasite/bodmir_cable).setup_strain()
 				BC.affected_mob = H
-				H.ailments += BC
+				H.contract_disease(/datum/ailment/parasite/bodmir_cable, null, BC, TRUE)
 
 			logTheThing(LOG_COMBAT, src, "infects [constructTarget(H,"combat")] with Bodmir cabling at [log_loc(src)].")
 			src.gib()
