@@ -1,5 +1,5 @@
 /obj/machinery/computer/operating
-	name = "Operating Computer"
+	name = "operating computer"
 	density = 1
 	anchored = ANCHORED
 	icon = 'icons/obj/computer.dmi'
@@ -170,6 +170,8 @@
 		else
 			if (O.robotic)
 				special = "Cybernetic"
+			if (O.synthetic)
+				special = "Synthetic"
 			if (O.unusual)
 				special = "Unusual"
 			var/list/organ_calc = calc_organ_damage_severity(O)
@@ -323,9 +325,10 @@
 	density = 0
 	icon_state = "operating-small"
 
-/obj/machinery/computer/operating/proc/change_shape(src)
-	if (density)
-		icon_state = "operating-small"
+/obj/machinery/computer/operating/proc/change_shape()
+	if (src.density)
+		src.base_icon_state = "operating-small"
 	else
-		icon_state = "operating"
-	density = !density
+		src.base_icon_state = "operating"
+	src.power_change() // redraw nopower/broken/screen glow
+	src.density = !src.density

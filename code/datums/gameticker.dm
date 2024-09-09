@@ -28,7 +28,10 @@ var/global/current_state = GAME_STATE_INVALID
 	var/tmp/useTimeDilation = TIME_DILATION_ENABLED
 	var/tmp/timeDilationLowerBound = MIN_TICKLAG
 	var/tmp/timeDilationUpperBound = OVERLOADED_WORLD_TICKLAG
-	var/tmp/highMapCpuCount = 0 // how many times in a row has the map_cpu been high
+	/// how many times in a row has the cpu been high
+	var/tmp/highCpuCount = 0
+	/// how many times in a row has the map_cpu been high
+	var/tmp/highMapCpuCount = 0
 
 /datum/controller/gameticker/proc/pregame()
 
@@ -59,8 +62,7 @@ var/global/current_state = GAME_STATE_INVALID
 	var/did_reminder = FALSE
 
 	#ifdef LIVE_SERVER
-	if (!player_capa)
-		new /obj/overlay/zamujasa/round_start_countdown/encourage()
+	new /obj/overlay/zamujasa/round_start_countdown/encourage()
 	#endif
 	var/obj/overlay/zamujasa/round_start_countdown/timer/title_countdown = new()
 	while (current_state <= GAME_STATE_PREGAME)
@@ -356,8 +358,7 @@ var/global/current_state = GAME_STATE_INVALID
 
 				if (player.mind.ckey)
 					//Record player participation in this round via the goonhub API
-					SPAWN(0)
-						participationRecorder.record(P)
+					participationRecorder.record(P)
 
 				if (player.mind && player.mind.assigned_role == "AI")
 					player.close_spawn_windows()
@@ -458,6 +459,13 @@ var/global/current_state = GAME_STATE_INVALID
 				last_try_dilate = world.time
 
 				// adjust the counter up or down and keep it within the set boundaries
+				if (world.cpu >= TICKLAG_CPU_MAX)
+					if (highCpuCount < TICKLAG_INCREASE_THRESHOLD)
+						highCpuCount++
+				else if (world.cpu <= TICKLAG_CPU_MIN)
+					if (highCpuCount > -TICKLAG_DECREASE_THRESHOLD)
+						highCpuCount--
+
 				if (world.map_cpu >= TICKLAG_MAPCPU_MAX)
 					if (highMapCpuCount < TICKLAG_INCREASE_THRESHOLD)
 						highMapCpuCount++
@@ -466,17 +474,18 @@ var/global/current_state = GAME_STATE_INVALID
 						highMapCpuCount--
 
 				// adjust the tick_lag, if needed
-				var/dilated_tick_lag = world.tick_lag
-				if (highMapCpuCount >= TICKLAG_INCREASE_THRESHOLD)
-					dilated_tick_lag = min(world.tick_lag + TICKLAG_DILATION_INC,	timeDilationUpperBound)
-				else if (highMapCpuCount <= -TICKLAG_DECREASE_THRESHOLD)
-					dilated_tick_lag = max(world.tick_lag - TICKLAG_DILATION_DEC, timeDilationLowerBound)
+				var/dilated_tick_lag
+				if (max(highCpuCount, highMapCpuCount) >= TICKLAG_INCREASE_THRESHOLD)
+					dilated_tick_lag = round(min(world.tick_lag + TICKLAG_DILATION_INC,	timeDilationUpperBound), min(TICKLAG_DILATION_INC, TICKLAG_DILATION_DEC))
+				else if (max(highCpuCount, highMapCpuCount) <= -TICKLAG_DECREASE_THRESHOLD)
+					dilated_tick_lag = round(max(world.tick_lag - TICKLAG_DILATION_DEC, timeDilationLowerBound), min(TICKLAG_DILATION_INC, TICKLAG_DILATION_DEC))
 
 				// only set the value if it changed! earlier iteration of this was
 				// setting world.tick_lag very often, which caused instability with
 				// the networking. do not spam change world.tick_lag! you will regret it!
-				if (world.tick_lag != dilated_tick_lag)
+				if (dilated_tick_lag && (round(world.tick_lag, 0.1) != dilated_tick_lag))
 					world.tick_lag = dilated_tick_lag
+					highCpuCount = 0
 					highMapCpuCount = 0
 
 		// Minds are sometimes kicked out of the global list, hence the fallback (Convair880).
@@ -542,6 +551,10 @@ var/global/current_state = GAME_STATE_INVALID
 					var/ircmsg[] = new()
 					ircmsg["msg"] = "Server would have restarted now, but the restart has been delayed[game_end_delayer ? " by [game_end_delayer]" : null]."
 					ircbot.export_async("admin", ircmsg)
+
+					if (game_end_delayer)
+						var/client/delayerClient = find_client(ckey(game_end_delayer))
+						if (delayerClient) delayerClient.flash_window()
 				else
 					ircbot.event("roundend")
 					//logTheThing(LOG_DEBUG, null, "Zamujasa: [world.timeofday] REBOOTING THE SERVER!!!!!!!!!!!!!!!!!")
@@ -648,6 +661,7 @@ var/global/current_state = GAME_STATE_INVALID
 			if(CO.check_completion())
 				crewMind.completed_objs++
 				boutput(crewMind.current, "<B>Objective #[count]</B>: [CO.explanation_text] [SPAN_SUCCESS("<B>Success</B>")]")
+				JOB_XP(crewMind.current, crewMind.assigned_role, CO.XPreward)
 				logTheThing(LOG_DIARY, crewMind, "completed objective: [CO.explanation_text]")
 				if (!isnull(CO.medal_name) && !isnull(crewMind.current))
 					crewMind.current.unlock_medal(CO.medal_name, CO.medal_announce)
@@ -903,10 +917,11 @@ var/global/current_state = GAME_STATE_INVALID
 				if (!E.abilityHolder)
 					E.add_ability_holder(/datum/abilityHolder/generic)
 				E.addAbility(/datum/targetable/crew_credits)
-				if (E.client.preferences.view_tickets)
-					E.showtickets()
 				if (E.client.preferences.view_score)
 					creds.ui_interact(E)
+				else if (E.client.preferences.view_tickets && (length(creds.citation_tab_data[CITATION_TAB_SECTION_TICKETS]) || length(creds.citation_tab_data[CITATION_TAB_SECTION_FINES])))
+					creds.ui_interact(E)
+				E.show_inspector_report()
 				SPAWN(0) show_xp_summary(E.key, E)
 	logTheThing(LOG_DEBUG, null, "Did credits")
 

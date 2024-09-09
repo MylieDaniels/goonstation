@@ -135,6 +135,7 @@ var/list/admin_verbs = list(
 		/client/proc/cmd_admin_managebioeffect,
 		/client/proc/toggle_cloning_with_records,
 		/client/proc/toggle_random_job_selection,
+		/client/proc/toggle_tracy_profiling,
 
 		/client/proc/debug_deletions,
 
@@ -153,7 +154,7 @@ var/list/admin_verbs = list(
 		/client/proc/display_bomb_monitor,
 		//Ban verbs
 		/client/proc/ban_panel,
-		/client/proc/addBanTemp,
+		/client/proc/addBanTempUntargetted,
 		/client/proc/banooc,
 		/client/proc/view_cid_list,
 		/client/proc/modify_parts,
@@ -165,6 +166,7 @@ var/list/admin_verbs = list(
 		/client/proc/cmd_admin_mute,
 		/client/proc/cmd_admin_mute_temp,
 		/client/proc/respawn_as_self,
+		/client/proc/ras,
 		/client/proc/respawn_as_new_self,
 		/client/proc/respawn_as_job,
 		/datum/admins/proc/toggletraitorscaling,
@@ -219,7 +221,6 @@ var/list/admin_verbs = list(
 		/client/proc/cmd_admin_add_freeform_ai_law,
 		/client/proc/cmd_admin_show_ai_laws,
 		/client/proc/cmd_admin_reset_ai,
-		/client/proc/addpathogens,
 		/client/proc/addreagents,
 		/client/proc/respawn_as_self,
 		/datum/admins/proc/toggletraitorscaling,
@@ -246,11 +247,13 @@ var/list/admin_verbs = list(
 		/client/proc/resetbuildmode,
 		/client/proc/togglebuildmode,
 		/client/proc/toggle_buildmode_view,
+		/client/proc/toggle_hide_offline,
 		/client/proc/cmd_admin_rejuvenate_all,
 		/client/proc/toggle_force_mixed_blob,
 		/client/proc/toggle_force_mixed_wraith,
 		/client/proc/toggle_spooky_light_plane,
 		/datum/admins/proc/toggle_radio_audio,
+		/datum/admins/proc/toggle_remote_music_announcements,
 		///proc/possess,
 		/proc/possessmob,
 		/proc/releasemob,
@@ -280,7 +283,6 @@ var/list/admin_verbs = list(
 		//client/proc/cmd_admin_delete,
 		/client/proc/noclip,
 		/client/proc/idclip,
-		///client/proc/addpathogens,
 		/client/proc/respawn_as_self,
 		/client/proc/respawn_list_players,
 		/client/proc/cmd_give_player_pets,
@@ -398,6 +400,7 @@ var/list/admin_verbs = list(
 		/client/proc/special_fullbright,
 		/client/proc/replace_space_exclusive,
 		/client/proc/dereplace_space,
+		/client/proc/unterrainify,
 		/client/proc/ghostdroneAll,
 		/client/proc/showLoadingHint,
 		/client/proc/showPregameHTML,
@@ -421,7 +424,10 @@ var/list/admin_verbs = list(
 		/client/proc/debug_image_deletions_clear,
 #endif
 		/client/proc/distribute_tokens,
-		/client/proc/spawn_all_type
+		/client/proc/spawn_all_type,
+		/client/proc/region_allocator_panel,
+		/datum/admins/proc/toggle_pcap_kick_messages,
+		/client/proc/set_round_req_bypass,
 		),
 
 	7 = list(
@@ -687,10 +693,12 @@ var/list/special_pa_observing_verbs = list(
 	if(src.mob.mouse_opacity)
 		src.mob.mouse_opacity = 0
 		src.mob.alpha = 0
+		APPLY_ATOM_PROPERTY(src.mob, PROP_MOB_HIDE_ICONS, "admin_invis")
 		boutput(src, SPAN_NOTICE("You are now invisible."))
 	else
 		src.mob.mouse_opacity = 1
 		src.mob.alpha = 255
+		REMOVE_ATOM_PROPERTY(src.mob, PROP_MOB_HIDE_ICONS, "admin_invis")
 		boutput(src, SPAN_NOTICE("You are no longer invisible!"))
 
 /client/proc/admin_observe()
@@ -1036,7 +1044,7 @@ var/list/fun_images = list()
 		if("Heavenly")
 			src.respawn_as_self()
 			var/mob/M = src.mob
-			M.UpdateOverlays(image('icons/misc/32x64.dmi',"halo"), "halo")
+			M.AddOverlays(image('icons/misc/32x64.dmi',"halo"), "halo")
 			heavenly_spawn(M)
 		if("Demonically")
 			src.respawn_as_self()
@@ -1085,7 +1093,7 @@ var/list/fun_images = list()
 	SHOW_VERB_DESC
 	if(istext(J))
 		var/idx = job_controls.savefile_get_job_names(src)?.Find(J)
-		if(job_controls.savefile_load(src, idx))
+		if(job_controls.cloudsave_load(src, idx))
 			J = job_controls.create_job(TRUE)
 
 	respawn_as_self_internal(new_self=TRUE, jobstring = J.name)
@@ -1111,6 +1119,12 @@ var/list/fun_images = list()
 
 	respawn_as_self_internal(new_self=FALSE)
 
+/client/proc/ras()
+	SET_ADMIN_CAT(ADMIN_CAT_NONE)
+	set name = "RAS"
+	set popup_menu = 0
+	ADMIN_ONLY
+	respawn_as_self_internal(new_self=FALSE)
 
 /client/proc/respawn_as_self_internal(new_self=FALSE, jobstring = "Staff Assistant")
 	ADMIN_ONLY
@@ -1149,12 +1163,12 @@ var/list/fun_images = list()
 		ticker.minds += mymob.mind
 	mymob.mind.transfer_to(H)
 	if(new_mob)
-		H.Equip_Rank(jobstring, 2) //ZeWaka: joined_late is 2 so you don't get announced.
+		H.Equip_Rank(jobstring, 2, skip_manifest = src.holder.skip_manifest) //ZeWaka: joined_late is 2 so you don't get announced.
 		H.update_colorful_parts()
 	qdel(mymob)
 	if (flourish)
 		for (var/mob/living/M in oviewers(5, get_turf(H)))
-			M.apply_flash(animation_duration = 30, weak = 5, uncloak_prob = 0, stamina_damage = 250)
+			M.apply_flash(animation_duration = 30, knockdown = 5, uncloak_prob = 0, stamina_damage = 250)
 
 /client/proc/respawn_list_players()
 	set name = "Respawn List of Players"
@@ -1346,6 +1360,13 @@ var/list/fun_images = list()
 	if (confirm7 == "Yes")
 		src.set_saturation(1)
 		src.set_color(COLOR_MATRIX_IDENTITY, FALSE)
+
+	var/confirm8 = tgui_alert(src.mob, "Disable Global Parallax?", "Disable Global Parallax?", list("Yes", "No"))
+	if (confirm8 == "Yes")
+		parallax_enabled = !parallax_enabled
+
+		for (var/client/client in clients)
+			client.toggle_parallax()
 
 	// Get fucked ghost HUD
 	for (var/atom/movable/screen/ability/hudItem in src.screen)
@@ -1730,7 +1751,7 @@ var/list/fun_images = list()
 		return
 	if (flourish)
 		for (var/mob/living/M in oviewers(5, get_turf(src.mob)))
-			M.apply_flash(animation_duration = 30, weak = 5, uncloak_prob = 0, stamina_damage = 250)
+			M.apply_flash(animation_duration = 30, knockdown = 5, uncloak_prob = 0, stamina_damage = 250)
 		animate(src.mob, transform = matrix(50, 50, MATRIX_SCALE), time = 15, alpha = 0, easing = CIRCULAR_EASING, flags = EASE_OUT)
 		sleep(1.5 SECONDS)
 
@@ -1740,6 +1761,7 @@ var/list/fun_images = list()
 	if(src.holder.respawn_as_self_mob)
 		qdel(src.holder.respawn_as_self_mob)
 	src.holder.respawn_as_self_mob = O
+	animate(src.holder.respawn_as_self_mob, transform = null)
 
 /client/proc/removeOther(var/mob/M as mob in world)
 	SET_ADMIN_CAT(ADMIN_CAT_PLAYERS)
@@ -1784,6 +1806,9 @@ var/list/fun_images = list()
 		var/ignorePlayerVote = tgui_alert(src.mob, "The next map was voted for by the players, are you sure you want to override it? This could be very rude!", "Ignore Players?", list("Yes", "No"))
 		if (ignorePlayerVote == "No")
 			return
+
+	if (mapSwitcher.locked)
+		return alert("The server is currently switching to another map. You will need to wait.")
 
 	var/info = "Select a map"
 	info += "\nCurrently on: [mapSwitcher.current]"
@@ -2230,7 +2255,8 @@ var/list/fun_images = list()
 
 	var/client/C = src.client
 	if (choice in type_procs)
-		call(A, type_procs[choice])()
+		var/procpath/procpath = type_procs[choice]
+		call(A, procpath.name)()
 		src.update_cursor()
 		return
 
@@ -2546,12 +2572,17 @@ var/list/fun_images = list()
 				players[M.mind.get_player()] = antag
 				break
 	var/total = 0
+	var/list/key_list = list()
 	for (var/datum/player/player in players)
 		var/datum/antagonist/antag = players[player]
 		boutput(src, "Giving token to roundstart [antag.display_name] [player.ckey], they now have [player.get_antag_tokens() + 1]")
 		total += 1
 		player.set_antag_tokens(player.get_antag_tokens() + 1)
+		key_list += player.key
 	boutput(src, "Roundstart antags given tokens: [total]")
+	var/key_text = english_list(key_list)
+	logTheThing(LOG_ADMIN, src, "[key_name(src.mob)] distributed antagonist tokens to the following roundstart antagonists: [key_text]")
+	message_admins("[key_name(src.mob)] distributed antagonist tokens to the following roundstart antagonists: [key_text]")
 
 /client/proc/spawn_all_type()
 	SET_ADMIN_CAT(ADMIN_CAT_PLAYERS)
@@ -2618,3 +2649,33 @@ var/list/fun_images = list()
 	message_admins("Admin [key_name(usr)] de-electrified all airlocks.")
 	logTheThing(LOG_ADMIN, usr, "de-electrified all airlocks.")
 	logTheThing(LOG_DIARY, usr, "de-electrified all airlocks.", "admin")
+
+/client/proc/region_allocator_panel()
+	SET_ADMIN_CAT(ADMIN_CAT_SERVER)
+	set name = "Region Allocator"
+	set desc = "Region Allocator front end panel. Allows you to dynamically allocate and deallocate areas of reserved space."
+	ADMIN_ONLY
+	SHOW_VERB_DESC
+
+	if (isnull(src.holder.region_allocator_panel))
+		src.holder.region_allocator_panel = new
+
+	src.holder.region_allocator_panel.ui_interact(src.mob)
+
+/client/proc/set_round_req_bypass(ckey as text)
+	SET_ADMIN_CAT(ADMIN_CAT_PLAYERS)
+	set name = "Set round req bypass"
+	set desc = "Set a flag for a specific ckey to allow them to bypass round requirements for jobs etc."
+	ADMIN_ONLY
+	SHOW_VERB_DESC
+
+	var/datum/player/player = make_player(ckey)
+	if (!player)
+		boutput(src, SPAN_ALERT("Unable to load data for ckey \"[ckey]\""))
+		return
+	var/value = alert(src, "Set flag on or off? Currently [player.cloudSaves.getData("bypass_round_reqs") ? "on" : "off"]", "Round requirement bypass for [ckey]", "On", "Off")
+	if (player.cloudSaves.putData("bypass_round_reqs", (value == "On")))
+		boutput(src, "Successfully set round requirement bypass flag")
+		logTheThing(LOG_ADMIN, src, "[key_name(src)] sets [ckey]'s bypass round requirement flag to [value]")
+	else
+		boutput(src, SPAN_ALERT("Unable to put cloud data, uh oh!"))

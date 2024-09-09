@@ -49,7 +49,7 @@
 		APPLY_ATOM_PROPERTY(src, PROP_MOB_NO_MOVEMENT_PUFFS, src)
 		if (render_special)
 			render_special.set_centerlight_icon("nightvision", rgb(0.5 * 255, 0.5 * 255, 0.5 * 255))
-		AddComponent(/datum/component/minimap_marker, MAP_AI, "ai_eye")
+		AddComponent(/datum/component/minimap_marker/minimap, MAP_AI, "ai_eye")
 
 	Login()
 		.=..()
@@ -159,7 +159,7 @@
 
 		var/in_ai_range = (get_z(mainframe) == get_z(target)) || (inunrestrictedz(target) && inonstationz(mainframe))
 
-		if (!src.mainframe.stat && !src.mainframe.restrained() && !src.mainframe.hasStatus(list("weakened", "paralysis", "stunned")))
+		if (!src.mainframe.stat && !src.mainframe.restrained() && !src.mainframe.hasStatus(list("knockdown", "unconscious", "stunned")))
 			if(src.client.check_any_key(KEY_OPEN | KEY_BOLT | KEY_SHOCK) && istype(target, /obj) )
 				var/obj/O = target
 				if(in_ai_range)

@@ -169,7 +169,7 @@ proc/debug_map_apc_count(delim,zlim)
 		var/burning = 0
 		if(istype(target, /turf/simulated))
 			var/turf/simulated/T = target
-			if(T.active_hotspot)
+			if(length(T.active_hotspots))
 				burning = 1
 
 		boutput(usr, "<span class='notice'>@[target.x],[target.y] ([GM.group_multiplier])<br>[MOLES_REPORT(GM)] t: [GM.temperature]&deg;K ([GM.temperature - T0C]&deg;C), [MIXTURE_PRESSURE(GM)] kPa [(burning)?("<span class='alert'>BURNING</span>"):(null)]</span>")
@@ -289,15 +289,6 @@ proc/debug_map_apc_count(delim,zlim)
 			if(theTurf.loc:do_not_irradiate)
 				img.app.color = "#0f0"
 			else
-				img.app.color = "#f00"
-
-	proximity
-		name = "proximity turfs"
-		help = "Green tiles are turfs with checkinghasproximity, red tiles have neighcheckinghasproximity."
-		GetInfo(var/turf/theTurf, var/image/debugoverlay/img)
-			if(theTurf:checkinghasproximity)
-				img.app.color = "#0f0"
-			else if(theTurf:neighcheckinghasproximity)
 				img.app.color = "#f00"
 
 	areas
@@ -1000,12 +991,6 @@ proc/debug_map_apc_count(delim,zlim)
 				img.app.color = "#0000ff"
 			else
 				img.app.alpha = 0
-
-	checkinghasproximity
-		name = "checkinghasproximity"
-		help = "Green = yes. Red = no. Yellow = next to yes."
-		GetInfo(var/turf/theTurf, var/image/debugoverlay/img)
-			img.app.color = theTurf.checkinghasproximity ? "#0f0" : (theTurf.neighcheckinghasproximity ? "#ff0" : "#f00")
 
 	blood_owner/no_items
 		name = "blood owner - no items"

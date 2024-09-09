@@ -19,7 +19,7 @@
 			src.gang.select_gang_name()
 
 		if (src.gang.gang_points[new_owner] == null)
-			src.gang.gang_points[new_owner] = 0
+			src.gang.gang_points[new_owner] = GANG_STARTING_POINTS
 
 		. = ..()
 
@@ -27,6 +27,11 @@
 		src.gang.leader = null
 
 		. = ..()
+
+	on_death()
+		if (GANG_LEADER_SOFT_DEATH_TIME > ticker.round_elapsed_ticks)
+			src.gang.handle_leader_early_death()
+		..()
 
 	handle_cryo()
 		src.gang.handle_leader_temp_cryo()

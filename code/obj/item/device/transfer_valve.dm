@@ -6,7 +6,6 @@ TYPEINFO(/obj/item/device/transfer_valve)
 	name = "tank transfer valve" // because that's what it is exadv1 and don't you dare change it
 	icon_state = "valve_1"
 	desc = "Regulates the transfer of air between two tanks."
-	event_handler_flags = USE_PROXIMITY | USE_FLUID_ENTER
 	wear_image_icon = 'icons/mob/clothing/back.dmi'
 	inhand_image_icon = 'icons/mob/inhand/hand_general.dmi' //TODO: as of 02/02/2020 only single general plasma+oxygen ttv sprites, no functionality or sprites to change the icon depending on tanks used
 	item_state = "newbomb"
@@ -234,7 +233,9 @@ TYPEINFO(/obj/item/device/transfer_valve)
 				var/openorclose = (src.valve_open) ? "closed" : "opened"
 				var/turf/bombturf = get_turf(src)
 				logTheThing(LOG_BOMBING, usr, "[openorclose] the valve on a TTV tank transfer valve at [log_loc(bombturf)].")
-				message_admins("[key_name(usr)] [openorclose] the valve on a TTV tank transfer valve at [log_loc(bombturf)].")
+				if (src.tank_one && src.tank_two)
+					message_admins("[key_name(usr)] [openorclose] the valve on a TTV tank transfer valve at [log_loc(bombturf)].")
+					message_ghosts("<b>A tank transfer valve</b> has been [openorclose] at [log_loc(bombturf, ghostjump=TRUE)].")
 				toggle_valve()
 			if ("remove_device")
 				src.attached_device.set_loc(get_turf(src))
@@ -242,8 +243,8 @@ TYPEINFO(/obj/item/device/transfer_valve)
 				src.attached_device = null
 				UpdateIcon()
 			if ("interact_device")
-				attached_device.attack_self(usr)
-		src.attack_self(usr)
+				attached_device.AttackSelf(usr)
+		src.AttackSelf(usr)
 		src.add_fingerprint(usr)
 
 	proc/remove_tank(var/T)
@@ -412,7 +413,7 @@ TYPEINFO(/obj/item/device/transfer_valve)
 					shake_camera(L,10,32)
 					boutput(L, SPAN_ALERT("You are sent flying!"))
 
-					L.changeStatus("weakened", stun_time SECONDS)
+					L.changeStatus("knockdown", stun_time SECONDS)
 					while (throw_repeat > 0)
 						throw_repeat--
 						step_away(L,get_turf(src),throw_speed)
@@ -462,14 +463,6 @@ TYPEINFO(/obj/item/device/transfer_valve)
 		if(istype(attached_device,/obj/item/device/prox_sensor))
 			var/obj/item/device/prox_sensor/A = attached_device
 			A.sense()
-
-	HasProximity(atom/movable/AM as mob|obj)
-		if(istype(attached_device,/obj/item/device/prox_sensor))
-			if (istype(AM, /obj/projectile))
-				return
-			if (AM.move_speed < 12)
-				var/obj/item/device/prox_sensor/A = attached_device
-				A.sense()
 
 	custom_suicide = 1
 	suicide(var/mob/user as mob)
@@ -576,7 +569,7 @@ TYPEINFO(/obj/item/device/transfer_valve/briefcase)
 	var/broken = FALSE
 	name = "pressure crystal"
 	desc = "A mysterious gadget that measures the power of bombs detonated over it. \
-		High measurements within the crystal can be very valuable on the shipping market."
+		Certain measurements within the crystal can be very valuable on the shipping market."
 	HELP_MESSAGE_OVERRIDE("Place this where the epicenter of a bomb would be, then detonate the bomb. \
 		Afterwards, place the crystal in a pressure sensor to determine the explosion power.<br>\
 		Spent pressure crystals can be sold to researchers on the shipping market, for a credit sum depending on the measured power.")
@@ -627,6 +620,7 @@ TYPEINFO(/obj/item/device/transfer_valve/briefcase)
 	icon_state = "pressure_tester"
 	desc = "Put in a pressure crystal to determine the strength of the explosion."
 	w_class = W_CLASS_SMALL
+	c_flags = ONBELT
 
 	var/obj/item/pressure_crystal/crystal
 

@@ -38,7 +38,7 @@
 		time_between_paydays = 5 MINUTES
 		time_between_lotto = 8 MINUTES
 
-		station_budget = 0
+		station_budget = PAY_IMPORTANT
 		shipping_budget = PAY_EXECUTIVE*5
 		research_budget = PAY_EXECUTIVE*10
 		total_stipend = station_budget + shipping_budget + research_budget
@@ -193,12 +193,14 @@
 		else if(istype(I, /obj/item/currency/spacecash/))
 			if (src.accessed_record)
 				boutput(user, SPAN_NOTICE("You insert the cash into the ATM."))
-
-				if(istype(I, /obj/item/currency/spacecash/buttcoin))
-					boutput(user, SPAN_SUCCESS("Your transaction will complete anywhere within 10 to 10e27 minutes from now."))
-				else
-					src.accessed_record["current_money"] += I.amount
-
+				src.accessed_record["current_money"] += I.amount
+				I.amount = 0
+				qdel(I)
+			else boutput(user, SPAN_ALERT("You need to log in before depositing cash!"))
+		else if(istype(I, /obj/item/currency/buttcoin/))
+			if (src.accessed_record)
+				boutput(user, SPAN_NOTICE("You insert the cash into the ATM."))
+				boutput(user, SPAN_SUCCESS("Your transaction will complete anywhere within 10 to 10e27 minutes from now."))
 				I.amount = 0
 				qdel(I)
 			else boutput(user, SPAN_ALERT("You need to log in before depositing cash!"))
@@ -297,7 +299,7 @@
 					else
 						boutput(usr, SPAN_ALERT("Cannot find a bank record for this card."))
 				else
-					boutput(usr, SPAN_ALERT("Incorrect pin number."))
+					boutput(usr, SPAN_ALERT("Incorrect PIN."))
 
 			if("login")
 				if(TryToFindRecord())
@@ -432,7 +434,7 @@
 				return
 			boutput(user, SPAN_NOTICE("You swipe your ID card in the ATM."))
 			src.scan = id_card
-			attack_hand(user)
+			src.Attackhand(user)
 			return
 		if (istype(I, /obj/item/currency/spacecash/))
 			if (afterlife)
@@ -446,7 +448,7 @@
 				src.accessed_record["current_money"] += I.amount
 				I.amount = 0
 				qdel(I)
-				attack_hand(user)
+				src.Attackhand(user)
 			else boutput(user, SPAN_ALERT("You need to log in before depositing cash!"))
 			return
 		if (istype(I, /obj/item/lotteryTicket))
@@ -463,7 +465,7 @@
 						wagesystem.lotteryJackpot -= I:winner
 					else
 						wagesystem.lotteryJackpot = 0
-					attack_hand(user)
+					src.Attackhand(user)
 				else
 					boutput(user, SPAN_ALERT("This ticket isn't a winner. Better luck next time!"))
 					src.show_message("Your ticket is not a winner. Commiserations.", "danger", "lottery")
@@ -482,7 +484,7 @@
 				playsound(src.loc, 'sound/machines/capsulebuy.ogg', 50, 1)
 			user.drop_item(SB)
 			qdel(SB)
-			attack_hand(user)
+			src.Attackhand(user)
 			return
 		var/damage = I.force
 		if (damage >= 5) //if it has five or more force, it'll do damage. prevents very weak objects from rattling the thing.
@@ -581,8 +583,8 @@
 						boutput(usr, SPAN_ALERT("Cannot find a bank record for this card."))
 						src.show_message("Cannot find a bank record for this card.", "danger", "login")
 				else
-					boutput(usr, SPAN_ALERT("Incorrect or invalid PIN number."))
-					src.show_message("Incorrect or invalid PIN number entered. Please try again.", "danger", "login")
+					boutput(usr, SPAN_ALERT("Incorrect or invalid PIN."))
+					src.show_message("Incorrect or invalid PIN entered. Please try again.", "danger", "login")
 				. = TRUE
 			if("logout")
 				if(!src.scan)
