@@ -10,7 +10,7 @@
 /turf/unsimulated/floor/black,
 /area/bodmir)
 "as" = (
-/obj/decal/fakeobjects/pipe/heat{
+/obj/fakeobject/pipe/heat{
 	dir = 10;
 	name = "heat pipe";
 	desc = "Heavily reinforced."
@@ -163,7 +163,7 @@
 /turf/unsimulated/wall/auto/lead/gray,
 /area/space)
 "em" = (
-/obj/decal/fakeobjects/pipe/heat{
+/obj/fakeobject/pipe/heat{
 	dir = 6;
 	name = "heat pipe";
 	desc = "Heavily reinforced."
@@ -340,7 +340,7 @@
 /turf/unsimulated/floor/twotone/black,
 /area/space)
 "iD" = (
-/obj/decal/fakeobjects/pipe/heat{
+/obj/fakeobject/pipe/heat{
 	dir = 10;
 	name = "heat pipe";
 	desc = "Heavily reinforced."
@@ -837,7 +837,7 @@
 	},
 /area/bodmir)
 "rb" = (
-/obj/decal/fakeobjects/pipe/heat{
+/obj/fakeobject/pipe/heat{
 	name = "heat pipe";
 	desc = "Heavily reinforced."
 	},
@@ -1009,7 +1009,7 @@
 /turf/unsimulated/floor/circuit/red,
 /area/space)
 "xb" = (
-/obj/decal/fakeobjects/pipe/heat{
+/obj/fakeobject/pipe/heat{
 	name = "heat pipe";
 	desc = "Heavily reinforced."
 	},
@@ -1489,7 +1489,7 @@
 	},
 /area/bodmir)
 "GN" = (
-/obj/decal/fakeobjects/pipe/heat{
+/obj/fakeobject/pipe/heat{
 	dir = 4;
 	name = "heat pipe";
 	desc = "Heavily reinforced."
@@ -1523,7 +1523,7 @@
 /turf/unsimulated/floor/plating,
 /area/space)
 "Hu" = (
-/obj/decal/fakeobjects/pipe/heat{
+/obj/fakeobject/pipe/heat{
 	dir = 6;
 	name = "heat pipe";
 	desc = "Heavily reinforced."
@@ -2160,7 +2160,7 @@
 /turf/unsimulated/floor/plating,
 /area/space)
 "Xn" = (
-/obj/decal/fakeobjects/pipe/heat{
+/obj/fakeobject/pipe/heat{
 	name = "heat pipe";
 	desc = "Heavily reinforced."
 	},

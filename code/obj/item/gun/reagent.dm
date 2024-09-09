@@ -243,7 +243,7 @@ TYPEINFO(/obj/item/gun/reagent/syringe)
 	icon_state = "syringe_rifle"
 	item_state = "tranq"
 	wear_image_icon = 'icons/mob/clothing/back.dmi'
-	flags =  FPRINT | TABLEPASS | CONDUCT | USEDELAY
+	flags = TABLEPASS | CONDUCT | USEDELAY
 	c_flags = ONBACK
 	force = MELEE_DMG_RIFLE
 	contraband = 6

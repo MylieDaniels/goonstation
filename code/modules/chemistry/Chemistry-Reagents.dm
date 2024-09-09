@@ -306,18 +306,6 @@ datum
 			dynamic_severity = clamp(dynamic_severity, 1, 5)
 			return
 
-		// for dynamically severe chemicals, this is the default logic
-		proc/modify_dynamic_severity(var/datum/reagents/holder, var/mult = 1)
-			if (dynamic_severity < 5)
-				dynamic_severity += log(3,holder.get_reagent_amount(src.id) + 1) * dynamic_severity_scaling * mult
-
-			for (var/reagent_id in dynamic_severity_impacts)
-				if (holder.has_reagent(reagent_id))
-					dynamic_severity += dynamic_severity_impacts[reagent_id] * mult
-
-			dynamic_severity = clamp(dynamic_severity, 1, 5)
-			return
-
 		proc/check_overdose(var/mob/M, var/mult = 1)
 			if (!M || !M.reagents)
 				return

@@ -38,7 +38,7 @@
 /turf/unsimulated/floor/black,
 /area/bodmir)
 "as" = (
-/obj/decal/fakeobjects/pipe/heat{
+/obj/fakeobject/pipe/heat{
 	dir = 10;
 	name = "heat pipe";
 	desc = "Heavily reinforced."
@@ -70,7 +70,7 @@
 /obj/item/storage/belt/tactical,
 /obj/table/syndicate/auto,
 /obj/machinery/light/small/floor/warm,
-/obj/item/dagger/syndicate/specialist{
+/obj/item/dagger/specialist{
 	pixel_x = 5
 	},
 /obj/item/gun/kinetic/smg/empty{
@@ -205,7 +205,7 @@
 /turf/unsimulated/floor/black,
 /area/space)
 "em" = (
-/obj/decal/fakeobjects/pipe/heat{
+/obj/fakeobject/pipe/heat{
 	dir = 6;
 	name = "heat pipe";
 	desc = "Heavily reinforced."
@@ -414,7 +414,7 @@
 /turf/simulated/floor/plating,
 /area/space)
 "iD" = (
-/obj/decal/fakeobjects/pipe/heat{
+/obj/fakeobject/pipe/heat{
 	dir = 10;
 	name = "heat pipe";
 	desc = "Heavily reinforced."
@@ -789,20 +789,20 @@
 /area/bodmir)
 "nN" = (
 /obj/table/reinforced/industrial/auto,
-/obj/item/dagger/syndicate/specialist{
+/obj/item/dagger/specialist{
 	pixel_x = 15
 	},
-/obj/item/dagger/syndicate/specialist{
+/obj/item/dagger/specialist{
 	pixel_x = 10
 	},
-/obj/item/dagger/syndicate/specialist{
+/obj/item/dagger/specialist{
 	pixel_x = -10
 	},
-/obj/item/dagger/syndicate/specialist{
+/obj/item/dagger/specialist{
 	pixel_x = -5
 	},
-/obj/item/dagger/syndicate/specialist,
-/obj/item/dagger/syndicate/specialist{
+/obj/item/dagger/specialist,
+/obj/item/dagger/specialist{
 	pixel_x = 5
 	},
 /turf/simulated/floor/red/redblackchecker,
@@ -942,7 +942,7 @@
 "ps" = (
 /obj/item/storage/belt/tactical,
 /obj/table/syndicate/auto,
-/obj/item/dagger/syndicate/specialist{
+/obj/item/dagger/specialist{
 	pixel_x = 5
 	},
 /obj/item/gun/kinetic/smg/empty{
@@ -1011,7 +1011,7 @@
 	},
 /area/bodmir)
 "rb" = (
-/obj/decal/fakeobjects/pipe/heat{
+/obj/fakeobject/pipe/heat{
 	name = "heat pipe";
 	desc = "Heavily reinforced."
 	},
@@ -1283,7 +1283,7 @@
 /turf/unsimulated/floor/circuit/red,
 /area/space)
 "xb" = (
-/obj/decal/fakeobjects/pipe/heat{
+/obj/fakeobject/pipe/heat{
 	name = "heat pipe";
 	desc = "Heavily reinforced."
 	},
@@ -1866,7 +1866,7 @@
 "FV" = (
 /obj/item/storage/belt/tactical,
 /obj/table/syndicate/auto,
-/obj/item/dagger/syndicate/specialist{
+/obj/item/dagger/specialist{
 	pixel_x = 5
 	},
 /obj/item/gun/kinetic/smg/empty{
@@ -1970,7 +1970,7 @@
 	},
 /area/bodmir)
 "GN" = (
-/obj/decal/fakeobjects/pipe/heat{
+/obj/fakeobject/pipe/heat{
 	dir = 4;
 	name = "heat pipe";
 	desc = "Heavily reinforced."
@@ -1997,7 +1997,7 @@
 /turf/unsimulated/floor/sanitary/white,
 /area/bodmir)
 "Hu" = (
-/obj/decal/fakeobjects/pipe/heat{
+/obj/fakeobject/pipe/heat{
 	dir = 6;
 	name = "heat pipe";
 	desc = "Heavily reinforced."
@@ -2802,7 +2802,7 @@
 /obj/machinery/light/small/floor/warm,
 /obj/item/storage/belt/tactical,
 /obj/table/syndicate/auto,
-/obj/item/dagger/syndicate/specialist{
+/obj/item/dagger/specialist{
 	pixel_x = 5
 	},
 /obj/item/gun/kinetic/smg/empty{
@@ -2818,7 +2818,7 @@
 /turf/simulated/floor/plating,
 /area/space)
 "Xn" = (
-/obj/decal/fakeobjects/pipe/heat{
+/obj/fakeobject/pipe/heat{
 	name = "heat pipe";
 	desc = "Heavily reinforced."
 	},
