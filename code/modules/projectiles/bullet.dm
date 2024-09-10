@@ -1153,6 +1153,60 @@ toxic - poisons
 		else
 			fireflash(get_turf(hit) || get_turf(P), 0, chemfire = CHEM_FIRE_RED)
 
+/datum/projectile/bullet/db12_pellet
+	name = "incendiary pellets"
+	sname = "incendiary pellets"
+	damage = 12
+	cost = 1
+	armor_ignored = 0.5
+	damage_type = D_BURNING
+	hit_type = null
+	brightness = 1.3
+	color_red = 1
+	color_green = 0.3
+	color_blue = 0
+	icon_state = "trace"
+	implanted = null
+	impact_image_state = "bullethole-small"
+	casing = /obj/item/casing/shotgun/orange
+
+	on_pre_hit(atom/hit, angle, var/obj/projectile/P)
+		if (isliving(hit))
+			if (ON_COOLDOWN(hit, "db12_bypass", 2 DECI SECONDS))
+				return TRUE
+			else
+				return FALSE
+
+	on_hit(atom/hit, direction, obj/projectile/P)
+		if (isliving(hit))
+			fireflash(get_turf(hit) || get_turf(P), 0, 4000, chemfire = CHEM_FIRE_WHITE)
+			var/mob/living/L = hit
+			L.changeStatus("burning", 20 SECONDS)
+			var/datum/statusEffect/simpledot/burning/burn = L.hasStatus("burning")
+			if(burn)
+				burn.counter += BURNING_LV3
+		else if (isturf(hit))
+			fireflash(hit, 0, 4000, chemfire = CHEM_FIRE_WHITE)
+		else
+			fireflash(get_turf(hit) || get_turf(P), 0, 4000, chemfire = CHEM_FIRE_WHITE)
+
+	post_setup(obj/projectile/P)
+		var/list/cross2 = list()
+		for(var/turf/T in P.crossing)
+			cross2[T] = P.crossing[T]
+		P.special_data["projcross"] = cross2
+
+	tick(obj/projectile/P)
+		var/list/cross2 = P.special_data["projcross"]
+		for (var/i = 1, i < cross2.len, i++)
+			var/turf/T = cross2[i]
+			if (cross2[T] < P.curr_t)
+				fireflash(T, 0, 4000, chemfire = CHEM_FIRE_WHITE)
+				cross2.Cut(1,2)
+				i--
+			else
+				break
+
 /datum/projectile/bullet/flare/UFO
 	name = "heat beam"
 	window_pass = 1
@@ -1335,7 +1389,7 @@ toxic - poisons
 		..()
 
 //1.57
-datum/projectile/bullet/autocannon
+/datum/projectile/bullet/autocannon
 	name = "HE grenade"
 	window_pass = 0
 	icon_state = "40mm_lethal"

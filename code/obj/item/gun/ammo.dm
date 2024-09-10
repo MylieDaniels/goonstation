@@ -936,6 +936,19 @@ ABSTRACT_TYPE(/obj/item/ammo/bullets/pipeshot)
 		amount_left = 1
 		max_amount = 1
 
+/obj/item/ammo/bullets/db12
+	sname = "12ga Dragons Breath"
+	name = "12ga dragon's breath ammo box"
+	desc = "A box of 12 gauge shells stuffed full of incendiary pellets. Illegal in 12 states and 4 Frontier planets."
+	ammo_type = new/datum/projectile/special/spreader/buckshot_burst/db12
+	icon_state = "12"
+	amount_left = 8
+	max_amount = 8
+	ammo_cat = AMMO_SHOTGUN_HIGH
+	icon_dynamic = 0
+	icon_empty = "12-0"
+	sound_load = 'sound/weapons/gunload_heavy.ogg'
+
 //0.75
 /obj/item/ammo/bullets/flintlock/rifle
 	sname = ".75 Flintlock"

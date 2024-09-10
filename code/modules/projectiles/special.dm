@@ -274,6 +274,19 @@ ABSTRACT_TYPE(/datum/projectile/special)
 	damage_type = D_SPECIAL
 	power = 32
 
+/datum/projectile/special/spreader/buckshot_burst/db12
+	spread_projectile_type = /datum/projectile/bullet/db12_pellet
+	name = "dragons breath"
+	sname = "dragons breath"
+	cost = 1
+	pellets_to_fire = 6
+	casing = /obj/item/casing/shotgun/orange
+	shot_sound = 'sound/weapons/shotgunshot.ogg'
+	speed_max = 48
+	speed_min = 40
+	spread_angle_variance = 18
+	dissipation_variance = 24
+
 /datum/projectile/special/spreader/uniform_burst/circle
 	name = "circular spread"
 	sname = "circular spread"
@@ -308,7 +321,6 @@ ABSTRACT_TYPE(/datum/projectile/special)
 	spread_projectile_type = /datum/projectile/bullet/kuvalda_shrapnel
 	casing = /obj/item/casing/shotgun/gray
 	shot_sound = 'sound/weapons/kuvalda.ogg'
-
 
 /datum/projectile/special/spreader/buckshot_burst/foamdarts
 	name = "foam dart"
