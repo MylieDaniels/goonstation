@@ -2360,9 +2360,9 @@ datum
 					else
 						M.take_toxin_damage(1 * mult)
 
-		harmful/hemotoxin
-			name = "hemotoxin"
-			id = "hemotoxin"
+		harmful/sickle_toxin
+			name = "sickle extract"
+			id = "sickle_toxin"
 			description = "A toxin that destroys red blood cells, causing suffocation and cardiac failure"
 			taste = "metallic"
 			reagent_state = LIQUID

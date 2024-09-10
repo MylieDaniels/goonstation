@@ -257,6 +257,7 @@ TYPEINFO(/obj/item/gun/reagent/syringe)
 		src.create_reagents(capacity)
 		set_current_projectile(new/datum/projectile/syringe/syringe_sniper)
 		src.UpdateIcon()
+		AddComponent(/datum/component/holdertargeting/sniper_scope, 12, 640, /datum/overlayComposition/sniper_scope, 'sound/weapons/scope.ogg')
 
 	move_trigger(var/mob/M, kindof)
 		if (..() && reagents)
@@ -303,6 +304,9 @@ TYPEINFO(/obj/item/gun/reagent/syringe)
 		return 1
 
 	proc/add_syringe(var/obj/item/reagent_containers/syringe/S, var/mob/user)
+		if(S.cant_drop)
+			boutput(user, "<span class='alert'>\The [S] is attached, you can't get it in the chamber!</span>")
+			return
 		if(S.reagents.maximum_volume > src.capacity)
 			boutput(user, "<span class='alert'>\The [S] could never fit, load something smaller!</span>")
 			return

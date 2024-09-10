@@ -37,7 +37,7 @@
 	type_to_target = /obj
 
 /datum/component/holdertargeting/smartgun/homing/pod/is_valid_target(mob/user, atom/A)
-	return ((istype(A, /obj/critter/gunbot/drone) || istype(A, /obj/machinery/vehicle/miniputt) || istype(A, /obj/machinery/vehicle/pod_smooth) || istype(A, /obj/machinery/vehicle/tank)) && !A.invisibility)
+	return ((istype(A, /obj/critter/gunbot/drone) || istype(A, /obj/machinery/vehicle/miniputt) || istype(A, /obj/machinery/vehicle/pod_smooth) || istype(A, /obj/machinery/vehicle/tank) || istype(A, /obj/machinery/vehicle/pod_massive)) && !A.invisibility)
 
 /datum/component/holdertargeting/smartgun/homing/pod/track_targets(mob/user)
 	set waitfor = 0
@@ -90,6 +90,10 @@
 				targeting_image = image(icon('icons/effects/128x128.dmi', "reticle_medium"), A, pixel_x = -32, pixel_y = -32)
 			else if (icon.Height() <= 96)
 				targeting_image = image(icon('icons/effects/128x128.dmi', "reticle_large"), A, pixel_x = -16, pixel_y = -16)
+			else if (icon.Height() <= 128)
+				targeting_image = image(icon('icons/effects/128x128.dmi', "reticle_large"), A, pixel_x = 0, pixel_y = 0)
+			else if (icon.Height() <= 160)
+				targeting_image = image(icon('icons/effects/128x128.dmi', "reticle_large"), A, pixel_x = 16, pixel_y = 16)
 			targeting_images[A] = targeting_image
 			aimer.images += targeting_images[A]
 	else

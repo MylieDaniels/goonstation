@@ -298,7 +298,7 @@ toxic - poisons
 			silentshot = 1
 
 	alphacarbon
-		reagent_payload = "alphacarbon_hemotoxin"
+		reagent_payload = "sickle_toxin"
 		icon_state = "tranqdart_red_barbed"
 		implanted = /obj/item/implant/projectile/body_visible/dart/tranq_dart_sleepy_barbed
 
@@ -1907,9 +1907,9 @@ datum/projectile/bullet/autocannon
 				M.playsound_local(src, 'sound/machines/whistlealert.ogg', 25)
 				boutput(M, pod.ship_message(message))
 
-	on_hit(atom/hit)
-		if (istype(hit, /obj/critter/gunbot/drone) || istype(hit, /obj/machinery/vehicle/miniputt) || istype(hit, /obj/machinery/vehicle/pod_smooth)|| istype(hit, /obj/machinery/vehicle/tank))
-			explosion_new(null, get_turf(hit), 12)
+	on_hit(atom/hit, angle, obj/projectile/O)
+		if (istype(hit, /obj/critter/gunbot/drone) || istype(hit, /obj/machinery/vehicle/miniputt) || istype(hit, /obj/machinery/vehicle/pod_smooth) || istype(hit, /obj/machinery/vehicle/tank) || istype(hit, /obj/machinery/vehicle/pod_massive))
+			explosion_new(null, get_turf(O), 12)
 
 			if(istype(hit, /obj/machinery/vehicle))
 				var/obj/machinery/vehicle/vehicle = hit

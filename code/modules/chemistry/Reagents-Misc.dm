@@ -4047,17 +4047,28 @@ datum
 			var/trail_color = "#FF3344"
 
 			proc/track_alchaemotracker(atom/movable/AM, oldLoc, direct)
+
 				var/turf/T = get_turf(AM)
-				var/obj/decal/thermal_trail/D = locate(/obj/decal/thermal_trail) in T
-				if(!D)
-					D = new /obj/decal/thermal_trail(T)
-					D.dir = direct
-					D.color = src.trail_color
-					var/obj/decal/thermal_trail/oldD = locate(/obj/decal/thermal_trail) in get_turf(oldLoc)
-					if(oldD && !oldD.altered)
-						oldD.altered = TRUE
-						if(direct != opposite_dir_to(oldD.dir) && direct != oldD.dir)
-							oldD.dir |= opposite_dir_to(direct)
+
+				for(var/obj/decal/thermal_trail/old_trail in get_turf(oldLoc))
+					if(!old_trail.altered && old_trail.color == src.trail_color)
+						old_trail.altered = TRUE
+						if(direct != opposite_dir_to(old_trail.dir) && direct != old_trail.dir)
+							old_trail.dir |= opposite_dir_to(direct)
+							for(var/obj/decal/thermal_trail/conflicting_trail in get_turf(oldLoc))
+								if(conflicting_trail == old_trail)
+									continue
+								if(conflicting_trail.color == old_trail.color && conflicting_trail.dir == old_trail.dir)
+									qdel(old_trail)
+						break
+
+				for(var/obj/decal/thermal_trail/conflicting_trail in get_turf(AM))
+					if(conflicting_trail.color == src.trail_color && (conflicting_trail.dir == opposite_dir_to(direct) || conflicting_trail.dir == direct))
+						return
+
+				var/obj/decal/thermal_trail/D = new /obj/decal/thermal_trail(T)
+				D.dir = direct
+				D.color = src.trail_color
 
 			on_add()
 				var/mob/living/carbon/M = holder.my_atom
