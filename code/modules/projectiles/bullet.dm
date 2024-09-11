@@ -1179,16 +1179,16 @@ toxic - poisons
 
 	on_hit(atom/hit, direction, obj/projectile/P)
 		if (isliving(hit))
-			fireflash(get_turf(hit) || get_turf(P), 0, 4000, chemfire = CHEM_FIRE_WHITE)
+			fireflash(get_turf(hit) || get_turf(P), 0, chemfire = CHEM_FIRE_WHITE)
 			var/mob/living/L = hit
 			L.changeStatus("burning", 20 SECONDS)
 			var/datum/statusEffect/simpledot/burning/burn = L.hasStatus("burning")
 			if(burn)
 				burn.counter += BURNING_LV3
 		else if (isturf(hit))
-			fireflash(hit, 0, 4000, chemfire = CHEM_FIRE_WHITE)
+			fireflash(hit, 0, chemfire = CHEM_FIRE_WHITE)
 		else
-			fireflash(get_turf(hit) || get_turf(P), 0, 4000, chemfire = CHEM_FIRE_WHITE)
+			fireflash(get_turf(hit) || get_turf(P), 0, chemfire = CHEM_FIRE_WHITE)
 
 	post_setup(obj/projectile/P)
 		var/list/cross2 = list()
