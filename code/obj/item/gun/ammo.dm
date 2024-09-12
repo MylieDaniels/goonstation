@@ -509,6 +509,23 @@
 			ammo_cat = AMMO_TRANQ_9MM//i prefer having tranqs grouped up- owari.
 			ammo_type = new/datum/projectile/bullet/tranq_dart/syndicate/pistol
 
+	alphacarbon
+		sname = ".308 Sickle Venom"
+		name = ".308 sickle venom darts"
+		desc = "A stripper clip of semilethal sickle venom darts. Will dramatically reduce red blood cell count in targets."
+		ammo_type = new/datum/projectile/bullet/tranq_dart/alphacarbon
+
+		pistol
+			sname = ".355 Sickle Venom"
+			name = ".355 sickle venom pistol darts"
+			desc = "A magazine of 10 sickle venom hemotoxin darts."
+			icon_state = "pistol_tranq"
+			amount_left = 10
+			max_amount = 15
+			icon_dynamic = 0
+			ammo_cat = AMMO_TRANQ_9MM//i prefer having tranqs grouped up- owari.
+			ammo_type = new/datum/projectile/bullet/tranq_dart/alphacarbon/pistol
+
 	anti_mutant
 		sname = ".308 Mutadone"
 		desc = "Some mutadone darts, for forcefully removing mutations without getting into melee range"
