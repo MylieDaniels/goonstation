@@ -27,7 +27,9 @@ TYPEINFO(/datum/component/wearertargeting/energy_shield)
 		ARG_INFO("shield_strength", DATA_INPUT_NUM, "Fraction of damage blocked by shield \[0-1\]", 1),
 		ARG_INFO("shield_efficiency", DATA_INPUT_NUM, "Power cost per point of damage blocked", 1),
 		ARG_INFO("bleedthrough", DATA_INPUT_BOOL, "If the shield should only block damage proportional to power left in the cell if it would run out to block the hit", TRUE),
-		ARG_INFO("power_drain", DATA_INPUT_NUM, "Cell power use per process cycle when active", 0)
+		ARG_INFO("power_drain", DATA_INPUT_NUM, "Cell power use per process cycle when active", 0),
+		ARG_INFO("flat_cost", DATA_INPUT_NUM, "Flat power cost per hit", 0),
+		ARG_INFO("min_charge_to_turn_on", DATA_INPUT_NUM, "Required cell charge to turn on", 1)
 	)
 
 /datum/component/wearertargeting/energy_shield
@@ -37,11 +39,15 @@ TYPEINFO(/datum/component/wearertargeting/energy_shield)
 	var/shield_strength
 	///efficiency of the shield, as a coefficient to damage blocked - i.e.: shield strength of 0.5, efficiency of 1.5, blocking a 100 damage attack, would cost 75 power (100 * 0.5 * 1.5).
 	var/shield_efficiency
+	///flat cost per impact, no matter how strong
+	var/flat_cost
 	///do we bleed through on break?
 	var/bleedthrough
 	///how much power do we draw every process cycle
 	var/power_drain
-	///are we turned on 😳
+	///minimum charge to turn on
+	var/min_charge_to_turn_on
+	///are we turned on
 	var/active
 
 	var/obj/decal/ceshield/overlay
@@ -49,14 +55,16 @@ TYPEINFO(/datum/component/wearertargeting/energy_shield)
 	signals = list(COMSIG_MOB_SHIELD_ACTIVATE)
 	proctype = PROC_REF(activate)
 
-/datum/component/wearertargeting/energy_shield/Initialize(_valid_slots, _shield_strength = 1, _shield_efficiency = 1, _bleedthrough = TRUE, _power_drain = 0)
+/datum/component/wearertargeting/energy_shield/Initialize(_valid_slots, _shield_strength = 1, _shield_efficiency = 1, _bleedthrough = TRUE, _power_drain = 0, _flat_cost = 0, _min_charge_to_turn_on = 1)
 	. = ..()
 	if(!isitem(parent))
 		return COMPONENT_INCOMPATIBLE
 	src.shield_strength = _shield_strength
 	src.shield_efficiency = _shield_efficiency
+	src.flat_cost = _flat_cost
 	src.bleedthrough = _bleedthrough
 	src.power_drain = _power_drain
+	src.min_charge_to_turn_on = _min_charge_to_turn_on
 	overlay = new
 	RegisterSignal(parent, COMSIG_SHIELD_TOGGLE, PROC_REF(toggle))
 	if((SLOT_L_HAND in valid_slots) || (SLOT_R_HAND in valid_slots))
@@ -85,12 +93,12 @@ TYPEINFO(/datum/component/wearertargeting/energy_shield)
 	else
 		return
 
-	var/cost = incoming_damage * shield_strength * shield_efficiency
+	var/cost = incoming_damage * shield_strength * shield_efficiency + flat_cost
 	var/blocked = shield_strength
 	if(cost > charge)
 		if(bleedthrough)
 			blocked *= charge/cost
-		turn_off(TRUE)
+		turn_off(TRUE, incoming_damage)
 	else
 		playsound(current_user, 'sound/impact_sounds/Energy_Hit_1.ogg', 30, 0.1, 0, 2)
 
@@ -131,7 +139,9 @@ TYPEINFO(/datum/component/wearertargeting/energy_shield)
 	if(active)
 		src.turn_off()
 	else
-		if(SEND_SIGNAL(parent, COMSIG_CELL_CHECK_CHARGE) & CELL_SUFFICIENT_CHARGE)
+		var/list/charge_list = list()
+
+		if(SEND_SIGNAL(parent, COMSIG_CELL_CHECK_CHARGE, charge_list) & CELL_RETURNED_LIST && charge_list["charge"] >= min_charge_to_turn_on)
 			src.turn_on()
 		else
 			playsound(current_user, "sparks", 75, 1, -1)
@@ -154,7 +164,26 @@ TYPEINFO(/datum/component/wearertargeting/energy_shield)
 	APPLY_ATOM_PROPERTY(current_user, PROP_MOB_COLDPROT, src, 100)
 	APPLY_ATOM_PROPERTY(current_user, PROP_MOB_HEATPROT, src, 100)
 
-/datum/component/wearertargeting/energy_shield/ceshield/turn_off(shatter = FALSE)
+/datum/component/wearertargeting/energy_shield/ceshield/turn_off(shatter = FALSE, damage_that_broke = 0)
 	. = ..()
 	REMOVE_ATOM_PROPERTY(current_user, PROP_MOB_COLDPROT, src)
 	REMOVE_ATOM_PROPERTY(current_user, PROP_MOB_HEATPROT, src)
+
+/datum/component/wearertargeting/energy_shield/gangshield/turn_on()
+	. = ..()
+	APPLY_ATOM_PROPERTY(current_user, PROP_MOB_COLDPROT, src, 90)
+	APPLY_ATOM_PROPERTY(current_user, PROP_MOB_HEATPROT, src, 30)
+
+/datum/component/wearertargeting/energy_shield/gangshield/turn_off(shatter = FALSE, damage_that_broke = 0)
+	. = ..()
+	REMOVE_ATOM_PROPERTY(current_user, PROP_MOB_COLDPROT, src)
+	REMOVE_ATOM_PROPERTY(current_user, PROP_MOB_HEATPROT, src)
+	if (shatter)
+		if(damage_that_broke > 10)
+			var/obj/item/I = parent
+			if (istype(I))
+				I.combust()
+		var/mob/living/L = current_user
+		if (istype(L))
+			L.setStatusMin("burning", 8 SECONDS, BURNING_LV2)
+

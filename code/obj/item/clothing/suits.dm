@@ -2364,3 +2364,42 @@ TYPEINFO(/obj/item/clothing/suit/space/industrial/salvager)
 	item_state = "naturerobe"
 	body_parts_covered = TORSO|LEGS|ARMS
 	hides_from_examine = C_UNIFORM
+
+
+/obj/item/clothing/suit/gang_shielded
+	name = "homemade shield rig"
+	desc = "A bunch of recalled shield gens dangerously soldered to a harness. While active, protects from space and dampens a few hits."
+	icon = 'icons/obj/clothing/overcoats/item_suit_armor.dmi'
+	wear_image_icon = 'icons/mob/clothing/overcoats/worn_suit_armor.dmi'
+	inhand_image_icon = 'icons/mob/inhand/overcoat/hand_suit_armor.dmi'
+	icon_state = "armorvest-old"
+	item_state = "armorvest-old"
+	inventory_counter_enabled = 1
+
+	New()
+		..()
+		//blocks 3/4 of incoming damage, up to 4 hits, with a slow drain, but can't be turned on unless at least 60% charged and combusts on shatter
+		AddComponent(/datum/component/wearertargeting/energy_shield/gangshield, list(SLOT_WEAR_SUIT), 0.75, 0, FALSE, 5, 25, 60)
+		var/obj/item/ammo/power_cell/self_charging/disruptor/cell = new/obj/item/ammo/power_cell/self_charging/disruptor{recharge_rate = 4; recharge_delay = 5 SECONDS}
+		AddComponent(/datum/component/cell_holder, cell, FALSE, 100, FALSE)
+		RegisterSignal(src, COMSIG_UPDATE_ICON, /atom/proc/UpdateIcon)
+		UpdateIcon()
+
+	examine()
+		. = ..()
+		var/list/ret = list()
+		if(SEND_SIGNAL(src, COMSIG_CELL_CHECK_CHARGE, ret) & CELL_RETURNED_LIST)
+			. += "There are [ret["charge"]]/[ret["max_charge"]] PUs left!"
+
+	equipped(mob/user, slot)
+		..()
+		inventory_counter?.show_count()
+
+	update_icon()
+		var/list/ret = list()
+		if(SEND_SIGNAL(src, COMSIG_CELL_CHECK_CHARGE, ret) & CELL_RETURNED_LIST)
+			inventory_counter?.update_percent(ret["charge"], ret["max_charge"])
+		else
+			inventory_counter?.update_text("-")
+		return 0
+
